@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/Users/andy/workspace/android-english-study/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/item_text_entry.xml",
+        "source": "/Users/andy/workspace/android-english-study/app/src/main/res/layout/item_text_entry.xml"
+    },
+    {
+        "merged": "/Users/andy/workspace/android-english-study/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/item_sentence.xml",
+        "source": "/Users/andy/workspace/android-english-study/app/src/main/res/layout/item_sentence.xml"
+    },
+    {
+        "merged": "/Users/andy/workspace/android-english-study/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_reading.xml",
+        "source": "/Users/andy/workspace/android-english-study/app/src/main/res/layout/activity_reading.xml"
+    },
+    {
+        "merged": "/Users/andy/workspace/android-english-study/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_main.xml",
+        "source": "/Users/andy/workspace/android-english-study/app/src/main/res/layout/activity_main.xml"
+    },
+    {
+        "merged": "/Users/andy/workspace/android-english-study/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_text_reader.xml",
+        "source": "/Users/andy/workspace/android-english-study/app/src/main/res/layout/activity_text_reader.xml"
+    }
+]

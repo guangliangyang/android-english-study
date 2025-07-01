@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(java:*)",
+      "Bash(/usr/libexec/java_home:*)"
+    ],
+    "deny": []
+  }
+}

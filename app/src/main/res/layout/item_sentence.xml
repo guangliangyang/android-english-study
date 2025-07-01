@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sentenceText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/sentence_background"
+    android:lineSpacingExtra="4dp"
+    android:padding="12dp"
+    android:textColor="@color/black"
+    android:textSize="16sp"
+    tools:text="It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife." />

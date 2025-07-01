@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">English Study</string>
+    <string name="enter_text">Enter English text to study</string>
+    <string name="generate_audio">Generate &amp; Save Audio</string>
+    <string name="save_text">Save Text Only</string>
+    <string name="play_audio">Play Audio</string>
+    <string name="saved_texts">Saved Texts</string>
+    <string name="text_hint">Type or paste English text here...</string>
+    <string name="speed_control">Speed</string>
+    <string name="delete">Delete</string>
+    <string name="title">Title</string>
+    <string name="search">Search</string>
+</resources>

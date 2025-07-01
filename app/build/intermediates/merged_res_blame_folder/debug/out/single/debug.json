@@ -1,0 +1,34 @@
+[
+    {
+        "merged": "/Users/andy/workspace/android-english-study/app/build/intermediates/res/merged/debug/layout_activity_text_reader.xml.flat",
+        "source": "/Users/andy/workspace/android-english-study/app/src/main/res/layout/activity_text_reader.xml"
+    },
+    {
+        "merged": "/Users/andy/workspace/android-english-study/app/build/intermediates/res/merged/debug/layout_item_text_entry.xml.flat",
+        "source": "/Users/andy/workspace/android-english-study/app/src/main/res/layout/item_text_entry.xml"
+    },
+    {
+        "merged": "/Users/andy/workspace/android-english-study/app/build/intermediates/res/merged/debug/layout_activity_reading.xml.flat",
+        "source": "/Users/andy/workspace/android-english-study/app/src/main/res/layout/activity_reading.xml"
+    },
+    {
+        "merged": "/Users/andy/workspace/android-english-study/app/build/intermediates/res/merged/debug/xml_backup_rules.xml.flat",
+        "source": "/Users/andy/workspace/android-english-study/app/src/main/res/xml/backup_rules.xml"
+    },
+    {
+        "merged": "/Users/andy/workspace/android-english-study/app/build/intermediates/res/merged/debug/xml_data_extraction_rules.xml.flat",
+        "source": "/Users/andy/workspace/android-english-study/app/src/main/res/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "/Users/andy/workspace/android-english-study/app/build/intermediates/res/merged/debug/drawable_sentence_background.xml.flat",
+        "source": "/Users/andy/workspace/android-english-study/app/src/main/res/drawable/sentence_background.xml"
+    },
+    {
+        "merged": "/Users/andy/workspace/android-english-study/app/build/intermediates/res/merged/debug/layout_item_sentence.xml.flat",
+        "source": "/Users/andy/workspace/android-english-study/app/src/main/res/layout/item_sentence.xml"
+    },
+    {
+        "merged": "/Users/andy/workspace/android-english-study/app/build/intermediates/res/merged/debug/layout_activity_main.xml.flat",
+        "source": "/Users/andy/workspace/android-english-study/app/src/main/res/layout/activity_main.xml"
+    }
+]

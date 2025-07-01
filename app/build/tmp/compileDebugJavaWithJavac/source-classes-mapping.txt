@@ -1,0 +1,29 @@
+com/englishstudy/app/data/TextEntryDao_Impl.java
+ com.englishstudy.app.data.TextEntryDao_Impl
+ com.englishstudy.app.data.TextEntryDao_Impl$1
+ com.englishstudy.app.data.TextEntryDao_Impl$2
+ com.englishstudy.app.data.TextEntryDao_Impl$3
+ com.englishstudy.app.data.TextEntryDao_Impl$4
+ com.englishstudy.app.data.TextEntryDao_Impl$5
+com/englishstudy/app/databinding/ActivityMainBinding.java
+ com.englishstudy.app.databinding.ActivityMainBinding
+com/englishstudy/app/databinding/ActivityReadingBinding.java
+ com.englishstudy.app.databinding.ActivityReadingBinding
+com/englishstudy/app/databinding/ActivityTextReaderBinding.java
+ com.englishstudy.app.databinding.ActivityTextReaderBinding
+com/englishstudy/app/BuildConfig.java
+ com.englishstudy.app.BuildConfig
+com/englishstudy/app/databinding/ItemTextEntryBinding.java
+ com.englishstudy.app.databinding.ItemTextEntryBinding
+com/englishstudy/app/databinding/ItemSentenceBinding.java
+ com.englishstudy.app.databinding.ItemSentenceBinding
+com/englishstudy/app/data/AppDatabase_Impl.java
+ com.englishstudy.app.data.AppDatabase_Impl
+ com.englishstudy.app.data.AppDatabase_Impl$1
+com/englishstudy/app/data/SentenceDao_Impl.java
+ com.englishstudy.app.data.SentenceDao_Impl
+ com.englishstudy.app.data.SentenceDao_Impl$1
+ com.englishstudy.app.data.SentenceDao_Impl$2
+ com.englishstudy.app.data.SentenceDao_Impl$3
+ com.englishstudy.app.data.SentenceDao_Impl$4
+ com.englishstudy.app.data.SentenceDao_Impl$5
