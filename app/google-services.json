@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1083811982446",
+    "project_id": "android-english-study",
+    "storage_bucket": "android-english-study.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083811982446:android:4cfd5ed58e84412b108a7f",
+        "android_client_info": {
+          "package_name": "com.englishstudy.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083811982446-t1q3d8c7083hcvpc0fm3hu0tkvrdiqqk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.englishstudy.app",
+            "certificate_hash": "d7c820f6f913f31b086ebcad190018a16e2dad96"
+          }
+        },
+        {
+          "client_id": "1083811982446-0g7ea738uosguav2jcrn36952p2phmsg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQlVQ7IMY8ToKLc00J_p9ssFhh2ZsLpxo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083811982446-0g7ea738uosguav2jcrn36952p2phmsg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
