@@ -11,11 +11,11 @@ interface TextEntryDao {
     @Query("SELECT * FROM text_entries ORDER BY createdAt DESC")
     fun getAllEntriesSync(): List<TextEntry>
 
-    @Query("SELECT * FROM text_entries WHERE title LIKE '%' || :searchQuery || '%' OR content LIKE '%' || :searchQuery || '%' ORDER BY createdAt DESC")
-    fun searchEntries(searchQuery: String): LiveData<List<TextEntry>>
+    @Query("SELECT * FROM text_entries WHERE title LIKE '%' || :query || '%' OR content LIKE '%' || :query || '%' ORDER BY createdAt DESC")
+    fun searchEntries(query: String): LiveData<List<TextEntry>>
 
-    @Query("SELECT * FROM text_entries WHERE id = :id")
-    fun getEntryById(id: Long): TextEntry?
+    @Query("SELECT * FROM text_entries WHERE id = :entryId")
+    fun getEntryById(entryId: Long): TextEntry?
 
     @Insert
     fun insertEntry(entry: TextEntry): Long

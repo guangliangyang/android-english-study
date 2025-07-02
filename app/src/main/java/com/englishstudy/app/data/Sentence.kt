@@ -3,6 +3,7 @@ package com.englishstudy.app.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.ForeignKey
+import androidx.room.Index
 
 @Entity(
     tableName = "sentences",
@@ -11,7 +12,8 @@ import androidx.room.ForeignKey
         parentColumns = arrayOf("id"),
         childColumns = arrayOf("textEntryId"),
         onDelete = ForeignKey.CASCADE
-    )]
+    )],
+    indices = [Index(value = ["textEntryId"])]
 )
 data class Sentence(
     @PrimaryKey(autoGenerate = true)

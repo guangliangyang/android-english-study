@@ -3,12 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdk 30
+    namespace 'com.englishstudy.app'
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.englishstudy.app"
         minSdk 24
-        targetSdk 30
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 

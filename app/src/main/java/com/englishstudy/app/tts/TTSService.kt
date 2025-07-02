@@ -49,6 +49,7 @@ class TTSService(private val context: Context) {
                     onProgress("Audio generation completed!")
                 }
                 
+                @Deprecated("Deprecated in API level 21", ReplaceWith("onError(utteranceId, errorCode)"))
                 override fun onError(utteranceId: String?) {
                     onProgress("Error generating audio")
                 }
