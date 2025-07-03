@@ -33,6 +33,11 @@ class YouTubeLearningActivity : AppCompatActivity() {
     private var videoDuration: Float = 0f
     private var isPlaying: Boolean = false
     private var isSeekBarTracking: Boolean = false
+    private var isLoopMode: Boolean = false
+    private var loopStartTime: Float = 0f
+    private var loopEndTime: Float = 0f
+    private var currentFontSize: Float = 16f
+    private val fontSizes = arrayOf(14f, 16f, 18f, 20f, 24f)
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +60,11 @@ class YouTubeLearningActivity : AppCompatActivity() {
                 currentPlayTime = second
                 updateTranscriptHighlight()
                 updateProgressBar()
+                
+                // 检查循环模式
+                if (isLoopMode && currentPlayTime >= loopEndTime) {
+                    youTubePlayer.seekTo(loopStartTime)
+                }
             }
             
             override fun onVideoDuration(youTubePlayer: YouTubePlayer, duration: Float) {
@@ -112,6 +122,11 @@ class YouTubeLearningActivity : AppCompatActivity() {
     }
     
     private fun setupVideoControls() {
+        // 循环/顺序播放模式按钮
+        binding.loopModeButton.setOnClickListener {
+            toggleLoopMode()
+        }
+        
         // 播放/暂停按钮
         binding.playPauseButton.setOnClickListener {
             youTubePlayer?.let { player ->
@@ -125,18 +140,35 @@ class YouTubeLearningActivity : AppCompatActivity() {
         
         // 后退10秒按钮
         binding.rewindButton.setOnClickListener {
-            youTubePlayer?.let { player ->
-                val newTime = maxOf(0f, currentPlayTime - 10f)
-                player.seekTo(newTime)
+            if (isLoopMode) {
+                // 复读模式下：调整循环起始点
+                adjustLoopWithRewind()
+            } else {
+                // 普通模式下：正常后退
+                youTubePlayer?.let { player ->
+                    val newTime = maxOf(0f, currentPlayTime - 10f)
+                    player.seekTo(newTime)
+                }
             }
         }
         
         // 前进10秒按钮
         binding.forwardButton.setOnClickListener {
-            youTubePlayer?.let { player ->
-                val newTime = minOf(videoDuration, currentPlayTime + 10f)
-                player.seekTo(newTime)
+            if (isLoopMode) {
+                // 复读模式下：调整循环结束点
+                adjustLoopWithForward()
+            } else {
+                // 普通模式下：正常前进
+                youTubePlayer?.let { player ->
+                    val newTime = minOf(videoDuration, currentPlayTime + 10f)
+                    player.seekTo(newTime)
+                }
             }
+        }
+        
+        // 字体大小按钮
+        binding.fontSizeButton.setOnClickListener {
+            cycleFontSize()
         }
         
         // 进度条控制
@@ -154,7 +186,11 @@ class YouTubeLearningActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 isSeekBarTracking = false
                 seekBar?.let { bar ->
-                    youTubePlayer?.seekTo(bar.progress.toFloat())
+                    val seekTime = bar.progress.toFloat()
+                    youTubePlayer?.seekTo(seekTime)
+                    
+                    // 在复读模式下调整循环范围
+                    adjustLoopWithSeek(seekTime)
                 }
             }
         })
@@ -165,6 +201,78 @@ class YouTubeLearningActivity : AppCompatActivity() {
             binding.videoProgressBar.progress = currentPlayTime.toInt()
             binding.currentTimeText.text = formatTime(currentPlayTime)
         }
+    }
+    
+    private fun toggleLoopMode() {
+        isLoopMode = !isLoopMode
+        
+        if (isLoopMode) {
+            // 设置循环范围：当前时间前后5秒（总共10秒）
+            loopStartTime = maxOf(0f, currentPlayTime - 5f)
+            loopEndTime = minOf(videoDuration, currentPlayTime + 5f)
+            binding.loopModeButton.setImageResource(R.drawable.ic_repeat)
+            val duration = loopEndTime - loopStartTime
+            Toast.makeText(this, "复读模式: ${formatTime(loopStartTime)} - ${formatTime(loopEndTime)} (${String.format("%.1f", duration)}秒)", Toast.LENGTH_SHORT).show()
+        } else {
+            binding.loopModeButton.setImageResource(R.drawable.ic_sequential)
+            Toast.makeText(this, "顺序播放模式", Toast.LENGTH_SHORT).show()
+        }
+    }
+    
+    private fun cycleFontSize() {
+        val currentIndex = fontSizes.indexOf(currentFontSize)
+        val nextIndex = (currentIndex + 1) % fontSizes.size
+        currentFontSize = fontSizes[nextIndex]
+        
+        // 更新transcript字体大小
+        binding.transcriptText.textSize = currentFontSize
+        Toast.makeText(this, "字体大小: ${currentFontSize.toInt()}sp", Toast.LENGTH_SHORT).show()
+    }
+    
+    private fun updateLoopRange(newStartTime: Float, newEndTime: Float) {
+        // 边界检查：确保在视频范围内
+        loopStartTime = maxOf(0f, newStartTime)
+        loopEndTime = minOf(videoDuration, newEndTime)
+        
+        // 确保起始时间不大于结束时间
+        if (loopStartTime >= loopEndTime) {
+            loopEndTime = minOf(videoDuration, loopStartTime + 1f)
+        }
+        
+        val duration = loopEndTime - loopStartTime
+        Toast.makeText(this, "复读范围: ${formatTime(loopStartTime)} - ${formatTime(loopEndTime)} (${String.format("%.1f", duration)}秒)", Toast.LENGTH_SHORT).show()
+    }
+    
+    private fun adjustLoopWithSeek(seekTime: Float) {
+        if (!isLoopMode) return
+        
+        // 如果拖拽到循环范围外，扩展循环范围
+        if (seekTime < loopStartTime || seekTime > loopEndTime) {
+            val currentDuration = loopEndTime - loopStartTime
+            val halfDuration = currentDuration / 2f
+            
+            updateLoopRange(seekTime - halfDuration, seekTime + halfDuration)
+        }
+    }
+    
+    private fun adjustLoopWithRewind() {
+        if (!isLoopMode) return
+        
+        // 后退按钮：整个复读区间向前移动10秒，长度保持不变
+        val currentDuration = loopEndTime - loopStartTime
+        val newStartTime = loopStartTime - 10f
+        val newEndTime = newStartTime + currentDuration
+        updateLoopRange(newStartTime, newEndTime)
+    }
+    
+    private fun adjustLoopWithForward() {
+        if (!isLoopMode) return
+        
+        // 前进按钮：整个复读区间向后移动10秒，长度保持不变
+        val currentDuration = loopEndTime - loopStartTime
+        val newStartTime = loopStartTime + 10f
+        val newEndTime = newStartTime + currentDuration
+        updateLoopRange(newStartTime, newEndTime)
     }
     
     private fun loadTranscript(videoId: String) {
@@ -200,6 +308,7 @@ class YouTubeLearningActivity : AppCompatActivity() {
         }
         
         binding.transcriptText.text = spannableBuilder.toString().trim()
+        binding.transcriptText.textSize = currentFontSize
         updateTranscriptHighlight()
     }
     
@@ -290,13 +399,18 @@ class YouTubeLearningActivity : AppCompatActivity() {
         videoDuration = 0f
         isPlaying = false
         isSeekBarTracking = false
+        isLoopMode = false
+        loopStartTime = 0f
+        loopEndTime = 0f
         
         // 重置UI状态
         binding.transcriptText.text = "Paste a YouTube video URL above and tap 'Play Video' to start learning English with YouTube videos!"
+        binding.transcriptText.textSize = currentFontSize
         binding.videoProgressBar.progress = 0
         binding.currentTimeText.text = "0:00"
         binding.totalTimeText.text = "0:00"
         binding.playPauseButton.setImageResource(R.drawable.ic_play_arrow)
+        binding.loopModeButton.setImageResource(R.drawable.ic_sequential)
     }
     
     private fun extractVideoId(url: String): String? {

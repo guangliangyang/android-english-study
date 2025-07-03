@@ -114,6 +114,15 @@
             android:gravity="center">
 
             <ImageButton
+                android:id="@+id/fontSizeButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_font_size"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Change Font Size"
+                android:layout_marginEnd="16dp" />
+
+            <ImageButton
                 android:id="@+id/rewindButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -139,6 +148,15 @@
                 android:src="@drawable/ic_forward_10"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Forward 10 seconds"
+                android:layout_marginStart="16dp" />
+
+            <ImageButton
+                android:id="@+id/loopModeButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_sequential"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Toggle Loop/Sequential Mode"
                 android:layout_marginStart="16dp" />
 
         </LinearLayout>
