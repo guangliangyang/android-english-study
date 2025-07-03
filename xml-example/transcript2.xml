@@ -1,0 +1,4493 @@
+<timedtext format="3">
+    <head>
+        <ws id="0"/>
+        <ws id="1" mh="2" ju="0" sd="3"/>
+        <wp id="0"/>
+        <wp id="1" ap="6" ah="20" av="100" rc="2" cc="40"/>
+    </head>
+    <body>
+        <w t="0" id="1" wp="1" ws="1"/>
+        <p t="160" d="6560" w="1">
+            <s ac="0">I'm</s>
+            <s t="400" ac="0"> honestly</s>
+            <s t="1200" ac="0"> blown</s>
+            <s t="1679" ac="0"> away</s>
+            <s t="2880" ac="0"> by</s>
+            <s t="3200" ac="0"> the</s>
+            <s t="3519" ac="0"> huge</s>
+        </p>
+        <p t="4230" d="2490" w="1" a="1"> </p>
+        <p t="4240" d="3679" w="1">
+            <s ac="0">disconnect</s>
+            <s t="720" ac="0"> between</s>
+            <s t="1680" ac="0"> people</s>
+            <s t="2000" ac="0"> like</s>
+            <s t="2160" ac="0"> I</s>
+            <s t="2320" ac="0"> have</s>
+        </p>
+        <p t="6710" d="1209" w="1" a="1"> </p>
+        <p t="6720" d="3520" w="1">
+            <s ac="0">here</s>
+            <s t="79" ac="0"> on</s>
+            <s t="240" ac="0"> the</s>
+            <s t="320" ac="0"> left</s>
+            <s t="480" ac="0"> where</s>
+            <s t="720" ac="0"> they</s>
+            <s t="880" ac="0"> say,</s>
+            <s t="960" ac="0"> "I</s>
+        </p>
+        <p t="7909" d="2331" w="1" a="1"> </p>
+        <p t="7919" d="4241" w="1">
+            <s ac="0">tried</s>
+            <s t="241" ac="0"> Cloud</s>
+            <s t="561" ac="0"> Code</s>
+            <s t="801" ac="0"> on</s>
+            <s t="961" ac="0"> your</s>
+            <s t="1121" ac="0"> recommendation</s>
+        </p>
+        <p t="10230" d="1930" w="1" a="1"> </p>
+        <p t="10240" d="4880" w="1">
+            <s ac="0">and</s>
+            <s t="319" ac="0"> I</s>
+            <s t="479" ac="0"> have</s>
+            <s t="560" ac="0"> a</s>
+            <s t="800" ac="0"> very</s>
+            <s t="1120" ac="0"> different</s>
+            <s t="1359" ac="0"> opinion</s>
+            <s t="1680" ac="0"> than</s>
+        </p>
+        <p t="12150" d="2970" w="1" a="1"> </p>
+        <p t="12160" d="4480" w="1">
+            <s ac="0">the</s>
+            <s t="160" ac="0"> others.</s>
+            <s t="559" ac="0"> It</s>
+            <s t="880" ac="0"> was</s>
+            <s t="1359" ac="0"> horrible."</s>
+        </p>
+        <p t="15110" d="1530" w="1" a="1"> </p>
+        <p t="15120" d="3680" w="1">
+            <s ac="0">Then</s>
+            <s t="240" ac="0"> you've</s>
+            <s t="399" ac="0"> got</s>
+            <s t="559" ac="0"> people</s>
+            <s t="800" ac="0"> over</s>
+            <s t="960" ac="0"> here</s>
+            <s t="1120" ac="0"> on</s>
+            <s t="1360" ac="0"> the</s>
+        </p>
+        <p t="16630" d="2170" w="1" a="1"> </p>
+        <p t="16640" d="4080" w="1">
+            <s ac="0">right</s>
+            <s t="639" ac="0"> that</s>
+            <s t="960" ac="0"> say</s>
+            <s t="1280" ac="0"> Cloud</s>
+            <s t="1600" ac="0"> Code</s>
+            <s t="1840" ac="0"> made</s>
+        </p>
+        <p t="18790" d="1930" w="1" a="1"> </p>
+        <p t="18800" d="4399" w="1">
+            <s ac="0">programming</s>
+            <s t="559" ac="0"> fun</s>
+            <s t="880" ac="0"> again.</s>
+            <s t="1280" ac="0"> As</s>
+            <s t="1440" ac="0"> you</s>
+            <s t="1600" ac="0"> may</s>
+            <s t="1760" ac="0"> know,</s>
+        </p>
+        <p t="20710" d="2489" w="1" a="1"> </p>
+        <p t="20720" d="5600" w="1">
+            <s ac="0">I</s>
+            <s t="160" ac="0"> fall</s>
+            <s t="399" ac="0"> more</s>
+            <s t="559" ac="0"> on</s>
+            <s t="800" ac="0"> the</s>
+            <s t="880" ac="0"> right</s>
+            <s t="1120" ac="0"> side.</s>
+            <s t="2080" ac="0"> And</s>
+            <s t="2240" ac="0"> I've</s>
+        </p>
+        <p t="23189" d="3131" w="1" a="1"> </p>
+        <p t="23199" d="6721" w="1">
+            <s ac="0">been</s>
+            <s t="160" ac="0"> thinking</s>
+            <s t="320" ac="0"> a</s>
+            <s t="561" ac="0"> lot</s>
+            <s t="801" ac="0"> like</s>
+            <s t="1121" ac="0"> why</s>
+            <s t="2481" ac="0"> do</s>
+            <s t="2641" ac="0"> I</s>
+            <s t="2881" ac="0"> see</s>
+        </p>
+        <p t="26310" d="3610" w="1" a="1"> </p>
+        <p t="26320" d="6320" w="1">
+            <s ac="0">such</s>
+            <s t="320" ac="0"> a</s>
+            <s t="560" ac="0"> divide</s>
+            <s t="1279" ac="0"> between</s>
+            <s t="2480" ac="0"> people</s>
+            <s t="3119" ac="0"> loving</s>
+        </p>
+        <p t="29910" d="2730" w="1" a="1"> </p>
+        <p t="29920" d="5760" w="1">
+            <s ac="0">cloud</s>
+            <s t="400" ac="0"> code</s>
+            <s t="1199" ac="0"> and</s>
+            <s t="1439" ac="0"> then</s>
+            <s t="1679" ac="0"> people</s>
+            <s t="2000" ac="0"> absolutely</s>
+        </p>
+        <p t="32630" d="3050" w="1" a="1"> </p>
+        <p t="32640" d="4560" w="1">
+            <s ac="0">hating</s>
+            <s t="480" ac="0"> cloud</s>
+            <s t="880" ac="0"> code.</s>
+            <s t="2160" ac="0"> And</s>
+            <s t="2320" ac="0"> I</s>
+            <s t="2480" ac="0"> I</s>
+            <s t="2720" ac="0"> got</s>
+            <s t="2880" ac="0"> to</s>
+        </p>
+        <p t="35670" d="1530" w="1" a="1"> </p>
+        <p t="35680" d="3760" w="1">
+            <s ac="0">thinking</s>
+            <s t="240" ac="0"> like</s>
+            <s t="559" ac="0"> maybe</s>
+            <s t="800" ac="0"> it's</s>
+            <s t="1039" ac="0"> just</s>
+            <s t="1200" ac="0"> the</s>
+            <s t="1440" ac="0"> way</s>
+        </p>
+        <p t="37190" d="2250" w="1" a="1"> </p>
+        <p t="37200" d="4000" w="1">
+            <s ac="0">I'm</s>
+            <s t="320" ac="0"> using</s>
+            <s t="560" ac="0"> it.</s>
+            <s t="1199" ac="0"> So</s>
+            <s t="1440" ac="0"> what</s>
+            <s t="1600" ac="0"> I</s>
+            <s t="1760" ac="0"> want</s>
+            <s t="1840" ac="0"> to</s>
+            <s t="1920" ac="0"> do</s>
+            <s t="2080" ac="0"> today</s>
+        </p>
+        <p t="39430" d="1770" w="1" a="1"> </p>
+        <p t="39440" d="4000" w="1">
+            <s ac="0">is</s>
+            <s t="240" ac="0"> I</s>
+            <s t="400" ac="0"> want</s>
+            <s t="480" ac="0"> to</s>
+            <s t="639" ac="0"> break</s>
+            <s t="880" ac="0"> down</s>
+            <s t="1279" ac="0"> all</s>
+            <s t="1520" ac="0"> the</s>
+        </p>
+        <p t="41190" d="2250" w="1" a="1"> </p>
+        <p t="41200" d="3840" w="1">
+            <s ac="0">different</s>
+            <s t="240" ac="0"> things</s>
+            <s t="400" ac="0"> that</s>
+            <s t="720" ac="0"> I've</s>
+            <s t="960" ac="0"> learned.</s>
+            <s t="2000" ac="0"> I've</s>
+        </p>
+        <p t="43430" d="1610" w="1" a="1"> </p>
+        <p t="43440" d="4720" w="1">
+            <s ac="0">tried</s>
+            <s t="160" ac="0"> to</s>
+            <s t="320" ac="0"> actually</s>
+            <s t="560" ac="0"> capture</s>
+            <s t="959" ac="0"> everything</s>
+            <s t="1279" ac="0"> I</s>
+        </p>
+        <p t="45030" d="3130" w="1" a="1"> </p>
+        <p t="45040" d="4640" w="1">
+            <s ac="0">could,</s>
+            <s t="800" ac="0"> all</s>
+            <s t="1039" ac="0"> the</s>
+            <s t="1199" ac="0"> techniques</s>
+            <s t="1600" ac="0"> that</s>
+            <s t="1760" ac="0"> I</s>
+            <s t="1920" ac="0"> use</s>
+            <s t="2960" ac="0"> and</s>
+        </p>
+        <p t="48150" d="1530" w="1" a="1"> </p>
+        <p t="48160" d="3360" w="1">
+            <s ac="0">I'm</s>
+            <s t="239" ac="0"> going</s>
+            <s t="320" ac="0"> to</s>
+            <s t="399" ac="0"> go</s>
+            <s t="480" ac="0"> through</s>
+            <s t="640" ac="0"> them</s>
+            <s t="800" ac="0"> one</s>
+            <s t="879" ac="0"> by</s>
+            <s t="1120" ac="0"> one.</s>
+        </p>
+        <p t="49670" d="1850" w="1" a="1"> </p>
+        <p t="49680" d="3440" w="1">
+            <s ac="0">I</s>
+            <s t="240" ac="0"> won't</s>
+            <s t="480" ac="0"> make</s>
+            <s t="559" ac="0"> this</s>
+            <s t="800" ac="0"> incredibly</s>
+            <s t="1280" ac="0"> long,</s>
+            <s t="1600" ac="0"> and</s>
+        </p>
+        <p t="51510" d="1610" w="1" a="1"> </p>
+        <p t="51520" d="3600" w="1">
+            <s ac="0">I'll</s>
+            <s t="160" ac="0"> try</s>
+            <s t="240" ac="0"> to</s>
+            <s t="400" ac="0"> put</s>
+            <s t="559" ac="0"> timestamps</s>
+            <s t="1039" ac="0"> below</s>
+            <s t="1280" ac="0"> so</s>
+            <s t="1440" ac="0"> you</s>
+        </p>
+        <p t="53110" d="2010" w="1" a="1"> </p>
+        <p t="53120" d="3439" w="1">
+            <s ac="0">can</s>
+            <s t="79" ac="0"> kind</s>
+            <s t="160" ac="0"> of</s>
+            <s t="320" ac="0"> jump</s>
+            <s t="480" ac="0"> between</s>
+            <s t="800" ac="0"> them.</s>
+            <s t="1599" ac="0"> So,</s>
+            <s t="1840" ac="0"> the</s>
+        </p>
+        <p t="55110" d="1449" w="1" a="1"> </p>
+        <p t="55120" d="4000" w="1">
+            <s ac="0">first</s>
+            <s t="160" ac="0"> tip</s>
+            <s t="400" ac="0"> that</s>
+            <s t="560" ac="0"> I</s>
+            <s t="720" ac="0"> want</s>
+            <s t="800" ac="0"> to</s>
+            <s t="880" ac="0"> talk</s>
+            <s t="959" ac="0"> about</s>
+            <s t="1119" ac="0"> is</s>
+        </p>
+        <p t="56549" d="2571" w="1" a="1"> </p>
+        <p t="56559" d="5041" w="1">
+            <s ac="0">something</s>
+            <s t="401" ac="0"> brand</s>
+            <s t="1041" ac="0"> new,</s>
+            <s t="1361" ac="0"> but</s>
+            <s t="1601" ac="0"> I</s>
+            <s t="1761" ac="0"> have</s>
+            <s t="2160" ac="0"> loved</s>
+        </p>
+        <p t="59110" d="2490" w="1" a="1"> </p>
+        <p t="59120" d="4640" w="1">
+            <s ac="0">it.</s>
+            <s t="800" ac="0"> Like,</s>
+            <s t="1040" ac="0"> this</s>
+            <s t="1279" ac="0"> is</s>
+            <s t="1439" ac="0"> actually</s>
+            <s t="2079" ac="0"> something</s>
+        </p>
+        <p t="61590" d="2170" w="1" a="1"> </p>
+        <p t="61600" d="4080" w="1">
+            <s ac="0">that</s>
+            <s t="240" ac="0"> I</s>
+            <s t="400" ac="0"> didn't</s>
+            <s t="639" ac="0"> realize</s>
+            <s t="880" ac="0"> how</s>
+            <s t="1040" ac="0"> much</s>
+            <s t="1200" ac="0"> I</s>
+            <s t="1439" ac="0"> missed,</s>
+        </p>
+        <p t="63750" d="1930" w="1" a="1"> </p>
+        <p t="63760" d="3679" w="1">
+            <s ac="0">and</s>
+            <s t="240" ac="0"> it</s>
+            <s t="479" ac="0"> could</s>
+            <s t="640" ac="0"> be</s>
+            <s t="880" ac="0"> one</s>
+            <s t="1119" ac="0"> of the</s>
+            <s t="1359" ac="0"> reasons</s>
+            <s t="1520" ac="0"> why</s>
+            <s t="1759" ac="0"> a</s>
+        </p>
+        <p t="65670" d="1769" w="1" a="1"> </p>
+        <p t="65680" d="4880" w="1">
+            <s ac="0">lot</s>
+            <s t="80" ac="0"> of</s>
+            <s t="160" ac="0"> people</s>
+            <s t="400" ac="0"> still</s>
+            <s t="720" ac="0"> really</s>
+            <s t="960" ac="0"> prefer</s>
+            <s t="1439" ac="0"> root</s>
+        </p>
+        <p t="67429" d="3131" w="1" a="1"> </p>
+        <p t="67439" d="5281" w="1">
+            <s ac="0">code.</s>
+            <s t="1201" ac="0"> If</s>
+            <s t="1441" ac="0"> you</s>
+            <s t="1601" ac="0"> hit</s>
+            <s t="1921" ac="0"> shift</s>
+            <s t="2241" ac="0"> tab,</s>
+            <s t="2561" ac="0"> tab,</s>
+            <s t="2801" ac="0"> and</s>
+            <s t="2961" ac="0"> let</s>
+        </p>
+        <p t="70550" d="2170" w="1" a="1"> </p>
+        <p t="70560" d="3840" w="1">
+            <s ac="0">me</s>
+            <s t="80" ac="0"> pull</s>
+            <s t="239" ac="0"> over</s>
+            <s t="480" ac="0"> the</s>
+            <s t="1360" ac="0"> terminal</s>
+            <s t="1680" ac="0"> here.</s>
+            <s t="2000" ac="0"> So,</s>
+        </p>
+        <p t="72710" d="1690" w="1" a="1"> </p>
+        <p t="72720" d="4399" w="1">
+            <s ac="0">shift</s>
+            <s t="240" ac="0"> tab</s>
+            <s t="560" ac="0"> tab.</s>
+            <s t="800" ac="0"> You</s>
+            <s t="960" ac="0"> can</s>
+            <s t="1040" ac="0"> see</s>
+            <s t="1200" ac="0"> over</s>
+            <s t="1360" ac="0"> here</s>
+            <s t="1439" ac="0"> on</s>
+        </p>
+        <p t="74390" d="2729" w="1" a="1"> </p>
+        <p t="74400" d="5359" w="1">
+            <s ac="0">the</s>
+            <s t="79" ac="0"> bottom</s>
+            <s t="240" ac="0"> where</s>
+            <s t="399" ac="0"> it</s>
+            <s t="560" ac="0"> says</s>
+            <s t="800" ac="0"> plan</s>
+            <s t="1039" ac="0"> mode</s>
+            <s t="1280" ac="0"> on.</s>
+        </p>
+        <p t="77109" d="2650" w="1" a="1"> </p>
+        <p t="77119" d="6081" w="1">
+            <s ac="0">What</s>
+            <s t="320" ac="0"> you</s>
+            <s t="481" ac="0"> can</s>
+            <s t="640" ac="0"> do</s>
+            <s t="961" ac="0"> is</s>
+            <s t="1201" ac="0"> you</s>
+            <s t="1441" ac="0"> can</s>
+            <s t="1601" ac="0"> actually</s>
+            <s t="2481" ac="0"> have</s>
+        </p>
+        <p t="79749" d="3451" w="1" a="1"> </p>
+        <p t="79759" d="4961" w="1">
+            <s ac="0">a</s>
+            <s t="321" ac="0"> conversation</s>
+            <s t="961" ac="0"> with</s>
+            <s t="1360" ac="0"> Claude</s>
+            <s t="2561" ac="0"> and</s>
+            <s t="3040" ac="0"> basically</s>
+        </p>
+        <p t="83190" d="1530" w="1" a="1"> </p>
+        <p t="83200" d="3200" w="1">
+            <s ac="0">it</s>
+            <s t="239" ac="0"> will</s>
+            <s t="400" ac="0"> generate</s>
+            <s t="640" ac="0"> a</s>
+            <s t="880" ac="0"> plan</s>
+            <s t="1040" ac="0"> of</s>
+            <s t="1200" ac="0"> all</s>
+            <s t="1360" ac="0"> the</s>
+        </p>
+        <p t="84710" d="1690" w="1" a="1"> </p>
+        <p t="84720" d="3520" w="1">
+            <s ac="0">things</s>
+            <s t="160" ac="0"> it's</s>
+            <s t="480" ac="0"> going</s>
+            <s t="560" ac="0"> to</s>
+            <s t="719" ac="0"> do</s>
+            <s t="1120" ac="0"> and</s>
+            <s t="1360" ac="0"> then</s>
+            <s t="1520" ac="0"> you</s>
+            <s t="1600" ac="0"> can</s>
+        </p>
+        <p t="86390" d="1850" w="1" a="1"> </p>
+        <p t="86400" d="4399" w="1">
+            <s ac="0">just</s>
+            <s t="160" ac="0"> kick</s>
+            <s t="320" ac="0"> it</s>
+            <s t="480" ac="0"> off</s>
+            <s t="560" ac="0"> and</s>
+            <s t="800" ac="0"> run</s>
+            <s t="960" ac="0"> it.</s>
+            <s t="1280" ac="0"> It's</s>
+        </p>
+        <p t="88230" d="2569" w="1" a="1"> </p>
+        <p t="88240" d="3839" w="1">
+            <s ac="0">magical.</s>
+            <s t="1040" ac="0"> Now</s>
+            <s t="1360" ac="0"> I</s>
+            <s t="1600" ac="0"> have</s>
+            <s t="1680" ac="0"> someone</s>
+            <s t="1919" ac="0"> in</s>
+            <s t="2160" ac="0"> Discord</s>
+        </p>
+        <p t="90789" d="1290" w="1" a="1"> </p>
+        <p t="90799" d="3360" w="1">
+            <s ac="0">to</s>
+            <s t="81" ac="0"> think</s>
+            <s t="241" ac="0"> for</s>
+            <s t="401" ac="0"> this.</s>
+            <s t="640" ac="0"> This</s>
+            <s t="881" ac="0"> actually</s>
+            <s t="1041" ac="0"> just</s>
+        </p>
+        <p t="92069" d="2090" w="1" a="1"> </p>
+        <p t="92079" d="5201" w="1">
+            <s ac="0">released</s>
+            <s t="321" ac="0"> a</s>
+            <s t="481" ac="0"> few</s>
+            <s t="641" ac="0"> days</s>
+            <s t="801" ac="0"> ago.</s>
+            <s t="1601" ac="0"> Definitely</s>
+            <s t="1921" ac="0"> try</s>
+        </p>
+        <p t="94149" d="3131" w="1" a="1"> </p>
+        <p t="94159" d="4881" w="1">
+            <s ac="0">it</s>
+            <s t="161" ac="0"> out.</s>
+            <s t="721" ac="0"> Shift</s>
+            <s t="1041" ac="0"> tab</s>
+            <s t="1280" ac="0"> tab</s>
+            <s t="1600" ac="0"> is</s>
+            <s t="1761" ac="0"> not</s>
+            <s t="1920" ac="0"> an</s>
+            <s t="2561" ac="0"> obvious</s>
+        </p>
+        <p t="97270" d="1770" w="1" a="1"> </p>
+        <p t="97280" d="4720" w="1">
+            <s ac="0">like</s>
+            <s t="799" ac="0"> thing</s>
+            <s t="1040" ac="0"> that</s>
+            <s t="1199" ac="0"> I</s>
+            <s t="1360" ac="0"> would</s>
+            <s t="1519" ac="0"> actually</s>
+        </p>
+        <p t="99030" d="2970" w="1" a="1"> </p>
+        <p t="99040" d="6480" w="1">
+            <s ac="0">normally</s>
+            <s t="480" ac="0"> hit.</s>
+            <s t="1439" ac="0"> uh</s>
+            <s t="1520" ac="0"> but</s>
+            <s t="1680" ac="0"> it</s>
+            <s t="1920" ac="0"> is</s>
+            <s t="2079" ac="0"> there</s>
+            <s t="2399" ac="0"> now</s>
+            <s t="2719" ac="0"> in</s>
+        </p>
+        <p t="101990" d="3530" w="1" a="1"> </p>
+        <p t="102000" d="6240" w="1">
+            <s ac="0">the</s>
+            <s t="320" ac="0"> latest</s>
+            <s t="880" ac="0"> uh</s>
+            <s t="1119" ac="0"> latest</s>
+            <s t="1520" ac="0"> version</s>
+            <s t="1840" ac="0"> of</s>
+            <s t="2240" ac="0"> claude.</s>
+        </p>
+        <p t="105510" d="2730" w="1" a="1"> </p>
+        <p t="105520" d="5120" w="1">
+            <s ac="0">Now</s>
+            <s t="1200" ac="0"> the</s>
+            <s t="1440" ac="0"> tip</s>
+            <s t="1680" ac="0"> too</s>
+            <s t="1840" ac="0"> that</s>
+            <s t="2000" ac="0"> I</s>
+            <s t="2080" ac="0"> would</s>
+            <s t="2239" ac="0"> give</s>
+            <s t="2320" ac="0"> you</s>
+            <s t="2480" ac="0"> is</s>
+        </p>
+        <p t="108230" d="2410" w="1" a="1"> </p>
+        <p t="108240" d="3760" w="1">
+            <s ac="0">talk</s>
+            <s t="239" ac="0"> to</s>
+            <s t="400" ac="0"> it</s>
+            <s t="640" ac="0"> like</s>
+            <s t="879" ac="0"> a</s>
+            <s t="1120" ac="0"> teammate.</s>
+            <s t="1760" ac="0"> Uh</s>
+            <s t="2000" ac="0"> there's</s>
+            <s t="2239" ac="0"> a</s>
+        </p>
+        <p t="110630" d="1370" w="1" a="1"> </p>
+        <p t="110640" d="3920" w="1">
+            <s ac="0">few</s>
+            <s t="159" ac="0"> different</s>
+            <s t="320" ac="0"> ways</s>
+            <s t="479" ac="0"> you</s>
+            <s t="640" ac="0"> can</s>
+            <s t="799" ac="0"> talk</s>
+            <s t="960" ac="0"> about</s>
+        </p>
+        <p t="111990" d="2570" w="1" a="1"> </p>
+        <p t="112000" d="3759" w="1">
+            <s ac="0">talk</s>
+            <s t="240" ac="0"> to</s>
+            <s t="399" ac="0"> it</s>
+            <s t="1200" ac="0"> but</s>
+            <s t="1520" ac="0"> you</s>
+            <s t="1759" ac="0"> can</s>
+            <s t="2079" ac="0"> you</s>
+            <s t="2240" ac="0"> know</s>
+            <s t="2399" ac="0"> think</s>
+        </p>
+        <p t="114550" d="1209" w="1" a="1"> </p>
+        <p t="114560" d="3839" w="1">
+            <s ac="0">about</s>
+            <s t="80" ac="0"> how</s>
+            <s t="239" ac="0"> you</s>
+            <s t="400" ac="0"> would</s>
+            <s t="559" ac="0"> talk</s>
+            <s t="720" ac="0"> to</s>
+            <s t="879" ac="0"> another</s>
+        </p>
+        <p t="115749" d="2650" w="1" a="1"> </p>
+        <p t="115759" d="6000" w="1">
+            <s ac="0">engineer.</s>
+            <s t="1281" ac="0"> Ask</s>
+            <s t="1521" ac="0"> it</s>
+            <s t="1761" ac="0"> questions</s>
+            <s t="2161" ac="0"> about</s>
+            <s t="2400" ac="0"> the</s>
+        </p>
+        <p t="118389" d="3370" w="1" a="1"> </p>
+        <p t="118399" d="6000" w="1">
+            <s ac="0">code.</s>
+            <s t="881" ac="0"> What</s>
+            <s t="1121" ac="0"> does</s>
+            <s t="1441" ac="0"> this</s>
+            <s t="1760" ac="0"> class</s>
+            <s t="2241" ac="0"> do?</s>
+            <s t="3040" ac="0"> Which</s>
+        </p>
+        <p t="121749" d="2650" w="1" a="1"> </p>
+        <p t="121759" d="5281" w="1">
+            <s ac="0">API?</s>
+            <s t="960" ac="0"> Like</s>
+            <s t="1201" ac="0"> one</s>
+            <s t="1360" ac="0"> of my</s>
+            <s t="1521" ac="0"> favorite</s>
+            <s t="1761" ac="0"> things</s>
+            <s t="2000" ac="0"> is</s>
+            <s t="2161" ac="0"> I</s>
+        </p>
+        <p t="124389" d="2651" w="1" a="1"> </p>
+        <p t="124399" d="4480" w="1">
+            <s ac="0">I</s>
+            <s t="241" ac="0"> couldn't</s>
+            <s t="561" ac="0"> remember</s>
+            <s t="801" ac="0"> the</s>
+            <s t="1040" ac="0"> name</s>
+            <s t="1201" ac="0"> of</s>
+            <s t="1281" ac="0"> an</s>
+            <s t="1441" ac="0"> API</s>
+        </p>
+        <p t="127030" d="1849" w="1" a="1"> </p>
+        <p t="127040" d="5760" w="1">
+            <s ac="0">and</s>
+            <s t="240" ac="0"> I</s>
+            <s t="480" ac="0"> was</s>
+            <s t="560" ac="0"> like,</s>
+            <s t="1120" ac="0"> you</s>
+            <s t="1279" ac="0"> know,</s>
+            <s t="1359" ac="0"> it's</s>
+            <s t="1600" ac="0"> like</s>
+        </p>
+        <p t="128869" d="3931" w="1" a="1"> </p>
+        <p t="128879" d="6801" w="1">
+            <s ac="0">start</s>
+            <s t="481" ac="0"> and</s>
+            <s t="800" ac="0"> all</s>
+            <s t="1041" ac="0"> this</s>
+            <s t="1281" ac="0"> stuff</s>
+            <s t="2160" ac="0"> and</s>
+            <s t="2401" ac="0"> I</s>
+            <s t="2561" ac="0"> said</s>
+            <s t="2801" ac="0"> okay</s>
+        </p>
+        <p t="132790" d="2890" w="1" a="1"> </p>
+        <p t="132800" d="4960" w="1">
+            <s ac="0">uh</s>
+            <s t="159" ac="0"> when</s>
+            <s t="400" ac="0"> onboarding</s>
+            <s t="960" ac="0"> starts,</s>
+            <s t="1920" ac="0"> what</s>
+            <s t="2159" ac="0"> API</s>
+            <s t="2560" ac="0"> am</s>
+            <s t="2720" ac="0"> I</s>
+        </p>
+        <p t="135670" d="2090" w="1" a="1"> </p>
+        <p t="135680" d="3919" w="1">
+            <s ac="0">calling?</s>
+            <s t="720" ac="0"> And</s>
+            <s t="880" ac="0"> in</s>
+            <s t="1040" ac="0"> a</s>
+            <s t="1199" ac="0"> few</s>
+            <s t="1360" ac="0"> seconds,</s>
+            <s t="1840" ac="0"> you</s>
+            <s t="2000" ac="0"> know,</s>
+        </p>
+        <p t="137750" d="1849" w="1" a="1"> </p>
+        <p t="137760" d="3920" w="1">
+            <s ac="0">it</s>
+            <s t="240" ac="0"> ended</s>
+            <s t="479" ac="0"> up</s>
+            <s t="559" ac="0"> having</s>
+            <s t="800" ac="0"> the</s>
+            <s t="1040" ac="0"> answer</s>
+            <s t="1199" ac="0"> for</s>
+            <s t="1440" ac="0"> me</s>
+            <s t="1680" ac="0"> and</s>
+        </p>
+        <p t="139589" d="2091" w="1" a="1"> </p>
+        <p t="139599" d="4401" w="1">
+            <s ac="0">it</s>
+            <s t="241" ac="0"> was</s>
+            <s t="401" ac="0"> correct.</s>
+            <s t="1201" ac="0"> You</s>
+            <s t="1360" ac="0"> can</s>
+            <s t="1441" ac="0"> also</s>
+            <s t="1681" ac="0"> do</s>
+            <s t="1841" ac="0"> things</s>
+        </p>
+        <p t="141670" d="2330" w="1" a="1"> </p>
+        <p t="141680" d="3680" w="1">
+            <s ac="0">like</s>
+            <s t="320" ac="0"> change</s>
+            <s t="880" ac="0"> the</s>
+            <s t="1199" ac="0"> login</s>
+            <s t="1680" ac="0"> button.</s>
+            <s t="2000" ac="0"> You</s>
+            <s t="2160" ac="0"> don't</s>
+        </p>
+        <p t="143990" d="1370" w="1" a="1"> </p>
+        <p t="144000" d="3680" w="1">
+            <s ac="0">even</s>
+            <s t="160" ac="0"> need</s>
+            <s t="319" ac="0"> to</s>
+            <s t="400" ac="0"> point</s>
+            <s t="640" ac="0"> to</s>
+            <s t="720" ac="0"> the</s>
+            <s t="959" ac="0"> component</s>
+        </p>
+        <p t="145350" d="2330" w="1" a="1"> </p>
+        <p t="145360" d="4720" w="1">
+            <s ac="0">name.</s>
+            <s t="879" ac="0"> Um</s>
+            <s t="1200" ac="0"> you</s>
+            <s t="1440" ac="0"> don't</s>
+            <s t="1599" ac="0"> even</s>
+            <s t="1760" ac="0"> need</s>
+            <s t="1840" ac="0"> to</s>
+            <s t="1920" ac="0"> point</s>
+            <s t="2160" ac="0"> to</s>
+        </p>
+        <p t="147670" d="2410" w="1" a="1"> </p>
+        <p t="147680" d="3760" w="1">
+            <s ac="0">the</s>
+            <s t="160" ac="0"> file.</s>
+            <s t="1040" ac="0"> It</s>
+            <s t="1360" ac="0"> does</s>
+            <s t="1520" ac="0"> help</s>
+            <s t="1680" ac="0"> it</s>
+            <s t="1919" ac="0"> speed</s>
+            <s t="2240" ac="0"> things</s>
+        </p>
+        <p t="150070" d="1370" w="1" a="1"> </p>
+        <p t="150080" d="3200" w="1">
+            <s ac="0">up</s>
+            <s t="159" ac="0"> if</s>
+            <s t="320" ac="0"> you</s>
+            <s t="400" ac="0"> do</s>
+            <s t="560" ac="0"> point</s>
+            <s t="799" ac="0"> to</s>
+            <s t="879" ac="0"> the</s>
+            <s t="1040" ac="0"> file,</s>
+            <s t="1200" ac="0"> which</s>
+        </p>
+        <p t="151430" d="1850" w="1" a="1"> </p>
+        <p t="151440" d="4079" w="1">
+            <s ac="0">I'll</s>
+            <s t="240" ac="0"> talk</s>
+            <s t="320" ac="0"> about</s>
+            <s t="400" ac="0"> in</s>
+            <s t="560" ac="0"> a</s>
+            <s t="720" ac="0"> minute.</s>
+            <s t="879" ac="0"> Here,</s>
+        </p>
+        <p t="153270" d="2249" w="1" a="1"> </p>
+        <p t="153280" d="3840" w="1">
+            <s ac="0">there's</s>
+            <s t="239" ac="0"> a</s>
+            <s t="480" ac="0"> button</s>
+            <s t="1360" ac="0"> that</s>
+            <s t="1679" ac="0"> says</s>
+            <s t="1920" ac="0"> create</s>
+        </p>
+        <p t="155509" d="1611" w="1" a="1"> </p>
+        <p t="155519" d="3601" w="1">
+            <s ac="0">campaign.</s>
+            <s t="401" ac="0"> When</s>
+            <s t="481" ac="0"> it's</s>
+            <s t="641" ac="0"> clicked,</s>
+            <s t="800" ac="0"> I</s>
+            <s t="961" ac="0"> get</s>
+            <s t="1041" ac="0"> a</s>
+            <s t="1201" ac="0"> 500</s>
+        </p>
+        <p t="157110" d="2010" w="1" a="1"> </p>
+        <p t="157120" d="4240" w="1">
+            <s ac="0">server</s>
+            <s t="320" ac="0"> error</s>
+            <s t="479" ac="0"> from</s>
+            <s t="640" ac="0"> the</s>
+            <s t="720" ac="0"> API.</s>
+            <s t="1199" ac="0"> Here</s>
+            <s t="1440" ac="0"> is</s>
+            <s t="1759" ac="0"> the</s>
+        </p>
+        <p t="159110" d="2250" w="1" a="1"> </p>
+        <p t="159120" d="5119" w="1">
+            <s ac="0">log.</s>
+            <s t="880" ac="0"> That</s>
+            <s t="1040" ac="0"> is</s>
+            <s t="1199" ac="0"> a</s>
+            <s t="1360" ac="0"> that</s>
+            <s t="1600" ac="0"> is</s>
+            <s t="1759" ac="0"> one</s>
+            <s t="1920" ac="0"> that</s>
+            <s t="2080" ac="0"> I</s>
+        </p>
+        <p t="161350" d="2889" w="1" a="1"> </p>
+        <p t="161360" d="6640" w="1">
+            <s ac="0">actually</s>
+            <s t="320" ac="0"> used</s>
+            <s t="879" ac="0"> yesterday</s>
+            <s t="2000" ac="0"> because</s>
+            <s t="2480" ac="0"> I</s>
+            <s t="2720" ac="0"> was</s>
+        </p>
+        <p t="164229" d="3771" w="1" a="1"> </p>
+        <p t="164239" d="6481" w="1">
+            <s ac="0">getting</s>
+            <s t="161" ac="0"> a</s>
+            <s t="321" ac="0"> weird</s>
+            <s t="720" ac="0"> 500</s>
+            <s t="1280" ac="0"> error</s>
+            <s t="2000" ac="0"> for</s>
+            <s t="2801" ac="0"> uh</s>
+            <s t="3121" ac="0"> just</s>
+            <s t="3441" ac="0"> a</s>
+        </p>
+        <p t="167990" d="2730" w="1" a="1"> </p>
+        <p t="168000" d="4400" w="1">
+            <s ac="0">field</s>
+            <s t="239" ac="0"> that</s>
+            <s t="400" ac="0"> was</s>
+            <s t="560" ac="0"> missing.</s>
+            <s t="879" ac="0"> So</s>
+            <s t="1040" ac="0"> then</s>
+            <s t="2160" ac="0"> it</s>
+            <s t="2480" ac="0"> ended</s>
+        </p>
+        <p t="170710" d="1690" w="1" a="1"> </p>
+        <p t="170720" d="3760" w="1">
+            <s ac="0">up</s>
+            <s t="159" ac="0"> fixing</s>
+            <s t="400" ac="0"> that</s>
+            <s t="640" ac="0"> for</s>
+            <s t="879" ac="0"> me</s>
+            <s t="1040" ac="0"> and</s>
+            <s t="1200" ac="0"> I</s>
+            <s t="1440" ac="0"> didn't</s>
+            <s t="1519" ac="0"> have</s>
+        </p>
+        <p t="172390" d="2090" w="1" a="1"> </p>
+        <p t="172400" d="4240" w="1">
+            <s ac="0">to</s>
+            <s t="80" ac="0"> go</s>
+            <s t="160" ac="0"> in</s>
+            <s t="400" ac="0"> and</s>
+            <s t="559" ac="0"> actually</s>
+            <s t="880" ac="0"> do</s>
+            <s t="1119" ac="0"> anything</s>
+            <s t="1760" ac="0"> too</s>
+        </p>
+        <p t="174470" d="2170" w="1" a="1"> </p>
+        <p t="174480" d="5039" w="1">
+            <s ac="0">crazy</s>
+            <s t="320" ac="0"> there.</s>
+            <s t="1039" ac="0"> You</s>
+            <s t="1280" ac="0"> can</s>
+            <s t="1360" ac="0"> also</s>
+            <s t="1680" ac="0"> do</s>
+            <s t="1839" ac="0"> like</s>
+        </p>
+        <p t="176630" d="2889" w="1" a="1"> </p>
+        <p t="176640" d="4879" w="1">
+            <s ac="0">explain</s>
+            <s t="480" ac="0"> this</s>
+            <s t="800" ac="0"> thing</s>
+            <s t="1040" ac="0"> to</s>
+            <s t="1280" ac="0"> me.</s>
+            <s t="2000" ac="0"> It</s>
+            <s t="2319" ac="0"> it</s>
+            <s t="2640" ac="0"> just</s>
+        </p>
+        <p t="179509" d="2010" w="1" a="1"> </p>
+        <p t="179519" d="3281" w="1">
+            <s ac="0">works</s>
+            <s t="401" ac="0"> really</s>
+            <s t="720" ac="0"> really really</s>
+            <s t="1281" ac="0"> well.</s>
+            <s t="1761" ac="0"> So</s>
+        </p>
+        <p t="181509" d="1291" w="1" a="1"> </p>
+        <p t="181519" d="2401" w="1">
+            <s ac="0">here's</s>
+            <s t="321" ac="0"> another</s>
+            <s t="561" ac="0"> project</s>
+            <s t="800" ac="0"> that</s>
+            <s t="961" ac="0"> I've</s>
+            <s t="1121" ac="0"> been</s>
+        </p>
+        <p t="182790" d="1130" w="1" a="1"> </p>
+        <p t="182800" d="5439" w="1">
+            <s ac="0">working</s>
+            <s t="79" ac="0"> on.</s>
+            <s t="240" ac="0"> I</s>
+            <s t="400" ac="0"> say</s>
+            <s t="560" ac="0"> can</s>
+            <s t="719" ac="0"> you</s>
+            <s t="799" ac="0"> tell</s>
+            <s t="880" ac="0"> me</s>
+            <s t="1040" ac="0"> what</s>
+        </p>
+        <p t="183910" d="4329" w="1" a="1"> </p>
+        <p t="183920" d="6880" w="1">
+            <s ac="0">the</s>
+            <s t="160" ac="0"> API</s>
+            <s t="480" ac="0"> is</s>
+            <s t="720" ac="0"> for</s>
+            <s t="880" ac="0"> logging</s>
+            <s t="1280" ac="0"> in</s>
+            <s t="2480" ac="0"> and</s>
+            <s t="3039" ac="0"> the</s>
+            <s t="3360" ac="0"> format</s>
+        </p>
+        <p t="188229" d="2571" w="1" a="1"> </p>
+        <p t="188239" d="4481" w="1">
+            <s ac="0">and</s>
+            <s t="640" ac="0"> it</s>
+            <s t="1360" ac="0"> starts</s>
+            <s t="1681" ac="0"> to</s>
+            <s t="1841" ac="0"> answer</s>
+            <s t="2080" ac="0"> that</s>
+            <s t="2321" ac="0"> question</s>
+        </p>
+        <p t="190790" d="1930" w="1" a="1"> </p>
+        <p t="190800" d="4240" w="1">
+            <s ac="0">for</s>
+            <s t="159" ac="0"> me.</s>
+            <s t="320" ac="0"> It</s>
+            <s t="480" ac="0"> does</s>
+            <s t="640" ac="0"> a</s>
+            <s t="799" ac="0"> great</s>
+            <s t="960" ac="0"> job</s>
+            <s t="1040" ac="0"> on</s>
+            <s t="1280" ac="0"> it.</s>
+            <s t="1519" ac="0"> But</s>
+            <s t="1680" ac="0"> I</s>
+        </p>
+        <p t="192710" d="2330" w="1" a="1"> </p>
+        <p t="192720" d="5519" w="1">
+            <s ac="0">also</s>
+            <s t="320" ac="0"> recommend</s>
+            <s t="799" ac="0"> being</s>
+            <s t="1280" ac="0"> more</s>
+            <s t="1519" ac="0"> precise</s>
+            <s t="2080" ac="0"> and</s>
+        </p>
+        <p t="195030" d="3209" w="1" a="1"> </p>
+        <p t="195040" d="5279" w="1">
+            <s ac="0">surgical.</s>
+            <s t="1199" ac="0"> In</s>
+            <s t="1520" ac="0"> this</s>
+            <s t="1760" ac="0"> file</s>
+            <s t="2320" ac="0"> I</s>
+            <s t="2559" ac="0"> need</s>
+            <s t="2720" ac="0"> you</s>
+            <s t="2880" ac="0"> to</s>
+            <s t="3040" ac="0"> add</s>
+        </p>
+        <p t="198229" d="2090" w="1" a="1"> </p>
+        <p t="198239" d="4640" w="1">
+            <s ac="0">a</s>
+            <s t="241" ac="0"> function</s>
+            <s t="481" ac="0"> that</s>
+            <s t="640" ac="0"> validates</s>
+            <s t="1121" ac="0"> XYZ</s>
+            <s t="1761" ac="0"> before</s>
+        </p>
+        <p t="200309" d="2570" w="1" a="1"> </p>
+        <p t="200319" d="4961" w="1">
+            <s ac="0">letting</s>
+            <s t="241" ac="0"> the</s>
+            <s t="401" ac="0"> user</s>
+            <s t="640" ac="0"> click</s>
+            <s t="881" ac="0"> sign</s>
+            <s t="1121" ac="0"> up.</s>
+            <s t="2241" ac="0"> Here's</s>
+        </p>
+        <p t="202869" d="2411" w="1" a="1"> </p>
+        <p t="202879" d="4881" w="1">
+            <s ac="0">an</s>
+            <s t="241" ac="0"> example</s>
+            <s t="481" ac="0"> of</s>
+            <s t="640" ac="0"> one</s>
+            <s t="801" ac="0"> that</s>
+            <s t="961" ac="0"> I</s>
+            <s t="1121" ac="0"> did.</s>
+            <s t="1921" ac="0"> In</s>
+            <s t="2241" ac="0"> this</s>
+        </p>
+        <p t="205270" d="2490" w="1" a="1"> </p>
+        <p t="205280" d="5280" w="1">
+            <s ac="0">file,</s>
+            <s t="400" ac="0"> the</s>
+            <s t="640" ac="0"> calculated</s>
+            <s t="1120" ac="0"> LTV</s>
+            <s t="1679" ac="0"> last</s>
+            <s t="2000" ac="0"> 90</s>
+            <s t="2239" ac="0"> is</s>
+        </p>
+        <p t="207750" d="2810" w="1" a="1"> </p>
+        <p t="207760" d="4640" w="1">
+            <s ac="0">different</s>
+            <s t="240" ac="0"> from</s>
+            <s t="479" ac="0"> what</s>
+            <s t="720" ac="0"> shows</s>
+            <s t="1040" ac="0"> on</s>
+            <s t="1600" ac="0"> this</s>
+            <s t="1920" ac="0"> file.</s>
+        </p>
+        <p t="210550" d="1850" w="1" a="1"> </p>
+        <p t="210560" d="4800" w="1">
+            <s ac="0">In</s>
+            <s t="239" ac="0"> this</s>
+            <s t="399" ac="0"> case,</s>
+            <s t="560" ac="0"> the</s>
+            <s t="800" ac="0"> number</s>
+            <s t="959" ac="0"> of</s>
+            <s t="1200" ac="0"> customers</s>
+            <s t="1599" ac="0"> is</s>
+        </p>
+        <p t="212390" d="2970" w="1" a="1"> </p>
+        <p t="212400" d="4960" w="1">
+            <s ac="0">the</s>
+            <s t="240" ac="0"> same,</s>
+            <s t="479" ac="0"> but</s>
+            <s t="720" ac="0"> the</s>
+            <s t="880" ac="0"> LTV</s>
+            <s t="1520" ac="0"> is</s>
+            <s t="1839" ac="0"> different.</s>
+            <s t="2640" ac="0"> Work</s>
+        </p>
+        <p t="215350" d="2010" w="1" a="1"> </p>
+        <p t="215360" d="5519" w="1">
+            <s ac="0">through</s>
+            <s t="159" ac="0"> the</s>
+            <s t="320" ac="0"> likely</s>
+            <s t="720" ac="0"> cause</s>
+            <s t="1120" ac="0"> and</s>
+            <s t="1280" ac="0"> a</s>
+            <s t="1519" ac="0"> proposed</s>
+        </p>
+        <p t="217350" d="3529" w="1" a="1"> </p>
+        <p t="217360" d="5920" w="1">
+            <s ac="0">plan</s>
+            <s t="239" ac="0"> to</s>
+            <s t="480" ac="0"> fix</s>
+            <s t="640" ac="0"> it.</s>
+            <s t="1200" ac="0"> Very</s>
+            <s t="1840" ac="0"> surgical,</s>
+            <s t="2640" ac="0"> like</s>
+            <s t="3280" ac="0"> I</s>
+        </p>
+        <p t="220869" d="2411" w="1" a="1"> </p>
+        <p t="220879" d="3681" w="1">
+            <s ac="0">don't</s>
+            <s t="80" ac="0"> want</s>
+            <s t="241" ac="0"> it</s>
+            <s t="401" ac="0"> to</s>
+            <s t="640" ac="0"> actually</s>
+            <s t="1761" ac="0"> code</s>
+            <s t="2080" ac="0"> anything.</s>
+        </p>
+        <p t="223270" d="1290" w="1" a="1"> </p>
+        <p t="223280" d="3120" w="1">
+            <s ac="0">I</s>
+            <s t="160" ac="0"> actually</s>
+            <s t="319" ac="0"> wanted</s>
+            <s t="560" ac="0"> to</s>
+            <s t="720" ac="0"> go</s>
+            <s t="879" ac="0"> try</s>
+            <s t="959" ac="0"> to</s>
+            <s t="1120" ac="0"> figure</s>
+        </p>
+        <p t="224550" d="1850" w="1" a="1"> </p>
+        <p t="224560" d="3679" w="1">
+            <s ac="0">out</s>
+            <s t="80" ac="0"> what</s>
+            <s t="239" ac="0"> the</s>
+            <s t="480" ac="0"> problem</s>
+            <s t="640" ac="0"> is.</s>
+            <s t="1200" ac="0"> I'll</s>
+            <s t="1440" ac="0"> kick</s>
+            <s t="1679" ac="0"> this</s>
+        </p>
+        <p t="226390" d="1849" w="1" a="1"> </p>
+        <p t="226400" d="4720" w="1">
+            <s ac="0">off</s>
+            <s t="160" ac="0"> and</s>
+            <s t="320" ac="0"> I'll</s>
+            <s t="479" ac="0"> go</s>
+            <s t="640" ac="0"> work</s>
+            <s t="800" ac="0"> on</s>
+            <s t="960" ac="0"> something</s>
+            <s t="1280" ac="0"> else.</s>
+        </p>
+        <p t="228229" d="2891" w="1" a="1"> </p>
+        <p t="228239" d="4080" w="1">
+            <s ac="0">it</s>
+            <s t="241" ac="0"> ends</s>
+            <s t="401" ac="0"> up</s>
+            <s t="560" ac="0"> being</s>
+            <s t="720" ac="0"> a</s>
+            <s t="881" ac="0"> very</s>
+            <s t="1121" ac="0"> minor</s>
+            <s t="1521" ac="0"> change</s>
+            <s t="2080" ac="0"> or</s>
+        </p>
+        <p t="231110" d="1209" w="1" a="1"> </p>
+        <p t="231120" d="2800" w="1">
+            <s ac="0">it</s>
+            <s t="240" ac="0"> may</s>
+            <s t="399" ac="0"> be</s>
+            <s t="479" ac="0"> a</s>
+            <s t="640" ac="0"> little</s>
+            <s t="720" ac="0"> bit</s>
+            <s t="800" ac="0"> more</s>
+            <s t="960" ac="0"> in</s>
+            <s t="1119" ac="0"> the</s>
+        </p>
+        <p t="232309" d="1611" w="1" a="1"> </p>
+        <p t="232319" d="3840" w="1">
+            <s ac="0">weeds.</s>
+            <s t="321" ac="0"> I</s>
+            <s t="480" ac="0"> can</s>
+            <s t="560" ac="0"> kind</s>
+            <s t="721" ac="0"> of</s>
+            <s t="801" ac="0"> take</s>
+            <s t="961" ac="0"> control</s>
+            <s t="1280" ac="0"> of</s>
+            <s t="1441" ac="0"> it</s>
+        </p>
+        <p t="233910" d="2249" w="1" a="1"> </p>
+        <p t="233920" d="4319" w="1">
+            <s ac="0">if</s>
+            <s t="160" ac="0"> I</s>
+            <s t="239" ac="0"> need</s>
+            <s t="319" ac="0"> to</s>
+            <s t="560" ac="0"> there.</s>
+            <s t="1200" ac="0"> Now,</s>
+            <s t="1679" ac="0"> this</s>
+            <s t="1840" ac="0"> is</s>
+            <s t="2000" ac="0"> one</s>
+            <s t="2160" ac="0"> of</s>
+        </p>
+        <p t="236149" d="2090" w="1" a="1"> </p>
+        <p t="236159" d="3681" w="1">
+            <s ac="0">the</s>
+            <s t="160" ac="0"> prompts</s>
+            <s t="561" ac="0"> that</s>
+            <s t="961" ac="0"> the</s>
+            <s t="1201" ac="0"> formats</s>
+            <s t="1681" ac="0"> that</s>
+            <s t="1841" ac="0"> I</s>
+            <s t="2000" ac="0"> like</s>
+        </p>
+        <p t="238229" d="1611" w="1" a="1"> </p>
+        <p t="238239" d="3441" w="1">
+            <s ac="0">to</s>
+            <s t="161" ac="0"> use</s>
+            <s t="321" ac="0"> for</s>
+            <s t="560" ac="0"> long</s>
+            <s t="801" ac="0"> prompts.</s>
+            <s t="1200" ac="0"> So,</s>
+            <s t="1280" ac="0"> a</s>
+            <s t="1441" ac="0"> lot</s>
+            <s t="1521" ac="0"> of</s>
+        </p>
+        <p t="239830" d="1850" w="1" a="1"> </p>
+        <p t="239840" d="4399" w="1">
+            <s ac="0">times</s>
+            <s t="160" ac="0"> I'll</s>
+            <s t="399" ac="0"> be</s>
+            <s t="640" ac="0"> working</s>
+            <s t="880" ac="0"> on</s>
+            <s t="1039" ac="0"> a</s>
+            <s t="1280" ac="0"> new</s>
+            <s t="1440" ac="0"> feature</s>
+        </p>
+        <p t="241670" d="2569" w="1" a="1"> </p>
+        <p t="241680" d="5199" w="1">
+            <s ac="0">or</s>
+            <s t="240" ac="0"> I</s>
+            <s t="400" ac="0"> want</s>
+            <s t="559" ac="0"> something</s>
+            <s t="720" ac="0"> a</s>
+            <s t="880" ac="0"> little</s>
+            <s t="1040" ac="0"> bit</s>
+            <s t="1119" ac="0"> bigger.</s>
+        </p>
+        <p t="244229" d="2650" w="1" a="1"> </p>
+        <p t="244239" d="5121" w="1">
+            <s ac="0">You</s>
+            <s t="241" ac="0"> need</s>
+            <s t="401" ac="0"> to</s>
+            <s t="560" ac="0"> be</s>
+            <s t="720" ac="0"> even</s>
+            <s t="961" ac="0"> more</s>
+            <s t="1360" ac="0"> precise.</s>
+            <s t="2401" ac="0"> So,</s>
+        </p>
+        <p t="246869" d="2491" w="1" a="1"> </p>
+        <p t="246879" d="3920" w="1">
+            <s ac="0">I'll</s>
+            <s t="241" ac="0"> use</s>
+            <s t="560" ac="0"> XML</s>
+            <s t="1121" ac="0"> tags.</s>
+            <s t="1440" ac="0"> And</s>
+            <s t="1601" ac="0"> I</s>
+            <s t="1761" ac="0"> actually</s>
+            <s t="2161" ac="0"> I</s>
+            <s t="2321" ac="0"> know</s>
+        </p>
+        <p t="249350" d="1449" w="1" a="1"> </p>
+        <p t="249360" d="4799" w="1">
+            <s ac="0">this</s>
+            <s t="159" ac="0"> is</s>
+            <s t="320" ac="0"> crazy,</s>
+            <s t="560" ac="0"> but</s>
+            <s t="799" ac="0"> I</s>
+            <s t="879" ac="0"> have</s>
+            <s t="959" ac="0"> like</s>
+            <s t="1120" ac="0"> a</s>
+            <s t="1200" ac="0"> million</s>
+        </p>
+        <p t="250789" d="3370" w="1" a="1"> </p>
+        <p t="250799" d="5601" w="1">
+            <s ac="0">notepad.</s>
+            <s t="640" ac="0"> I'm</s>
+            <s t="881" ac="0"> on</s>
+            <s t="1041" ac="0"> Windows</s>
+            <s t="2401" ac="0"> billion</s>
+            <s t="2800" ac="0"> notepads</s>
+        </p>
+        <p t="254149" d="2251" w="1" a="1"> </p>
+        <p t="254159" d="4001" w="1">
+            <s ac="0">open.</s>
+            <s t="1041" ac="0"> And</s>
+            <s t="1280" ac="0"> this</s>
+            <s t="1440" ac="0"> is</s>
+            <s t="1521" ac="0"> the</s>
+            <s t="1681" ac="0"> format</s>
+            <s t="1920" ac="0"> that</s>
+            <s t="2080" ac="0"> I'll</s>
+        </p>
+        <p t="256390" d="1770" w="1" a="1"> </p>
+        <p t="256400" d="4320" w="1">
+            <s ac="0">use.</s>
+            <s t="79" ac="0"> So</s>
+            <s t="160" ac="0"> I</s>
+            <s t="399" ac="0"> use</s>
+            <s t="559" ac="0"> things</s>
+            <s t="720" ac="0"> like</s>
+            <s t="959" ac="0"> instructions,</s>
+        </p>
+        <p t="258150" d="2570" w="1" a="1"> </p>
+        <p t="258160" d="5120" w="1">
+            <s ac="0">requirements,</s>
+            <s t="720" ac="0"> testing,</s>
+            <s t="1680" ac="0"> great</s>
+            <s t="1919" ac="0"> tags</s>
+            <s t="2319" ac="0"> to</s>
+        </p>
+        <p t="260710" d="2570" w="1" a="1"> </p>
+        <p t="260720" d="4640" w="1">
+            <s ac="0">use.</s>
+            <s t="799" ac="0"> Uh</s>
+            <s t="1120" ac="0"> claw</s>
+            <s t="1440" ac="0"> code</s>
+            <s t="1600" ac="0"> seems</s>
+            <s t="1840" ac="0"> to</s>
+            <s t="2000" ac="0"> follow</s>
+            <s t="2240" ac="0"> those</s>
+        </p>
+        <p t="263270" d="2090" w="1" a="1"> </p>
+        <p t="263280" d="3840" w="1">
+            <s ac="0">really</s>
+            <s t="320" ac="0"> really</s>
+            <s t="639" ac="0"> well.</s>
+            <s t="1359" ac="0"> So</s>
+            <s t="1520" ac="0"> I'll</s>
+            <s t="1840" ac="0"> build</s>
+        </p>
+        <p t="265350" d="1770" w="1" a="1"> </p>
+        <p t="265360" d="4800" w="1">
+            <s ac="0">something</s>
+            <s t="480" ac="0"> like</s>
+            <s t="720" ac="0"> this</s>
+            <s t="880" ac="0"> where</s>
+            <s t="1119" ac="0"> I'll</s>
+            <s t="1440" ac="0"> this</s>
+            <s t="1680" ac="0"> is</s>
+        </p>
+        <p t="267110" d="3050" w="1" a="1"> </p>
+        <p t="267120" d="4639" w="1">
+            <s ac="0">an</s>
+            <s t="240" ac="0"> exact</s>
+            <s t="1040" ac="0"> example</s>
+            <s t="1359" ac="0"> that</s>
+            <s t="1600" ac="0"> I</s>
+            <s t="1840" ac="0"> actually</s>
+            <s t="2160" ac="0"> used.</s>
+        </p>
+        <p t="270150" d="1609" w="1" a="1"> </p>
+        <p t="270160" d="4080" w="1">
+            <s ac="0">So</s>
+            <s t="80" ac="0"> I</s>
+            <s t="240" ac="0"> will</s>
+            <s t="400" ac="0"> say</s>
+            <s t="560" ac="0"> build</s>
+            <s t="720" ac="0"> a</s>
+            <s t="880" ac="0"> serverless</s>
+            <s t="1280" ac="0"> user</s>
+        </p>
+        <p t="271749" d="2491" w="1" a="1"> </p>
+        <p t="271759" d="6000" w="1">
+            <s ac="0">authentication</s>
+            <s t="561" ac="0"> system</s>
+            <s t="880" ac="0"> using</s>
+            <s t="1121" ac="0"> AWS</s>
+            <s t="1921" ac="0"> Cognto</s>
+        </p>
+        <p t="274230" d="3529" w="1" a="1"> </p>
+        <p t="274240" d="4800" w="1">
+            <s ac="0">Lambda</s>
+            <s t="560" ac="0"> CDK</s>
+            <s t="1760" ac="0"> and</s>
+            <s t="2000" ac="0"> then</s>
+            <s t="2239" ac="0"> I</s>
+            <s t="2480" ac="0"> kind</s>
+            <s t="2720" ac="0"> of</s>
+            <s t="2800" ac="0"> fill</s>
+            <s t="3040" ac="0"> in</s>
+        </p>
+        <p t="277749" d="1291" w="1" a="1"> </p>
+        <p t="277759" d="4081" w="1">
+            <s ac="0">all</s>
+            <s t="241" ac="0"> the</s>
+            <s t="401" ac="0"> stuff.</s>
+            <s t="561" ac="0"> So</s>
+            <s t="641" ac="0"> I'll</s>
+            <s t="801" ac="0"> go</s>
+            <s t="961" ac="0"> through</s>
+            <s t="1121" ac="0"> and</s>
+        </p>
+        <p t="279030" d="2810" w="1" a="1"> </p>
+        <p t="279040" d="4640" w="1">
+            <s ac="0">tweak</s>
+            <s t="240" ac="0"> this.</s>
+            <s t="480" ac="0"> I</s>
+            <s t="719" ac="0"> actually</s>
+            <s t="960" ac="0"> will</s>
+            <s t="1200" ac="0"> use</s>
+            <s t="1599" ac="0"> AI</s>
+            <s t="2560" ac="0"> to</s>
+        </p>
+        <p t="281830" d="1850" w="1" a="1"> </p>
+        <p t="281840" d="3200" w="1">
+            <s ac="0">help</s>
+            <s t="240" ac="0"> generate</s>
+            <s t="639" ac="0"> this</s>
+            <s t="880" ac="0"> originally</s>
+            <s t="1680" ac="0"> u</s>
+        </p>
+        <p t="283670" d="1370" w="1" a="1"> </p>
+        <p t="283680" d="4239" w="1">
+            <s ac="0">initially</s>
+            <s t="320" ac="0"> and</s>
+            <s t="480" ac="0"> then</s>
+            <s t="640" ac="0"> I</s>
+            <s t="720" ac="0"> just</s>
+            <s t="880" ac="0"> go</s>
+            <s t="959" ac="0"> in</s>
+            <s t="1120" ac="0"> and</s>
+            <s t="1280" ac="0"> kind</s>
+        </p>
+        <p t="285030" d="2889" w="1" a="1"> </p>
+        <p t="285040" d="6560" w="1">
+            <s ac="0">of</s>
+            <s t="159" ac="0"> manually</s>
+            <s t="560" ac="0"> change</s>
+            <s t="800" ac="0"> it</s>
+            <s t="1840" ac="0"> and</s>
+            <s t="2080" ac="0"> this</s>
+            <s t="2400" ac="0"> will</s>
+            <s t="2560" ac="0"> help</s>
+        </p>
+        <p t="287909" d="3691" w="1" a="1"> </p>
+        <p t="287919" d="5280" w="1">
+            <s ac="0">a</s>
+            <s t="321" ac="0"> ton</s>
+            <s t="1441" ac="0"> with</s>
+            <s t="2081" ac="0"> the</s>
+            <s t="2321" ac="0"> way</s>
+            <s t="2481" ac="0"> that</s>
+            <s t="2801" ac="0"> the</s>
+            <s t="3121" ac="0"> cloud</s>
+            <s t="3441" ac="0"> code</s>
+        </p>
+        <p t="291590" d="1609" w="1" a="1"> </p>
+        <p t="291600" d="4800" w="1">
+            <s ac="0">will</s>
+            <s t="159" ac="0"> actually</s>
+            <s t="319" ac="0"> pick</s>
+            <s t="560" ac="0"> up</s>
+            <s t="720" ac="0"> this</s>
+            <s t="879" ac="0"> feature</s>
+            <s t="1280" ac="0"> and</s>
+        </p>
+        <p t="293189" d="3211" w="1" a="1"> </p>
+        <p t="293199" d="5280" w="1">
+            <s ac="0">run</s>
+            <s t="241" ac="0"> it.</s>
+            <s t="1121" ac="0"> I've</s>
+            <s t="1681" ac="0"> uh</s>
+            <s t="1841" ac="0"> Claude</s>
+            <s t="2401" ac="0"> Anthropic</s>
+            <s t="3201" ac="0"> itms</s>
+        </p>
+        <p t="296390" d="2089" w="1" a="1"> </p>
+        <p t="296400" d="3920" w="1">
+            <s ac="0">itself</s>
+            <s t="480" ac="0"> actually</s>
+            <s t="720" ac="0"> talk</s>
+            <s t="960" ac="0"> about</s>
+            <s t="1120" ac="0"> how</s>
+            <s t="1359" ac="0"> well</s>
+        </p>
+        <p t="298469" d="1851" w="1" a="1"> </p>
+        <p t="298479" d="4000" w="1">
+            <s ac="0">Claude</s>
+            <s t="401" ac="0"> has</s>
+            <s t="561" ac="0"> been</s>
+            <s t="720" ac="0"> trained</s>
+            <s t="1041" ac="0"> on</s>
+            <s t="1361" ac="0"> following</s>
+        </p>
+        <p t="300310" d="2169" w="1" a="1"> </p>
+        <p t="300320" d="5120" w="1">
+            <s ac="0">XMLbased</s>
+            <s t="720" ac="0"> tags</s>
+            <s t="1360" ac="0"> and</s>
+            <s t="1599" ac="0"> you</s>
+            <s t="1760" ac="0"> can</s>
+            <s t="1920" ac="0"> actually</s>
+        </p>
+        <p t="302469" d="2971" w="1" a="1"> </p>
+        <p t="302479" d="4801" w="1">
+            <s ac="0">reference</s>
+            <s t="481" ac="0"> them</s>
+            <s t="1201" ac="0"> in</s>
+            <s t="2160" ac="0"> other</s>
+            <s t="2481" ac="0"> parts</s>
+            <s t="2720" ac="0"> of</s>
+            <s t="2801" ac="0"> the</s>
+        </p>
+        <p t="305430" d="1850" w="1" a="1"> </p>
+        <p t="305440" d="4319" w="1">
+            <s ac="0">prompt.</s>
+            <s t="319" ac="0"> for</s>
+            <s t="400" ac="0"> example,</s>
+            <s t="800" ac="0"> you</s>
+            <s t="880" ac="0"> can</s>
+            <s t="1039" ac="0"> be</s>
+            <s t="1599" ac="0"> make</s>
+        </p>
+        <p t="307270" d="2489" w="1" a="1"> </p>
+        <p t="307280" d="4240" w="1">
+            <s ac="0">sure</s>
+            <s t="160" ac="0"> you</s>
+            <s t="479" ac="0"> refer</s>
+            <s t="880" ac="0"> back</s>
+            <s t="1120" ac="0"> to</s>
+            <s t="1600" ac="0"> this</s>
+            <s t="2000" ac="0"> information</s>
+        </p>
+        <p t="309749" d="1771" w="1" a="1"> </p>
+        <p t="309759" d="3601" w="1">
+            <s ac="0">area</s>
+            <s t="321" ac="0"> or</s>
+            <s t="561" ac="0"> make</s>
+            <s t="641" ac="0"> sure</s>
+            <s t="801" ac="0"> you</s>
+            <s t="961" ac="0"> do</s>
+            <s t="1121" ac="0"> this</s>
+            <s t="1280" ac="0"> particular</s>
+        </p>
+        <p t="311510" d="1850" w="1" a="1"> </p>
+        <p t="311520" d="4239" w="1">
+            <s ac="0">thing.</s>
+            <s t="480" ac="0"> And</s>
+            <s t="640" ac="0"> I</s>
+            <s t="800" ac="0"> actually</s>
+            <s t="1040" ac="0"> use</s>
+            <s t="1200" ac="0"> that</s>
+            <s t="1360" ac="0"> a</s>
+            <s t="1519" ac="0"> lot</s>
+            <s t="1600" ac="0"> in</s>
+        </p>
+        <p t="313350" d="2409" w="1" a="1"> </p>
+        <p t="313360" d="4960" w="1">
+            <s ac="0">my</s>
+            <s t="160" ac="0"> production</s>
+            <s t="559" ac="0"> prompts</s>
+            <s t="960" ac="0"> as</s>
+            <s t="1279" ac="0"> well.</s>
+            <s t="2000" ac="0"> So</s>
+            <s t="2240" ac="0"> this</s>
+        </p>
+        <p t="315749" d="2571" w="1" a="1"> </p>
+        <p t="315759" d="4081" w="1">
+            <s ac="0">is</s>
+            <s t="160" ac="0"> a,</s>
+            <s t="1041" ac="0"> you</s>
+            <s t="1201" ac="0"> know,</s>
+            <s t="1361" ac="0"> this</s>
+            <s t="1521" ac="0"> is</s>
+            <s t="1601" ac="0"> an</s>
+            <s t="1841" ac="0"> example</s>
+            <s t="2241" ac="0"> of</s>
+            <s t="2401" ac="0"> a</s>
+        </p>
+        <p t="318310" d="1530" w="1" a="1"> </p>
+        <p t="318320" d="3680" w="1">
+            <s ac="0">prompt</s>
+            <s t="240" ac="0"> that</s>
+            <s t="400" ac="0"> I</s>
+            <s t="560" ac="0"> would</s>
+            <s t="719" ac="0"> build</s>
+            <s t="960" ac="0"> outside</s>
+            <s t="1360" ac="0"> of</s>
+        </p>
+        <p t="319830" d="2170" w="1" a="1"> </p>
+        <p t="319840" d="3760" w="1">
+            <s ac="0">claude.</s>
+            <s t="320" ac="0"> I</s>
+            <s t="480" ac="0"> wouldn't</s>
+            <s t="639" ac="0"> just</s>
+            <s t="799" ac="0"> type</s>
+            <s t="960" ac="0"> it</s>
+            <s t="1120" ac="0"> in</s>
+            <s t="1840" ac="0"> and</s>
+        </p>
+        <p t="321990" d="1610" w="1" a="1"> </p>
+        <p t="322000" d="4560" w="1">
+            <s ac="0">then</s>
+            <s t="80" ac="0"> I</s>
+            <s t="240" ac="0"> copy</s>
+            <s t="400" ac="0"> and</s>
+            <s t="560" ac="0"> paste</s>
+            <s t="800" ac="0"> it</s>
+            <s t="880" ac="0"> in</s>
+            <s t="1120" ac="0"> and</s>
+            <s t="1280" ac="0"> we're</s>
+        </p>
+        <p t="323590" d="2970" w="1" a="1"> </p>
+        <p t="323600" d="4800" w="1">
+            <s ac="0">good</s>
+            <s t="159" ac="0"> to</s>
+            <s t="240" ac="0"> go</s>
+            <s t="400" ac="0"> at</s>
+            <s t="640" ac="0"> that</s>
+            <s t="800" ac="0"> point.</s>
+        </p>
+        <p t="326550" d="1850" w="1" a="1"> </p>
+        <p t="326560" d="3520" w="1">
+            <s ac="0">Make</s>
+            <s t="160" ac="0"> sure</s>
+            <s t="320" ac="0"> you</s>
+            <s t="479" ac="0"> use</s>
+            <s t="639" ac="0"> a</s>
+            <s t="880" ac="0"> net</s>
+            <s t="1120" ac="0"> to</s>
+            <s t="1359" ac="0"> create</s>
+            <s t="1600" ac="0"> a</s>
+        </p>
+        <p t="328390" d="1690" w="1" a="1"> </p>
+        <p t="328400" d="3120" w="1">
+            <s ac="0">cloud.md</s>
+            <s t="799" ac="0"> file.</s>
+            <s t="1120" ac="0"> Talked</s>
+            <s t="1280" ac="0"> about</s>
+            <s t="1440" ac="0"> that</s>
+            <s t="1519" ac="0"> a</s>
+        </p>
+        <p t="330070" d="1450" w="1" a="1"> </p>
+        <p t="330080" d="3440" w="1">
+            <s ac="0">little</s>
+            <s t="80" ac="0"> bit,</s>
+            <s t="160" ac="0"> but</s>
+            <s t="399" ac="0"> also</s>
+            <s t="640" ac="0"> make</s>
+            <s t="800" ac="0"> sure</s>
+            <s t="959" ac="0"> you</s>
+            <s t="1200" ac="0"> keep</s>
+        </p>
+        <p t="331510" d="2010" w="1" a="1"> </p>
+        <p t="331520" d="3519" w="1">
+            <s ac="0">it</s>
+            <s t="239" ac="0"> up.</s>
+            <s t="480" ac="0"> So</s>
+            <s t="720" ac="0"> tell</s>
+            <s t="880" ac="0"> it</s>
+            <s t="1040" ac="0"> to</s>
+            <s t="1200" ac="0"> update</s>
+            <s t="1440" ac="0"> it</s>
+            <s t="1600" ac="0"> once</s>
+            <s t="1760" ac="0"> in</s>
+            <s t="1840" ac="0"> a</s>
+        </p>
+        <p t="333510" d="1529" w="1" a="1"> </p>
+        <p t="333520" d="3440" w="1">
+            <s ac="0">while.</s>
+            <s t="160" ac="0"> This</s>
+            <s t="399" ac="0"> is</s>
+            <s t="560" ac="0"> something</s>
+            <s t="1040" ac="0"> I've</s>
+            <s t="1360" ac="0"> talked</s>
+        </p>
+        <p t="335029" d="1931" w="1" a="1"> </p>
+        <p t="335039" d="3921" w="1">
+            <s ac="0">about</s>
+            <s t="241" ac="0"> in</s>
+            <s t="561" ac="0"> previous</s>
+            <s t="961" ac="0"> videos</s>
+            <s t="1361" ac="0"> quite</s>
+            <s t="1521" ac="0"> a</s>
+            <s t="1681" ac="0"> bit.</s>
+        </p>
+        <p t="336950" d="2010" w="1" a="1"> </p>
+        <p t="336960" d="3920" w="1">
+            <s ac="0">So,</s>
+            <s t="160" ac="0"> make</s>
+            <s t="320" ac="0"> sure</s>
+            <s t="400" ac="0"> you</s>
+            <s t="1120" ac="0"> just</s>
+            <s t="1280" ac="0"> are</s>
+            <s t="1519" ac="0"> aware</s>
+            <s t="1760" ac="0"> of</s>
+            <s t="1840" ac="0"> the</s>
+        </p>
+        <p t="338950" d="1930" w="1" a="1"> </p>
+        <p t="338960" d="5280" w="1">
+            <s ac="0">slash</s>
+            <s t="480" ac="0"> innit</s>
+            <s t="880" ac="0"> command.</s>
+            <s t="1280" ac="0"> That's</s>
+            <s t="1440" ac="0"> a</s>
+            <s t="1600" ac="0"> very,</s>
+        </p>
+        <p t="340870" d="3370" w="1" a="1"> </p>
+        <p t="340880" d="4720" w="1">
+            <s ac="0">very,</s>
+            <s t="640" ac="0"> very</s>
+            <s t="1039" ac="0"> powerful</s>
+            <s t="1440" ac="0"> one.</s>
+            <s t="2720" ac="0"> Now,</s>
+            <s t="3039" ac="0"> this</s>
+            <s t="3200" ac="0"> is</s>
+        </p>
+        <p t="344230" d="1370" w="1" a="1"> </p>
+        <p t="344240" d="3200" w="1">
+            <s ac="0">one</s>
+            <s t="160" ac="0"> that</s>
+            <s t="320" ac="0"> I</s>
+            <s t="480" ac="0"> know</s>
+            <s t="640" ac="0"> a</s>
+            <s t="799" ac="0"> lot</s>
+            <s t="880" ac="0"> of</s>
+            <s t="959" ac="0"> people</s>
+            <s t="1120" ac="0"> don't</s>
+        </p>
+        <p t="345590" d="1850" w="1" a="1"> </p>
+        <p t="345600" d="3599" w="1">
+            <s ac="0">know</s>
+            <s t="159" ac="0"> about,</s>
+            <s t="879" ac="0"> but</s>
+            <s t="1120" ac="0"> let's</s>
+            <s t="1280" ac="0"> say</s>
+            <s t="1439" ac="0"> for</s>
+            <s t="1680" ac="0"> some</s>
+        </p>
+        <p t="347430" d="1769" w="1" a="1"> </p>
+        <p t="347440" d="3840" w="1">
+            <s ac="0">reason</s>
+            <s t="240" ac="0"> you</s>
+            <s t="479" ac="0"> end</s>
+            <s t="720" ac="0"> the</s>
+            <s t="880" ac="0"> day,</s>
+            <s t="1199" ac="0"> you</s>
+            <s t="1360" ac="0"> close</s>
+            <s t="1599" ac="0"> out</s>
+        </p>
+        <p t="349189" d="2091" w="1" a="1"> </p>
+        <p t="349199" d="4560" w="1">
+            <s ac="0">the</s>
+            <s t="161" ac="0"> conversation</s>
+            <s t="720" ac="0"> claw</s>
+            <s t="1041" ac="0"> exit.</s>
+            <s t="1761" ac="0"> You</s>
+            <s t="1921" ac="0"> can</s>
+        </p>
+        <p t="351270" d="2489" w="1" a="1"> </p>
+        <p t="351280" d="4400" w="1">
+            <s ac="0">simply</s>
+            <s t="240" ac="0"> hit-</s>
+            <s t="1520" ac="0"> continue</s>
+            <s t="1840" ac="0"> to</s>
+            <s t="2000" ac="0"> load</s>
+            <s t="2160" ac="0"> up</s>
+            <s t="2320" ac="0"> your</s>
+        </p>
+        <p t="353749" d="1931" w="1" a="1"> </p>
+        <p t="353759" d="4160" w="1">
+            <s ac="0">previous</s>
+            <s t="321" ac="0"> conversation.</s>
+            <s t="1440" ac="0"> You're</s>
+            <s t="1601" ac="0"> good</s>
+            <s t="1761" ac="0"> to</s>
+        </p>
+        <p t="355670" d="2249" w="1" a="1"> </p>
+        <p t="355680" d="4000" w="1">
+            <s ac="0">go.</s>
+            <s t="320" ac="0"> It's</s>
+            <s t="640" ac="0"> super</s>
+            <s t="1040" ac="0"> helpful.</s>
+            <s t="1680" ac="0"> There's</s>
+            <s t="2000" ac="0"> also</s>
+        </p>
+        <p t="357909" d="1771" w="1" a="1"> </p>
+        <p t="357919" d="4000" w="1">
+            <s ac="0">ways</s>
+            <s t="321" ac="0"> to</s>
+            <s t="401" ac="0"> go</s>
+            <s t="560" ac="0"> look</s>
+            <s t="720" ac="0"> at</s>
+            <s t="801" ac="0"> your</s>
+            <s t="961" ac="0"> claw</s>
+            <s t="1280" ac="0"> logs</s>
+            <s t="1601" ac="0"> and</s>
+        </p>
+        <p t="359670" d="2249" w="1" a="1"> </p>
+        <p t="359680" d="4880" w="1">
+            <s ac="0">grab</s>
+            <s t="239" ac="0"> the</s>
+            <s t="400" ac="0"> idea</s>
+            <s t="640" ac="0"> of</s>
+            <s t="799" ac="0"> a</s>
+            <s t="1040" ac="0"> conversation</s>
+            <s t="1840" ac="0"> and</s>
+            <s t="2079" ac="0"> then</s>
+        </p>
+        <p t="361909" d="2651" w="1" a="1"> </p>
+        <p t="361919" d="3921" w="1">
+            <s ac="0">you</s>
+            <s t="161" ac="0"> can</s>
+            <s t="321" ac="0"> load</s>
+            <s t="481" ac="0"> that</s>
+            <s t="720" ac="0"> in</s>
+            <s t="961" ac="0"> as</s>
+            <s t="1120" ac="0"> well.</s>
+            <s t="1681" ac="0"> But</s>
+            <s t="1840" ac="0"> claw-</s>
+        </p>
+        <p t="364550" d="1290" w="1" a="1"> </p>
+        <p t="364560" d="2800" w="1">
+            <s ac="0">continue</s>
+            <s t="240" ac="0"> is</s>
+            <s t="400" ac="0"> the</s>
+            <s t="560" ac="0"> one</s>
+            <s t="639" ac="0"> I</s>
+            <s t="800" ac="0"> probably</s>
+            <s t="960" ac="0"> use</s>
+            <s t="1120" ac="0"> the</s>
+        </p>
+        <p t="365830" d="1530" w="1" a="1"> </p>
+        <p t="365840" d="3120" w="1">
+            <s ac="0">most</s>
+            <s t="160" ac="0"> cuz</s>
+            <s t="400" ac="0"> most</s>
+            <s t="560" ac="0"> of</s>
+            <s t="639" ac="0"> my</s>
+            <s t="799" ac="0"> conversations,</s>
+            <s t="1359" ac="0"> my</s>
+        </p>
+        <p t="367350" d="1610" w="1" a="1"> </p>
+        <p t="367360" d="3760" w="1">
+            <s ac="0">old</s>
+            <s t="160" ac="0"> ones,</s>
+            <s t="399" ac="0"> I</s>
+            <s t="559" ac="0"> don't</s>
+            <s t="720" ac="0"> really</s>
+            <s t="880" ac="0"> want</s>
+            <s t="1040" ac="0"> to</s>
+            <s t="1200" ac="0"> resume</s>
+        </p>
+        <p t="368950" d="2170" w="1" a="1"> </p>
+        <p t="368960" d="4640" w="1">
+            <s ac="0">them</s>
+            <s t="239" ac="0"> very</s>
+            <s t="480" ac="0"> well.</s>
+            <s t="959" ac="0"> For</s>
+            <s t="1200" ac="0"> the</s>
+            <s t="1359" ac="0"> longest</s>
+            <s t="1679" ac="0"> time,</s>
+            <s t="1920" ac="0"> I</s>
+        </p>
+        <p t="371110" d="2490" w="1" a="1"> </p>
+        <p t="371120" d="4560" w="1">
+            <s ac="0">was</s>
+            <s t="160" ac="0"> actually</s>
+            <s t="1040" ac="0"> exiting</s>
+            <s t="1600" ac="0"> Claude</s>
+            <s t="2000" ac="0"> or</s>
+            <s t="2240" ac="0"> opening</s>
+        </p>
+        <p t="373590" d="2090" w="1" a="1"> </p>
+        <p t="373600" d="4159" w="1">
+            <s ac="0">up</s>
+            <s t="159" ac="0"> another</s>
+            <s t="480" ac="0"> terminal</s>
+            <s t="1200" ac="0"> to</s>
+            <s t="1439" ac="0"> actually</s>
+            <s t="1680" ac="0"> interact</s>
+        </p>
+        <p t="375670" d="2089" w="1" a="1"> </p>
+        <p t="375680" d="4799" w="1">
+            <s ac="0">with</s>
+            <s t="239" ac="0"> GitHub.</s>
+            <s t="639" ac="0"> And</s>
+            <s t="799" ac="0"> I</s>
+            <s t="959" ac="0"> still</s>
+            <s t="1200" ac="0"> do</s>
+            <s t="1359" ac="0"> this</s>
+            <s t="1600" ac="0"> quite</s>
+            <s t="1840" ac="0"> a</s>
+        </p>
+        <p t="377749" d="2730" w="1" a="1"> </p>
+        <p t="377759" d="4641" w="1">
+            <s ac="0">bit,</s>
+            <s t="880" ac="0"> but</s>
+            <s t="1201" ac="0"> there's</s>
+            <s t="1440" ac="0"> no</s>
+            <s t="1681" ac="0"> reason</s>
+            <s t="1921" ac="0"> to</s>
+            <s t="2241" ac="0"> always</s>
+            <s t="2560" ac="0"> do</s>
+        </p>
+        <p t="380469" d="1931" w="1" a="1"> </p>
+        <p t="380479" d="3921" w="1">
+            <s ac="0">that.</s>
+            <s t="241" ac="0"> There</s>
+            <s t="401" ac="0"> are</s>
+            <s t="560" ac="0"> times</s>
+            <s t="881" ac="0"> that</s>
+            <s t="1361" ac="0"> I</s>
+            <s t="1601" ac="0"> just</s>
+            <s t="1761" ac="0"> want</s>
+        </p>
+        <p t="382390" d="2010" w="1" a="1"> </p>
+        <p t="382400" d="4000" w="1">
+            <s ac="0">to</s>
+            <s t="160" ac="0"> go</s>
+            <s t="239" ac="0"> ahead</s>
+            <s t="400" ac="0"> and</s>
+            <s t="560" ac="0"> commit.</s>
+            <s t="1519" ac="0"> So</s>
+            <s t="1760" ac="0"> you</s>
+            <s t="1919" ac="0"> can</s>
+        </p>
+        <p t="384390" d="2010" w="1" a="1"> </p>
+        <p t="384400" d="4560" w="1">
+            <s ac="0">literally</s>
+            <s t="320" ac="0"> just</s>
+            <s t="560" ac="0"> type</s>
+            <s t="720" ac="0"> in</s>
+            <s t="960" ac="0"> commit</s>
+            <s t="1280" ac="0"> into</s>
+            <s t="1600" ac="0"> cloud</s>
+        </p>
+        <p t="386390" d="2570" w="1" a="1"> </p>
+        <p t="386400" d="3840" w="1">
+            <s ac="0">code</s>
+            <s t="720" ac="0"> and</s>
+            <s t="1120" ac="0"> it'll</s>
+            <s t="1600" ac="0"> actually</s>
+            <s t="1919" ac="0"> go</s>
+            <s t="2079" ac="0"> through.</s>
+            <s t="2400" ac="0"> You</s>
+        </p>
+        <p t="388950" d="1290" w="1" a="1"> </p>
+        <p t="388960" d="4160" w="1">
+            <s ac="0">can</s>
+            <s t="79" ac="0"> see</s>
+            <s t="239" ac="0"> here</s>
+            <s t="400" ac="0"> where</s>
+            <s t="720" ac="0"> I've</s>
+            <s t="959" ac="0"> actually</s>
+            <s t="1120" ac="0"> been</s>
+        </p>
+        <p t="390230" d="2890" w="1" a="1"> </p>
+        <p t="390240" d="5600" w="1">
+            <s ac="0">asked</s>
+            <s t="160" ac="0"> if</s>
+            <s t="320" ac="0"> I</s>
+            <s t="399" ac="0"> want</s>
+            <s t="480" ac="0"> to</s>
+            <s t="560" ac="0"> get</s>
+            <s t="799" ac="0"> add</s>
+            <s t="1040" ac="0"> that</s>
+            <s t="1280" ac="0"> file</s>
+            <s t="2160" ac="0"> and</s>
+        </p>
+        <p t="393110" d="2730" w="1" a="1"> </p>
+        <p t="393120" d="5359" w="1">
+            <s ac="0">basically</s>
+            <s t="400" ac="0"> eventually</s>
+            <s t="880" ac="0"> do</s>
+            <s t="960" ac="0"> a</s>
+            <s t="1199" ac="0"> get</s>
+            <s t="1600" ac="0"> commit-m.</s>
+        </p>
+        <p t="395830" d="2649" w="1" a="1"> </p>
+        <p t="395840" d="4240" w="1">
+            <s ac="0">I</s>
+            <s t="240" ac="0"> do</s>
+            <s t="400" ac="0"> actually</s>
+            <s t="799" ac="0"> love</s>
+            <s t="1359" ac="0"> the</s>
+            <s t="1840" ac="0"> commit</s>
+            <s t="2160" ac="0"> message</s>
+            <s t="2400" ac="0"> it</s>
+        </p>
+        <p t="398469" d="1611" w="1" a="1"> </p>
+        <p t="398479" d="5280" w="1">
+            <s ac="0">has</s>
+            <s t="160" ac="0"> here.</s>
+            <s t="720" ac="0"> Another</s>
+            <s t="1041" ac="0"> thing</s>
+            <s t="1201" ac="0"> that</s>
+            <s t="1361" ac="0"> I'll</s>
+        </p>
+        <p t="400070" d="3689" w="1" a="1"> </p>
+        <p t="400080" d="5040" w="1">
+            <s ac="0">typically</s>
+            <s t="399" ac="0"> do</s>
+            <s t="640" ac="0"> though</s>
+            <s t="800" ac="0"> is</s>
+            <s t="1200" ac="0"> if</s>
+            <s t="1520" ac="0"> I</s>
+            <s t="2880" ac="0"> am</s>
+            <s t="3119" ac="0"> if</s>
+            <s t="3360" ac="0"> I</s>
+            <s t="3520" ac="0"> want</s>
+        </p>
+        <p t="403749" d="1371" w="1" a="1"> </p>
+        <p t="403759" d="3121" w="1">
+            <s ac="0">to</s>
+            <s t="81" ac="0"> do</s>
+            <s t="160" ac="0"> the</s>
+            <s t="321" ac="0"> commit</s>
+            <s t="560" ac="0"> myself,</s>
+            <s t="961" ac="0"> I'll</s>
+            <s t="1201" ac="0"> actually</s>
+        </p>
+        <p t="405110" d="1770" w="1" a="1"> </p>
+        <p t="405120" d="3680" w="1">
+            <s ac="0">tell</s>
+            <s t="240" ac="0"> it</s>
+            <s t="400" ac="0"> to</s>
+            <s t="480" ac="0"> generate</s>
+            <s t="720" ac="0"> a</s>
+            <s t="960" ac="0"> commit</s>
+            <s t="1199" ac="0"> message</s>
+            <s t="1519" ac="0"> for</s>
+        </p>
+        <p t="406870" d="1930" w="1" a="1"> </p>
+        <p t="406880" d="5280" w="1">
+            <s ac="0">me.</s>
+            <s t="319" ac="0"> I'll</s>
+            <s t="560" ac="0"> copy</s>
+            <s t="800" ac="0"> and</s>
+            <s t="1039" ac="0"> paste</s>
+            <s t="1200" ac="0"> it</s>
+            <s t="1360" ac="0"> and</s>
+            <s t="1520" ac="0"> I</s>
+            <s t="1680" ac="0"> use</s>
+        </p>
+        <p t="408790" d="3370" w="1" a="1"> </p>
+        <p t="408800" d="6080" w="1">
+            <s ac="0">that.</s>
+            <s t="880" ac="0"> I</s>
+            <s t="1280" ac="0"> typically</s>
+            <s t="1920" ac="0"> don't</s>
+            <s t="2320" ac="0"> use</s>
+            <s t="2560" ac="0"> it,</s>
+            <s t="2800" ac="0"> but</s>
+            <s t="3119" ac="0"> you</s>
+        </p>
+        <p t="412150" d="2730" w="1" a="1"> </p>
+        <p t="412160" d="5759" w="1">
+            <s ac="0">can</s>
+            <s t="240" ac="0"> actually</s>
+            <s t="560" ac="0"> use</s>
+            <s t="879" ac="0"> the</s>
+            <s t="1200" ac="0"> push</s>
+            <s t="1520" ac="0"> as</s>
+            <s t="1759" ac="0"> well.</s>
+            <s t="2400" ac="0"> Um,</s>
+        </p>
+        <p t="414870" d="3049" w="1" a="1"> </p>
+        <p t="414880" d="5039" w="1">
+            <s ac="0">so</s>
+            <s t="80" ac="0"> you</s>
+            <s t="240" ac="0"> can</s>
+            <s t="400" ac="0"> say</s>
+            <s t="1599" ac="0"> uh</s>
+            <s t="1759" ac="0"> push</s>
+            <s t="2080" ac="0"> branch</s>
+            <s t="2400" ac="0"> or</s>
+            <s t="2640" ac="0"> push</s>
+            <s t="2879" ac="0"> to</s>
+        </p>
+        <p t="417909" d="2010" w="1" a="1"> </p>
+        <p t="417919" d="3921" w="1">
+            <s ac="0">dev</s>
+            <s t="321" ac="0"> and</s>
+            <s t="481" ac="0"> then</s>
+            <s t="641" ac="0"> you</s>
+            <s t="801" ac="0"> can</s>
+            <s t="961" ac="0"> actually</s>
+            <s t="1201" ac="0"> get</s>
+            <s t="1361" ac="0"> it</s>
+            <s t="1601" ac="0"> to</s>
+        </p>
+        <p t="419909" d="1931" w="1" a="1"> </p>
+        <p t="419919" d="4481" w="1">
+            <s ac="0">to</s>
+            <s t="81" ac="0"> to</s>
+            <s t="720" ac="0"> go</s>
+            <s t="881" ac="0"> ahead</s>
+            <s t="1041" ac="0"> and</s>
+            <s t="1120" ac="0"> do</s>
+            <s t="1280" ac="0"> the</s>
+            <s t="1441" ac="0"> push</s>
+            <s t="1601" ac="0"> for</s>
+            <s t="1761" ac="0"> you</s>
+        </p>
+        <p t="421830" d="2570" w="1" a="1"> </p>
+        <p t="421840" d="4160" w="1">
+            <s ac="0">as</s>
+            <s t="160" ac="0"> well.</s>
+            <s t="799" ac="0"> Again,</s>
+            <s t="1120" ac="0"> you</s>
+            <s t="1280" ac="0"> do</s>
+            <s t="1440" ac="0"> need</s>
+            <s t="1520" ac="0"> to</s>
+            <s t="1680" ac="0"> have</s>
+            <s t="1840" ac="0"> git</s>
+        </p>
+        <p t="424390" d="1610" w="1" a="1"> </p>
+        <p t="424400" d="3359" w="1">
+            <s ac="0">configured</s>
+            <s t="560" ac="0"> correctly</s>
+            <s t="880" ac="0"> to</s>
+            <s t="1040" ac="0"> make</s>
+            <s t="1120" ac="0"> this</s>
+            <s t="1359" ac="0"> work,</s>
+        </p>
+        <p t="425990" d="1769" w="1" a="1"> </p>
+        <p t="426000" d="3759" w="1">
+            <s ac="0">but</s>
+            <s t="160" ac="0"> it</s>
+            <s t="400" ac="0"> is</s>
+            <s t="479" ac="0"> a</s>
+            <s t="720" ac="0"> very</s>
+            <s t="960" ac="0"> useful</s>
+            <s t="1280" ac="0"> thing</s>
+            <s t="1440" ac="0"> if</s>
+            <s t="1680" ac="0"> you</s>
+        </p>
+        <p t="427749" d="2010" w="1" a="1"> </p>
+        <p t="427759" d="4321" w="1">
+            <s ac="0">just</s>
+            <s t="160" ac="0"> really</s>
+            <s t="401" ac="0"> want</s>
+            <s t="560" ac="0"> to</s>
+            <s t="720" ac="0"> kind</s>
+            <s t="880" ac="0"> of</s>
+            <s t="1361" ac="0"> have</s>
+            <s t="1601" ac="0"> it</s>
+            <s t="1840" ac="0"> do</s>
+        </p>
+        <p t="429749" d="2331" w="1" a="1"> </p>
+        <p t="429759" d="5041" w="1">
+            <s ac="0">its</s>
+            <s t="241" ac="0"> thing</s>
+            <s t="481" ac="0"> in</s>
+            <s t="720" ac="0"> particular.</s>
+        </p>
+        <p t="432070" d="2730" w="1" a="1"> </p>
+        <p t="432080" d="3679" w="1">
+            <s ac="0">Now,</s>
+            <s t="320" ac="0"> this</s>
+            <s t="480" ac="0"> is</s>
+            <s t="720" ac="0"> one</s>
+            <s t="1360" ac="0"> I</s>
+            <s t="1679" ac="0"> freaking</s>
+            <s t="2160" ac="0"> love.</s>
+            <s t="2480" ac="0"> So,</s>
+        </p>
+        <p t="434790" d="969" w="1" a="1"> </p>
+        <p t="434800" d="2959" w="1">
+            <s ac="0">now</s>
+            <s t="80" ac="0"> we're</s>
+            <s t="239" ac="0"> starting</s>
+            <s t="399" ac="0"> to</s>
+            <s t="480" ac="0"> get</s>
+            <s t="640" ac="0"> into</s>
+            <s t="799" ac="0"> some</s>
+        </p>
+        <p t="435749" d="2010" w="1" a="1"> </p>
+        <p t="435759" d="4401" w="1">
+            <s ac="0">stuff</s>
+            <s t="160" ac="0"> that</s>
+            <s t="321" ac="0"> I</s>
+            <s t="801" ac="0"> probably</s>
+            <s t="1361" ac="0"> would</s>
+            <s t="1601" ac="0"> think</s>
+            <s t="1761" ac="0"> that</s>
+        </p>
+        <p t="437749" d="2411" w="1" a="1"> </p>
+        <p t="437759" d="5601" w="1">
+            <s ac="0">you</s>
+            <s t="160" ac="0"> guys</s>
+            <s t="321" ac="0"> probably</s>
+            <s t="641" ac="0"> haven't</s>
+            <s t="1041" ac="0"> tried</s>
+            <s t="1280" ac="0"> yet.</s>
+            <s t="2160" ac="0"> So,</s>
+        </p>
+        <p t="440150" d="3210" w="1" a="1"> </p>
+        <p t="440160" d="6479" w="1">
+            <s ac="0">let's</s>
+            <s t="240" ac="0"> say</s>
+            <s t="400" ac="0"> that</s>
+            <s t="640" ac="0"> I'm</s>
+            <s t="960" ac="0"> in</s>
+            <s t="1360" ac="0"> a</s>
+        </p>
+        <p t="443350" d="3289" w="1" a="1"> </p>
+        <p t="443360" d="4480" w="1">
+            <s ac="0">uh</s>
+            <s t="320" ac="0"> I'm</s>
+            <s t="480" ac="0"> in</s>
+            <s t="640" ac="0"> a</s>
+            <s t="800" ac="0"> terminal</s>
+            <s t="1920" ac="0"> and</s>
+            <s t="2399" ac="0"> I</s>
+            <s t="2720" ac="0"> just</s>
+            <s t="2959" ac="0"> have</s>
+            <s t="3040" ac="0"> an</s>
+        </p>
+        <p t="446629" d="1211" w="1" a="1"> </p>
+        <p t="446639" d="3680" w="1">
+            <s ac="0">idea</s>
+            <s t="241" ac="0"> for</s>
+            <s t="400" ac="0"> something.</s>
+            <s t="641" ac="0"> I</s>
+            <s t="801" ac="0"> want</s>
+            <s t="881" ac="0"> to</s>
+            <s t="960" ac="0"> go</s>
+            <s t="1120" ac="0"> to</s>
+        </p>
+        <p t="447830" d="2489" w="1" a="1"> </p>
+        <p t="447840" d="5040" w="1">
+            <s ac="0">lunch.</s>
+            <s t="960" ac="0"> So,</s>
+            <s t="1199" ac="0"> I</s>
+            <s t="1359" ac="0"> will</s>
+            <s t="1520" ac="0"> say</s>
+            <s t="1759" ac="0"> something</s>
+            <s t="2079" ac="0"> like</s>
+        </p>
+        <p t="450309" d="2571" w="1" a="1"> </p>
+        <p t="450319" d="3681" w="1">
+            <s ac="0">claw-p.</s>
+            <s t="1201" ac="0"> So,</s>
+            <s t="1440" ac="0"> this</s>
+            <s t="1600" ac="0"> is</s>
+            <s t="1761" ac="0"> basically</s>
+            <s t="2160" ac="0"> it's</s>
+            <s t="2401" ac="0"> just</s>
+        </p>
+        <p t="452870" d="1130" w="1" a="1"> </p>
+        <p t="452880" d="2319" w="1">
+            <s ac="0">going</s>
+            <s t="80" ac="0"> to</s>
+            <s t="159" ac="0"> sit</s>
+            <s t="319" ac="0"> there</s>
+            <s t="480" ac="0"> and</s>
+            <s t="719" ac="0"> do</s>
+            <s t="800" ac="0"> the</s>
+            <s t="960" ac="0"> work</s>
+        </p>
+        <p t="453990" d="1209" w="1" a="1"> </p>
+        <p t="454000" d="3039" w="1">
+            <s ac="0">behind</s>
+            <s t="240" ac="0"> the</s>
+            <s t="400" ac="0"> scenes.</s>
+            <s t="639" ac="0"> I</s>
+            <s t="800" ac="0"> don't</s>
+            <s t="960" ac="0"> have</s>
+            <s t="1039" ac="0"> to</s>
+        </p>
+        <p t="455189" d="1850" w="1" a="1"> </p>
+        <p t="455199" d="4000" w="1">
+            <s ac="0">interact</s>
+            <s t="321" ac="0"> with</s>
+            <s t="481" ac="0"> it.</s>
+            <s t="961" ac="0"> Don't</s>
+            <s t="1120" ac="0"> have</s>
+            <s t="1280" ac="0"> to</s>
+            <s t="1440" ac="0"> approve</s>
+        </p>
+        <p t="457029" d="2170" w="1" a="1"> </p>
+        <p t="457039" d="4241" w="1">
+            <s ac="0">anything.</s>
+            <s t="880" ac="0"> I'll</s>
+            <s t="1121" ac="0"> say</s>
+            <s t="1361" ac="0"> I</s>
+            <s t="1521" ac="0"> want</s>
+            <s t="1600" ac="0"> you</s>
+            <s t="1761" ac="0"> to</s>
+            <s t="1921" ac="0"> make</s>
+            <s t="2000" ac="0"> it</s>
+        </p>
+        <p t="459189" d="2091" w="1" a="1"> </p>
+        <p t="459199" d="4961" w="1">
+            <s ac="0">so</s>
+            <s t="161" ac="0"> that</s>
+            <s t="321" ac="0"> I</s>
+            <s t="481" ac="0"> can</s>
+            <s t="560" ac="0"> attach</s>
+            <s t="801" ac="0"> a</s>
+            <s t="1041" ac="0"> user</s>
+            <s t="1361" ac="0"> avatar</s>
+            <s t="1840" ac="0"> via</s>
+        </p>
+        <p t="461270" d="2890" w="1" a="1"> </p>
+        <p t="461280" d="6400" w="1">
+            <s ac="0">an</s>
+            <s t="240" ac="0"> URL</s>
+            <s t="639" ac="0"> to</s>
+            <s t="800" ac="0"> my</s>
+            <s t="960" ac="0"> user</s>
+            <s t="1280" ac="0"> record.</s>
+            <s t="1919" ac="0"> I</s>
+            <s t="2160" ac="0"> need</s>
+            <s t="2240" ac="0"> an</s>
+            <s t="2400" ac="0"> API</s>
+        </p>
+        <p t="464150" d="3530" w="1" a="1"> </p>
+        <p t="464160" d="5520" w="1">
+            <s ac="0">model</s>
+            <s t="240" ac="0"> update.</s>
+            <s t="1439" ac="0"> Very</s>
+            <s t="1759" ac="0"> basic.</s>
+            <s t="2879" ac="0"> And</s>
+            <s t="3200" ac="0"> this</s>
+            <s t="3439" ac="0"> is</s>
+        </p>
+        <p t="467670" d="2010" w="1" a="1"> </p>
+        <p t="467680" d="4239" w="1">
+            <s ac="0">what</s>
+            <s t="160" ac="0"> ends</s>
+            <s t="400" ac="0"> up</s>
+            <s t="560" ac="0"> happening.</s>
+            <s t="959" ac="0"> Like</s>
+            <s t="1200" ac="0"> I</s>
+            <s t="1359" ac="0"> get</s>
+            <s t="1519" ac="0"> back</s>
+        </p>
+        <p t="469670" d="2249" w="1" a="1"> </p>
+        <p t="469680" d="4000" w="1">
+            <s ac="0">this</s>
+            <s t="320" ac="0"> once</s>
+            <s t="560" ac="0"> it's</s>
+            <s t="799" ac="0"> finished.</s>
+            <s t="1519" ac="0"> All</s>
+            <s t="1680" ac="0"> the</s>
+            <s t="1919" ac="0"> work's</s>
+        </p>
+        <p t="471909" d="1771" w="1" a="1"> </p>
+        <p t="471919" d="4241" w="1">
+            <s ac="0">done.</s>
+            <s t="321" ac="0"> I</s>
+            <s t="560" ac="0"> can</s>
+            <s t="641" ac="0"> then</s>
+            <s t="801" ac="0"> now</s>
+            <s t="1041" ac="0"> go</s>
+            <s t="1120" ac="0"> in</s>
+            <s t="1361" ac="0"> and</s>
+            <s t="1521" ac="0"> review</s>
+        </p>
+        <p t="473670" d="2490" w="1" a="1"> </p>
+        <p t="473680" d="5359" w="1">
+            <s ac="0">it.</s>
+            <s t="1120" ac="0"> This</s>
+            <s t="1280" ac="0"> is</s>
+            <s t="1519" ac="0"> great.</s>
+            <s t="1760" ac="0"> You</s>
+            <s t="2000" ac="0"> can</s>
+            <s t="2079" ac="0"> kind</s>
+            <s t="2160" ac="0"> of</s>
+            <s t="2320" ac="0"> think</s>
+        </p>
+        <p t="476150" d="2889" w="1" a="1"> </p>
+        <p t="476160" d="4400" w="1">
+            <s ac="0">about</s>
+            <s t="159" ac="0"> this</s>
+            <s t="319" ac="0"> like</s>
+            <s t="560" ac="0"> a</s>
+            <s t="719" ac="0"> local</s>
+            <s t="1840" ac="0"> codeex.</s>
+            <s t="2560" ac="0"> You</s>
+            <s t="2800" ac="0"> can</s>
+        </p>
+        <p t="479029" d="1531" w="1" a="1"> </p>
+        <p t="479039" d="2720" w="1">
+            <s ac="0">just</s>
+            <s t="160" ac="0"> kind</s>
+            <s t="321" ac="0"> of</s>
+            <s t="401" ac="0"> kick</s>
+            <s t="560" ac="0"> off</s>
+            <s t="720" ac="0"> these</s>
+            <s t="961" ac="0"> tasks.</s>
+            <s t="1361" ac="0"> And</s>
+        </p>
+        <p t="480550" d="1209" w="1" a="1"> </p>
+        <p t="480560" d="3520" w="1">
+            <s ac="0">sometimes</s>
+            <s t="240" ac="0"> I'll</s>
+            <s t="479" ac="0"> kick</s>
+            <s t="560" ac="0"> off</s>
+            <s t="720" ac="0"> a</s>
+            <s t="880" ac="0"> couple</s>
+            <s t="960" ac="0"> of</s>
+            <s t="1120" ac="0"> them</s>
+        </p>
+        <p t="481749" d="2331" w="1" a="1"> </p>
+        <p t="481759" d="5120" w="1">
+            <s ac="0">at</s>
+            <s t="160" ac="0"> a</s>
+            <s t="321" ac="0"> time</s>
+            <s t="880" ac="0"> in</s>
+            <s t="1120" ac="0"> different</s>
+            <s t="1361" ac="0"> parts</s>
+            <s t="1601" ac="0"> of</s>
+            <s t="1681" ac="0"> the</s>
+            <s t="1921" ac="0"> code</s>
+        </p>
+        <p t="484070" d="2809" w="1" a="1"> </p>
+        <p t="484080" d="5040" w="1">
+            <s ac="0">and</s>
+            <s t="239" ac="0"> then</s>
+            <s t="399" ac="0"> I'll</s>
+            <s t="640" ac="0"> come</s>
+            <s t="799" ac="0"> back</s>
+            <s t="1040" ac="0"> to</s>
+            <s t="1280" ac="0"> it</s>
+            <s t="2320" ac="0"> and</s>
+            <s t="2559" ac="0"> just</s>
+        </p>
+        <p t="486869" d="2251" w="1" a="1"> </p>
+        <p t="486879" d="4401" w="1">
+            <s ac="0">see</s>
+            <s t="81" ac="0"> what</s>
+            <s t="241" ac="0"> it</s>
+            <s t="481" ac="0"> did.</s>
+            <s t="1040" ac="0"> Now</s>
+            <s t="1361" ac="0"> the</s>
+            <s t="1600" ac="0"> you</s>
+            <s t="1841" ac="0"> do</s>
+            <s t="2000" ac="0"> end</s>
+            <s t="2081" ac="0"> up</s>
+        </p>
+        <p t="489110" d="2170" w="1" a="1"> </p>
+        <p t="489120" d="4079" w="1">
+            <s ac="0">losing</s>
+            <s t="320" ac="0"> the</s>
+            <s t="479" ac="0"> interactivity</s>
+            <s t="1120" ac="0"> to</s>
+            <s t="1359" ac="0"> it.</s>
+            <s t="1680" ac="0"> So</s>
+            <s t="1919" ac="0"> if</s>
+        </p>
+        <p t="491270" d="1929" w="1" a="1"> </p>
+        <p t="491280" d="3520" w="1">
+            <s ac="0">it's</s>
+            <s t="160" ac="0"> something</s>
+            <s t="400" ac="0"> that</s>
+            <s t="1199" ac="0"> you</s>
+            <s t="1359" ac="0"> know</s>
+            <s t="1440" ac="0"> you</s>
+            <s t="1680" ac="0"> kind</s>
+            <s t="1840" ac="0"> of</s>
+        </p>
+        <p t="493189" d="1611" w="1" a="1"> </p>
+        <p t="493199" d="4481" w="1">
+            <s ac="0">want</s>
+            <s t="161" ac="0"> to</s>
+            <s t="241" ac="0"> have</s>
+            <s t="400" ac="0"> a</s>
+            <s t="560" ac="0"> conversation</s>
+            <s t="1041" ac="0"> with</s>
+            <s t="1280" ac="0"> or</s>
+            <s t="1440" ac="0"> be</s>
+        </p>
+        <p t="494790" d="2890" w="1" a="1"> </p>
+        <p t="494800" d="5280" w="1">
+            <s ac="0">able</s>
+            <s t="79" ac="0"> to</s>
+            <s t="160" ac="0"> iterate</s>
+            <s t="560" ac="0"> on</s>
+            <s t="1360" ac="0"> uh</s>
+            <s t="1519" ac="0"> you</s>
+            <s t="1760" ac="0"> do</s>
+            <s t="2000" ac="0"> want</s>
+            <s t="2320" ac="0"> to</s>
+            <s t="2560" ac="0"> not</s>
+        </p>
+        <p t="497670" d="2410" w="1" a="1"> </p>
+        <p t="497680" d="4480" w="1">
+            <s ac="0">do</s>
+            <s t="160" ac="0"> the</s>
+            <s t="320" ac="0"> dashb</s>
+            <s t="959" ac="0"> but</s>
+            <s t="1040" ac="0"> it's</s>
+            <s t="1280" ac="0"> so</s>
+            <s t="1919" ac="0"> freaking</s>
+        </p>
+        <p t="500070" d="2090" w="1" a="1"> </p>
+        <p t="500080" d="5440" w="1">
+            <s ac="0">awesome</s>
+            <s t="959" ac="0"> if</s>
+            <s t="1119" ac="0"> you</s>
+            <s t="1280" ac="0"> just</s>
+            <s t="1440" ac="0"> want</s>
+            <s t="1519" ac="0"> to</s>
+            <s t="1679" ac="0"> get</s>
+            <s t="1760" ac="0"> a</s>
+            <s t="1920" ac="0"> start</s>
+        </p>
+        <p t="502150" d="3370" w="1" a="1"> </p>
+        <p t="502160" d="6240" w="1">
+            <s ac="0">on</s>
+            <s t="80" ac="0"> it</s>
+            <s t="240" ac="0"> and</s>
+            <s t="479" ac="0"> treat</s>
+            <s t="719" ac="0"> it</s>
+            <s t="1039" ac="0"> literally</s>
+            <s t="1520" ac="0"> like</s>
+            <s t="2319" ac="0"> codeex</s>
+        </p>
+        <p t="505510" d="2890" w="1" a="1"> </p>
+        <p t="505520" d="4799" w="1">
+            <s ac="0">uh</s>
+            <s t="79" ac="0"> or</s>
+            <s t="399" ac="0"> some</s>
+            <s t="560" ac="0"> sort</s>
+            <s t="720" ac="0"> of</s>
+            <s t="880" ac="0"> remote</s>
+            <s t="1200" ac="0"> a</s>
+            <s t="1600" ac="0"> agent.</s>
+            <s t="2640" ac="0"> This</s>
+        </p>
+        <p t="508390" d="1929" w="1" a="1"> </p>
+        <p t="508400" d="3440" w="1">
+            <s ac="0">is</s>
+            <s t="79" ac="0"> one</s>
+            <s t="320" ac="0"> I've</s>
+            <s t="560" ac="0"> started</s>
+            <s t="880" ac="0"> using</s>
+            <s t="1199" ac="0"> a</s>
+            <s t="1440" ac="0"> bit</s>
+            <s t="1600" ac="0"> more.</s>
+        </p>
+        <p t="510309" d="1531" w="1" a="1"> </p>
+        <p t="510319" d="4080" w="1">
+            <s ac="0">This</s>
+            <s t="81" ac="0"> is</s>
+            <s t="160" ac="0"> a</s>
+            <s t="401" ac="0"> new</s>
+            <s t="560" ac="0"> project</s>
+            <s t="801" ac="0"> I'm</s>
+            <s t="1041" ac="0"> working</s>
+            <s t="1201" ac="0"> on.</s>
+        </p>
+        <p t="511830" d="2569" w="1" a="1"> </p>
+        <p t="511840" d="5280" w="1">
+            <s ac="0">But</s>
+            <s t="160" ac="0"> in</s>
+            <s t="400" ac="0"> general</s>
+            <s t="1520" ac="0"> what</s>
+            <s t="1759" ac="0"> I</s>
+            <s t="1920" ac="0"> want</s>
+            <s t="1999" ac="0"> to</s>
+            <s t="2160" ac="0"> say</s>
+            <s t="2319" ac="0"> is</s>
+        </p>
+        <p t="514389" d="2731" w="1" a="1"> </p>
+        <p t="514399" d="4721" w="1">
+            <s ac="0">like</s>
+            <s t="241" ac="0"> clawed</s>
+            <s t="640" ac="0"> custom</s>
+            <s t="1041" ac="0"> slash</s>
+            <s t="1361" ac="0"> commands.</s>
+            <s t="2481" ac="0"> You</s>
+        </p>
+        <p t="517110" d="2010" w="1" a="1"> </p>
+        <p t="517120" d="3680" w="1">
+            <s ac="0">can</s>
+            <s t="159" ac="0"> actually</s>
+            <s t="560" ac="0"> create</s>
+            <s t="1120" ac="0"> your</s>
+            <s t="1440" ac="0"> own</s>
+            <s t="1680" ac="0"> slash</s>
+        </p>
+        <p t="519110" d="1690" w="1" a="1"> </p>
+        <p t="519120" d="3359" w="1">
+            <s ac="0">commands</s>
+            <s t="399" ac="0"> by</s>
+            <s t="560" ac="0"> going</s>
+            <s t="719" ac="0"> into</s>
+            <s t="960" ac="0"> your</s>
+            <s t="1120" ac="0"> do.cloud</s>
+        </p>
+        <p t="520790" d="1689" w="1" a="1"> </p>
+        <p t="520800" d="4080" w="1">
+            <s ac="0">folder,</s>
+            <s t="640" ac="0"> creating</s>
+            <s t="960" ac="0"> a</s>
+            <s t="1119" ac="0"> folder</s>
+            <s t="1359" ac="0"> called</s>
+        </p>
+        <p t="522469" d="2411" w="1" a="1"> </p>
+        <p t="522479" d="4401" w="1">
+            <s ac="0">commands,</s>
+            <s t="881" ac="0"> and</s>
+            <s t="1040" ac="0"> then</s>
+            <s t="1281" ac="0"> making</s>
+            <s t="1521" ac="0"> a</s>
+            <s t="1761" ac="0"> markdown</s>
+        </p>
+        <p t="524870" d="2010" w="1" a="1"> </p>
+        <p t="524880" d="4399" w="1">
+            <s ac="0">file.</s>
+            <s t="639" ac="0"> In</s>
+            <s t="800" ac="0"> this</s>
+            <s t="959" ac="0"> case,</s>
+            <s t="1360" ac="0"> let's</s>
+            <s t="1519" ac="0"> just</s>
+            <s t="1680" ac="0"> say</s>
+            <s t="1840" ac="0"> I</s>
+        </p>
+        <p t="526870" d="2409" w="1" a="1"> </p>
+        <p t="526880" d="3760" w="1">
+            <s ac="0">want</s>
+            <s t="79" ac="0"> to</s>
+            <s t="160" ac="0"> do</s>
+            <s t="240" ac="0"> an</s>
+            <s t="480" ac="0"> update</s>
+            <s t="800" ac="0"> docs</s>
+            <s t="1120" ac="0"> one.</s>
+            <s t="2079" ac="0"> So,</s>
+            <s t="2240" ac="0"> I'll</s>
+        </p>
+        <p t="529269" d="1371" w="1" a="1"> </p>
+        <p t="529279" d="3281" w="1">
+            <s ac="0">say</s>
+            <s t="240" ac="0"> evaluate</s>
+            <s t="641" ac="0"> the</s>
+            <s t="801" ac="0"> current</s>
+            <s t="961" ac="0"> project,</s>
+        </p>
+        <p t="530630" d="1930" w="1" a="1"> </p>
+        <p t="530640" d="3600" w="1">
+            <s ac="0">evaluate</s>
+            <s t="480" ac="0"> the</s>
+            <s t="639" ac="0"> current</s>
+            <s t="800" ac="0"> documentation,</s>
+        </p>
+        <p t="532550" d="1690" w="1" a="1"> </p>
+        <p t="532560" d="2959" w="1">
+            <s ac="0">update</s>
+            <s t="399" ac="0"> cloud.md</s>
+            <s t="1200" ac="0"> with</s>
+            <s t="1360" ac="0"> any</s>
+            <s t="1520" ac="0"> new</s>
+        </p>
+        <p t="534230" d="1289" w="1" a="1"> </p>
+        <p t="534240" d="3440" w="1">
+            <s ac="0">functionality,</s>
+            <s t="640" ac="0"> update</s>
+            <s t="1039" ac="0"> other</s>
+        </p>
+        <p t="535509" d="2171" w="1" a="1"> </p>
+        <p t="535519" d="4880" w="1">
+            <s ac="0">documentation</s>
+            <s t="561" ac="0"> as</s>
+            <s t="880" ac="0"> needed,</s>
+            <s t="1521" ac="0"> and</s>
+            <s t="1760" ac="0"> now</s>
+            <s t="1921" ac="0"> you</s>
+            <s t="2081" ac="0"> can</s>
+        </p>
+        <p t="537670" d="2729" w="1" a="1"> </p>
+        <p t="537680" d="6159" w="1">
+            <s ac="0">see</s>
+            <s t="159" ac="0"> I</s>
+            <s t="320" ac="0"> do</s>
+            <s t="480" ac="0"> slash</s>
+            <s t="1360" ac="0"> and</s>
+            <s t="1680" ac="0"> I</s>
+            <s t="1920" ac="0"> have</s>
+            <s t="2159" ac="0"> that</s>
+            <s t="2480" ac="0"> command</s>
+        </p>
+        <p t="540389" d="3450" w="1" a="1"> </p>
+        <p t="540399" d="6481" w="1">
+            <s ac="0">in</s>
+            <s t="241" ac="0"> there.</s>
+            <s t="641" ac="0"> This</s>
+            <s t="961" ac="0"> is</s>
+            <s t="1120" ac="0"> a</s>
+            <s t="2241" ac="0"> brilliant</s>
+            <s t="3201" ac="0"> like</s>
+        </p>
+        <p t="543829" d="3051" w="1" a="1"> </p>
+        <p t="543839" d="4721" w="1">
+            <s ac="0">absolute</s>
+            <s t="721" ac="0"> brilliant</s>
+            <s t="1201" ac="0"> addition</s>
+            <s t="2321" ac="0"> that</s>
+            <s t="2721" ac="0"> I've</s>
+        </p>
+        <p t="546870" d="1690" w="1" a="1"> </p>
+        <p t="546880" d="4000" w="1">
+            <s ac="0">actually</s>
+            <s t="240" ac="0"> started</s>
+            <s t="480" ac="0"> to</s>
+            <s t="639" ac="0"> play</s>
+            <s t="880" ac="0"> around</s>
+            <s t="1120" ac="0"> with</s>
+            <s t="1440" ac="0"> a</s>
+        </p>
+        <p t="548550" d="2330" w="1" a="1"> </p>
+        <p t="548560" d="4719" w="1">
+            <s ac="0">lot</s>
+            <s t="160" ac="0"> more</s>
+            <s t="719" ac="0"> in</s>
+            <s t="1040" ac="0"> my</s>
+            <s t="1200" ac="0"> main</s>
+            <s t="1360" ac="0"> repo</s>
+            <s t="1680" ac="0"> that</s>
+            <s t="1839" ac="0"> I</s>
+            <s t="2000" ac="0"> work</s>
+            <s t="2080" ac="0"> on</s>
+        </p>
+        <p t="550870" d="2409" w="1" a="1"> </p>
+        <p t="550880" d="5280" w="1">
+            <s ac="0">a</s>
+            <s t="160" ac="0"> daily</s>
+            <s t="480" ac="0"> basis.</s>
+            <s t="800" ac="0"> I</s>
+            <s t="1040" ac="0"> think</s>
+            <s t="1120" ac="0"> I</s>
+            <s t="1280" ac="0"> have</s>
+            <s t="1440" ac="0"> two</s>
+            <s t="1920" ac="0"> three</s>
+        </p>
+        <p t="553269" d="2891" w="1" a="1"> </p>
+        <p t="553279" d="5201" w="1">
+            <s ac="0">actually</s>
+            <s t="641" ac="0"> that</s>
+            <s t="881" ac="0"> I've</s>
+            <s t="1120" ac="0"> created</s>
+            <s t="1921" ac="0"> all</s>
+            <s t="2240" ac="0"> very</s>
+            <s t="2481" ac="0"> very</s>
+        </p>
+        <p t="556150" d="2330" w="1" a="1"> </p>
+        <p t="556160" d="3280" w="1">
+            <s ac="0">useful.</s>
+            <s t="880" ac="0"> This</s>
+            <s t="1119" ac="0"> one</s>
+            <s t="1200" ac="0"> is</s>
+            <s t="1359" ac="0"> one</s>
+            <s t="1520" ac="0"> that</s>
+            <s t="1760" ac="0"> Anthropic</s>
+        </p>
+        <p t="558470" d="970" w="1" a="1"> </p>
+        <p t="558480" d="2240" w="1">
+            <s ac="0">kind</s>
+            <s t="160" ac="0"> of</s>
+            <s t="240" ac="0"> recommends</s>
+            <s t="560" ac="0"> where</s>
+            <s t="720" ac="0"> you're</s>
+            <s t="799" ac="0"> going</s>
+            <s t="880" ac="0"> to</s>
+        </p>
+        <p t="559430" d="1290" w="1" a="1"> </p>
+        <p t="559440" d="3120" w="1">
+            <s ac="0">be</s>
+            <s t="79" ac="0"> like</s>
+            <s t="240" ac="0"> please</s>
+            <s t="480" ac="0"> analyze</s>
+            <s t="800" ac="0"> and</s>
+            <s t="959" ac="0"> fix</s>
+            <s t="1120" ac="0"> the</s>
+        </p>
+        <p t="560710" d="1850" w="1" a="1"> </p>
+        <p t="560720" d="4000" w="1">
+            <s ac="0">GitHub</s>
+            <s t="320" ac="0"> issue</s>
+            <s t="799" ac="0"> and</s>
+            <s t="960" ac="0"> you</s>
+            <s t="1119" ac="0"> can</s>
+            <s t="1200" ac="0"> pass</s>
+            <s t="1360" ac="0"> in</s>
+            <s t="1600" ac="0"> a</s>
+        </p>
+        <p t="562550" d="2170" w="1" a="1"> </p>
+        <p t="562560" d="3680" w="1">
+            <s ac="0">number</s>
+            <s t="160" ac="0"> for</s>
+            <s t="320" ac="0"> the</s>
+            <s t="480" ac="0"> GitHub</s>
+            <s t="880" ac="0"> issue</s>
+            <s t="1440" ac="0"> and</s>
+            <s t="1680" ac="0"> it</s>
+            <s t="1920" ac="0"> has</s>
+        </p>
+        <p t="564710" d="1530" w="1" a="1"> </p>
+        <p t="564720" d="4000" w="1">
+            <s ac="0">the</s>
+            <s t="320" ac="0"> these</s>
+            <s t="559" ac="0"> commands</s>
+            <s t="880" ac="0"> here</s>
+            <s t="1119" ac="0"> like</s>
+            <s t="1280" ac="0"> follow</s>
+        </p>
+        <p t="566230" d="2490" w="1" a="1"> </p>
+        <p t="566240" d="4880" w="1">
+            <s ac="0">these</s>
+            <s t="159" ac="0"> steps</s>
+            <s t="560" ac="0"> use</s>
+            <s t="880" ac="0"> GitHub</s>
+            <s t="1520" ac="0"> issue</s>
+            <s t="2000" ac="0"> view</s>
+            <s t="2240" ac="0"> to</s>
+            <s t="2400" ac="0"> get</s>
+        </p>
+        <p t="568710" d="2410" w="1" a="1"> </p>
+        <p t="568720" d="4480" w="1">
+            <s ac="0">the</s>
+            <s t="160" ac="0"> issue</s>
+            <s t="400" ac="0"> details</s>
+            <s t="880" ac="0"> etc</s>
+            <s t="1280" ac="0"> etc</s>
+            <s t="2000" ac="0"> all</s>
+            <s t="2160" ac="0"> the</s>
+            <s t="2320" ac="0"> way</s>
+        </p>
+        <p t="571110" d="2090" w="1" a="1"> </p>
+        <p t="571120" d="4880" w="1">
+            <s ac="0">down</s>
+            <s t="159" ac="0"> to</s>
+            <s t="399" ac="0"> push</s>
+            <s t="640" ac="0"> and</s>
+            <s t="800" ac="0"> create</s>
+            <s t="960" ac="0"> a</s>
+            <s t="1200" ac="0"> PR</s>
+            <s t="1680" ac="0"> to</s>
+        </p>
+        <p t="573190" d="2810" w="1" a="1"> </p>
+        <p t="573200" d="4639" w="1">
+            <s ac="0">literally</s>
+            <s t="319" ac="0"> automate</s>
+            <s t="800" ac="0"> the</s>
+            <s t="1120" ac="0"> entire</s>
+            <s t="1840" ac="0"> thing</s>
+        </p>
+        <p t="575990" d="1849" w="1" a="1"> </p>
+        <p t="576000" d="4080" w="1">
+            <s ac="0">without</s>
+            <s t="399" ac="0"> ever</s>
+            <s t="720" ac="0"> interacting</s>
+            <s t="1200" ac="0"> with</s>
+            <s t="1360" ac="0"> it.</s>
+            <s t="1600" ac="0"> It's</s>
+        </p>
+        <p t="577829" d="2251" w="1" a="1"> </p>
+        <p t="577839" d="3921" w="1">
+            <s ac="0">super</s>
+            <s t="241" ac="0"> super</s>
+            <s t="560" ac="0"> sweet.</s>
+        </p>
+        <p t="580070" d="1690" w="1" a="1"> </p>
+        <p t="580080" d="3840" w="1">
+            <s ac="0">This</s>
+            <s t="160" ac="0"> is</s>
+            <s t="319" ac="0"> one</s>
+            <s t="480" ac="0"> thing,</s>
+            <s t="640" ac="0"> a</s>
+            <s t="879" ac="0"> workflow</s>
+            <s t="1280" ac="0"> that</s>
+            <s t="1439" ac="0"> I've</s>
+        </p>
+        <p t="581750" d="2170" w="1" a="1"> </p>
+        <p t="581760" d="6800" w="1">
+            <s ac="0">used</s>
+            <s t="240" ac="0"> and</s>
+            <s t="400" ac="0"> I</s>
+            <s t="560" ac="0"> use</s>
+            <s t="639" ac="0"> this</s>
+            <s t="800" ac="0"> with</s>
+            <s t="960" ac="0"> other</s>
+            <s t="1120" ac="0"> AI</s>
+            <s t="1600" ac="0"> too,</s>
+        </p>
+        <p t="583910" d="4650" w="1" a="1"> </p>
+        <p t="583920" d="6240" w="1">
+            <s ac="0">but</s>
+            <s t="880" ac="0"> have</s>
+            <s t="1760" ac="0"> Claude</s>
+            <s t="3039" ac="0"> review</s>
+            <s t="3680" ac="0"> work</s>
+            <s t="3919" ac="0"> from</s>
+            <s t="4240" ac="0"> Claude</s>
+        </p>
+        <p t="588550" d="1610" w="1" a="1"> </p>
+        <p t="588560" d="3440" w="1">
+            <s ac="0">and</s>
+            <s t="160" ac="0"> you</s>
+            <s t="320" ac="0"> can</s>
+            <s t="399" ac="0"> have</s>
+            <s t="480" ac="0"> one</s>
+            <s t="640" ac="0"> in</s>
+            <s t="800" ac="0"> Opus</s>
+            <s t="1200" ac="0"> and</s>
+            <s t="1360" ac="0"> one</s>
+            <s t="1440" ac="0"> in</s>
+        </p>
+        <p t="590150" d="1850" w="1" a="1"> </p>
+        <p t="590160" d="4400" w="1">
+            <s ac="0">Sonnet.</s>
+            <s t="320" ac="0"> Now,</s>
+            <s t="480" ac="0"> I</s>
+            <s t="640" ac="0"> primarily</s>
+            <s t="1040" ac="0"> use</s>
+            <s t="1200" ac="0"> Sonnet</s>
+            <s t="1679" ac="0"> just</s>
+        </p>
+        <p t="591990" d="2570" w="1" a="1"> </p>
+        <p t="592000" d="6080" w="1">
+            <s ac="0">because</s>
+            <s t="160" ac="0"> I</s>
+            <s t="320" ac="0"> want</s>
+            <s t="480" ac="0"> as</s>
+            <s t="800" ac="0"> much</s>
+            <s t="1760" ac="0"> uh</s>
+            <s t="1920" ac="0"> usage</s>
+            <s t="2320" ac="0"> as</s>
+        </p>
+        <p t="594550" d="3530" w="1" a="1"> </p>
+        <p t="594560" d="5120" w="1">
+            <s ac="0">possible,</s>
+            <s t="1040" ac="0"> but</s>
+            <s t="1279" ac="0"> I</s>
+            <s t="1520" ac="0"> will</s>
+            <s t="1760" ac="0"> a</s>
+            <s t="2000" ac="0"> lot</s>
+            <s t="2160" ac="0"> of</s>
+            <s t="2399" ac="0"> times</s>
+        </p>
+        <p t="598070" d="1610" w="1" a="1"> </p>
+        <p t="598080" d="3680" w="1">
+            <s ac="0">basically</s>
+            <s t="560" ac="0"> go</s>
+            <s t="800" ac="0"> through</s>
+            <s t="960" ac="0"> and</s>
+            <s t="1120" ac="0"> I'll</s>
+            <s t="1439" ac="0"> have</s>
+        </p>
+        <p t="599670" d="2090" w="1" a="1"> </p>
+        <p t="599680" d="3520" w="1">
+            <s ac="0">something</s>
+            <s t="400" ac="0"> done</s>
+            <s t="1279" ac="0"> and</s>
+            <s t="1440" ac="0"> then</s>
+            <s t="1599" ac="0"> I'll</s>
+            <s t="1839" ac="0"> be</s>
+            <s t="1920" ac="0"> like,</s>
+        </p>
+        <p t="601750" d="1450" w="1" a="1"> </p>
+        <p t="601760" d="4560" w="1">
+            <s ac="0">"All</s>
+            <s t="79" ac="0"> right,</s>
+            <s t="400" ac="0"> this</s>
+            <s t="560" ac="0"> is</s>
+            <s t="639" ac="0"> a</s>
+            <s t="800" ac="0"> new</s>
+            <s t="960" ac="0"> file</s>
+            <s t="1199" ac="0"> I</s>
+        </p>
+        <p t="603190" d="3130" w="1" a="1"> </p>
+        <p t="603200" d="4720" w="1">
+            <s ac="0">created.</s>
+            <s t="1120" ac="0"> Go</s>
+            <s t="1440" ac="0"> review</s>
+            <s t="1920" ac="0"> this</s>
+            <s t="2480" ac="0"> in</s>
+            <s t="2800" ac="0"> another</s>
+        </p>
+        <p t="606310" d="1610" w="1" a="1"> </p>
+        <p t="606320" d="4400" w="1">
+            <s ac="0">window."</s>
+            <s t="400" ac="0"> So,</s>
+            <s t="560" ac="0"> I</s>
+            <s t="720" ac="0"> basically</s>
+            <s t="959" ac="0"> a</s>
+            <s t="1120" ac="0"> brand</s>
+            <s t="1360" ac="0"> new</s>
+        </p>
+        <p t="607910" d="2810" w="1" a="1"> </p>
+        <p t="607920" d="4400" w="1">
+            <s ac="0">context.</s>
+            <s t="640" ac="0"> look</s>
+            <s t="880" ac="0"> for</s>
+            <s t="1120" ac="0"> issues.</s>
+            <s t="2000" ac="0"> You</s>
+            <s t="2240" ac="0"> can</s>
+            <s t="2400" ac="0"> make</s>
+            <s t="2560" ac="0"> a</s>
+        </p>
+        <p t="610710" d="1610" w="1" a="1"> </p>
+        <p t="610720" d="4160" w="1">
+            <s ac="0">prompt</s>
+            <s t="239" ac="0"> for</s>
+            <s t="400" ac="0"> this</s>
+            <s t="640" ac="0"> as</s>
+            <s t="799" ac="0"> well.</s>
+            <s t="1040" ac="0"> By</s>
+            <s t="1200" ac="0"> the</s>
+            <s t="1280" ac="0"> way,</s>
+            <s t="1440" ac="0"> you</s>
+        </p>
+        <p t="612310" d="2570" w="1" a="1"> </p>
+        <p t="612320" d="4800" w="1">
+            <s ac="0">can</s>
+            <s t="160" ac="0"> do</s>
+            <s t="320" ac="0"> a</s>
+            <s t="480" ac="0"> prompt</s>
+            <s t="1440" ac="0"> uh</s>
+            <s t="1680" ac="0"> custom</s>
+            <s t="2000" ac="0"> prompt</s>
+            <s t="2320" ac="0"> if</s>
+            <s t="2480" ac="0"> you</s>
+        </p>
+        <p t="614870" d="2250" w="1" a="1"> </p>
+        <p t="614880" d="4560" w="1">
+            <s ac="0">have</s>
+            <s t="160" ac="0"> like</s>
+            <s t="320" ac="0"> a</s>
+            <s t="480" ac="0"> special</s>
+            <s t="800" ac="0"> review</s>
+            <s t="1120" ac="0"> guidelines</s>
+        </p>
+        <p t="617110" d="2330" w="1" a="1"> </p>
+        <p t="617120" d="3520" w="1">
+            <s ac="0">and</s>
+            <s t="320" ac="0"> it</s>
+            <s t="560" ac="0"> gives</s>
+            <s t="719" ac="0"> me</s>
+            <s t="880" ac="0"> the</s>
+            <s t="1040" ac="0"> reviews.</s>
+            <s t="1920" ac="0"> I</s>
+            <s t="2159" ac="0"> will</s>
+        </p>
+        <p t="619430" d="1210" w="1" a="1"> </p>
+        <p t="619440" d="3040" w="1">
+            <s ac="0">typically</s>
+            <s t="399" ac="0"> go</s>
+            <s t="480" ac="0"> through</s>
+            <s t="720" ac="0"> and</s>
+            <s t="880" ac="0"> have</s>
+            <s t="959" ac="0"> a</s>
+        </p>
+        <p t="620630" d="1850" w="1" a="1"> </p>
+        <p t="620640" d="3120" w="1">
+            <s ac="0">conversation</s>
+            <s t="480" ac="0"> about</s>
+            <s t="720" ac="0"> this,</s>
+            <s t="1280" ac="0"> get</s>
+            <s t="1439" ac="0"> it</s>
+            <s t="1520" ac="0"> to</s>
+            <s t="1680" ac="0"> the</s>
+        </p>
+        <p t="622470" d="1290" w="1" a="1"> </p>
+        <p t="622480" d="3280" w="1">
+            <s ac="0">point</s>
+            <s t="80" ac="0"> I</s>
+            <s t="240" ac="0"> want</s>
+            <s t="400" ac="0"> and</s>
+            <s t="560" ac="0"> I</s>
+            <s t="720" ac="0"> give</s>
+            <s t="799" ac="0"> it</s>
+            <s t="960" ac="0"> back</s>
+            <s t="1039" ac="0"> to</s>
+            <s t="1200" ac="0"> the</s>
+        </p>
+        <p t="623750" d="2010" w="1" a="1"> </p>
+        <p t="623760" d="4960" w="1">
+            <s ac="0">one</s>
+            <s t="160" ac="0"> that</s>
+            <s t="400" ac="0"> actually</s>
+            <s t="720" ac="0"> built</s>
+            <s t="960" ac="0"> it</s>
+            <s t="1280" ac="0"> and</s>
+            <s t="1519" ac="0"> I</s>
+            <s t="1680" ac="0"> have</s>
+            <s t="1840" ac="0"> it</s>
+        </p>
+        <p t="625750" d="2970" w="1" a="1"> </p>
+        <p t="625760" d="5040" w="1">
+            <s ac="0">iterate</s>
+            <s t="400" ac="0"> on</s>
+            <s t="560" ac="0"> it.</s>
+            <s t="1120" ac="0"> It's</s>
+            <s t="1440" ac="0"> very</s>
+            <s t="1759" ac="0"> very</s>
+            <s t="2079" ac="0"> handy</s>
+            <s t="2639" ac="0"> to</s>
+        </p>
+        <p t="628710" d="2090" w="1" a="1"> </p>
+        <p t="628720" d="4320" w="1">
+            <s ac="0">start</s>
+            <s t="239" ac="0"> thinking</s>
+            <s t="480" ac="0"> about</s>
+            <s t="720" ac="0"> AI</s>
+            <s t="1760" ac="0"> kind</s>
+            <s t="1920" ac="0"> of</s>
+        </p>
+        <p t="630790" d="2250" w="1" a="1"> </p>
+        <p t="630800" d="4080" w="1">
+            <s ac="0">iterating</s>
+            <s t="640" ac="0"> on</s>
+            <s t="960" ac="0"> things</s>
+            <s t="1200" ac="0"> that</s>
+            <s t="1440" ac="0"> AI</s>
+            <s t="1760" ac="0"> has</s>
+            <s t="2000" ac="0"> actually</s>
+        </p>
+        <p t="633030" d="1850" w="1" a="1"> </p>
+        <p t="633040" d="3840" w="1">
+            <s ac="0">done</s>
+            <s t="160" ac="0"> for</s>
+            <s t="320" ac="0"> you</s>
+            <s t="400" ac="0"> and</s>
+            <s t="640" ac="0"> cloud</s>
+            <s t="880" ac="0"> code</s>
+            <s t="1120" ac="0"> is</s>
+            <s t="1359" ac="0"> perfect.</s>
+        </p>
+        <p t="634870" d="2010" w="1" a="1"> </p>
+        <p t="634880" d="3680" w="1">
+            <s ac="0">Absolutely</s>
+            <s t="480" ac="0"> perfect</s>
+            <s t="720" ac="0"> at</s>
+            <s t="959" ac="0"> that.</s>
+            <s t="1440" ac="0"> Yep.</s>
+            <s t="1760" ac="0"> use</s>
+        </p>
+        <p t="636870" d="1690" w="1" a="1"> </p>
+        <p t="636880" d="4000" w="1">
+            <s ac="0">screenshots,</s>
+            <s t="720" ac="0"> really</s>
+            <s t="1040" ac="0"> use</s>
+            <s t="1199" ac="0"> them.</s>
+            <s t="1440" ac="0"> You</s>
+            <s t="1600" ac="0"> can</s>
+        </p>
+        <p t="638550" d="2330" w="1" a="1"> </p>
+        <p t="638560" d="3839" w="1">
+            <s ac="0">drag</s>
+            <s t="160" ac="0"> and</s>
+            <s t="399" ac="0"> paste</s>
+            <s t="1200" ac="0"> or</s>
+            <s t="1440" ac="0"> drag</s>
+            <s t="1600" ac="0"> and</s>
+            <s t="1839" ac="0"> copy</s>
+            <s t="2080" ac="0"> them</s>
+        </p>
+        <p t="640870" d="1529" w="1" a="1"> </p>
+        <p t="640880" d="3600" w="1">
+            <s ac="0">directly</s>
+            <s t="320" ac="0"> into</s>
+            <s t="560" ac="0"> the</s>
+            <s t="720" ac="0"> terminal.</s>
+            <s t="1120" ac="0"> This</s>
+            <s t="1280" ac="0"> is</s>
+            <s t="1360" ac="0"> what</s>
+        </p>
+        <p t="642389" d="2091" w="1" a="1"> </p>
+        <p t="642399" d="4641" w="1">
+            <s ac="0">it</s>
+            <s t="81" ac="0"> looks</s>
+            <s t="241" ac="0"> like</s>
+            <s t="401" ac="0"> for</s>
+            <s t="560" ac="0"> me</s>
+            <s t="721" ac="0"> when</s>
+            <s t="880" ac="0"> I</s>
+            <s t="1041" ac="0"> do</s>
+            <s t="1201" ac="0"> that.</s>
+            <s t="1680" ac="0"> Um,</s>
+        </p>
+        <p t="644470" d="2570" w="1" a="1"> </p>
+        <p t="644480" d="5200" w="1">
+            <s ac="0">it</s>
+            <s t="240" ac="0"> works</s>
+            <s t="400" ac="0"> on</s>
+            <s t="640" ac="0"> WSL.</s>
+            <s t="1599" ac="0"> It</s>
+            <s t="1840" ac="0"> also</s>
+            <s t="2080" ac="0"> works</s>
+            <s t="2320" ac="0"> really</s>
+        </p>
+        <p t="647030" d="2650" w="1" a="1"> </p>
+        <p t="647040" d="4320" w="1">
+            <s ac="0">well</s>
+            <s t="160" ac="0"> in</s>
+            <s t="400" ac="0"> Linux.</s>
+            <s t="1440" ac="0"> So,</s>
+            <s t="1760" ac="0"> in</s>
+            <s t="1919" ac="0"> my</s>
+            <s t="2080" ac="0"> case,</s>
+            <s t="2320" ac="0"> what</s>
+            <s t="2479" ac="0"> I</s>
+        </p>
+        <p t="649670" d="1690" w="1" a="1"> </p>
+        <p t="649680" d="4399" w="1">
+            <s ac="0">typically</s>
+            <s t="240" ac="0"> do</s>
+            <s t="399" ac="0"> is</s>
+            <s t="480" ac="0"> I'll</s>
+            <s t="719" ac="0"> just</s>
+            <s t="880" ac="0"> drag</s>
+            <s t="1120" ac="0"> a</s>
+            <s t="1360" ac="0"> file</s>
+        </p>
+        <p t="651350" d="2729" w="1" a="1"> </p>
+        <p t="651360" d="4400" w="1">
+            <s ac="0">itself</s>
+            <s t="479" ac="0"> into</s>
+            <s t="800" ac="0"> the</s>
+            <s t="1039" ac="0"> terminal.</s>
+            <s t="1919" ac="0"> It</s>
+            <s t="2320" ac="0"> really,</s>
+        </p>
+        <p t="654069" d="1691" w="1" a="1"> </p>
+        <p t="654079" d="3440" w="1">
+            <s ac="0">really</s>
+            <s t="320" ac="0"> is</s>
+            <s t="641" ac="0"> handy,</s>
+            <s t="1121" ac="0"> especially</s>
+            <s t="1361" ac="0"> when</s>
+            <s t="1521" ac="0"> you're</s>
+        </p>
+        <p t="655750" d="1769" w="1" a="1"> </p>
+        <p t="655760" d="4000" w="1">
+            <s ac="0">doing</s>
+            <s t="240" ac="0"> design</s>
+            <s t="639" ac="0"> stuff</s>
+            <s t="800" ac="0"> or</s>
+            <s t="960" ac="0"> if</s>
+            <s t="1120" ac="0"> there's</s>
+            <s t="1280" ac="0"> a</s>
+            <s t="1440" ac="0"> UI</s>
+        </p>
+        <p t="657509" d="2251" w="1" a="1"> </p>
+        <p t="657519" d="4801" w="1">
+            <s ac="0">bug,</s>
+            <s t="641" ac="0"> copy</s>
+            <s t="880" ac="0"> and</s>
+            <s t="1041" ac="0"> paste</s>
+            <s t="1281" ac="0"> it</s>
+            <s t="1440" ac="0"> in</s>
+            <s t="1601" ac="0"> there</s>
+            <s t="1841" ac="0"> or</s>
+            <s t="2081" ac="0"> just</s>
+        </p>
+        <p t="659750" d="2570" w="1" a="1"> </p>
+        <p t="659760" d="4240" w="1">
+            <s ac="0">drag</s>
+            <s t="319" ac="0"> and</s>
+            <s t="480" ac="0"> and</s>
+            <s t="880" ac="0"> put</s>
+            <s t="1040" ac="0"> it</s>
+            <s t="1199" ac="0"> in</s>
+            <s t="1360" ac="0"> there</s>
+            <s t="1600" ac="0"> rather</s>
+            <s t="2319" ac="0"> and</s>
+        </p>
+        <p t="662310" d="1690" w="1" a="1"> </p>
+        <p t="662320" d="3920" w="1">
+            <s ac="0">then</s>
+            <s t="320" ac="0"> have</s>
+            <s t="560" ac="0"> tell</s>
+            <s t="800" ac="0"> it</s>
+            <s t="959" ac="0"> what's</s>
+            <s t="1199" ac="0"> going</s>
+            <s t="1360" ac="0"> on</s>
+            <s t="1519" ac="0"> with</s>
+        </p>
+        <p t="663990" d="2250" w="1" a="1"> </p>
+        <p t="664000" d="4560" w="1">
+            <s ac="0">it</s>
+            <s t="160" ac="0"> and</s>
+            <s t="399" ac="0"> it</s>
+            <s t="720" ac="0"> helps</s>
+            <s t="959" ac="0"> it</s>
+            <s t="1279" ac="0"> so</s>
+            <s t="1600" ac="0"> so</s>
+            <s t="1760" ac="0"> much.</s>
+            <s t="2000" ac="0"> should</s>
+        </p>
+        <p t="666230" d="2330" w="1" a="1"> </p>
+        <p t="666240" d="4400" w="1">
+            <s ac="0">definitely</s>
+            <s t="960" ac="0"> use</s>
+            <s t="1279" ac="0"> screenshots.</s>
+            <s t="2000" ac="0"> Don't</s>
+            <s t="2159" ac="0"> be</s>
+        </p>
+        <p t="668550" d="2090" w="1" a="1"> </p>
+        <p t="668560" d="3680" w="1">
+            <s ac="0">afraid</s>
+            <s t="399" ac="0"> of</s>
+            <s t="640" ac="0"> them.</s>
+            <s t="1200" ac="0"> I</s>
+            <s t="1360" ac="0"> know</s>
+            <s t="1519" ac="0"> a</s>
+            <s t="1680" ac="0"> lot</s>
+            <s t="1760" ac="0"> of</s>
+            <s t="1920" ac="0"> people</s>
+        </p>
+        <p t="670630" d="1610" w="1" a="1"> </p>
+        <p t="670640" d="3520" w="1">
+            <s ac="0">like</s>
+            <s t="160" ac="0"> the</s>
+            <s t="400" ac="0"> computer</s>
+            <s t="800" ac="0"> use</s>
+            <s t="1040" ac="0"> and</s>
+            <s t="1199" ac="0"> some</s>
+            <s t="1360" ac="0"> of</s>
+            <s t="1439" ac="0"> the</s>
+        </p>
+        <p t="672230" d="1930" w="1" a="1"> </p>
+        <p t="672240" d="3920" w="1">
+            <s ac="0">other</s>
+            <s t="240" ac="0"> tools.</s>
+            <s t="960" ac="0"> This</s>
+            <s t="1200" ac="0"> is</s>
+            <s t="1279" ac="0"> one</s>
+            <s t="1440" ac="0"> of the</s>
+            <s t="1599" ac="0"> prompts</s>
+        </p>
+        <p t="674150" d="2010" w="1" a="1"> </p>
+        <p t="674160" d="4480" w="1">
+            <s ac="0">that</s>
+            <s t="160" ac="0"> I've</s>
+            <s t="320" ac="0"> been</s>
+            <s t="480" ac="0"> using</s>
+            <s t="1200" ac="0"> quite</s>
+            <s t="1440" ac="0"> a</s>
+            <s t="1520" ac="0"> bit.</s>
+            <s t="1760" ac="0"> Again,</s>
+        </p>
+        <p t="676150" d="2490" w="1" a="1"> </p>
+        <p t="676160" d="3919" w="1">
+            <s ac="0">I</s>
+            <s t="160" ac="0"> have</s>
+            <s t="320" ac="0"> what</s>
+            <s t="480" ac="0"> I</s>
+            <s t="640" ac="0"> do</s>
+            <s t="720" ac="0"> is</s>
+            <s t="960" ac="0"> I</s>
+            <s t="1119" ac="0"> have</s>
+            <s t="2080" ac="0"> u</s>
+            <s t="2160" ac="0"> these</s>
+        </p>
+        <p t="678630" d="1449" w="1" a="1"> </p>
+        <p t="678640" d="3120" w="1">
+            <s ac="0">little</s>
+            <s t="160" ac="0"> text</s>
+            <s t="400" ac="0"> files</s>
+            <s t="639" ac="0"> I</s>
+            <s t="800" ac="0"> save</s>
+            <s t="960" ac="0"> on</s>
+            <s t="1120" ac="0"> my</s>
+            <s t="1199" ac="0"> desktop.</s>
+        </p>
+        <p t="680069" d="1691" w="1" a="1"> </p>
+        <p t="680079" d="4641" w="1">
+            <s ac="0">My</s>
+            <s t="161" ac="0"> desktop</s>
+            <s t="481" ac="0"> is</s>
+            <s t="641" ac="0"> a</s>
+            <s t="801" ac="0"> mess,</s>
+            <s t="1041" ac="0"> by</s>
+            <s t="1200" ac="0"> the</s>
+            <s t="1281" ac="0"> way.</s>
+            <s t="1440" ac="0"> I</s>
+            <s t="1601" ac="0"> need</s>
+        </p>
+        <p t="681750" d="2970" w="1" a="1"> </p>
+        <p t="681760" d="4880" w="1">
+            <s ac="0">to</s>
+            <s t="240" ac="0"> organize</s>
+            <s t="639" ac="0"> that.</s>
+            <s t="960" ac="0"> But</s>
+            <s t="2000" ac="0"> I</s>
+            <s t="2240" ac="0"> will</s>
+            <s t="2480" ac="0"> do</s>
+            <s t="2639" ac="0"> like</s>
+            <s t="2800" ac="0"> a</s>
+        </p>
+        <p t="684710" d="1930" w="1" a="1"> </p>
+        <p t="684720" d="4320" w="1">
+            <s ac="0">TDD</s>
+            <s t="559" ac="0"> type</s>
+            <s t="799" ac="0"> prompt</s>
+            <s t="1119" ac="0"> and</s>
+            <s t="1359" ac="0"> notice</s>
+            <s t="1600" ac="0"> that</s>
+            <s t="1760" ac="0"> I'm</s>
+        </p>
+        <p t="686630" d="2410" w="1" a="1"> </p>
+        <p t="686640" d="3759" w="1">
+            <s ac="0">using</s>
+            <s t="160" ac="0"> the</s>
+            <s t="319" ac="0"> XML</s>
+            <s t="800" ac="0"> format.</s>
+            <s t="1600" ac="0"> I'll</s>
+            <s t="1920" ac="0"> do</s>
+            <s t="2080" ac="0"> three</s>
+        </p>
+        <p t="689030" d="1369" w="1" a="1"> </p>
+        <p t="689040" d="3600" w="1">
+            <s ac="0">different</s>
+            <s t="239" ac="0"> tag</s>
+            <s t="479" ac="0"> types.</s>
+            <s t="799" ac="0"> So,</s>
+            <s t="1039" ac="0"> test,</s>
+        </p>
+        <p t="690389" d="2251" w="1" a="1"> </p>
+        <p t="690399" d="4000" w="1">
+            <s ac="0">implementation,</s>
+            <s t="641" ac="0"> and</s>
+            <s t="880" ac="0"> rules.</s>
+            <s t="1761" ac="0"> And</s>
+            <s t="1921" ac="0"> then</s>
+            <s t="2081" ac="0"> I'll</s>
+        </p>
+        <p t="692630" d="1769" w="1" a="1"> </p>
+        <p t="692640" d="3520" w="1">
+            <s ac="0">say</s>
+            <s t="240" ac="0"> we</s>
+            <s t="480" ac="0"> are</s>
+            <s t="639" ac="0"> doing</s>
+            <s t="1040" ac="0"> uh</s>
+            <s t="1199" ac="0"> test-driven</s>
+        </p>
+        <p t="694389" d="1771" w="1" a="1"> </p>
+        <p t="694399" d="3841" w="1">
+            <s ac="0">development.</s>
+            <s t="321" ac="0"> the</s>
+            <s t="560" ac="0"> implementation</s>
+            <s t="1281" ac="0"> does</s>
+            <s t="1521" ac="0"> not</s>
+        </p>
+        <p t="696150" d="2090" w="1" a="1"> </p>
+        <p t="696160" d="4640" w="1">
+            <s ac="0">quite</s>
+            <s t="320" ac="0"> exist</s>
+            <s t="640" ac="0"> yet.</s>
+            <s t="1359" ac="0"> Please</s>
+            <s t="1600" ac="0"> implement</s>
+            <s t="1919" ac="0"> my</s>
+        </p>
+        <p t="698230" d="2570" w="1" a="1"> </p>
+        <p t="698240" d="4400" w="1">
+            <s ac="0">test</s>
+            <s t="560" ac="0"> then</s>
+            <s t="880" ac="0"> implement</s>
+            <s t="1279" ac="0"> the</s>
+            <s t="1520" ac="0"> functionality</s>
+            <s t="2320" ac="0"> to</s>
+        </p>
+        <p t="700790" d="1850" w="1" a="1"> </p>
+        <p t="700800" d="4400" w="1">
+            <s ac="0">pass</s>
+            <s t="240" ac="0"> the</s>
+            <s t="479" ac="0"> test.</s>
+            <s t="960" ac="0"> Now</s>
+            <s t="1200" ac="0"> you</s>
+            <s t="1360" ac="0"> can</s>
+            <s t="1520" ac="0"> actually</s>
+            <s t="1680" ac="0"> go</s>
+        </p>
+        <p t="702630" d="2570" w="1" a="1"> </p>
+        <p t="702640" d="4160" w="1">
+            <s ac="0">on</s>
+            <s t="160" ac="0"> and</s>
+            <s t="319" ac="0"> say</s>
+            <s t="560" ac="0"> go</s>
+            <s t="639" ac="0"> ahead</s>
+            <s t="800" ac="0"> and</s>
+            <s t="960" ac="0"> commit</s>
+            <s t="1439" ac="0"> and</s>
+            <s t="2240" ac="0"> do</s>
+            <s t="2400" ac="0"> a</s>
+        </p>
+        <p t="705190" d="1610" w="1" a="1"> </p>
+        <p t="705200" d="3920" w="1">
+            <s ac="0">PR</s>
+            <s t="319" ac="0"> as</s>
+            <s t="480" ac="0"> well.</s>
+            <s t="639" ac="0"> I</s>
+            <s t="879" ac="0"> actually</s>
+            <s t="1040" ac="0"> want</s>
+            <s t="1199" ac="0"> to</s>
+            <s t="1360" ac="0"> review</s>
+        </p>
+        <p t="706790" d="2330" w="1" a="1"> </p>
+        <p t="706800" d="4479" w="1">
+            <s ac="0">the</s>
+            <s t="159" ac="0"> code</s>
+            <s t="400" ac="0"> before</s>
+            <s t="640" ac="0"> that</s>
+            <s t="880" ac="0"> happens.</s>
+            <s t="1520" ac="0"> So</s>
+            <s t="1680" ac="0"> I</s>
+            <s t="1840" ac="0"> do</s>
+        </p>
+        <p t="709110" d="2169" w="1" a="1"> </p>
+        <p t="709120" d="4320" w="1">
+            <s ac="0">usually</s>
+            <s t="320" ac="0"> stop</s>
+            <s t="560" ac="0"> it</s>
+            <s t="800" ac="0"> here.</s>
+            <s t="1360" ac="0"> You</s>
+            <s t="1600" ac="0"> can</s>
+            <s t="1680" ac="0"> add</s>
+            <s t="1839" ac="0"> any</s>
+        </p>
+        <p t="711269" d="2171" w="1" a="1"> </p>
+        <p t="711279" d="5361" w="1">
+            <s ac="0">rules</s>
+            <s t="240" ac="0"> that</s>
+            <s t="481" ac="0"> you</s>
+            <s t="560" ac="0"> want</s>
+            <s t="721" ac="0"> in</s>
+            <s t="961" ac="0"> there.</s>
+            <s t="1601" ac="0"> This</s>
+            <s t="1841" ac="0"> is</s>
+            <s t="1921" ac="0"> a</s>
+        </p>
+        <p t="713430" d="3210" w="1" a="1"> </p>
+        <p t="713440" d="5760" w="1">
+            <s ac="0">very</s>
+            <s t="399" ac="0"> very</s>
+            <s t="880" ac="0"> cool</s>
+            <s t="1200" ac="0"> way</s>
+            <s t="1440" ac="0"> because</s>
+            <s t="1680" ac="0"> it</s>
+            <s t="2000" ac="0"> actually</s>
+        </p>
+        <p t="716630" d="2570" w="1" a="1"> </p>
+        <p t="716640" d="4879" w="1">
+            <s ac="0">makes</s>
+            <s t="319" ac="0"> claw</s>
+            <s t="720" ac="0"> code</s>
+            <s t="960" ac="0"> pretty</s>
+            <s t="1360" ac="0"> powerful.</s>
+            <s t="2240" ac="0"> If</s>
+            <s t="2480" ac="0"> you</s>
+        </p>
+        <p t="719190" d="2329" w="1" a="1"> </p>
+        <p t="719200" d="4800" w="1">
+            <s ac="0">have</s>
+            <s t="160" ac="0"> something</s>
+            <s t="400" ac="0"> kind</s>
+            <s t="639" ac="0"> of</s>
+            <s t="720" ac="0"> isolated</s>
+            <s t="1440" ac="0"> enough</s>
+        </p>
+        <p t="721509" d="2491" w="1" a="1"> </p>
+        <p t="721519" d="5041" w="1">
+            <s ac="0">to</s>
+            <s t="241" ac="0"> where</s>
+            <s t="560" ac="0"> you</s>
+            <s t="721" ac="0"> can</s>
+            <s t="880" ac="0"> just</s>
+            <s t="1041" ac="0"> have</s>
+            <s t="1201" ac="0"> it</s>
+            <s t="1361" ac="0"> iterate</s>
+            <s t="1760" ac="0"> on</s>
+        </p>
+        <p t="723990" d="2570" w="1" a="1"> </p>
+        <p t="724000" d="4480" w="1">
+            <s ac="0">to</s>
+            <s t="320" ac="0"> make</s>
+            <s t="560" ac="0"> the</s>
+            <s t="800" ac="0"> test</s>
+            <s t="1120" ac="0"> that</s>
+            <s t="1279" ac="0"> it</s>
+            <s t="1519" ac="0"> wrote</s>
+            <s t="1839" ac="0"> pass,</s>
+        </p>
+        <p t="726550" d="1930" w="1" a="1"> </p>
+        <p t="726560" d="4079" w="1">
+            <s ac="0">it's</s>
+            <s t="320" ac="0"> pretty</s>
+            <s t="560" ac="0"> pretty</s>
+            <s t="959" ac="0"> freaking</s>
+            <s t="1360" ac="0"> powerful</s>
+            <s t="1760" ac="0"> to</s>
+        </p>
+        <p t="728470" d="2169" w="1" a="1"> </p>
+        <p t="728480" d="4080" w="1">
+            <s ac="0">be</s>
+            <s t="80" ac="0"> honest</s>
+            <s t="320" ac="0"> with</s>
+            <s t="479" ac="0"> you.</s>
+            <s t="1120" ac="0"> So</s>
+            <s t="1440" ac="0"> definitely</s>
+            <s t="2000" ac="0"> give</s>
+        </p>
+        <p t="730629" d="1931" w="1" a="1"> </p>
+        <p t="730639" d="3200" w="1">
+            <s ac="0">this</s>
+            <s t="241" ac="0"> a</s>
+            <s t="481" ac="0"> try</s>
+            <s t="961" ac="0"> uh</s>
+            <s t="1041" ac="0"> if</s>
+            <s t="1281" ac="0"> you</s>
+            <s t="1440" ac="0"> haven't</s>
+            <s t="1601" ac="0"> already.</s>
+        </p>
+        <p t="732550" d="1289" w="1" a="1"> </p>
+        <p t="732560" d="2399" w="1">
+            <s ac="0">You</s>
+            <s t="160" ac="0"> may</s>
+            <s t="320" ac="0"> even</s>
+            <s t="480" ac="0"> have</s>
+            <s t="560" ac="0"> a</s>
+            <s t="719" ac="0"> better</s>
+            <s t="880" ac="0"> prompt</s>
+            <s t="1120" ac="0"> than</s>
+        </p>
+        <p t="733829" d="1130" w="1" a="1"> </p>
+        <p t="733839" d="4401" w="1">
+            <s ac="0">what</s>
+            <s t="81" ac="0"> I</s>
+            <s t="240" ac="0"> have</s>
+            <s t="321" ac="0"> here</s>
+            <s t="481" ac="0"> and</s>
+            <s t="641" ac="0"> I</s>
+            <s t="800" ac="0"> would</s>
+            <s t="881" ac="0"> love</s>
+            <s t="1041" ac="0"> to</s>
+        </p>
+        <p t="734949" d="3291" w="1" a="1"> </p>
+        <p t="734959" d="6641" w="1">
+            <s ac="0">hear</s>
+            <s t="241" ac="0"> that</s>
+            <s t="801" ac="0"> in</s>
+            <s t="1041" ac="0"> the</s>
+            <s t="1201" ac="0"> comments</s>
+            <s t="1440" ac="0"> below.</s>
+        </p>
+        <p t="738230" d="3370" w="1" a="1"> </p>
+        <p t="738240" d="5920" w="1">
+            <s ac="0">Now,</s>
+            <s t="480" ac="0"> this</s>
+            <s t="719" ac="0"> is</s>
+            <s t="880" ac="0"> one</s>
+            <s t="1520" ac="0"> that</s>
+            <s t="2159" ac="0"> I</s>
+            <s t="2719" ac="0"> think</s>
+            <s t="2880" ac="0"> a</s>
+            <s t="3120" ac="0"> lot</s>
+            <s t="3279" ac="0"> of</s>
+        </p>
+        <p t="741590" d="2570" w="1" a="1"> </p>
+        <p t="741600" d="5679" w="1">
+            <s ac="0">people</s>
+            <s t="239" ac="0"> were</s>
+            <s t="479" ac="0"> most</s>
+            <s t="720" ac="0"> surprised</s>
+            <s t="1200" ac="0"> about.</s>
+            <s t="2160" ac="0"> Um,</s>
+        </p>
+        <p t="744150" d="3129" w="1" a="1"> </p>
+        <p t="744160" d="6320" w="1">
+            <s ac="0">but</s>
+            <s t="239" ac="0"> it</s>
+            <s t="479" ac="0"> is</s>
+            <s t="720" ac="0"> so</s>
+            <s t="1119" ac="0"> so</s>
+            <s t="1440" ac="0"> helpful.</s>
+            <s t="2320" ac="0"> So,</s>
+            <s t="2560" ac="0"> I</s>
+            <s t="2720" ac="0"> use</s>
+            <s t="2880" ac="0"> a</s>
+        </p>
+        <p t="747269" d="3211" w="1" a="1"> </p>
+        <p t="747279" d="4481" w="1">
+            <s ac="0">combination</s>
+            <s t="560" ac="0"> of</s>
+            <s t="881" ac="0"> Ultra</s>
+            <s t="1360" ac="0"> Think,</s>
+            <s t="2321" ac="0"> but</s>
+            <s t="2641" ac="0"> also</s>
+            <s t="2961" ac="0"> a</s>
+        </p>
+        <p t="750470" d="1290" w="1" a="1"> </p>
+        <p t="750480" d="3039" w="1">
+            <s ac="0">few</s>
+            <s t="159" ac="0"> other</s>
+            <s t="320" ac="0"> things</s>
+            <s t="479" ac="0"> in</s>
+            <s t="640" ac="0"> this</s>
+            <s t="799" ac="0"> prompt.</s>
+            <s t="1120" ac="0"> This</s>
+            <s t="1200" ac="0"> is</s>
+        </p>
+        <p t="751750" d="1769" w="1" a="1"> </p>
+        <p t="751760" d="3360" w="1">
+            <s ac="0">the</s>
+            <s t="160" ac="0"> prompt</s>
+            <s t="319" ac="0"> that</s>
+            <s t="480" ac="0"> I</s>
+            <s t="639" ac="0"> save</s>
+            <s t="1040" ac="0"> and</s>
+            <s t="1280" ac="0"> I</s>
+            <s t="1440" ac="0"> just</s>
+            <s t="1519" ac="0"> copy</s>
+        </p>
+        <p t="753509" d="1611" w="1" a="1"> </p>
+        <p t="753519" d="3841" w="1">
+            <s ac="0">and</s>
+            <s t="161" ac="0"> paste</s>
+            <s t="320" ac="0"> it</s>
+            <s t="401" ac="0"> in</s>
+            <s t="560" ac="0"> and</s>
+            <s t="721" ac="0"> I</s>
+            <s t="880" ac="0"> fill</s>
+            <s t="1041" ac="0"> in</s>
+            <s t="1201" ac="0"> what</s>
+            <s t="1440" ac="0"> I</s>
+        </p>
+        <p t="755110" d="2250" w="1" a="1"> </p>
+        <p t="755120" d="4320" w="1">
+            <s ac="0">want</s>
+            <s t="80" ac="0"> to</s>
+            <s t="240" ac="0"> do.</s>
+            <s t="959" ac="0"> So,</s>
+            <s t="1120" ac="0"> I'll</s>
+            <s t="1360" ac="0"> say,</s>
+            <s t="1519" ac="0"> "Please</s>
+            <s t="1920" ac="0"> ultra</s>
+        </p>
+        <p t="757350" d="2090" w="1" a="1"> </p>
+        <p t="757360" d="3760" w="1">
+            <s ac="0">think</s>
+            <s t="240" ac="0"> through</s>
+            <s t="479" ac="0"> this.</s>
+            <s t="1200" ac="0"> Start</s>
+            <s t="1440" ac="0"> by</s>
+            <s t="1680" ac="0"> exploring</s>
+        </p>
+        <p t="759430" d="1690" w="1" a="1"> </p>
+        <p t="759440" d="4320" w="1">
+            <s ac="0">the</s>
+            <s t="160" ac="0"> codebase</s>
+            <s t="560" ac="0"> and</s>
+            <s t="720" ac="0"> gathering</s>
+            <s t="1040" ac="0"> the</s>
+            <s t="1280" ac="0"> necessary</s>
+        </p>
+        <p t="761110" d="2650" w="1" a="1"> </p>
+        <p t="761120" d="4480" w="1">
+            <s ac="0">context.</s>
+            <s t="1040" ac="0"> You</s>
+            <s t="1200" ac="0"> should</s>
+            <s t="1440" ac="0"> use</s>
+            <s t="1760" ac="0"> sub</s>
+            <s t="2000" ac="0"> agents</s>
+            <s t="2399" ac="0"> where</s>
+        </p>
+        <p t="763750" d="1850" w="1" a="1"> </p>
+        <p t="763760" d="4639" w="1">
+            <s ac="0">it</s>
+            <s t="160" ac="0"> makes</s>
+            <s t="319" ac="0"> sense.</s>
+            <s t="720" ac="0"> I</s>
+            <s t="960" ac="0"> want</s>
+            <s t="1040" ac="0"> you</s>
+            <s t="1199" ac="0"> to</s>
+            <s t="1360" ac="0"> explore,</s>
+        </p>
+        <p t="765590" d="2809" w="1" a="1"> </p>
+        <p t="765600" d="4479" w="1">
+            <s ac="0">plan,</s>
+            <s t="320" ac="0"> and</s>
+            <s t="560" ac="0"> implement</s>
+            <s t="960" ac="0"> the</s>
+            <s t="1280" ac="0"> following.</s>
+            <s t="2560" ac="0"> So,</s>
+        </p>
+        <p t="768389" d="1690" w="1" a="1"> </p>
+        <p t="768399" d="4081" w="1">
+            <s ac="0">basically,</s>
+            <s t="481" ac="0"> take</s>
+            <s t="641" ac="0"> a</s>
+            <s t="801" ac="0"> look</s>
+            <s t="880" ac="0"> at</s>
+            <s t="1041" ac="0"> this</s>
+            <s t="1440" ac="0"> uh</s>
+        </p>
+        <p t="770069" d="2411" w="1" a="1"> </p>
+        <p t="770079" d="4241" w="1">
+            <s ac="0">example</s>
+            <s t="401" ac="0"> here.</s>
+            <s t="1440" ac="0"> All</s>
+            <s t="1601" ac="0"> of</s>
+            <s t="1760" ac="0"> the</s>
+            <s t="1921" ac="0"> stuff</s>
+            <s t="2000" ac="0"> I</s>
+            <s t="2241" ac="0"> just</s>
+        </p>
+        <p t="772470" d="1850" w="1" a="1"> </p>
+        <p t="772480" d="3280" w="1">
+            <s ac="0">said,</s>
+            <s t="240" ac="0"> implement</s>
+            <s t="640" ac="0"> a</s>
+            <s t="880" ac="0"> new</s>
+            <s t="1039" ac="0"> table</s>
+            <s t="1280" ac="0"> for</s>
+            <s t="1520" ac="0"> child</s>
+        </p>
+        <p t="774310" d="1450" w="1" a="1"> </p>
+        <p t="774320" d="4079" w="1">
+            <s ac="0">profile.</s>
+            <s t="400" ac="0"> This</s>
+            <s t="639" ac="0"> should</s>
+            <s t="800" ac="0"> include</s>
+            <s t="1120" ac="0"> name,</s>
+        </p>
+        <p t="775750" d="2649" w="1" a="1"> </p>
+        <p t="775760" d="4400" w="1">
+            <s ac="0">birthday,</s>
+            <s t="319" ac="0"> and</s>
+            <s t="480" ac="0"> avatar</s>
+            <s t="960" ac="0"> name,</s>
+            <s t="1600" ac="0"> avatar</s>
+            <s t="2079" ac="0"> image.</s>
+        </p>
+        <p t="778389" d="1771" w="1" a="1"> </p>
+        <p t="778399" d="3440" w="1">
+            <s ac="0">Child</s>
+            <s t="240" ac="0"> profile</s>
+            <s t="721" ac="0"> should</s>
+            <s t="880" ac="0"> reference</s>
+            <s t="1120" ac="0"> a</s>
+            <s t="1361" ac="0"> user</s>
+            <s t="1521" ac="0"> as</s>
+        </p>
+        <p t="780150" d="1689" w="1" a="1"> </p>
+        <p t="780160" d="2799" w="1">
+            <s ac="0">the</s>
+            <s t="160" ac="0"> owner.</s>
+            <s t="479" ac="0"> The</s>
+            <s t="640" ac="0"> users</s>
+            <s t="960" ac="0"> add</s>
+            <s t="1200" ac="0"> them</s>
+            <s t="1359" ac="0"> to</s>
+            <s t="1520" ac="0"> their</s>
+        </p>
+        <p t="781829" d="1130" w="1" a="1"> </p>
+        <p t="781839" d="2641" w="1">
+            <s ac="0">account.</s>
+            <s t="240" ac="0"> It's</s>
+            <s t="401" ac="0"> possible</s>
+            <s t="641" ac="0"> in</s>
+            <s t="881" ac="0"> the</s>
+            <s t="961" ac="0"> future</s>
+        </p>
+        <p t="782949" d="1531" w="1" a="1"> </p>
+        <p t="782959" d="3680" w="1">
+            <s ac="0">that</s>
+            <s t="320" ac="0"> other</s>
+            <s t="481" ac="0"> users</s>
+            <s t="801" ac="0"> will</s>
+            <s t="961" ac="0"> have</s>
+            <s t="1120" ac="0"> access</s>
+            <s t="1361" ac="0"> to</s>
+        </p>
+        <p t="784470" d="2169" w="1" a="1"> </p>
+        <p t="784480" d="5599" w="1">
+            <s ac="0">viewing</s>
+            <s t="320" ac="0"> child</s>
+            <s t="560" ac="0"> profiles</s>
+            <s t="1440" ac="0"> owned</s>
+            <s t="1760" ac="0"> by</s>
+            <s t="1919" ac="0"> a</s>
+        </p>
+        <p t="786629" d="3450" w="1" a="1"> </p>
+        <p t="786639" d="5681" w="1">
+            <s ac="0">different</s>
+            <s t="320" ac="0"> user.</s>
+            <s t="1440" ac="0"> And</s>
+            <s t="1681" ac="0"> it</s>
+            <s t="1921" ac="0"> goes</s>
+            <s t="2161" ac="0"> through</s>
+            <s t="3041" ac="0"> and</s>
+        </p>
+        <p t="790069" d="2251" w="1" a="1"> </p>
+        <p t="790079" d="3760" w="1">
+            <s ac="0">starts</s>
+            <s t="320" ac="0"> to</s>
+            <s t="560" ac="0"> do</s>
+            <s t="880" ac="0"> work.</s>
+            <s t="1361" ac="0"> So</s>
+            <s t="1760" ac="0"> you</s>
+            <s t="1921" ac="0"> can</s>
+            <s t="2081" ac="0"> kind</s>
+            <s t="2161" ac="0"> of</s>
+        </p>
+        <p t="792310" d="1529" w="1" a="1"> </p>
+        <p t="792320" d="5680" w="1">
+            <s ac="0">see</s>
+            <s t="160" ac="0"> some</s>
+            <s t="319" ac="0"> of</s>
+            <s t="400" ac="0"> the</s>
+            <s t="560" ac="0"> thinking</s>
+            <s t="880" ac="0"> that</s>
+            <s t="1120" ac="0"> it</s>
+            <s t="1280" ac="0"> did</s>
+        </p>
+        <p t="793829" d="4171" w="1" a="1"> </p>
+        <p t="793839" d="6800" w="1">
+            <s ac="0">here.</s>
+            <s t="881" ac="0"> Then</s>
+            <s t="1361" ac="0"> it</s>
+            <s t="1680" ac="0"> builds</s>
+            <s t="2081" ac="0"> a</s>
+            <s t="2721" ac="0"> really</s>
+            <s t="3120" ac="0"> great</s>
+            <s t="3761" ac="0"> task</s>
+        </p>
+        <p t="797990" d="2649" w="1" a="1"> </p>
+        <p t="798000" d="4720" w="1">
+            <s ac="0">list</s>
+            <s t="320" ac="0"> manager</s>
+            <s t="720" ac="0"> or</s>
+            <s t="880" ac="0"> a</s>
+            <s t="1040" ac="0"> task</s>
+            <s t="1360" ac="0"> list</s>
+            <s t="2079" ac="0"> of</s>
+            <s t="2399" ac="0"> things</s>
+        </p>
+        <p t="800629" d="2091" w="1" a="1"> </p>
+        <p t="800639" d="4241" w="1">
+            <s ac="0">that</s>
+            <s t="161" ac="0"> it</s>
+            <s t="401" ac="0"> needs</s>
+            <s t="640" ac="0"> to</s>
+            <s t="801" ac="0"> go</s>
+            <s t="961" ac="0"> through</s>
+            <s t="1121" ac="0"> and</s>
+            <s t="1361" ac="0"> do.</s>
+            <s t="1841" ac="0"> And</s>
+        </p>
+        <p t="802710" d="2170" w="1" a="1"> </p>
+        <p t="802720" d="4720" w="1">
+            <s ac="0">this</s>
+            <s t="160" ac="0"> is</s>
+            <s t="400" ac="0"> spot-on.</s>
+            <s t="1200" ac="0"> And</s>
+            <s t="1359" ac="0"> the</s>
+            <s t="1600" ac="0"> implementation</s>
+        </p>
+        <p t="804870" d="2570" w="1" a="1"> </p>
+        <p t="804880" d="4160" w="1">
+            <s ac="0">here</s>
+            <s t="480" ac="0"> was</s>
+            <s t="1120" ac="0"> incredible.</s>
+            <s t="2079" ac="0"> And</s>
+            <s t="2240" ac="0"> you</s>
+            <s t="2399" ac="0"> can</s>
+            <s t="2480" ac="0"> see</s>
+        </p>
+        <p t="807430" d="1610" w="1" a="1"> </p>
+        <p t="807440" d="3680" w="1">
+            <s ac="0">that</s>
+            <s t="160" ac="0"> we've</s>
+            <s t="399" ac="0"> now</s>
+            <s t="639" ac="0"> triggered</s>
+            <s t="959" ac="0"> this</s>
+            <s t="1280" ac="0"> thinking</s>
+        </p>
+        <p t="809030" d="2090" w="1" a="1"> </p>
+        <p t="809040" d="4239" w="1">
+            <s ac="0">dot</s>
+            <s t="239" ac="0"> dot</s>
+            <s t="479" ac="0"> dot</s>
+            <s t="1039" ac="0"> because</s>
+            <s t="1280" ac="0"> we've</s>
+            <s t="1520" ac="0"> told</s>
+            <s t="1680" ac="0"> it</s>
+            <s t="1840" ac="0"> to</s>
+        </p>
+        <p t="811110" d="2169" w="1" a="1"> </p>
+        <p t="811120" d="4640" w="1">
+            <s ac="0">think</s>
+            <s t="640" ac="0"> harder.</s>
+            <s t="1360" ac="0"> This</s>
+            <s t="1519" ac="0"> is</s>
+            <s t="1680" ac="0"> all</s>
+            <s t="1839" ac="0"> done</s>
+            <s t="1920" ac="0"> with</s>
+        </p>
+        <p t="813269" d="2491" w="1" a="1"> </p>
+        <p t="813279" d="4881" w="1">
+            <s ac="0">Sonic</s>
+            <s t="481" ac="0"> 4.</s>
+            <s t="1120" ac="0"> This</s>
+            <s t="1281" ac="0"> is</s>
+            <s t="1441" ac="0"> not</s>
+            <s t="1680" ac="0"> Opus.</s>
+            <s t="2081" ac="0"> I've</s>
+            <s t="2321" ac="0"> heard</s>
+        </p>
+        <p t="815750" d="2410" w="1" a="1"> </p>
+        <p t="815760" d="5120" w="1">
+            <s ac="0">people</s>
+            <s t="400" ac="0"> say</s>
+            <s t="560" ac="0"> they</s>
+            <s t="800" ac="0"> get</s>
+            <s t="879" ac="0"> even</s>
+            <s t="1120" ac="0"> better</s>
+            <s t="1440" ac="0"> results</s>
+        </p>
+        <p t="818150" d="2730" w="1" a="1"> </p>
+        <p t="818160" d="4400" w="1">
+            <s ac="0">from</s>
+            <s t="320" ac="0"> Opus,</s>
+            <s t="880" ac="0"> but</s>
+            <s t="1040" ac="0"> I</s>
+            <s t="1200" ac="0"> have</s>
+            <s t="1679" ac="0"> uh</s>
+            <s t="1919" ac="0"> again</s>
+            <s t="2479" ac="0"> most</s>
+            <s t="2640" ac="0"> of</s>
+        </p>
+        <p t="820870" d="1690" w="1" a="1"> </p>
+        <p t="820880" d="4639" w="1">
+            <s ac="0">my</s>
+            <s t="79" ac="0"> testing</s>
+            <s t="399" ac="0"> has</s>
+            <s t="560" ac="0"> done</s>
+            <s t="959" ac="0"> been</s>
+            <s t="1199" ac="0"> done</s>
+            <s t="1360" ac="0"> with</s>
+        </p>
+        <p t="822550" d="2969" w="1" a="1"> </p>
+        <p t="822560" d="5600" w="1">
+            <s ac="0">Sonnet.</s>
+            <s t="1200" ac="0"> Now,</s>
+            <s t="2000" ac="0"> the</s>
+            <s t="2240" ac="0"> last</s>
+            <s t="2399" ac="0"> thing</s>
+            <s t="2560" ac="0"> that</s>
+            <s t="2719" ac="0"> I</s>
+            <s t="2880" ac="0"> want</s>
+        </p>
+        <p t="825509" d="2651" w="1" a="1"> </p>
+        <p t="825519" d="4880" w="1">
+            <s ac="0">to</s>
+            <s t="81" ac="0"> do</s>
+            <s t="560" ac="0"> say</s>
+            <s t="721" ac="0"> is</s>
+            <s t="1041" ac="0"> don't</s>
+            <s t="1361" ac="0"> be</s>
+            <s t="1521" ac="0"> afraid</s>
+            <s t="2081" ac="0"> to</s>
+            <s t="2401" ac="0"> throw</s>
+        </p>
+        <p t="828150" d="2249" w="1" a="1"> </p>
+        <p t="828160" d="5440" w="1">
+            <s ac="0">away</s>
+            <s t="320" ac="0"> what</s>
+            <s t="560" ac="0"> it</s>
+            <s t="720" ac="0"> does.</s>
+        </p>
+        <p t="830389" d="3211" w="1" a="1"> </p>
+        <p t="830399" d="5120" w="1">
+            <s ac="0">This</s>
+            <s t="240" ac="0"> is</s>
+            <s t="481" ac="0"> something</s>
+            <s t="880" ac="0"> that</s>
+            <s t="1921" ac="0"> I</s>
+            <s t="2240" ac="0"> feel</s>
+            <s t="2721" ac="0"> a</s>
+            <s t="3041" ac="0"> lot</s>
+            <s t="3120" ac="0"> of</s>
+        </p>
+        <p t="833590" d="1929" w="1" a="1"> </p>
+        <p t="833600" d="4400" w="1">
+            <s ac="0">people</s>
+            <s t="239" ac="0"> struggle</s>
+            <s t="560" ac="0"> with.</s>
+            <s t="960" ac="0"> And</s>
+            <s t="1120" ac="0"> if</s>
+            <s t="1280" ac="0"> I</s>
+            <s t="1440" ac="0"> were</s>
+            <s t="1679" ac="0"> was</s>
+        </p>
+        <p t="835509" d="2491" w="1" a="1"> </p>
+        <p t="835519" d="6161" w="1">
+            <s ac="0">a</s>
+            <s t="161" ac="0"> betting</s>
+            <s t="560" ac="0"> person,</s>
+            <s t="1601" ac="0"> I</s>
+            <s t="1841" ac="0"> think</s>
+            <s t="2000" ac="0"> a</s>
+            <s t="2241" ac="0"> lot</s>
+            <s t="2320" ac="0"> of</s>
+        </p>
+        <p t="837990" d="3690" w="1" a="1"> </p>
+        <p t="838000" d="5199" w="1">
+            <s ac="0">people</s>
+            <s t="240" ac="0"> spend</s>
+            <s t="480" ac="0"> a</s>
+            <s t="800" ac="0"> time</s>
+            <s t="1279" ac="0"> fighting</s>
+            <s t="1760" ac="0"> AI</s>
+            <s t="3199" ac="0"> to</s>
+            <s t="3519" ac="0"> try</s>
+        </p>
+        <p t="841670" d="1529" w="1" a="1"> </p>
+        <p t="841680" d="3599" w="1">
+            <s ac="0">to</s>
+            <s t="159" ac="0"> get</s>
+            <s t="240" ac="0"> it</s>
+            <s t="399" ac="0"> to</s>
+            <s t="640" ac="0"> go</s>
+            <s t="719" ac="0"> back</s>
+            <s t="880" ac="0"> on</s>
+            <s t="1040" ac="0"> the</s>
+            <s t="1120" ac="0"> rails</s>
+            <s t="1360" ac="0"> when</s>
+        </p>
+        <p t="843189" d="2090" w="1" a="1"> </p>
+        <p t="843199" d="4801" w="1">
+            <s ac="0">it's</s>
+            <s t="161" ac="0"> already</s>
+            <s t="320" ac="0"> messed</s>
+            <s t="640" ac="0"> something</s>
+            <s t="880" ac="0"> up.</s>
+            <s t="1841" ac="0"> Get</s>
+        </p>
+        <p t="845269" d="2731" w="1" a="1"> </p>
+        <p t="845279" d="5041" w="1">
+            <s ac="0">commit,</s>
+            <s t="881" ac="0"> get</s>
+            <s t="1201" ac="0"> commit,</s>
+            <s t="2000" ac="0"> throw</s>
+            <s t="2240" ac="0"> away</s>
+            <s t="2560" ac="0"> things</s>
+        </p>
+        <p t="847990" d="2330" w="1" a="1"> </p>
+        <p t="848000" d="5360" w="1">
+            <s ac="0">that</s>
+            <s t="240" ac="0"> mess</s>
+            <s t="480" ac="0"> up,</s>
+            <s t="880" ac="0"> go</s>
+            <s t="1120" ac="0"> back,</s>
+            <s t="1600" ac="0"> start</s>
+            <s t="1920" ac="0"> over,</s>
+        </p>
+        <p t="850310" d="3050" w="1" a="1"> </p>
+        <p t="850320" d="5280" w="1">
+            <s ac="0">reword</s>
+            <s t="480" ac="0"> it.</s>
+            <s t="1120" ac="0"> It</s>
+            <s t="1360" ac="0"> is</s>
+            <s t="1600" ac="0"> okay.</s>
+            <s t="1920" ac="0"> Like</s>
+            <s t="2160" ac="0"> code</s>
+            <s t="2480" ac="0"> is</s>
+            <s t="2720" ac="0"> now</s>
+        </p>
+        <p t="853350" d="2250" w="1" a="1"> </p>
+        <p t="853360" d="5200" w="1">
+            <s ac="0">pretty</s>
+            <s t="320" ac="0"> cheap</s>
+            <s t="560" ac="0"> to</s>
+            <s t="800" ac="0"> generate.</s>
+            <s t="1599" ac="0"> So</s>
+            <s t="1680" ac="0"> if</s>
+            <s t="1919" ac="0"> it</s>
+            <s t="2000" ac="0"> goes</s>
+        </p>
+        <p t="855590" d="2970" w="1" a="1"> </p>
+        <p t="855600" d="6799" w="1">
+            <s ac="0">off</s>
+            <s t="160" ac="0"> the</s>
+            <s t="320" ac="0"> rails,</s>
+            <s t="1120" ac="0"> go</s>
+            <s t="1359" ac="0"> ahead</s>
+            <s t="1760" ac="0"> and</s>
+            <s t="2080" ac="0"> just</s>
+            <s t="2479" ac="0"> wipe</s>
+            <s t="2799" ac="0"> it</s>
+        </p>
+        <p t="858550" d="3849" w="1" a="1"> </p>
+        <p t="858560" d="5680" w="1">
+            <s ac="0">away</s>
+            <s t="160" ac="0"> and</s>
+            <s t="399" ac="0"> start</s>
+            <s t="639" ac="0"> over.</s>
+            <s t="1839" ac="0"> So</s>
+            <s t="2079" ac="0"> my</s>
+            <s t="2320" ac="0"> hope</s>
+            <s t="2560" ac="0"> is</s>
+            <s t="3519" ac="0"> that</s>
+        </p>
+        <p t="862389" d="1851" w="1" a="1"> </p>
+        <p t="862399" d="3361" w="1">
+            <s ac="0">I'll</s>
+            <s t="481" ac="0"> start</s>
+            <s t="641" ac="0"> to</s>
+            <s t="800" ac="0"> gather</s>
+            <s t="1201" ac="0"> even</s>
+            <s t="1521" ac="0"> more</s>
+        </p>
+        <p t="864230" d="1530" w="1" a="1"> </p>
+        <p t="864240" d="3920" w="1">
+            <s ac="0">information</s>
+            <s t="399" ac="0"> over</s>
+            <s t="719" ac="0"> time</s>
+            <s t="880" ac="0"> to</s>
+            <s t="1120" ac="0"> try</s>
+            <s t="1279" ac="0"> to</s>
+        </p>
+        <p t="865750" d="2410" w="1" a="1"> </p>
+        <p t="865760" d="5120" w="1">
+            <s ac="0">understand</s>
+            <s t="1040" ac="0"> why</s>
+            <s t="1360" ac="0"> there</s>
+            <s t="1600" ac="0"> is</s>
+            <s t="1840" ac="0"> this</s>
+            <s t="2079" ac="0"> like</s>
+        </p>
+        <p t="868150" d="2730" w="1" a="1"> </p>
+        <p t="868160" d="5840" w="1">
+            <s ac="0">massive</s>
+            <s t="560" ac="0"> disconnect.</s>
+            <s t="1200" ac="0"> And</s>
+            <s t="1359" ac="0"> I</s>
+            <s t="1520" ac="0"> see</s>
+            <s t="1600" ac="0"> this</s>
+            <s t="2479" ac="0"> I'm</s>
+        </p>
+        <p t="870870" d="3130" w="1" a="1"> </p>
+        <p t="870880" d="6079" w="1">
+            <s ac="0">talking</s>
+            <s t="1040" ac="0"> tons</s>
+            <s t="1440" ac="0"> of</s>
+            <s t="1600" ac="0"> messages</s>
+        </p>
+        <p t="873990" d="2969" w="1" a="1"> </p>
+        <p t="874000" d="5680" w="1">
+            <s ac="0">uh</s>
+            <s t="160" ac="0"> saying</s>
+            <s t="560" ac="0"> I</s>
+            <s t="880" ac="0"> love</s>
+            <s t="1279" ac="0"> cloud</s>
+            <s t="1680" ac="0"> code</s>
+            <s t="2000" ac="0"> or</s>
+            <s t="2320" ac="0"> I</s>
+            <s t="2560" ac="0"> hate</s>
+        </p>
+        <p t="876949" d="2731" w="1" a="1"> </p>
+        <p t="876959" d="5281" w="1">
+            <s ac="0">cloud</s>
+            <s t="320" ac="0"> code</s>
+            <s t="1361" ac="0"> and</s>
+            <s t="1761" ac="0"> there</s>
+            <s t="2000" ac="0"> may</s>
+            <s t="2240" ac="0"> just</s>
+            <s t="2401" ac="0"> be</s>
+            <s t="2560" ac="0"> a</s>
+        </p>
+        <p t="879670" d="2570" w="1" a="1"> </p>
+        <p t="879680" d="5680" w="1">
+            <s ac="0">nature</s>
+            <s t="320" ac="0"> that</s>
+            <s t="640" ac="0"> people</s>
+            <s t="959" ac="0"> are</s>
+            <s t="1200" ac="0"> not</s>
+            <s t="1519" ac="0"> CLI</s>
+            <s t="2240" ac="0"> based</s>
+        </p>
+        <p t="882230" d="3130" w="1" a="1"> </p>
+        <p t="882240" d="5839" w="1">
+            <s ac="0">users.</s>
+            <s t="1039" ac="0"> You</s>
+            <s t="1200" ac="0"> know</s>
+            <s t="1440" ac="0"> it</s>
+            <s t="1599" ac="0"> is</s>
+            <s t="1760" ac="0"> a</s>
+            <s t="2159" ac="0"> just</s>
+            <s t="2480" ac="0"> a</s>
+            <s t="2719" ac="0"> different</s>
+        </p>
+        <p t="885350" d="2729" w="1" a="1"> </p>
+        <p t="885360" d="4479" w="1">
+            <s ac="0">experience</s>
+            <s t="1200" ac="0"> and</s>
+            <s t="1520" ac="0"> I</s>
+            <s t="1760" ac="0"> can't</s>
+            <s t="1919" ac="0"> fault</s>
+            <s t="2240" ac="0"> anyone</s>
+            <s t="2479" ac="0"> for</s>
+        </p>
+        <p t="888069" d="1770" w="1" a="1"> </p>
+        <p t="888079" d="3681" w="1">
+            <s ac="0">wanting</s>
+            <s t="161" ac="0"> to</s>
+            <s t="241" ac="0"> go</s>
+            <s t="401" ac="0"> back</s>
+            <s t="481" ac="0"> to</s>
+            <s t="801" ac="0"> group</s>
+            <s t="1041" ac="0"> code.</s>
+            <s t="1281" ac="0"> I</s>
+            <s t="1521" ac="0"> love</s>
+        </p>
+        <p t="889829" d="1931" w="1" a="1"> </p>
+        <p t="889839" d="4881" w="1">
+            <s ac="0">root</s>
+            <s t="240" ac="0"> code.</s>
+            <s t="481" ac="0"> I</s>
+            <s t="721" ac="0"> still</s>
+            <s t="881" ac="0"> use</s>
+            <s t="1120" ac="0"> it</s>
+            <s t="1281" ac="0"> on</s>
+            <s t="1440" ac="0"> a</s>
+            <s t="1680" ac="0"> daily</s>
+        </p>
+        <p t="891750" d="2970" w="1" a="1"> </p>
+        <p t="891760" d="6720" w="1">
+            <s ac="0">basis.</s>
+            <s t="1040" ac="0"> But</s>
+            <s t="1199" ac="0"> I</s>
+            <s t="1439" ac="0"> also</s>
+            <s t="1840" ac="0"> think</s>
+            <s t="2079" ac="0"> cloud</s>
+            <s t="2480" ac="0"> code</s>
+        </p>
+        <p t="894710" d="3770" w="1" a="1"> </p>
+        <p t="894720" d="4880" w="1">
+            <s ac="0">really</s>
+            <s t="960" ac="0"> does</s>
+            <s t="1760" ac="0"> make</s>
+            <s t="2080" ac="0"> programming</s>
+            <s t="2799" ac="0"> very</s>
+            <s t="3200" ac="0"> fun.</s>
+            <s t="3520" ac="0"> I</s>
+        </p>
+        <p t="898470" d="1130" w="1" a="1"> </p>
+        <p t="898480" d="4320" w="1">
+            <s ac="0">don't</s>
+            <s t="80" ac="0"> know</s>
+            <s t="240" ac="0"> another</s>
+            <s t="560" ac="0"> way</s>
+            <s t="640" ac="0"> to</s>
+            <s t="799" ac="0"> actually</s>
+        </p>
+        <p t="899590" d="3210" w="1" a="1"> </p>
+        <p t="899600" d="5919" w="1">
+            <s ac="0">explain</s>
+            <s t="320" ac="0"> it</s>
+            <s t="1200" ac="0"> other</s>
+            <s t="1520" ac="0"> than</s>
+            <s t="2320" ac="0"> I</s>
+            <s t="2560" ac="0"> just</s>
+            <s t="2720" ac="0"> have</s>
+            <s t="2960" ac="0"> so</s>
+        </p>
+        <p t="902790" d="2729" w="1" a="1"> </p>
+        <p t="902800" d="6560" w="1">
+            <s ac="0">much</s>
+            <s t="240" ac="0"> control</s>
+            <s t="1279" ac="0"> of</s>
+            <s t="1599" ac="0"> how</s>
+            <s t="1839" ac="0"> I</s>
+            <s t="2080" ac="0"> actually</s>
+            <s t="2399" ac="0"> want</s>
+            <s t="2479" ac="0"> to</s>
+        </p>
+        <p t="905509" d="3851" w="1" a="1"> </p>
+        <p t="905519" d="5760" w="1">
+            <s ac="0">get</s>
+            <s t="161" ac="0"> things</s>
+            <s t="401" ac="0"> done</s>
+            <s t="1760" ac="0"> and</s>
+            <s t="2081" ac="0"> I</s>
+            <s t="2320" ac="0"> can</s>
+            <s t="2560" ac="0"> choose</s>
+            <s t="2961" ac="0"> like</s>
+            <s t="3601" ac="0"> I</s>
+        </p>
+        <p t="909350" d="1929" w="1" a="1"> </p>
+        <p t="909360" d="3839" w="1">
+            <s ac="0">could</s>
+            <s t="80" ac="0"> choose</s>
+            <s t="320" ac="0"> to</s>
+            <s t="479" ac="0"> do</s>
+            <s t="560" ac="0"> a</s>
+            <s t="719" ac="0"> oneshot</s>
+            <s t="1279" ac="0"> and</s>
+            <s t="1520" ac="0"> let</s>
+            <s t="1680" ac="0"> it</s>
+        </p>
+        <p t="911269" d="1930" w="1" a="1"> </p>
+        <p t="911279" d="4240" w="1">
+            <s ac="0">go.</s>
+            <s t="481" ac="0"> I</s>
+            <s t="721" ac="0"> can</s>
+            <s t="800" ac="0"> actually</s>
+            <s t="1041" ac="0"> have</s>
+            <s t="1201" ac="0"> it</s>
+            <s t="1441" ac="0"> go</s>
+            <s t="1680" ac="0"> really</s>
+        </p>
+        <p t="913189" d="2330" w="1" a="1"> </p>
+        <p t="913199" d="4801" w="1">
+            <s ac="0">deep</s>
+            <s t="161" ac="0"> and</s>
+            <s t="401" ac="0"> build</s>
+            <s t="561" ac="0"> a</s>
+            <s t="721" ac="0"> task</s>
+            <s t="1041" ac="0"> list.</s>
+            <s t="1681" ac="0"> The</s>
+            <s t="2000" ac="0"> control</s>
+        </p>
+        <p t="915509" d="2491" w="1" a="1"> </p>
+        <p t="915519" d="4801" w="1">
+            <s ac="0">that</s>
+            <s t="241" ac="0"> I</s>
+            <s t="401" ac="0"> get</s>
+            <s t="560" ac="0"> on</s>
+            <s t="801" ac="0"> it</s>
+            <s t="961" ac="0"> is</s>
+            <s t="1201" ac="0"> just</s>
+            <s t="1601" ac="0"> absolutely</s>
+        </p>
+        <p t="917990" d="2330" w="1" a="1"> </p>
+        <p t="918000" d="4320" w="1">
+            <s ac="0">incredible.</s>
+            <s t="1199" ac="0"> So</s>
+            <s t="1360" ac="0"> anyway,</s>
+            <s t="1680" ac="0"> I</s>
+            <s t="1760" ac="0"> hope</s>
+            <s t="1920" ac="0"> these</s>
+            <s t="2079" ac="0"> tips</s>
+        </p>
+        <p t="920310" d="2010" w="1" a="1"> </p>
+        <p t="920320" d="3199" w="1">
+            <s ac="0">have</s>
+            <s t="160" ac="0"> been</s>
+            <s t="319" ac="0"> helpful</s>
+            <s t="560" ac="0"> to</s>
+            <s t="800" ac="0"> all</s>
+            <s t="879" ac="0"> of</s>
+            <s t="1040" ac="0"> you.</s>
+            <s t="1600" ac="0"> If</s>
+            <s t="1759" ac="0"> they</s>
+        </p>
+        <p t="922310" d="1209" w="1" a="1"> </p>
+        <p t="922320" d="2720" w="1">
+            <s ac="0">have</s>
+            <s t="160" ac="0"> in</s>
+            <s t="319" ac="0"> some</s>
+            <s t="480" ac="0"> way,</s>
+            <s t="639" ac="0"> let</s>
+            <s t="800" ac="0"> me</s>
+            <s t="879" ac="0"> know</s>
+            <s t="959" ac="0"> in</s>
+            <s t="1120" ac="0"> the</s>
+        </p>
+        <p t="923509" d="1531" w="1" a="1"> </p>
+        <p t="923519" d="2961" w="1">
+            <s ac="0">comments</s>
+            <s t="241" ac="0"> below.</s>
+            <s t="481" ac="0"> if</s>
+            <s t="641" ac="0"> there's</s>
+            <s t="880" ac="0"> new</s>
+            <s t="1041" ac="0"> ones</s>
+            <s t="1281" ac="0"> that</s>
+        </p>
+        <p t="925030" d="1450" w="1" a="1"> </p>
+        <p t="925040" d="4080" w="1">
+            <s ac="0">you</s>
+            <s t="239" ac="0"> actually</s>
+            <s t="479" ac="0"> know</s>
+            <s t="720" ac="0"> that</s>
+            <s t="960" ac="0"> I</s>
+            <s t="1200" ac="0"> haven't</s>
+        </p>
+        <p t="926470" d="2650" w="1" a="1"> </p>
+        <p t="926480" d="5599" w="1">
+            <s ac="0">included</s>
+            <s t="479" ac="0"> here.</s>
+            <s t="1039" ac="0"> Um,</s>
+            <s t="1359" ac="0"> this</s>
+            <s t="1599" ac="0"> is</s>
+            <s t="1680" ac="0"> just</s>
+            <s t="1919" ac="0"> my</s>
+            <s t="2240" ac="0"> own</s>
+        </p>
+        <p t="929110" d="2969" w="1" a="1"> </p>
+        <p t="929120" d="5360" w="1">
+            <s ac="0">personal</s>
+            <s t="1200" ac="0"> uh</s>
+            <s t="1600" ac="0"> way</s>
+            <s t="1760" ac="0"> of</s>
+            <s t="1920" ac="0"> using</s>
+            <s t="2159" ac="0"> cloud</s>
+            <s t="2480" ac="0"> code.</s>
+            <s t="2800" ac="0"> I'm</s>
+        </p>
+        <p t="932069" d="2411" w="1" a="1"> </p>
+        <p t="932079" d="5120" w="1">
+            <s ac="0">sure</s>
+            <s t="161" ac="0"> there</s>
+            <s t="401" ac="0"> are</s>
+            <s t="1440" ac="0"> ways</s>
+            <s t="1681" ac="0"> that</s>
+            <s t="1921" ac="0"> people</s>
+            <s t="2081" ac="0"> use</s>
+            <s t="2241" ac="0"> it</s>
+        </p>
+        <p t="934470" d="2729" w="1" a="1"> </p>
+        <p t="934480" d="3919" w="1">
+            <s ac="0">that</s>
+            <s t="240" ac="0"> are</s>
+            <s t="400" ac="0"> beyond</s>
+            <s t="799" ac="0"> my</s>
+            <s t="1919" ac="0"> uh</s>
+            <s t="2159" ac="0"> beyond</s>
+            <s t="2560" ac="0"> my</s>
+        </p>
+        <p t="937189" d="1210" w="1" a="1"> </p>
+        <p t="937199" d="3681" w="1">
+            <s ac="0">knowledge</s>
+            <s t="320" ac="0"> at</s>
+            <s t="481" ac="0"> this</s>
+            <s t="640" ac="0"> point,</s>
+            <s t="801" ac="0"> which</s>
+            <s t="961" ac="0"> would</s>
+            <s t="1121" ac="0"> be</s>
+        </p>
+        <p t="938389" d="2491" w="1" a="1"> </p>
+        <p t="938399" d="4641" w="1">
+            <s ac="0">amazing</s>
+            <s t="321" ac="0"> to</s>
+            <s t="481" ac="0"> learn</s>
+            <s t="800" ac="0"> for</s>
+            <s t="961" ac="0"> myself.</s>
+            <s t="1841" ac="0"> Anyway,</s>
+            <s t="2321" ac="0"> I</s>
+        </p>
+        <p t="940870" d="2170" w="1" a="1"> </p>
+        <p t="940880" d="6639" w="1">
+            <s ac="0">hope</s>
+            <s t="160" ac="0"> you</s>
+            <s t="319" ac="0"> guys</s>
+            <s t="560" ac="0"> all</s>
+            <s t="800" ac="0"> have</s>
+            <s t="959" ac="0"> a</s>
+            <s t="1280" ac="0"> wonderful</s>
+            <s t="1680" ac="0"> day</s>
+        </p>
+        <p t="943030" d="4489" w="1" a="1"> </p>
+        <p t="943040" d="4479" w="1">
+            <s ac="0">and</s>
+            <s t="320" ac="0"> until</s>
+            <s t="640" ac="0"> next</s>
+            <s t="799" ac="0"> time</s>
+            <s t="1039" ac="0"> everyone,</s>
+            <s t="1520" ac="0"> peace</s>
+            <s t="1760" ac="0"> out.</s>
+        </p>
+    </body>
+</timedtext>

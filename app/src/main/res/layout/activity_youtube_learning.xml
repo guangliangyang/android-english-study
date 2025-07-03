@@ -64,13 +64,38 @@
         android:layout_height="200dp"
         android:layout_marginBottom="16dp" />
 
-    <TextView
+
+    <ScrollView
+        android:id="@+id/transcriptScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Paste a YouTube video URL above and tap 'Play Video' to start learning English with YouTube videos!"
-        android:textSize="14sp"
-        android:textColor="@android:color/darker_gray"
-        android:gravity="center"
-        android:padding="16dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transcript"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/transcriptText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No transcript available"
+                android:textSize="16sp"
+                android:lineSpacingExtra="4dp"
+                android:textIsSelectable="true" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
