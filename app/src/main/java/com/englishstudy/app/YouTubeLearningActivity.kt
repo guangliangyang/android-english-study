@@ -336,10 +336,17 @@ class YouTubeLearningActivity : AppCompatActivity() {
             }
         }
         
-        // 如果高亮的段落没有变化，不需要更新
-        if (currentSegmentIndex == highlightedSegmentIndex) return
+        // 计算要高亮的段落：下一个段落（提前显示）
+        val highlightSegmentIndex = if (currentSegmentIndex >= 0 && currentSegmentIndex + 1 < transcript.segments.size) {
+            currentSegmentIndex + 1  // 高亮下一个段落
+        } else {
+            currentSegmentIndex      // 如果没有下一个段落，高亮当前段落
+        }
         
-        highlightedSegmentIndex = currentSegmentIndex
+        // 如果高亮的段落没有变化，不需要更新
+        if (highlightSegmentIndex == highlightedSegmentIndex) return
+        
+        highlightedSegmentIndex = highlightSegmentIndex
         
         // 重新构建带高亮的文本
         val spannableBuilder = SpannableStringBuilder()
@@ -351,8 +358,8 @@ class YouTubeLearningActivity : AppCompatActivity() {
             spannableBuilder.append(segmentText)
             val endPos = spannableBuilder.length
             
-            // 如果是当前播放的段落，添加高亮背景
-            if (index == currentSegmentIndex) {
+            // 如果是要高亮的段落，添加高亮背景
+            if (index == highlightSegmentIndex) {
                 val highlightColor = ContextCompat.getColor(this, android.R.color.holo_orange_light)
                 spannableBuilder.setSpan(
                     BackgroundColorSpan(highlightColor),
@@ -366,8 +373,8 @@ class YouTubeLearningActivity : AppCompatActivity() {
         binding.transcriptText.text = spannableBuilder
         
         // 自动滚动到高亮的句子，使其在屏幕中间
-        if (currentSegmentIndex >= 0) {
-            scrollToHighlightedSegment(currentSegmentIndex, transcript.segments.size)
+        if (highlightSegmentIndex >= 0) {
+            scrollToHighlightedSegment(highlightSegmentIndex, transcript.segments.size)
         }
     }
     

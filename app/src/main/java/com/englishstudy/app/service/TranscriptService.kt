@@ -279,28 +279,14 @@ class TranscriptService {
                     val startTime = startTimeMs / 1000.0f
                     val duration = durationMs / 1000.0f
                     
-                    // 提取<s>标签中的文本
-                    val textBuilder = StringBuilder()
-                    val sPattern = Pattern.compile("<s[^>]*>([^<]*)</s>", Pattern.CASE_INSENSITIVE)
-                    val sMatcher = sPattern.matcher(content)
-                    
-                    while (sMatcher.find()) {
-                        val sText = sMatcher.group(1) ?: ""
-                        textBuilder.append(sText)
+                    // 检测XML格式类型并相应解析
+                    val text = if (content.contains("<s")) {
+                        // 格式1: 包含<s>标签的格式 (transcript1.xml)
+                        parseWithSTags(content)
+                    } else {
+                        // 格式2: 直接文本内容格式 (transcript2.xml)
+                        parseDirectText(content)
                     }
-                    
-                    var text = textBuilder.toString()
-                    
-                    // 清理文本
-                    text = text
-                        .replace("&amp;", "&")
-                        .replace("&lt;", "<")
-                        .replace("&gt;", ">")
-                        .replace("&quot;", "\"")
-                        .replace("&#39;", "'")
-                        .replace("&apos;", "'")
-                        .replace("\\s+".toRegex(), " ")
-                        .trim()
                     
                     if (text.isNotBlank()) {
                         segments.add(TranscriptSegment(startTime, duration, text))
@@ -325,5 +311,41 @@ class TranscriptService {
             Log.e(TAG, "Error parsing transcript XML: ${e.message}", e)
             return null
         }
+    }
+    
+    private fun parseWithSTags(content: String): String {
+        // 格式1: 提取<s>标签中的文本
+        val textBuilder = StringBuilder()
+        val sPattern = Pattern.compile("<s[^>]*>([^<]*)</s>", Pattern.CASE_INSENSITIVE)
+        val sMatcher = sPattern.matcher(content)
+        
+        while (sMatcher.find()) {
+            val sText = sMatcher.group(1) ?: ""
+            textBuilder.append(sText)
+        }
+        
+        return cleanText(textBuilder.toString())
+    }
+    
+    private fun parseDirectText(content: String): String {
+        // 格式2: 直接解析文本内容，移除任何HTML标签
+        val textWithoutTags = content
+            .replace(Regex("<[^>]*>"), "") // 移除任何HTML标签
+            .replace(Regex("\\s+"), " ") // 规范化空格
+        
+        return cleanText(textWithoutTags)
+    }
+    
+    private fun cleanText(text: String): String {
+        // 统一的文本清理函数
+        return text
+            .replace("&amp;", "&")
+            .replace("&lt;", "<")
+            .replace("&gt;", ">")
+            .replace("&quot;", "\"")
+            .replace("&#39;", "'")
+            .replace("&apos;", "'")
+            .replace("\\s+".toRegex(), " ")
+            .trim()
     }
 }
