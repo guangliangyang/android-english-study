@@ -12,6 +12,8 @@ import com.englishstudy.app.service.TranscriptService
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
+import android.widget.SeekBar
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 import android.text.SpannableStringBuilder
@@ -28,6 +30,9 @@ class YouTubeLearningActivity : AppCompatActivity() {
     private val transcriptService = TranscriptService()
     private var currentPlayTime: Float = 0f
     private var highlightedSegmentIndex = -1
+    private var videoDuration: Float = 0f
+    private var isPlaying: Boolean = false
+    private var isSeekBarTracking: Boolean = false
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +54,29 @@ class YouTubeLearningActivity : AppCompatActivity() {
             override fun onCurrentSecond(youTubePlayer: YouTubePlayer, second: Float) {
                 currentPlayTime = second
                 updateTranscriptHighlight()
+                updateProgressBar()
+            }
+            
+            override fun onVideoDuration(youTubePlayer: YouTubePlayer, duration: Float) {
+                videoDuration = duration
+                binding.totalTimeText.text = formatTime(duration)
+                binding.videoProgressBar.max = duration.toInt()
+            }
+            
+            override fun onStateChange(youTubePlayer: YouTubePlayer, state: PlayerConstants.PlayerState) {
+                when (state) {
+                    PlayerConstants.PlayerState.PLAYING -> {
+                        isPlaying = true
+                        binding.playPauseButton.setImageResource(R.drawable.ic_pause)
+                    }
+                    PlayerConstants.PlayerState.PAUSED -> {
+                        isPlaying = false
+                        binding.playPauseButton.setImageResource(R.drawable.ic_play_arrow)
+                    }
+                    else -> {
+                        // Handle other states if needed
+                    }
+                }
             }
         })
     }
@@ -79,6 +107,64 @@ class YouTubeLearningActivity : AppCompatActivity() {
             clearTranscript()
         }
         
+        // 设置视频控制按钮
+        setupVideoControls()
+    }
+    
+    private fun setupVideoControls() {
+        // 播放/暂停按钮
+        binding.playPauseButton.setOnClickListener {
+            youTubePlayer?.let { player ->
+                if (isPlaying) {
+                    player.pause()
+                } else {
+                    player.play()
+                }
+            }
+        }
+        
+        // 后退10秒按钮
+        binding.rewindButton.setOnClickListener {
+            youTubePlayer?.let { player ->
+                val newTime = maxOf(0f, currentPlayTime - 10f)
+                player.seekTo(newTime)
+            }
+        }
+        
+        // 前进10秒按钮
+        binding.forwardButton.setOnClickListener {
+            youTubePlayer?.let { player ->
+                val newTime = minOf(videoDuration, currentPlayTime + 10f)
+                player.seekTo(newTime)
+            }
+        }
+        
+        // 进度条控制
+        binding.videoProgressBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                if (fromUser) {
+                    binding.currentTimeText.text = formatTime(progress.toFloat())
+                }
+            }
+            
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                isSeekBarTracking = true
+            }
+            
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                isSeekBarTracking = false
+                seekBar?.let { bar ->
+                    youTubePlayer?.seekTo(bar.progress.toFloat())
+                }
+            }
+        })
+    }
+    
+    private fun updateProgressBar() {
+        if (!isSeekBarTracking) {
+            binding.videoProgressBar.progress = currentPlayTime.toInt()
+            binding.currentTimeText.text = formatTime(currentPlayTime)
+        }
     }
     
     private fun loadTranscript(videoId: String) {
@@ -201,7 +287,16 @@ class YouTubeLearningActivity : AppCompatActivity() {
         currentVideoId = null
         currentPlayTime = 0f
         highlightedSegmentIndex = -1
+        videoDuration = 0f
+        isPlaying = false
+        isSeekBarTracking = false
+        
+        // 重置UI状态
         binding.transcriptText.text = "Paste a YouTube video URL above and tap 'Play Video' to start learning English with YouTube videos!"
+        binding.videoProgressBar.progress = 0
+        binding.currentTimeText.text = "0:00"
+        binding.totalTimeText.text = "0:00"
+        binding.playPauseButton.setImageResource(R.drawable.ic_play_arrow)
     }
     
     private fun extractVideoId(url: String): String? {
