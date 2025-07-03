@@ -1,25 +1,28 @@
 package com.englishstudy.app
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.englishstudy.app.databinding.ActivityYoutubeLearningBinding
 import com.englishstudy.app.model.Transcript
 import com.englishstudy.app.service.TranscriptService
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
-import android.widget.SeekBar
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.BackgroundColorSpan
-import androidx.core.content.ContextCompat
 
 class YouTubeLearningActivity : AppCompatActivity() {
     
@@ -38,6 +41,7 @@ class YouTubeLearningActivity : AppCompatActivity() {
     private var loopEndTime: Float = 0f
     private var currentFontSize: Float = 16f
     private val fontSizes = arrayOf(14f, 16f, 18f, 20f, 24f)
+    private var isHeaderVisible: Boolean = true
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +50,7 @@ class YouTubeLearningActivity : AppCompatActivity() {
         
         setupYouTubePlayer()
         setupUI()
+        setupGestureDetector()
     }
     
     private fun setupYouTubePlayer() {
@@ -411,6 +416,11 @@ class YouTubeLearningActivity : AppCompatActivity() {
         binding.totalTimeText.text = "0:00"
         binding.playPauseButton.setImageResource(R.drawable.ic_play_arrow)
         binding.loopModeButton.setImageResource(R.drawable.ic_sequential)
+        
+        // 重置header显示状态
+        if (!isHeaderVisible) {
+            animateHeaderVisibility(true)
+        }
     }
     
     private fun extractVideoId(url: String): String? {
@@ -429,6 +439,88 @@ class YouTubeLearningActivity : AppCompatActivity() {
             }
         }
         return null
+    }
+    
+    private fun setupGestureDetector() {
+        // 使用简单的滑动检测
+        var startY = 0f
+        var isSwipeDetected = false
+        
+        binding.transcriptScrollView.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    startY = event.y
+                    isSwipeDetected = false
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    val diffY = event.y - startY
+                    if (!isSwipeDetected && Math.abs(diffY) > 150) {
+                        isSwipeDetected = true
+                        if (diffY < 0) {
+                            // 向上滑动 - 隐藏header
+                            if (isHeaderVisible) {
+                                animateHeaderVisibility(false)
+                            }
+                        } else {
+                            // 向下滑动 - 显示header  
+                            if (!isHeaderVisible) {
+                                animateHeaderVisibility(true)
+                            }
+                        }
+                    }
+                }
+            }
+            false // 返回false以便ScrollView能正常处理滚动
+        }
+    }
+    
+    private fun animateHeaderVisibility(show: Boolean) {
+        if (show == isHeaderVisible) return
+        
+        val headerSection = binding.headerSection
+        val startHeight = if (show) 0 else headerSection.height
+        val endHeight = if (show) headerSection.measuredHeight else 0
+        
+        // 如果要显示，先设置visibility为VISIBLE
+        if (show) {
+            headerSection.visibility = View.VISIBLE
+            // 需要测量header的高度
+            headerSection.measure(
+                View.MeasureSpec.makeMeasureSpec(binding.root.width, View.MeasureSpec.EXACTLY),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+            )
+        }
+        
+        val animator = ValueAnimator.ofInt(startHeight, if (show) headerSection.measuredHeight else 0)
+        animator.duration = 300
+        animator.interpolator = DecelerateInterpolator()
+        
+        animator.addUpdateListener { animation ->
+            val animatedValue = animation.animatedValue as Int
+            val layoutParams = headerSection.layoutParams
+            layoutParams.height = animatedValue
+            headerSection.layoutParams = layoutParams
+        }
+        
+        animator.addListener(object : android.animation.Animator.AnimatorListener {
+            override fun onAnimationStart(animation: android.animation.Animator) {}
+            override fun onAnimationRepeat(animation: android.animation.Animator) {}
+            override fun onAnimationCancel(animation: android.animation.Animator) {}
+            override fun onAnimationEnd(animation: android.animation.Animator) {
+                if (!show) {
+                    headerSection.visibility = View.GONE
+                }
+                // 恢复原始高度设置
+                val layoutParams = headerSection.layoutParams
+                layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                headerSection.layoutParams = layoutParams
+            }
+        })
+        
+        isHeaderVisible = show
+        animator.start()
+        
+        Toast.makeText(this, if (show) "显示控制面板" else "隐藏控制面板", Toast.LENGTH_SHORT).show()
     }
     
     override fun onDestroy() {
