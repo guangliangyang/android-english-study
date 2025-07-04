@@ -207,6 +207,17 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       WakelockPlus.disable();
     }
     
+    // 检查视频是否播放完毕，自动重播
+    if (!_isLoopMode && duration > 0 && position >= duration - 1) {
+      // 视频播放完毕，自动从头开始播放
+      Future.delayed(const Duration(milliseconds: 500), () {
+        if (_controller != null) {
+          _controller!.seekTo(Duration.zero);
+          _controller!.play();
+        }
+      });
+    }
+    
     // 检查循环模式
     if (_isLoopMode && position >= _loopEndTime) {
       _controller!.seekTo(Duration(seconds: _loopStartTime.toInt()));
