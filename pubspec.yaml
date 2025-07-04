@@ -33,6 +33,13 @@ dependencies:
   # URL handling
   url_launcher: ^6.1.14
 
+  # Background audio playback
+  audio_service: ^0.18.12
+  just_audio: ^0.9.36
+  
+  # Wake lock for preventing sleep
+  wakelock_plus: ^1.1.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

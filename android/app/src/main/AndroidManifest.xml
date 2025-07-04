@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.englishstudy.app">
 
     <!-- Internet permission for YouTube videos and API calls -->
@@ -7,6 +8,13 @@
     
     <!-- Wake lock permission for video playback -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    
+    <!-- Foreground service permission for background playback -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    
+    <!-- Audio playback permissions -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     
     <!-- External storage permission for potential file downloads -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -56,6 +64,26 @@
                       android:host="youtu.be" />
             </intent-filter>
         </activity>
+        
+        <!-- Background Audio Service -->
+        <service
+            android:name="com.ryanheise.audioservice.AudioService"
+            android:foregroundServiceType="mediaPlayback"
+            android:exported="true"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
+        
+        <!-- Media button receiver -->
+        <receiver android:name="com.ryanheise.audioservice.MediaButtonReceiver"
+            android:exported="true"
+            tools:ignore="Instantiatable">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
         
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
+import 'package:audio_service/audio_service.dart';
 import '../models/transcript.dart';
 import '../services/transcript_service.dart';
 import '../services/auth_service.dart';
+import '../services/background_audio_service.dart';
 
 class YoutubeLearningScreen extends StatefulWidget {
   const YoutubeLearningScreen({Key? key}) : super(key: key);
@@ -40,12 +43,17 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   double _currentFontSize = 16.0;
   final List<double> _fontSizes = [14.0, 16.0, 18.0, 20.0, 24.0];
   
+  // 后台音频服务
+  BackgroundAudioService? _backgroundAudioService;
+  bool _isBackgroundModeEnabled = false;
+  
   // 动画控制器（保留用于其他可能的动画）
 
   @override
   void initState() {
     super.initState();
     _initializeWithSampleVideo();
+    _initializeBackgroundAudio();
   }
 
   void _initializeWithSampleVideo() {
@@ -53,12 +61,42 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     _urlController.text = 'https://m.youtube.com/watch?v=$sampleVideoId';
     _loadVideo(sampleVideoId);
   }
+  
+  Future<void> _initializeBackgroundAudio() async {
+    try {
+      _backgroundAudioService = await AudioService.init(
+        builder: () => BackgroundAudioService.instance,
+        config: const AudioServiceConfig(
+          androidNotificationChannelId: 'com.englishstudy.app.audio',
+          androidNotificationChannelName: 'English Study Audio',
+          androidNotificationOngoing: true,
+          androidNotificationIcon: 'mipmap/ic_launcher',
+          androidShowNotificationBadge: true,
+        ),
+      );
+      
+      // Listen to background audio position updates for transcript sync
+      _backgroundAudioService?.transcriptUpdateStream.listen((positionString) {
+        if (_isBackgroundModeEnabled) {
+          final position = double.tryParse(positionString) ?? 0.0;
+          setState(() {
+            _currentPosition = position;
+          });
+          _updateTranscriptHighlight();
+        }
+      });
+    } catch (e) {
+      // Handle initialization error silently
+    }
+  }
 
   @override
   void dispose() {
     _controller?.dispose();
     _urlController.dispose();
     _transcriptScrollController.dispose();
+    _backgroundAudioService?.dispose();
+    WakelockPlus.disable();
     super.dispose();
   }
 
@@ -122,6 +160,14 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
         _isLoading = false;
       });
 
+      // Setup background audio service for the new video
+      if (_backgroundAudioService != null && transcript != null) {
+        await _backgroundAudioService!.setupAudioSource(
+          videoId,
+          'English Study - $videoId',
+        );
+      }
+
       AuthService.addRecentVideo(videoId);
     } catch (e) {
       setState(() {
@@ -144,7 +190,20 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       _isPlaying = isPlaying;
     });
 
+    // Sync with background audio service
+    if (_backgroundAudioService != null && _isBackgroundModeEnabled) {
+      _backgroundAudioService!.syncPosition(Duration(seconds: position.toInt()));
+      _backgroundAudioService!.syncPlaybackState(isPlaying);
+    }
+
     _updateTranscriptHighlight();
+    
+    // Enable/disable wakelock based on playing state
+    if (isPlaying) {
+      WakelockPlus.enable();
+    } else {
+      WakelockPlus.disable();
+    }
     
     // 检查循环模式
     if (_isLoopMode && position >= _loopEndTime) {
@@ -378,6 +437,29 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
         _scrollToHighlightedSegment();
       }
     });
+  }
+  
+  void _toggleBackgroundMode() {
+    setState(() {
+      _isBackgroundModeEnabled = !_isBackgroundModeEnabled;
+    });
+    
+    if (_isBackgroundModeEnabled) {
+      // Enable background mode
+      if (_backgroundAudioService != null) {
+        _backgroundAudioService!.syncPosition(Duration(seconds: _currentPosition.toInt()));
+        _backgroundAudioService!.syncPlaybackState(_isPlaying);
+      }
+      WakelockPlus.enable();
+    } else {
+      // Disable background mode
+      if (_backgroundAudioService != null) {
+        _backgroundAudioService!.pause();
+      }
+      if (!_isPlaying) {
+        WakelockPlus.disable();
+      }
+    }
   }
 
   void _seekToTime(double seconds) {
@@ -641,6 +723,14 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
               onPressed: _cycleFontSize,
               icon: const Icon(Icons.text_fields, color: Colors.white),
               tooltip: '字体大小',
+            ),
+            IconButton(
+              onPressed: _toggleBackgroundMode,
+              icon: Icon(
+                _isBackgroundModeEnabled ? Icons.headset : Icons.headset_off,
+                color: _isBackgroundModeEnabled ? Colors.green : Colors.white,
+              ),
+              tooltip: _isBackgroundModeEnabled ? '关闭后台播放' : '开启后台播放',
             ),
             IconButton(
               onPressed: _controller != null ? (_isLoopMode ? _adjustLoopWithRewind : () {
