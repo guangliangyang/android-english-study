@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(java:*)",
+      "Bash(/usr/libexec/java_home:*)",
+      "Bash(chmod:*)",
+      "Bash(flutter:*)",
+      "Bash(export:*)",
+      "Bash(cp:*)",
+      "Bash(git init:*)",
+      "Bash(git remote add:*)"
+    ],
+    "deny": []
+  }
+}
