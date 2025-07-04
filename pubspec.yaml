@@ -37,6 +37,9 @@ dependencies:
   audio_service: ^0.18.12
   just_audio: ^0.9.36
   
+  # YouTube audio extraction
+  youtube_explode_dart: ^2.2.1
+  
   # Wake lock for preventing sleep
   wakelock_plus: ^1.1.4
 

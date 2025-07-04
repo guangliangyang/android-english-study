@@ -43,9 +43,8 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   double _currentFontSize = 16.0;
   final List<double> _fontSizes = [14.0, 16.0, 18.0, 20.0, 24.0];
   
-  // 后台音频服务
+  // 后台音频服务 (默认启用)
   BackgroundAudioService? _backgroundAudioService;
-  bool _isBackgroundModeEnabled = false;
   
   // 动画控制器（保留用于其他可能的动画）
 
@@ -77,13 +76,12 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       
       // Listen to background audio position updates for transcript sync
       _backgroundAudioService?.transcriptUpdateStream.listen((positionString) {
-        if (_isBackgroundModeEnabled) {
-          final position = double.tryParse(positionString) ?? 0.0;
-          setState(() {
-            _currentPosition = position;
-          });
-          _updateTranscriptHighlight();
-        }
+        // 后台播放默认启用，直接同步位置
+        final position = double.tryParse(positionString) ?? 0.0;
+        setState(() {
+          _currentPosition = position;
+        });
+        _updateTranscriptHighlight();
       });
     } catch (e) {
       // Handle initialization error silently
@@ -162,10 +160,14 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
 
       // Setup background audio service for the new video
       if (_backgroundAudioService != null && transcript != null) {
-        await _backgroundAudioService!.setupAudioSource(
-          videoId,
-          'English Study - $videoId',
-        );
+        try {
+          await _backgroundAudioService!.setupAudioSource(
+            videoId,
+            'English Study - $videoId',
+          );
+        } catch (e) {
+          // Handle audio setup error silently
+        }
       }
 
       AuthService.addRecentVideo(videoId);
@@ -190,8 +192,8 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       _isPlaying = isPlaying;
     });
 
-    // Sync with background audio service
-    if (_backgroundAudioService != null && _isBackgroundModeEnabled) {
+    // Sync with background audio service (默认启用)
+    if (_backgroundAudioService != null && _backgroundAudioService!.isAudioReady) {
       _backgroundAudioService!.syncPosition(Duration(seconds: position.toInt()));
       _backgroundAudioService!.syncPlaybackState(isPlaying);
     }
@@ -439,28 +441,6 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     });
   }
   
-  void _toggleBackgroundMode() {
-    setState(() {
-      _isBackgroundModeEnabled = !_isBackgroundModeEnabled;
-    });
-    
-    if (_isBackgroundModeEnabled) {
-      // Enable background mode
-      if (_backgroundAudioService != null) {
-        _backgroundAudioService!.syncPosition(Duration(seconds: _currentPosition.toInt()));
-        _backgroundAudioService!.syncPlaybackState(_isPlaying);
-      }
-      WakelockPlus.enable();
-    } else {
-      // Disable background mode
-      if (_backgroundAudioService != null) {
-        _backgroundAudioService!.pause();
-      }
-      if (!_isPlaying) {
-        WakelockPlus.disable();
-      }
-    }
-  }
 
   void _seekToTime(double seconds) {
     if (_controller != null) {
@@ -723,14 +703,6 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
               onPressed: _cycleFontSize,
               icon: const Icon(Icons.text_fields, color: Colors.white),
               tooltip: '字体大小',
-            ),
-            IconButton(
-              onPressed: _toggleBackgroundMode,
-              icon: Icon(
-                _isBackgroundModeEnabled ? Icons.headset : Icons.headset_off,
-                color: _isBackgroundModeEnabled ? Colors.green : Colors.white,
-              ),
-              tooltip: _isBackgroundModeEnabled ? '关闭后台播放' : '开启后台播放',
             ),
             IconButton(
               onPressed: _controller != null ? (_isLoopMode ? _adjustLoopWithRewind : () {

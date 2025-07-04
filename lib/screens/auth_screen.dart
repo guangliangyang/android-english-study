@@ -129,26 +129,38 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
   }
 
   Widget _buildContent() {
-    return Padding(
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(24.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Logo and title section
-          _buildHeader(),
-          const SizedBox(height: 80),
-          
-          // Features section
-          _buildFeaturesList(),
-          const SizedBox(height: 60),
-          
-          // Sign in button
-          _buildSignInButton(),
-          const SizedBox(height: 30),
-          
-          // Footer
-          _buildFooter(),
-        ],
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height - 
+                      MediaQuery.of(context).padding.top - 
+                      MediaQuery.of(context).padding.bottom - 48, // padding
+        ),
+        child: IntrinsicHeight(
+          child: Column(
+            children: [
+              const SizedBox(height: 20), // 顶部间距
+              
+              // Logo and title section
+              _buildHeader(),
+              const SizedBox(height: 30), // 减少间距
+              
+              // Features section
+              _buildFeaturesList(),
+              
+              const SizedBox(height: 30), // 确保按钮和特性之间有固定间距
+              
+              // Sign in button - 确保总是可见
+              _buildSignInButton(),
+              const SizedBox(height: 16),
+              
+              // Footer
+              _buildFooter(),
+              const SizedBox(height: 20), // 底部间距
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -157,10 +169,10 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
     return Column(
       children: [
         Container(
-          width: 120,
-          height: 120,
+          width: 100, // 缩小Logo
+          height: 100,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(25),
             gradient: const LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -172,31 +184,31 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
             boxShadow: [
               BoxShadow(
                 color: Colors.deepOrange.withOpacity(0.3),
-                blurRadius: 20,
-                offset: const Offset(0, 10),
+                blurRadius: 15, // 减少阴影
+                offset: const Offset(0, 8),
               ),
             ],
           ),
           child: const Icon(
             Icons.school,
-            size: 60,
+            size: 50, // 缩小图标
             color: Colors.white,
           ),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 20), // 减少间距
         const Text(
           'English Study',
           style: TextStyle(
-            fontSize: 32,
+            fontSize: 28, // 稍微缩小标题
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 6), // 减少间距
         Text(
           'YouTube 英语学习助手',
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 15, // 稍微缩小副标题
             color: Colors.grey[300],
           ),
         ),
@@ -231,9 +243,9 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
     return Column(
       children: features.map((feature) {
         return Padding(
-          padding: const EdgeInsets.only(bottom: 16.0),
+          padding: const EdgeInsets.only(bottom: 12.0), // 减少间距
           child: Container(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(12), // 减少内边距
             decoration: BoxDecoration(
               color: Colors.grey[900]?.withOpacity(0.5),
               borderRadius: BorderRadius.circular(12),
@@ -245,19 +257,19 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
             child: Row(
               children: [
                 Container(
-                  width: 48,
-                  height: 48,
+                  width: 40, // 缩小图标容器
+                  height: 40,
                   decoration: BoxDecoration(
                     color: Colors.deepOrange.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Icon(
                     feature['icon'] as IconData,
                     color: Colors.deepOrange,
-                    size: 24,
+                    size: 20, // 缩小图标
                   ),
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: 12), // 减少间距
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -265,16 +277,16 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
                       Text(
                         feature['title'] as String,
                         style: const TextStyle(
-                          fontSize: 16,
+                          fontSize: 15, // 稍微缩小字体
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 2), // 减少间距
                       Text(
                         feature['subtitle'] as String,
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: 13, // 缩小字体
                           color: Colors.grey[400],
                         ),
                       ),
@@ -366,12 +378,12 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
         Text(
           '登录即表示您同意我们的服务条款和隐私政策',
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 11, // 缩小字体
             color: Colors.grey[500],
           ),
           textAlign: TextAlign.center,
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 8), // 减少间距
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -379,10 +391,14 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
               onPressed: () {
                 _showInfoDialog('服务条款', '这里是服务条款的详细内容...');
               },
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), // 减少按钮内边距
+                minimumSize: Size.zero,
+              ),
               child: Text(
                 '服务条款',
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 11, // 缩小字体
                   color: Colors.grey[400],
                 ),
               ),
@@ -390,7 +406,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
             Text(
               ' | ',
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 11, // 缩小字体
                 color: Colors.grey[500],
               ),
             ),
@@ -398,10 +414,14 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
               onPressed: () {
                 _showInfoDialog('隐私政策', '这里是隐私政策的详细内容...');
               },
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), // 减少按钮内边距
+                minimumSize: Size.zero,
+              ),
               child: Text(
                 '隐私政策',
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 11, // 缩小字体
                   color: Colors.grey[400],
                 ),
               ),

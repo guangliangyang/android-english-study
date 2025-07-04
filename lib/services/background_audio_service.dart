@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:audio_service/audio_service.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class BackgroundAudioService extends BaseAudioHandler {
   static BackgroundAudioService? _instance;
@@ -10,8 +11,10 @@ class BackgroundAudioService extends BaseAudioHandler {
   
   final AudioPlayer _audioPlayer = AudioPlayer();
   final StreamController<String> _transcriptUpdateController = StreamController<String>.broadcast();
+  final YoutubeExplode _youtubeExplode = YoutubeExplode();
   
   String? _currentVideoId;
+  String? _currentAudioUrl;
   bool _isInitialized = false;
   
   // Stream for transcript updates
@@ -40,28 +43,48 @@ class BackgroundAudioService extends BaseAudioHandler {
     
     _currentVideoId = videoId;
     
-    // Create media item
-    final mediaItem = MediaItem(
-      id: videoId,
-      title: title,
-      artist: 'English Study',
-      duration: Duration.zero,
-      artUri: Uri.parse('https://img.youtube.com/vi/$videoId/maxresdefault.jpg'),
-    );
-    
-    // Update media item
-    this.mediaItem.add(mediaItem);
-    
-    // For YouTube audio, we'll use a workaround since direct YouTube audio URLs
-    // are not easily accessible. We'll use the YouTube player's audio in background mode.
-    // This is a simplified approach - in production, you might want to use
-    // youtube_explode_dart for extracting audio URLs.
-    
-    // Set up a silent audio source as placeholder
-    // In a real implementation, you'd extract the actual YouTube audio URL
-    await _audioPlayer.setUrl('https://www.soundjay.com/misc/sounds/bell-ringing-05.wav');
-    
-    _broadcastState();
+    try {
+      // Extract audio URL from YouTube video
+      final video = await _youtubeExplode.videos.get(videoId);
+      final manifest = await _youtubeExplode.videos.streamsClient.getManifest(videoId);
+      
+      // Get the best audio stream
+      final audioStreamInfo = manifest.audioOnly.withHighestBitrate();
+      if (audioStreamInfo != null) {
+        _currentAudioUrl = audioStreamInfo.url.toString();
+        
+        // Create media item with actual video info
+        final mediaItem = MediaItem(
+          id: videoId,
+          title: video.title,
+          artist: video.author,
+          duration: video.duration ?? Duration.zero,
+          artUri: Uri.parse(video.thumbnails.highResUrl),
+        );
+        
+        // Update media item
+        this.mediaItem.add(mediaItem);
+        
+        // Set up audio player with extracted URL
+        await _audioPlayer.setUrl(_currentAudioUrl!);
+        
+        _broadcastState();
+      } else {
+        throw Exception('No audio stream found');
+      }
+    } catch (e) {
+      // Fallback - create basic media item without audio setup
+      final mediaItem = MediaItem(
+        id: videoId,
+        title: title,
+        artist: 'English Study',
+        duration: Duration.zero,
+        artUri: Uri.parse('https://img.youtube.com/vi/$videoId/maxresdefault.jpg'),
+      );
+      
+      this.mediaItem.add(mediaItem);
+      _currentAudioUrl = null;
+    }
   }
   
   // Sync with YouTube player position
@@ -82,7 +105,9 @@ class BackgroundAudioService extends BaseAudioHandler {
   
   @override
   Future<void> play() async {
-    await _audioPlayer.play();
+    if (_currentAudioUrl != null) {
+      await _audioPlayer.play();
+    }
     _broadcastState();
   }
   
@@ -178,9 +203,16 @@ class BackgroundAudioService extends BaseAudioHandler {
   // Get current playing state
   bool get isPlaying => _audioPlayer.playing;
   
+  // Get audio stream URL for external use
+  String? get currentAudioUrl => _currentAudioUrl;
+  
+  // Check if audio is ready for background playback
+  bool get isAudioReady => _currentAudioUrl != null;
+  
   // Dispose resources
   void dispose() {
     _audioPlayer.dispose();
     _transcriptUpdateController.close();
+    _youtubeExplode.close();
   }
 }
