@@ -68,8 +68,31 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     });
 
     try {
-      _controller?.dispose();
+      // 停止并释放旧的控制器
+      if (_controller != null) {
+        _controller!.removeListener(_onPlayerStateChanged);
+        _controller!.pause();
+        _controller!.dispose();
+        _controller = null;
+      }
       
+      // 重置播放状态
+      _currentPosition = 0.0;
+      _videoDuration = 0.0;
+      _isPlaying = false;
+      _isSeekBarTracking = false;
+      _currentSegmentIndex = -1;
+      _highlightedSegmentIndex = -1;
+      _loopStartTime = 0.0;
+      _loopEndTime = 0.0;
+      
+      // 确保UI更新显示加载状态
+      setState(() {});
+      
+      // 短暂延迟确保旧控制器完全释放
+      await Future.delayed(const Duration(milliseconds: 100));
+      
+      // 创建新的控制器
       _controller = YoutubePlayerController(
         initialVideoId: videoId,
         flags: YoutubePlayerFlags(
@@ -90,6 +113,8 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
           transcript.segments.length,
           (index) => GlobalKey(),
         );
+      } else {
+        _transcriptItemKeys.clear();
       }
       
       setState(() {
@@ -535,40 +560,40 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
               tooltip: '字体大小',
             ),
             IconButton(
-              onPressed: _isLoopMode ? _adjustLoopWithRewind : () {
-                if (_controller != null) {
-                  final newTime = (_currentPosition - 10.0).clamp(0.0, _videoDuration);
-                  _seekToTime(newTime);
-                }
-              },
-              icon: const Icon(Icons.replay_10, color: Colors.white),
+              onPressed: _controller != null ? (_isLoopMode ? _adjustLoopWithRewind : () {
+                final newTime = (_currentPosition - 10.0).clamp(0.0, _videoDuration);
+                _seekToTime(newTime);
+              }) : null,
+              icon: Icon(
+                Icons.replay_10, 
+                color: _controller != null ? Colors.white : Colors.grey,
+              ),
               tooltip: '后退10秒',
             ),
             IconButton(
-              onPressed: () {
-                if (_controller != null) {
-                  if (_isPlaying) {
-                    _controller!.pause();
-                  } else {
-                    _controller!.play();
-                  }
+              onPressed: _controller != null ? () {
+                if (_isPlaying) {
+                  _controller!.pause();
+                } else {
+                  _controller!.play();
                 }
-              },
+              } : null,
               icon: Icon(
                 _isPlaying ? Icons.pause : Icons.play_arrow,
-                color: Colors.white,
+                color: _controller != null ? Colors.white : Colors.grey,
                 size: 32,
               ),
               tooltip: '播放/暂停',
             ),
             IconButton(
-              onPressed: _isLoopMode ? _adjustLoopWithForward : () {
-                if (_controller != null) {
-                  final newTime = (_currentPosition + 10.0).clamp(0.0, _videoDuration);
-                  _seekToTime(newTime);
-                }
-              },
-              icon: const Icon(Icons.forward_10, color: Colors.white),
+              onPressed: _controller != null ? (_isLoopMode ? _adjustLoopWithForward : () {
+                final newTime = (_currentPosition + 10.0).clamp(0.0, _videoDuration);
+                _seekToTime(newTime);
+              }) : null,
+              icon: Icon(
+                Icons.forward_10, 
+                color: _controller != null ? Colors.white : Colors.grey,
+              ),
               tooltip: '前进10秒',
             ),
             IconButton(
