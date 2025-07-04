@@ -258,6 +258,57 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     );
   }
 
+  void _forceScrollToCurrentPosition() {
+    if (_transcript == null || _controller == null) return;
+    
+    // 立即计算当前位置应该对应的字幕段落
+    final currentPosition = _controller!.value.position.inSeconds.toDouble();
+    
+    int targetSegmentIndex = -1;
+    for (int i = 0; i < _transcript!.segments.length; i++) {
+      final segment = _transcript!.segments[i];
+      if (currentPosition >= segment.startTime && 
+          currentPosition < segment.endTime) {
+        targetSegmentIndex = i;
+        break;
+      }
+    }
+    
+    // 如果找不到当前段落，找最接近的段落
+    if (targetSegmentIndex == -1) {
+      double minDistance = double.infinity;
+      for (int i = 0; i < _transcript!.segments.length; i++) {
+        final segment = _transcript!.segments[i];
+        final distance = (currentPosition - segment.startTime).abs();
+        if (distance < minDistance) {
+          minDistance = distance;
+          targetSegmentIndex = i;
+        }
+      }
+    }
+    
+    if (targetSegmentIndex >= 0) {
+      // 使用高亮下一个段落的逻辑（与 _updateTranscriptHighlight 保持一致）
+      final highlightSegmentIndex = targetSegmentIndex >= 0 && 
+          targetSegmentIndex + 1 < _transcript!.segments.length
+          ? targetSegmentIndex + 1
+          : targetSegmentIndex;
+      
+      // 强制更新高亮状态
+      setState(() {
+        _currentSegmentIndex = targetSegmentIndex;
+        _highlightedSegmentIndex = highlightSegmentIndex;
+      });
+      
+      // 完全复制字体变化的逻辑：setState后直接调用_scrollToHighlightedSegment
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (_highlightedSegmentIndex >= 0) {
+          _scrollToHighlightedSegment();
+        }
+      });
+    }
+  }
+
   void _toggleLoopMode() {
     setState(() {
       _isLoopMode = !_isLoopMode;
@@ -268,7 +319,19 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       _loopStartTime = (_currentPosition - 5.0).clamp(0.0, _videoDuration);
       _loopEndTime = (_currentPosition + 5.0).clamp(0.0, _videoDuration);
       
+      // 切换到循环模式后重新居中字幕
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(const Duration(milliseconds: 100), () {
+          _forceScrollToCurrentPosition();
+        });
+      });
     } else {
+      // 退出循环模式后也重新居中字幕
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(const Duration(milliseconds: 100), () {
+          _forceScrollToCurrentPosition();
+        });
+      });
     }
   }
 
@@ -279,6 +342,12 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     _loopStartTime = (_loopStartTime - 10.0).clamp(0.0, _videoDuration);
     _loopEndTime = (_loopStartTime + duration).clamp(0.0, _videoDuration);
     
+    // 调整循环范围后强制滚动到对应的字幕位置
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(milliseconds: 100), () {
+        _forceScrollToCurrentPosition();
+      });
+    });
   }
 
   void _adjustLoopWithForward() {
@@ -288,6 +357,12 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     _loopStartTime = (_loopStartTime + 10.0).clamp(0.0, _videoDuration);
     _loopEndTime = (_loopStartTime + duration).clamp(0.0, _videoDuration);
     
+    // 调整循环范围后强制滚动到对应的字幕位置
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(milliseconds: 100), () {
+        _forceScrollToCurrentPosition();
+      });
+    });
   }
 
   void _cycleFontSize() {
@@ -309,6 +384,14 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     if (_controller != null) {
       _controller!.seekTo(Duration(seconds: seconds.toInt()));
       AuthService.incrementSegmentClicks();
+      
+      // 手动seek后强制滚动到对应的字幕位置
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        // 延迟一点让视频播放器更新位置
+        Future.delayed(const Duration(milliseconds: 100), () {
+          _forceScrollToCurrentPosition();
+        });
+      });
     }
   }
 
