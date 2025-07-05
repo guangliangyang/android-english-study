@@ -16,7 +16,6 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   String _searchQuery = '';
   String _selectedCategory = '全部';
   final TextEditingController _searchController = TextEditingController();
-  final TextEditingController _urlController = TextEditingController();
 
   @override
   void initState() {
@@ -41,7 +40,6 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   @override
   void dispose() {
     _searchController.dispose();
-    _urlController.dispose();
     super.dispose();
   }
 
@@ -62,8 +60,10 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     // 按搜索关键词筛选
     if (_searchQuery.isNotEmpty) {
       items = items.where((item) {
-        return item.title.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-               (item.channelName?.toLowerCase().contains(_searchQuery.toLowerCase()) ?? false);
+        final query = _searchQuery.toLowerCase();
+        return item.title.toLowerCase().contains(query) ||
+               (item.channelName?.toLowerCase().contains(query) ?? false) ||
+               item.category.toLowerCase().contains(query);
       }).toList();
     }
     
@@ -75,37 +75,6 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     Navigator.pushNamed(context, '/learning', arguments: item.videoId);
   }
 
-  void _playNewVideo() {
-    final url = _urlController.text.trim();
-    if (url.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('请输入YouTube视频链接')),
-      );
-      return;
-    }
-
-    final videoId = YoutubePlayer.convertUrlToId(url);
-    if (videoId == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('无效的YouTube链接')),
-      );
-      return;
-    }
-
-    _urlController.clear();
-    
-    // Show loading message
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('正在加载视频并保存到播放列表...'),
-        duration: Duration(seconds: 1),
-        backgroundColor: Colors.blue,
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
-    
-    Navigator.pushNamed(context, '/learning', arguments: videoId);
-  }
 
   void _signOut() {
     showDialog(
@@ -408,198 +377,118 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
         foregroundColor: Colors.white,
         title: Row(
           children: [
-            const Text('English Study'),
-            const SizedBox(width: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-              decoration: BoxDecoration(
-                color: Colors.blue.withOpacity(0.7),
-                borderRadius: BorderRadius.circular(4),
+            // Category dropdown
+            DropdownButton<String>(
+              value: _selectedCategory,
+              dropdownColor: Colors.grey[900],
+              style: const TextStyle(color: Colors.white, fontSize: 16),
+              underline: Container(),
+              icon: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(width: 4),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.withOpacity(0.7),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      '${_filteredItems.length}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  const Icon(Icons.arrow_drop_down, color: Colors.white),
+                ],
               ),
-              child: Text(
-                '${_playlist.length}',
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              items: [
+                '全部',
+                ..._playlist.categories,
+              ].map((category) => DropdownMenuItem<String>(
+                value: category,
+                child: Text(category),
+              )).toList(),
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() {
+                    _selectedCategory = value;
+                  });
+                }
+              },
             ),
             const Spacer(),
-            if (AuthService.currentUser != null) ...[
-              CircleAvatar(
-                radius: 16,
-                backgroundImage: AuthService.currentUser!.photoUrl != null
-                    ? NetworkImage(AuthService.currentUser!.photoUrl!)
-                    : null,
-                child: AuthService.currentUser!.photoUrl == null
-                    ? Text(AuthService.currentUser!.name.isNotEmpty 
-                        ? AuthService.currentUser!.name[0].toUpperCase() 
-                        : 'U')
-                    : null,
-              ),
-              const SizedBox(width: 8),
-              Text(
-                AuthService.currentUser!.name,
-                style: const TextStyle(fontSize: 14),
-              ),
-            ],
           ],
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: _showAddVideoDialog,
-            tooltip: '添加新视频',
-          ),
-          if (_playlist.isNotEmpty)
-            IconButton(
-              onPressed: _clearPlaylist,
-              icon: const Icon(Icons.clear_all),
-              tooltip: '清空播放列表',
-            ),
-          PopupMenuButton<String>(
-            icon: const Icon(Icons.more_vert),
-            onSelected: (value) {
-              switch (value) {
-                case 'signout':
-                  _signOut();
-                  break;
-              }
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'signout',
+          if (AuthService.currentUser != null)
+            PopupMenuButton<String>(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(Icons.logout, color: Colors.red),
-                    SizedBox(width: 8),
-                    Text('退出登录'),
+                    CircleAvatar(
+                      radius: 12,
+                      backgroundImage: AuthService.currentUser!.photoUrl != null
+                          ? NetworkImage(AuthService.currentUser!.photoUrl!)
+                          : null,
+                      child: AuthService.currentUser!.photoUrl == null
+                          ? Text(
+                              AuthService.currentUser!.name.isNotEmpty 
+                                  ? AuthService.currentUser!.name[0].toUpperCase() 
+                                  : 'U',
+                              style: const TextStyle(fontSize: 10),
+                            )
+                          : null,
+                    ),
+                    const SizedBox(width: 4),
+                    const Icon(Icons.more_vert, size: 16),
                   ],
                 ),
               ),
-            ],
-          ),
+              onSelected: (value) {
+                switch (value) {
+                  case 'clear':
+                    _clearPlaylist();
+                    break;
+                  case 'signout':
+                    _signOut();
+                    break;
+                }
+              },
+              itemBuilder: (context) => [
+                if (_playlist.isNotEmpty)
+                  const PopupMenuItem(
+                    value: 'clear',
+                    child: Row(
+                      children: [
+                        Icon(Icons.clear_all, color: Colors.orange),
+                        SizedBox(width: 8),
+                        Text('清空播放列表'),
+                      ],
+                    ),
+                  ),
+                const PopupMenuItem(
+                  value: 'signout',
+                  child: Row(
+                    children: [
+                      Icon(Icons.logout, color: Colors.red),
+                      SizedBox(width: 8),
+                      Text('退出登录'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
         ],
       ),
       body: Column(
         children: [
-          // 新视频输入区域
-          Container(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const Text(
-                          '播放新视频',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          '列表: ${_playlist.length} 个视频',
-                          style: const TextStyle(
-                            color: Colors.grey,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                    // DEBUG INFO
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      margin: const EdgeInsets.only(top: 4),
-                      decoration: BoxDecoration(
-                        color: Colors.red.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'DEBUG: _playlist.length = ${_playlist.length}',
-                            style: const TextStyle(color: Colors.red, fontSize: 10),
-                          ),
-                          Text(
-                            'DEBUG: AuthService.playlist.length = ${AuthService.playlist.length}',
-                            style: const TextStyle(color: Colors.red, fontSize: 10),
-                          ),
-                          Text(
-                            'DEBUG: currentUser = ${AuthService.currentUser?.name ?? "null"}',
-                            style: const TextStyle(color: Colors.red, fontSize: 10),
-                          ),
-                          Text(
-                            'DEBUG: currentUser.playlist.length = ${AuthService.currentUser?.playlist.length ?? "null"}',
-                            style: const TextStyle(color: Colors.red, fontSize: 10),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _urlController,
-                        style: const TextStyle(color: Colors.white),
-                        decoration: const InputDecoration(
-                          hintText: '粘贴YouTube视频链接...',
-                          hintStyle: TextStyle(color: Colors.grey),
-                          border: OutlineInputBorder(),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: Colors.blue),
-                          ),
-                        ),
-                        onSubmitted: (_) => _playNewVideo(),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    ElevatedButton(
-                      onPressed: _playNewVideo,
-                      child: const Text('播放'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          
-          // 分隔线
-          if (_playlist.isNotEmpty)
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 16),
-              height: 1,
-              color: Colors.grey[800],
-            ),
-          
-          // 分类筛选器
-          if (_playlist.isNotEmpty)
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    _buildCategoryChip('全部'),
-                    ..._playlist.categories.map((category) => _buildCategoryChip(category)),
-                  ],
-                ),
-              ),
-            ),
-          
           // 搜索栏
           if (_playlist.isNotEmpty)
             Container(
@@ -608,11 +497,14 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                 controller: _searchController,
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  hintText: '搜索视频标题或频道名...',
+                  hintText: '搜索视频标题、频道名或分类...',
                   hintStyle: const TextStyle(color: Colors.grey),
                   prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                  suffixIcon: _searchQuery.isNotEmpty
-                      ? IconButton(
+                  suffixIcon: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (_searchQuery.isNotEmpty)
+                        IconButton(
                           onPressed: () {
                             _searchController.clear();
                             setState(() {
@@ -620,8 +512,14 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                             });
                           },
                           icon: const Icon(Icons.clear, color: Colors.grey),
-                        )
-                      : null,
+                        ),
+                      IconButton(
+                        onPressed: _showAddVideoDialog,
+                        icon: const Icon(Icons.add, color: Colors.blue),
+                        tooltip: '添加新视频',
+                      ),
+                    ],
+                  ),
                   border: const OutlineInputBorder(),
                   enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey),
@@ -880,30 +778,6 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     );
   }
 
-  Widget _buildCategoryChip(String category) {
-    final isSelected = _selectedCategory == category;
-    return Padding(
-      padding: const EdgeInsets.only(right: 8),
-      child: FilterChip(
-        label: Text(category),
-        selected: isSelected,
-        onSelected: (selected) {
-          setState(() {
-            _selectedCategory = category;
-          });
-        },
-        backgroundColor: Colors.grey[800],
-        selectedColor: Colors.blue.withOpacity(0.3),
-        labelStyle: TextStyle(
-          color: isSelected ? Colors.blue : Colors.white,
-          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-        ),
-        side: BorderSide(
-          color: isSelected ? Colors.blue : Colors.grey[600]!,
-        ),
-      ),
-    );
-  }
 
   String _formatDate(DateTime date) {
     final now = DateTime.now();
