@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:audio_service/audio_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/transcript.dart';
 import '../services/transcript_service.dart';
 import '../services/auth_service.dart';
@@ -54,6 +55,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   @override
   void initState() {
     super.initState();
+    _loadSavedFontSize();
     if (widget.videoId != null) {
       _loadVideo(widget.videoId!);
     } else {
@@ -450,12 +452,38 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     });
   }
 
+  Future<void> _loadSavedFontSize() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final savedFontSize = prefs.getDouble('transcript_font_size');
+      if (savedFontSize != null && _fontSizes.contains(savedFontSize)) {
+        setState(() {
+          _currentFontSize = savedFontSize;
+        });
+      }
+    } catch (e) {
+      // 静默处理错误，使用默认字体大小
+    }
+  }
+
+  Future<void> _saveFontSize() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setDouble('transcript_font_size', _currentFontSize);
+    } catch (e) {
+      // 静默处理错误
+    }
+  }
+
   void _cycleFontSize() {
     final currentIndex = _fontSizes.indexOf(_currentFontSize);
     final nextIndex = (currentIndex + 1) % _fontSizes.length;
     setState(() {
       _currentFontSize = _fontSizes[nextIndex];
     });
+    
+    // 保存字体大小设置
+    _saveFontSize();
     
     // 字体大小变化后重新居中当前高亮的transcript
     WidgetsBinding.instance.addPostFrameCallback((_) {
