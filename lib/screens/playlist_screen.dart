@@ -25,6 +25,20 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Reload playlist when returning from other screens
+    print('PlaylistScreen.didChangeDependencies() called');
+    _loadPlaylist();
+  }
+
+  @override
+  void didUpdateWidget(PlaylistScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _loadPlaylist();
+  }
+
+  @override
   void dispose() {
     _searchController.dispose();
     _urlController.dispose();
@@ -79,6 +93,17 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     }
 
     _urlController.clear();
+    
+    // Show loading message
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('正在加载视频并保存到播放列表...'),
+        duration: Duration(seconds: 1),
+        backgroundColor: Colors.blue,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+    
     Navigator.pushNamed(context, '/learning', arguments: videoId);
   }
 
@@ -124,6 +149,15 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
               AuthService.removeFromPlaylist(videoId);
               _loadPlaylist();
               Navigator.of(context).pop();
+              
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('视频已移除 (剩余: ${_playlist.length})'),
+                  duration: const Duration(seconds: 2),
+                  backgroundColor: Colors.orange,
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
             },
             child: const Text('移除'),
           ),
@@ -145,9 +179,19 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
           ),
           TextButton(
             onPressed: () {
+              final count = _playlist.length;
               AuthService.clearPlaylist();
               _loadPlaylist();
               Navigator.of(context).pop();
+              
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('已清空播放列表 ($count 个视频)'),
+                  duration: const Duration(seconds: 2),
+                  backgroundColor: Colors.red,
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
             },
             child: const Text('清空'),
           ),
@@ -195,6 +239,15 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                             AuthService.updateVideoCategory(item.videoId, value);
                             _loadPlaylist();
                             Navigator.of(context).pop();
+                            
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('分类已更改为: $value'),
+                                duration: const Duration(seconds: 1),
+                                backgroundColor: Colors.green,
+                                behavior: SnackBarBehavior.floating,
+                              ),
+                            );
                           }
                         },
                       ),
@@ -202,6 +255,15 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                         AuthService.updateVideoCategory(item.videoId, category);
                         _loadPlaylist();
                         Navigator.of(context).pop();
+                        
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('分类已更改为: $category'),
+                            duration: const Duration(seconds: 1),
+                            backgroundColor: Colors.green,
+                            behavior: SnackBarBehavior.floating,
+                          ),
+                        );
                       },
                     );
                   },
@@ -237,6 +299,15 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                 AuthService.updateVideoCategory(item.videoId, newCategory);
                 _loadPlaylist();
                 Navigator.of(context).pop();
+                
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('新分类已创建: $newCategory'),
+                    duration: const Duration(seconds: 2),
+                    backgroundColor: Colors.blue,
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
               }
             },
             child: const Text('确定'),
@@ -244,6 +315,88 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
         ],
       ),
     );
+  }
+
+  void _showAddVideoDialog() {
+    final urlController = TextEditingController();
+    
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.grey[900],
+        title: const Text(
+          '添加新视频',
+          style: TextStyle(color: Colors.white),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: urlController,
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
+                hintText: '请输入YouTube视频链接',
+                hintStyle: TextStyle(color: Colors.grey),
+                border: OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                ),
+              ),
+              onSubmitted: (value) {
+                if (value.trim().isNotEmpty) {
+                  Navigator.of(context).pop();
+                  _playVideoFromUrl(value.trim());
+                }
+              },
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('取消', style: TextStyle(color: Colors.grey)),
+          ),
+          TextButton(
+            onPressed: () {
+              final url = urlController.text.trim();
+              if (url.isNotEmpty) {
+                Navigator.of(context).pop();
+                _playVideoFromUrl(url);
+              }
+            },
+            child: const Text('播放', style: TextStyle(color: Colors.blue)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _playVideoFromUrl(String url) {
+    final videoId = YoutubePlayer.convertUrlToId(url);
+    if (videoId == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('无效的YouTube链接'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('正在加载视频并保存到播放列表...'),
+        duration: Duration(seconds: 1),
+        backgroundColor: Colors.blue,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+    
+    Navigator.pushNamed(context, '/learning', arguments: videoId);
   }
 
   @override
@@ -256,6 +409,22 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
         title: Row(
           children: [
             const Text('English Study'),
+            const SizedBox(width: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              decoration: BoxDecoration(
+                color: Colors.blue.withOpacity(0.7),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Text(
+                '${_playlist.length}',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             const Spacer(),
             if (AuthService.currentUser != null) ...[
               CircleAvatar(
@@ -278,6 +447,11 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
           ],
         ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: _showAddVideoDialog,
+            tooltip: '添加新视频',
+          ),
           if (_playlist.isNotEmpty)
             IconButton(
               onPressed: _clearPlaylist,
@@ -316,13 +490,60 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '播放新视频',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Text(
+                          '播放新视频',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Spacer(),
+                        Text(
+                          '列表: ${_playlist.length} 个视频',
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                    // DEBUG INFO
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      margin: const EdgeInsets.only(top: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'DEBUG: _playlist.length = ${_playlist.length}',
+                            style: const TextStyle(color: Colors.red, fontSize: 10),
+                          ),
+                          Text(
+                            'DEBUG: AuthService.playlist.length = ${AuthService.playlist.length}',
+                            style: const TextStyle(color: Colors.red, fontSize: 10),
+                          ),
+                          Text(
+                            'DEBUG: currentUser = ${AuthService.currentUser?.name ?? "null"}',
+                            style: const TextStyle(color: Colors.red, fontSize: 10),
+                          ),
+                          Text(
+                            'DEBUG: currentUser.playlist.length = ${AuthService.currentUser?.playlist.length ?? "null"}',
+                            style: const TextStyle(color: Colors.red, fontSize: 10),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 8),
                 Row(
@@ -429,7 +650,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                       const Icon(Icons.history, color: Colors.grey, size: 16),
                       const SizedBox(width: 4),
                       Text(
-                        '播放历史 (${_filteredItems.length})',
+                        '播放历史 (${_filteredItems.length}/${_playlist.length})',
                         style: const TextStyle(color: Colors.grey, fontSize: 14),
                       ),
                     ],

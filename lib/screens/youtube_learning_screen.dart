@@ -19,10 +19,8 @@ class YoutubeLearningScreen extends StatefulWidget {
 
 class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   YoutubePlayerController? _controller;
-  TextEditingController _urlController = TextEditingController();
   Transcript? _transcript;
   bool _isLoading = false;
-  bool _isHeaderVisible = true;
   bool _isLoopMode = false;
   
   // 播放状态
@@ -98,7 +96,6 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   @override
   void dispose() {
     _controller?.dispose();
-    _urlController.dispose();
     _transcriptScrollController.dispose();
     _backgroundAudioService?.dispose();
     WakelockPlus.disable();
@@ -503,32 +500,6 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     }
   }
 
-  void _onPlayVideo() {
-    final url = _urlController.text.trim();
-    if (url.isEmpty) {
-      return;
-    }
-
-    final videoId = YoutubePlayer.convertUrlToId(url);
-    if (videoId == null) {
-      return;
-    }
-
-    _loadVideo(videoId);
-  }
-
-  void _toggleHeaderVisibility() {
-    setState(() {
-      _isHeaderVisible = !_isHeaderVisible;
-    });
-    
-    // 布局变化后重新居中当前高亮的transcript
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_highlightedSegmentIndex >= 0) {
-        _scrollToHighlightedSegment();
-      }
-    });
-  }
 
   String _formatTime(double seconds) {
     final totalSeconds = seconds.toInt();
@@ -621,94 +592,24 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header Section - 使用Visibility确保稳定的widget树
-            Container(
-              color: Colors.black,
-              child: Column(
-                children: [
-                  // 控制面板部分 - 使用Visibility而不是高度动画
-                  Visibility(
-                    visible: _isHeaderVisible,
-                    maintainState: true,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        children: [
-                          const Text(
-                            'YouTube English Learning',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          
-                          // URL Input
-                          TextField(
-                            controller: _urlController,
-                            style: const TextStyle(color: Colors.white),
-                            decoration: const InputDecoration(
-                              hintText: 'Paste YouTube video URL here',
-                              hintStyle: TextStyle(color: Colors.grey),
-                              border: OutlineInputBorder(),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.blue),
-                              ),
-                            ),
-                            maxLines: 2,
-                          ),
-                          const SizedBox(height: 16),
-                          
-                          // Control Buttons
-                          Row(
-                            children: [
-                              Expanded(
-                                child: ElevatedButton(
-                                  onPressed: _onPlayVideo,
-                                  child: const Text('Play Video'),
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: OutlinedButton(
-                                  onPressed: () => _urlController.clear(),
-                                  child: const Text('Clear'),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                        ],
-                      ),
+            // YouTube Player - 简化版本
+            if (_controller != null)
+              Container(
+                color: Colors.black,
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: YoutubePlayer(
+                      controller: _controller!,
+                      showVideoProgressIndicator: true,
+                      progressIndicatorColor: Colors.red,
                     ),
                   ),
-                  
-                  // YouTube Player - 独立的稳定容器，始终保持在widget树中
-                  if (_controller != null)
-                    Visibility(
-                      visible: _isHeaderVisible,
-                      maintainState: true,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: YoutubePlayer(
-                            controller: _controller!,
-                            showVideoProgressIndicator: true,
-                            progressIndicatorColor: Colors.red,
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
+                ),
               ),
-            ),
             
-            // Transcript Section - 根据header状态动态调整大小
+            // Transcript Section
             Expanded(
               child: Container(
                 color: Colors.grey[900],
@@ -736,14 +637,6 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            IconButton(
-              onPressed: _toggleHeaderVisibility,
-              icon: Icon(
-                _isHeaderVisible ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-                color: Colors.white,
-              ),
-              tooltip: _isHeaderVisible ? '隐藏视频区域' : '显示视频区域',
-            ),
             IconButton(
               onPressed: _cycleFontSize,
               icon: const Icon(Icons.text_fields, color: Colors.white),
