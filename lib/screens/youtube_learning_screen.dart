@@ -52,7 +52,6 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   void initState() {
     super.initState();
     if (widget.videoId != null) {
-      _urlController.text = 'https://m.youtube.com/watch?v=${widget.videoId}';
       _loadVideo(widget.videoId!);
     } else {
       _initializeWithSampleVideo();
@@ -62,7 +61,6 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
 
   void _initializeWithSampleVideo() {
     const sampleVideoId = '8YkkvVe_Z8w'; // 设置一个默认视频
-    _urlController.text = 'https://m.youtube.com/watch?v=$sampleVideoId';
     _loadVideo(sampleVideoId);
   }
   
