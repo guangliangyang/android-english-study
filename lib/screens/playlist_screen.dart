@@ -4,10 +4,12 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../models/playlist.dart';
 import '../services/auth_service.dart';
 import '../services/sharing_service.dart';
+import '../services/youtube_playlist_service.dart';
 import '../models/user.dart';
 import 'youtube_learning_screen.dart';
 import 'sharing_screen.dart';
 import 'import_screen.dart';
+import 'playlist_import_screen.dart';
 
 class PlaylistScreen extends StatefulWidget {
   const PlaylistScreen({Key? key}) : super(key: key);
@@ -71,7 +73,13 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
           return;
         }
         
-        // 如果不是分享内容，检查是否为单个YouTube链接
+        // 检查是否为YouTube播放列表
+        if (YouTubePlaylistService.isPlaylistUrl(clipboardText) && mounted) {
+          _showClipboardPlaylistPrompt(clipboardText);
+          return;
+        }
+        
+        // 如果不是分享内容和播放列表，检查是否为单个YouTube链接
         final videoId = YoutubePlayer.convertUrlToId(clipboardText);
         
         if (videoId != null && mounted) {
@@ -85,6 +93,114 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
       // Silently handle clipboard errors (permissions, etc.)
       print('Clipboard check error: $e');
     }
+  }
+
+  void _showClipboardPlaylistPrompt(String url) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.grey[900],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: Row(
+          children: [
+            Icon(Icons.playlist_play, color: Colors.purple, size: 24),
+            const SizedBox(width: 8),
+            const Expanded(
+              child: Text(
+                '检测到YouTube播放列表',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              '检测到你刚复制了一个YouTube播放列表链接，是否要导入所有视频？',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.grey[800]?.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.link, color: Colors.grey[400], size: 16),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      url.length > 50 ? '${url.substring(0, 50)}...' : url,
+                      style: TextStyle(
+                        color: Colors.grey[300],
+                        fontSize: 12,
+                        fontFamily: 'monospace',
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            child: const Text(
+              '取消',
+              style: TextStyle(color: Colors.grey, fontSize: 16),
+            ),
+          ),
+          ElevatedButton.icon(
+            onPressed: () async {
+              Navigator.of(context).pop();
+              // Clear clipboard to avoid showing the prompt again
+              await Clipboard.setData(const ClipboardData(text: ''));
+              // Navigate to playlist import screen
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PlaylistImportScreen(initialUrl: url),
+                ),
+              );
+              // Refresh playlist when returning
+              await _refreshPlaylist();
+            },
+            icon: const Icon(Icons.playlist_add, size: 18),
+            label: const Text('导入'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.purple,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              elevation: 0,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   void _showClipboardSharePrompt(ShareParseResult shareResult) {
@@ -570,6 +686,19 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
       final clipboardText = clipboardData?.text?.trim();
       
       if (clipboardText != null && clipboardText.isNotEmpty) {
+        // 检查是否为播放列表
+        if (YouTubePlaylistService.isPlaylistUrl(clipboardText)) {
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PlaylistImportScreen(initialUrl: clipboardText),
+            ),
+          );
+          await _refreshPlaylist();
+          return;
+        }
+        
+        // 检查是否为单个视频
         final videoId = YoutubePlayer.convertUrlToId(clipboardText);
         
         if (videoId != null && !AuthService.isVideoInPlaylist(videoId)) {
@@ -590,7 +719,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('请先复制一个YouTube视频链接'),
+            content: Text('请先复制一个YouTube视频链接或播放列表链接'),
             backgroundColor: Colors.orange,
             behavior: SnackBarBehavior.floating,
           ),
@@ -601,7 +730,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text('无法访问剪贴板，请先复制YouTube视频链接'),
+            content: Text('无法访问剪贴板，请先复制YouTube链接'),
             backgroundColor: Colors.red,
             behavior: SnackBarBehavior.floating,
           ),
@@ -737,6 +866,14 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                       ),
                     ).then((_) => _refreshPlaylist());
                     break;
+                  case 'import_playlist':
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PlaylistImportScreen(),
+                      ),
+                    ).then((_) => _refreshPlaylist());
+                    break;
                   case 'share':
                     Navigator.push(
                       context,
@@ -761,6 +898,16 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                       Icon(Icons.download, color: Colors.green),
                       SizedBox(width: 8),
                       Text('导入学习资源'),
+                    ],
+                  ),
+                ),
+                const PopupMenuItem(
+                  value: 'import_playlist',
+                  child: Row(
+                    children: [
+                      Icon(Icons.playlist_play, color: Colors.purple),
+                      SizedBox(width: 8),
+                      Text('导入YouTube播放列表'),
                     ],
                   ),
                 ),
