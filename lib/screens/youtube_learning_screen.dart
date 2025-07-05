@@ -509,6 +509,61 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     );
   }
 
+  Widget _buildCustomContextMenu(BuildContext context, EditableTextState editableTextState, String fullText) {
+    final TextEditingValue value = editableTextState.textEditingValue;
+    final List<ContextMenuButtonItem> buttonItems = <ContextMenuButtonItem>[];
+
+    // 获取选中的文本
+    final String selectedText = value.selection.textInside(value.text);
+    
+    // 添加默认的复制按钮（如果有选中文本）
+    if (selectedText.isNotEmpty) {
+      buttonItems.add(
+        ContextMenuButtonItem(
+          onPressed: () {
+            ContextMenuController.removeAny();
+            editableTextState.copySelection(SelectionChangedCause.toolbar);
+          },
+          type: ContextMenuButtonType.copy,
+        ),
+      );
+    }
+
+    // 添加全选按钮
+    buttonItems.add(
+      ContextMenuButtonItem(
+        onPressed: () {
+          ContextMenuController.removeAny();
+          editableTextState.selectAll(SelectionChangedCause.toolbar);
+        },
+        type: ContextMenuButtonType.selectAll,
+      ),
+    );
+
+    // 添加生词查询按钮（如果有选中文本）
+    if (selectedText.isNotEmpty && selectedText.trim().split(' ').length <= 3) {
+      buttonItems.add(
+        ContextMenuButtonItem(
+          onPressed: () {
+            ContextMenuController.removeAny();
+            // 清理选中的文本（去除标点符号）
+            final cleanWord = selectedText.replaceAll(RegExp(r'[^\w\s]'), '').trim();
+            if (cleanWord.isNotEmpty) {
+              _onWordSelected(cleanWord);
+            }
+          },
+          type: ContextMenuButtonType.custom,
+          label: '查询生词',
+        ),
+      );
+    }
+
+    return AdaptiveTextSelectionToolbar.buttonItems(
+      anchors: editableTextState.contextMenuAnchors,
+      buttonItems: buttonItems,
+    );
+  }
+
   void _showVocabularyTip() {
     showDialog(
       context: context,
@@ -539,7 +594,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
                 Text('1. ', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
                 Expanded(
                   child: Text(
-                    '长按字幕中的任意单词',
+                    '双击选择字幕中的单词',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -551,7 +606,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
                 Text('2. ', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
                 Expanded(
                   child: Text(
-                    '选择想要查询的单词',
+                    '在弹出菜单中点击"查询生词"',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -663,7 +718,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
                 SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    '长按字幕中的单词查看释义',
+                    '双击选择单词，在菜单中选择"查询生词"',
                     style: TextStyle(color: Colors.white, fontSize: 14),
                   ),
                 ),
@@ -697,7 +752,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
             ),
             SizedBox(height: 12),
             Text(
-              '试试长按下面字幕中的单词吧！',
+              '试试双击下面字幕中的单词吧！',
               style: TextStyle(
                 color: Colors.blue,
                 fontSize: 12,
@@ -801,13 +856,8 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
                     color: isHighlighted ? Colors.green : Colors.white,
                     fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,
                   ),
-                  onSelectionChanged: (selection, cause) {
-                    if (selection.isValid && cause == SelectionChangedCause.longPress) {
-                      final selectedText = segment.text.substring(selection.start, selection.end);
-                      if (selectedText.isNotEmpty) {
-                        _onWordSelected(selectedText);
-                      }
-                    }
+                  contextMenuBuilder: (context, editableTextState) {
+                    return _buildCustomContextMenu(context, editableTextState, segment.text);
                   },
                 ),
               ],
