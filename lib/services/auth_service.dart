@@ -33,6 +33,8 @@ class AuthService {
       final account = await googleSignIn.signInSilently();
       if (account != null) {
         _currentUser = User.fromGoogleSignInAccount(account);
+        // Load saved playlist from local storage
+        await _loadPlaylistFromStorage();
         print('AuthService.initialize: Created user with playlist length: ${_currentUser!.playlist.length}');
       }
       _initialized = true;
@@ -219,7 +221,12 @@ class AuthService {
   static Playlist get playlist => _currentUser?.playlist ?? Playlist();
 
   static Future<void> addToPlaylist(String videoId, {String? title, String? channelName, Duration? duration, String? thumbnail, String? description, String category = '未分类'}) async {
-    if (_currentUser == null) return;
+    if (_currentUser == null) {
+      print('AuthService.addToPlaylist: No current user, skipping');
+      return;
+    }
+    
+    print('AuthService.addToPlaylist: Adding video $videoId to playlist');
 
     try {
       PlaylistItem? item;
@@ -252,7 +259,10 @@ class AuthService {
 
       final newPlaylist = _currentUser!.playlist.addVideo(item);
       _currentUser = _currentUser!.copyWith(playlist: newPlaylist);
+      await _savePlaylistToStorage();
+      print('AuthService.addToPlaylist: Video added successfully, new playlist length: ${_currentUser!.playlist.length}');
     } catch (e) {
+      print('AuthService.addToPlaylist: Error in main flow: $e');
       // Fallback: create with basic info
       final item = PlaylistItem(
         videoId: videoId,
@@ -266,6 +276,8 @@ class AuthService {
 
       final newPlaylist = _currentUser!.playlist.addVideo(item);
       _currentUser = _currentUser!.copyWith(playlist: newPlaylist);
+      await _savePlaylistToStorage();
+      print('AuthService.addToPlaylist: Video added via fallback, new playlist length: ${_currentUser!.playlist.length}');
     }
   }
 
@@ -273,6 +285,7 @@ class AuthService {
     if (_currentUser != null) {
       final newPlaylist = _currentUser!.playlist.removeVideo(videoId);
       _currentUser = _currentUser!.copyWith(playlist: newPlaylist);
+      _savePlaylistToStorage();
     }
   }
 
@@ -280,6 +293,7 @@ class AuthService {
     if (_currentUser != null) {
       final newPlaylist = Playlist();
       _currentUser = _currentUser!.copyWith(playlist: newPlaylist);
+      _savePlaylistToStorage();
     }
   }
 
@@ -287,6 +301,7 @@ class AuthService {
     if (_currentUser != null) {
       final newPlaylist = _currentUser!.playlist.updateVideoCategory(videoId, newCategory);
       _currentUser = _currentUser!.copyWith(playlist: newPlaylist);
+      _savePlaylistToStorage();
     }
   }
 
@@ -304,5 +319,39 @@ class AuthService {
 
   static List<PlaylistItem> getVideosByCategory(String category) {
     return _currentUser?.playlist.getVideosByCategory(category) ?? [];
+  }
+
+  // Local storage methods
+  static Future<void> _savePlaylistToStorage() async {
+    try {
+      if (_currentUser == null) return;
+      
+      final prefs = await SharedPreferences.getInstance();
+      final playlistJson = json.encode(_currentUser!.playlist.toJson());
+      await prefs.setString('user_playlist', playlistJson);
+      print('AuthService: Saved playlist to storage with ${_currentUser!.playlist.length} items');
+    } catch (e) {
+      print('Error saving playlist to storage: $e');
+    }
+  }
+
+  static Future<void> _loadPlaylistFromStorage() async {
+    try {
+      if (_currentUser == null) return;
+      
+      final prefs = await SharedPreferences.getInstance();
+      final playlistJsonString = prefs.getString('user_playlist');
+      
+      if (playlistJsonString != null) {
+        final playlistJson = json.decode(playlistJsonString) as Map<String, dynamic>;
+        final savedPlaylist = Playlist.fromJson(playlistJson);
+        _currentUser = _currentUser!.copyWith(playlist: savedPlaylist);
+        print('AuthService: Loaded playlist from storage with ${savedPlaylist.length} items');
+      } else {
+        print('AuthService: No saved playlist found in storage');
+      }
+    } catch (e) {
+      print('Error loading playlist from storage: $e');
+    }
   }
 }
