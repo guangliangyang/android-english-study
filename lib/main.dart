@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'screens/auth_screen.dart';
 import 'screens/youtube_learning_screen.dart';
+import 'screens/playlist_screen.dart';
 import 'services/auth_service.dart';
 
 void main() {
@@ -25,7 +26,11 @@ class EnglishStudyApp extends StatelessWidget {
       routes: {
         '/': (context) => const SplashScreen(),
         '/auth': (context) => const AuthScreen(),
-        '/learning': (context) => const YoutubeLearningScreen(),
+        '/playlist': (context) => const PlaylistScreen(),
+        '/learning': (context) {
+          final videoId = ModalRoute.of(context)?.settings.arguments as String?;
+          return YoutubeLearningScreen(videoId: videoId);
+        },
       },
       initialRoute: '/',
     );
@@ -53,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
     
     if (mounted) {
       if (AuthService.isSignedIn) {
-        Navigator.pushReplacementNamed(context, '/learning');
+        Navigator.pushReplacementNamed(context, '/playlist');
       } else {
         Navigator.pushReplacementNamed(context, '/auth');
       }

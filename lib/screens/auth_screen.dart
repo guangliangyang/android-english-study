@@ -60,7 +60,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
     try {
       final User? user = await AuthService.signInWithGoogle();
       if (user != null && mounted) {
-        Navigator.pushReplacementNamed(context, '/learning');
+        Navigator.pushReplacementNamed(context, '/playlist');
       } else {
         _showErrorDialog('登录失败', '请检查网络连接后重试');
       }

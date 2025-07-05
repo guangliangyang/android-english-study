@@ -9,7 +9,9 @@ import '../services/auth_service.dart';
 import '../services/background_audio_service.dart';
 
 class YoutubeLearningScreen extends StatefulWidget {
-  const YoutubeLearningScreen({Key? key}) : super(key: key);
+  final String? videoId;
+  
+  const YoutubeLearningScreen({Key? key, this.videoId}) : super(key: key);
 
   @override
   State<YoutubeLearningScreen> createState() => _YoutubeLearningScreenState();
@@ -51,7 +53,12 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   @override
   void initState() {
     super.initState();
-    _initializeWithSampleVideo();
+    if (widget.videoId != null) {
+      _urlController.text = 'https://m.youtube.com/watch?v=${widget.videoId}';
+      _loadVideo(widget.videoId!);
+    } else {
+      _initializeWithSampleVideo();
+    }
     _initializeBackgroundAudio();
   }
 
@@ -171,6 +178,9 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       }
 
       AuthService.addRecentVideo(videoId);
+      
+      // Auto-save to playlist
+      await AuthService.addToPlaylist(videoId);
     } catch (e) {
       setState(() {
         _isLoading = false;
@@ -584,6 +594,16 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text('English Study'),
+        elevation: 0,
+      ),
       body: SafeArea(
         child: Column(
           children: [

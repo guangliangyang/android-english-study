@@ -1,9 +1,14 @@
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 import '../models/user.dart';
+import '../models/playlist.dart';
+import 'video_metadata_service.dart';
 
 class AuthService {
   static GoogleSignIn? _googleSignIn;
   static User? _currentUser;
+  static Playlist? _persistentPlaylist;
 
   static GoogleSignIn get googleSignIn {
     _googleSignIn ??= GoogleSignIn(
@@ -21,8 +26,12 @@ class AuthService {
   static Future<void> initialize() async {
     try {
       final account = await googleSignIn.signInSilently();
-      if (account != null) {
+      if (account != null && _currentUser == null) {
+        // Only create new user if we don't have one already
         _currentUser = User.fromGoogleSignInAccount(account);
+        print('AuthService.initialize: Created new user with playlist length: ${_currentUser!.playlist.length}');
+      } else if (account != null && _currentUser != null) {
+        print('AuthService.initialize: User already exists, keeping existing playlist length: ${_currentUser!.playlist.length}');
       }
     } catch (e) {
       print('Error initializing auth service: $e');
@@ -198,5 +207,94 @@ class AuthService {
       );
       _currentUser = _currentUser!.copyWith(stats: newStats);
     }
+  }
+
+  // Playlist management methods - using persistent playlist
+  static Playlist get playlist {
+    _persistentPlaylist ??= Playlist();
+    return _persistentPlaylist!;
+  }
+
+  static Future<void> addToPlaylist(String videoId, {String? title, String? channelName, Duration? duration, String? thumbnail, String? description, String category = '未分类'}) async {
+    _persistentPlaylist ??= Playlist();
+
+    try {
+      PlaylistItem? item;
+      
+      // Try to get metadata from VideoMetadataService
+      item = await VideoMetadataService.getVideoMetadata(videoId);
+      
+      // If metadata service returns null or incomplete data, create with provided data
+      if (item == null) {
+        item = PlaylistItem(
+          videoId: videoId,
+          title: title ?? 'Video $videoId',
+          channelName: channelName,
+          duration: duration,
+          thumbnail: thumbnail,
+          description: description,
+          category: category,
+        );
+      } else {
+        // Update with any additional data provided
+        item = item.copyWith(
+          title: title ?? item.title,
+          channelName: channelName ?? item.channelName,
+          duration: duration ?? item.duration,
+          thumbnail: thumbnail ?? item.thumbnail,
+          description: description ?? item.description,
+          category: category,
+        );
+      }
+
+      _persistentPlaylist = _persistentPlaylist!.addVideo(item);
+    } catch (e) {
+      // Fallback: create with basic info
+      final item = PlaylistItem(
+        videoId: videoId,
+        title: title ?? 'Video $videoId',
+        channelName: channelName,
+        duration: duration,
+        thumbnail: thumbnail ?? 'https://img.youtube.com/vi/$videoId/mqdefault.jpg',
+        description: description,
+        category: category,
+      );
+
+      _persistentPlaylist = _persistentPlaylist!.addVideo(item);
+    }
+  }
+
+  static void removeFromPlaylist(String videoId) {
+    _persistentPlaylist ??= Playlist();
+    _persistentPlaylist = _persistentPlaylist!.removeVideo(videoId);
+  }
+
+  static void clearPlaylist() {
+    _persistentPlaylist = Playlist();
+  }
+
+  static void updateVideoCategory(String videoId, String newCategory) {
+    _persistentPlaylist ??= Playlist();
+    _persistentPlaylist = _persistentPlaylist!.updateVideoCategory(videoId, newCategory);
+  }
+
+  static bool isVideoInPlaylist(String videoId) {
+    _persistentPlaylist ??= Playlist();
+    return _persistentPlaylist!.containsVideo(videoId);
+  }
+
+  static PlaylistItem? getPlaylistVideo(String videoId) {
+    _persistentPlaylist ??= Playlist();
+    return _persistentPlaylist!.getVideo(videoId);
+  }
+
+  static List<String> getPlaylistCategories() {
+    _persistentPlaylist ??= Playlist();
+    return _persistentPlaylist!.categories;
+  }
+
+  static List<PlaylistItem> getVideosByCategory(String category) {
+    _persistentPlaylist ??= Playlist();
+    return _persistentPlaylist!.getVideosByCategory(category);
   }
 }

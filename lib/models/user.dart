@@ -1,4 +1,5 @@
 import 'package:google_sign_in/google_sign_in.dart';
+import 'playlist.dart';
 
 class User {
   final String id;
@@ -12,6 +13,7 @@ class User {
   final Map<String, double> videoProgress;
   final List<String> favoriteVideoIds;
   final UserStats stats;
+  final Playlist playlist;
 
   User({
     required this.id,
@@ -25,13 +27,15 @@ class User {
     Map<String, double>? videoProgress,
     List<String>? favoriteVideoIds,
     UserStats? stats,
+    Playlist? playlist,
   }) : createdAt = createdAt ?? DateTime.now(),
         lastActiveAt = lastActiveAt ?? DateTime.now(),
         preferences = preferences ?? UserPreferences(),
         recentVideoIds = recentVideoIds ?? [],
         videoProgress = videoProgress ?? {},
         favoriteVideoIds = favoriteVideoIds ?? [],
-        stats = stats ?? UserStats();
+        stats = stats ?? UserStats(),
+        playlist = playlist ?? Playlist();
 
   factory User.fromGoogleSignInAccount(GoogleSignInAccount account) {
     return User(
@@ -55,6 +59,7 @@ class User {
       'videoProgress': videoProgress,
       'favoriteVideoIds': favoriteVideoIds,
       'stats': stats.toJson(),
+      'playlist': playlist.toJson(),
     };
   }
 
@@ -71,6 +76,7 @@ class User {
       videoProgress: Map<String, double>.from(json['videoProgress'] ?? {}),
       favoriteVideoIds: List<String>.from(json['favoriteVideoIds'] ?? []),
       stats: UserStats.fromJson(json['stats'] ?? {}),
+      playlist: Playlist.fromJson(json['playlist'] ?? {}),
     );
   }
 
@@ -86,6 +92,7 @@ class User {
     Map<String, double>? videoProgress,
     List<String>? favoriteVideoIds,
     UserStats? stats,
+    Playlist? playlist,
   }) {
     return User(
       id: id ?? this.id,
@@ -99,6 +106,7 @@ class User {
       videoProgress: videoProgress ?? this.videoProgress,
       favoriteVideoIds: favoriteVideoIds ?? this.favoriteVideoIds,
       stats: stats ?? this.stats,
+      playlist: playlist ?? this.playlist,
     );
   }
 
