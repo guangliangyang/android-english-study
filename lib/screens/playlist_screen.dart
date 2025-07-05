@@ -3,8 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../models/playlist.dart';
 import '../services/auth_service.dart';
+import '../services/sharing_service.dart';
 import '../models/user.dart';
 import 'youtube_learning_screen.dart';
+import 'sharing_screen.dart';
+import 'import_screen.dart';
 
 class PlaylistScreen extends StatefulWidget {
   const PlaylistScreen({Key? key}) : super(key: key);
@@ -61,6 +64,14 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
       final clipboardText = clipboardData?.text?.trim();
       
       if (clipboardText != null && clipboardText.isNotEmpty) {
+        // 首先检查是否为分享内容
+        final shareResult = SharingService.parseShareText(clipboardText);
+        if (shareResult != null && mounted) {
+          _showClipboardSharePrompt(shareResult);
+          return;
+        }
+        
+        // 如果不是分享内容，检查是否为单个YouTube链接
         final videoId = YoutubePlayer.convertUrlToId(clipboardText);
         
         if (videoId != null && mounted) {
@@ -74,6 +85,130 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
       // Silently handle clipboard errors (permissions, etc.)
       print('Clipboard check error: $e');
     }
+  }
+
+  void _showClipboardSharePrompt(ShareParseResult shareResult) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.grey[900],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: Row(
+          children: [
+            Icon(Icons.download, color: Colors.green, size: 24),
+            const SizedBox(width: 8),
+            const Expanded(
+              child: Text(
+                '检测到学习资源分享',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              '检测到你刚复制了学习资源分享内容，是否要导入到你的播放列表？',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.grey[800]?.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.folder, color: Colors.blue, size: 16),
+                      const SizedBox(width: 8),
+                      Text(
+                        '分类：${shareResult.categoryName}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Icon(Icons.video_library, color: Colors.grey[400], size: 16),
+                      const SizedBox(width: 8),
+                      Text(
+                        '视频数量：${shareResult.validVideos.length}',
+                        style: TextStyle(
+                          color: Colors.grey[300],
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            child: const Text(
+              '取消',
+              style: TextStyle(color: Colors.grey, fontSize: 16),
+            ),
+          ),
+          ElevatedButton.icon(
+            onPressed: () async {
+              Navigator.of(context).pop();
+              // Clear clipboard to avoid showing the prompt again
+              await Clipboard.setData(const ClipboardData(text: ''));
+              // Navigate to import screen
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ImportScreen(),
+                ),
+              );
+              // Refresh playlist when returning
+              await _refreshPlaylist();
+            },
+            icon: const Icon(Icons.download, size: 18),
+            label: const Text('导入'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.green,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              elevation: 0,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   void _showClipboardYouTubePrompt(String url, String videoId) {
@@ -549,7 +684,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
               ),
               items: [
                 '全部',
-                ..._playlist.categories,
+                ..._playlist.categories.where((cat) => cat != '全部'),
               ].map((category) => DropdownMenuItem<String>(
                 value: category,
                 child: Text(category),
@@ -594,6 +729,22 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
               ),
               onSelected: (value) {
                 switch (value) {
+                  case 'import':
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ImportScreen(),
+                      ),
+                    ).then((_) => _refreshPlaylist());
+                    break;
+                  case 'share':
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SharingScreen(),
+                      ),
+                    );
+                    break;
                   case 'clear':
                     _clearPlaylist();
                     break;
@@ -603,6 +754,27 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                 }
               },
               itemBuilder: (context) => [
+                const PopupMenuItem(
+                  value: 'import',
+                  child: Row(
+                    children: [
+                      Icon(Icons.download, color: Colors.green),
+                      SizedBox(width: 8),
+                      Text('导入学习资源'),
+                    ],
+                  ),
+                ),
+                if (_playlist.isNotEmpty)
+                  const PopupMenuItem(
+                    value: 'share',
+                    child: Row(
+                      children: [
+                        Icon(Icons.share, color: Colors.blue),
+                        SizedBox(width: 8),
+                        Text('分享学习资源'),
+                      ],
+                    ),
+                  ),
                 if (_playlist.isNotEmpty)
                   const PopupMenuItem(
                     value: 'clear',

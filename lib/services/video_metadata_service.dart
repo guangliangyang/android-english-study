@@ -35,6 +35,30 @@ class VideoMetadataService {
     }
   }
 
+  /// 获取YouTube视频的元数据信息(返回Map格式，用于导入功能)
+  static Future<Map<String, dynamic>> getVideoMetadataMap(String videoId) async {
+    try {
+      final item = await getVideoMetadata(videoId);
+      if (item != null) {
+        return {
+          'title': item.title,
+          'thumbnail': item.thumbnail,
+          'duration': item.duration,
+          'channelName': item.channelName,
+        };
+      }
+    } catch (e) {
+      developer.log('Error fetching video metadata map: $e', name: _tag, error: e);
+    }
+    
+    return {
+      'title': 'Video $videoId',
+      'thumbnail': 'https://img.youtube.com/vi/$videoId/mqdefault.jpg',
+      'duration': null,
+      'channelName': null,
+    };
+  }
+
   /// 从YouTube视频页面HTML提取元数据
   static Future<PlaylistItem?> _extractFromVideoPage(String videoId) async {
     try {
