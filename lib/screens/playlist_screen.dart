@@ -18,7 +18,6 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   String _searchQuery = '';
   String _selectedCategory = '全部';
   final TextEditingController _searchController = TextEditingController();
-  final TextEditingController _emptyUrlController = TextEditingController();
 
   @override
   void initState() {
@@ -40,7 +39,6 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   @override
   void dispose() {
     _searchController.dispose();
-    _emptyUrlController.dispose();
     super.dispose();
   }
 
@@ -219,43 +217,6 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     await _refreshPlaylist();
   }
 
-  void _playVideoFromEmptyState() async {
-    final url = _emptyUrlController.text.trim();
-    if (url.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('请输入YouTube视频链接'),
-          backgroundColor: Colors.red,
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-      return;
-    }
-
-    final videoId = YoutubePlayer.convertUrlToId(url);
-    if (videoId == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('无效的YouTube链接'),
-          backgroundColor: Colors.red,
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
-      return;
-    }
-
-    _emptyUrlController.clear();
-    
-    // 使用 Navigator.push 并等待返回，然后刷新播放列表
-    await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => YoutubeLearningScreen(videoId: videoId),
-      ),
-    );
-    // 返回时刷新播放列表
-    await _refreshPlaylist();
-  }
 
   void _signOut() {
     showDialog(
@@ -467,196 +428,53 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     );
   }
 
-  void _showAddVideoDialog() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      builder: (context) => _buildAddVideoBottomSheet(),
-    );
-  }
-
-  Widget _buildAddVideoBottomSheet() {
-    final urlController = TextEditingController();
-    
-    return StatefulBuilder(
-      builder: (context, setModalState) {
-        return Container(
-          decoration: const BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20),
-              topRight: Radius.circular(20),
+  void _showAddVideoDialog() async {
+    // 直接检查剪贴板，如果有有效YouTube链接就开始学习
+    try {
+      final clipboardData = await Clipboard.getData(Clipboard.kTextPlain);
+      final clipboardText = clipboardData?.text?.trim();
+      
+      if (clipboardText != null && clipboardText.isNotEmpty) {
+        final videoId = YoutubePlayer.convertUrlToId(clipboardText);
+        
+        if (videoId != null && !AuthService.isVideoInPlaylist(videoId)) {
+          // 直接开始学习
+          await Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => YoutubeLearningScreen(videoId: videoId),
             ),
-          ),
-          child: Padding(
-            padding: EdgeInsets.only(
-              top: 20,
-              left: 32,
-              right: 32,
-              bottom: MediaQuery.of(context).viewInsets.bottom + 32,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Handle bar
-                Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[600],
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-                
-                const SizedBox(height: 24),
-                
-                // Icon and Title
-                Container(
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[800]?.withOpacity(0.3),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: const Column(
-                    children: [
-                      Icon(Icons.add_circle_outline, size: 48, color: Colors.blue),
-                      SizedBox(height: 12),
-                      Text(
-                        '添加新视频',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 6),
-                      Text(
-                        '输入YouTube视频链接开始学习',
-                        style: TextStyle(color: Colors.grey, fontSize: 14),
-                      ),
-                    ],
-                  ),
-                ),
-                
-                const SizedBox(height: 24),
-                
-                // URL Input
-                TextField(
-                  controller: urlController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    hintText: '粘贴YouTube视频链接...',
-                    hintStyle: const TextStyle(color: Colors.grey),
-                    prefixIcon: const Icon(Icons.link, color: Colors.grey),
-                    suffixIcon: urlController.text.isNotEmpty
-                        ? IconButton(
-                            onPressed: () {
-                              urlController.clear();
-                              setModalState(() {});
-                            },
-                            icon: const Icon(Icons.clear, color: Colors.grey),
-                          )
-                        : null,
-                    filled: true,
-                    fillColor: Colors.grey[800]?.withOpacity(0.5),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.blue, width: 2),
-                    ),
-                  ),
-                  onChanged: (value) {
-                    setModalState(() {});
-                  },
-                  onSubmitted: (value) {
-                    if (value.trim().isNotEmpty) {
-                      Navigator.of(context).pop();
-                      _playVideoFromUrl(value.trim());
-                    }
-                  },
-                ),
-                
-                const SizedBox(height: 16),
-                
-                // Action Buttons
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            side: BorderSide(color: Colors.grey[600]!),
-                          ),
-                        ),
-                        child: const Text(
-                          '取消',
-                          style: TextStyle(color: Colors.grey, fontSize: 16),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      flex: 2,
-                      child: ElevatedButton.icon(
-                        onPressed: urlController.text.trim().isNotEmpty
-                            ? () {
-                                Navigator.of(context).pop();
-                                _playVideoFromUrl(urlController.text.trim());
-                              }
-                            : null,
-                        icon: const Icon(Icons.play_arrow),
-                        label: const Text('开始学习'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          elevation: 0,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                
-                const SizedBox(height: 16),
-                
-                // Tips
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.blue.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.blue.withOpacity(0.3)),
-                  ),
-                  child: const Row(
-                    children: [
-                      Icon(Icons.lightbulb_outline, color: Colors.blue, size: 18),
-                      SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          '支持YouTube视频链接，自动提取字幕进行英语学习',
-                          style: TextStyle(color: Colors.blue, fontSize: 12),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+          );
+          // 刷新播放列表
+          await _refreshPlaylist();
+          return;
+        }
+      }
+      
+      // 如果没有有效链接，显示提示
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('请先复制一个YouTube视频链接'),
+            backgroundColor: Colors.orange,
+            behavior: SnackBarBehavior.floating,
           ),
         );
-      },
-    );
+      }
+    } catch (e) {
+      print('Clipboard check error: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('无法访问剪贴板，请先复制YouTube视频链接'),
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+    }
   }
+
 
   void _playVideoFromUrl(String url) async {
     final videoId = YoutubePlayer.convertUrlToId(url);
@@ -931,60 +749,15 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
               
               const SizedBox(height: 32),
               
-              // URL Input
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: TextField(
-                  controller: _emptyUrlController,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    hintText: '粘贴YouTube视频链接...',
-                    hintStyle: const TextStyle(color: Colors.grey),
-                    prefixIcon: const Icon(Icons.link, color: Colors.grey),
-                    suffixIcon: _emptyUrlController.text.isNotEmpty
-                        ? IconButton(
-                            onPressed: () {
-                              _emptyUrlController.clear();
-                              setState(() {});
-                            },
-                            icon: const Icon(Icons.clear, color: Colors.grey),
-                          )
-                        : null,
-                    filled: true,
-                    fillColor: Colors.grey[800]?.withOpacity(0.5),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.blue, width: 2),
-                    ),
-                  ),
-                  onChanged: (value) {
-                    setState(() {});
-                  },
-                  onSubmitted: (value) {
-                    if (value.trim().isNotEmpty) {
-                      _playVideoFromEmptyState();
-                    }
-                  },
-                ),
-              ),
-              
-              const SizedBox(height: 16),
-              
-              // Play Button
+              // 简化的剪贴板检测按钮
               SizedBox(
                 width: double.infinity,
                 child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   child: ElevatedButton.icon(
-                    onPressed: _emptyUrlController.text.trim().isNotEmpty
-                        ? _playVideoFromEmptyState
-                        : null,
-                    icon: const Icon(Icons.play_arrow),
-                    label: const Text('开始学习'),
+                    onPressed: _showAddVideoDialog,
+                    icon: const Icon(Icons.content_paste),
+                    label: const Text('使用剪贴板中的视频开始学习'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue,
                       foregroundColor: Colors.white,
@@ -1015,7 +788,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                     SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        '提示：支持YouTube视频链接，自动提取字幕进行英语学习',
+                        '提示：复制YouTube视频链接后点击上方按钮即可开始学习',
                         style: TextStyle(color: Colors.blue, fontSize: 12),
                       ),
                     ),
