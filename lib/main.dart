@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/auth_screen.dart';
 import 'screens/youtube_learning_screen.dart';
 import 'screens/playlist_screen.dart';
+import 'screens/vocabulary_screen.dart';
 import 'services/auth_service.dart';
 
 void main() {
@@ -31,6 +32,7 @@ class EnglishStudyApp extends StatelessWidget {
           final videoId = ModalRoute.of(context)?.settings.arguments as String?;
           return YoutubeLearningScreen(videoId: videoId);
         },
+        '/vocabulary': (context) => const VocabularyScreen(),
       },
       initialRoute: '/',
     );

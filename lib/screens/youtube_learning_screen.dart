@@ -7,6 +7,7 @@ import '../models/transcript.dart';
 import '../services/transcript_service.dart';
 import '../services/auth_service.dart';
 import '../services/background_audio_service.dart';
+import '../widgets/word_definition_dialog.dart';
 
 class YoutubeLearningScreen extends StatefulWidget {
   final String? videoId;
@@ -487,6 +488,23 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     }
   }
 
+  void _onWordSelected(String word) {
+    // 暂停视频播放
+    if (_controller != null && _isPlaying) {
+      _controller!.pause();
+    }
+    
+    // 显示单词查询对话框
+    _showWordDefinitionDialog(word);
+  }
+
+  void _showWordDefinitionDialog(String word) {
+    showDialog(
+      context: context,
+      builder: (context) => WordDefinitionDialog(word: word),
+    );
+  }
+
   void _toggleHeaderVisibility() {
     setState(() {
       _isHeaderVisible = !_isHeaderVisible;
@@ -558,13 +576,21 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text(
+                SelectableText(
                   segment.text,
                   style: TextStyle(
                     fontSize: _currentFontSize,
                     color: isHighlighted ? Colors.green : Colors.white,
                     fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,
                   ),
+                  onSelectionChanged: (selection, cause) {
+                    if (selection.isValid && cause == SelectionChangedCause.longPress) {
+                      final selectedText = segment.text.substring(selection.start, selection.end);
+                      if (selectedText.isNotEmpty) {
+                        _onWordSelected(selectedText);
+                      }
+                    }
+                  },
                 ),
               ],
             ),

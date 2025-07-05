@@ -46,6 +46,9 @@ dependencies:
   # Local storage
   shared_preferences: ^2.2.2
 
+  # Audio playback for dictionary
+  audioplayers: ^6.1.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

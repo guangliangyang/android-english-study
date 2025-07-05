@@ -882,6 +882,9 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                       ),
                     );
                     break;
+                  case 'vocabulary':
+                    Navigator.pushNamed(context, '/vocabulary');
+                    break;
                   case 'clear':
                     _clearPlaylist();
                     break;
@@ -922,6 +925,16 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                       ],
                     ),
                   ),
+                const PopupMenuItem(
+                  value: 'vocabulary',
+                  child: Row(
+                    children: [
+                      Icon(Icons.book, color: Colors.amber),
+                      SizedBox(width: 8),
+                      Text('生词本'),
+                    ],
+                  ),
+                ),
                 if (_playlist.isNotEmpty)
                   const PopupMenuItem(
                     value: 'clear',
