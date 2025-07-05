@@ -3,6 +3,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../models/playlist.dart';
 import '../services/auth_service.dart';
 import '../models/user.dart';
+import 'youtube_learning_screen.dart';
 
 class PlaylistScreen extends StatefulWidget {
   const PlaylistScreen({Key? key}) : super(key: key);
@@ -27,15 +28,8 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Reload playlist when returning from other screens
+    // Navigation now uses await pattern for reliable refresh
     print('PlaylistScreen.didChangeDependencies() called');
-    _loadPlaylist();
-  }
-
-  @override
-  void didUpdateWidget(PlaylistScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    _loadPlaylist();
   }
 
   @override
@@ -46,6 +40,13 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   }
 
   void _loadPlaylist() {
+    setState(() {
+      _playlist = AuthService.playlist;
+    });
+  }
+
+  Future<void> _refreshPlaylist() async {
+    await AuthService.refreshPlaylist();
     setState(() {
       _playlist = AuthService.playlist;
     });
@@ -72,12 +73,19 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     return items;
   }
 
-  void _onVideoTap(PlaylistItem item) {
-    // 始终使用标准导航，不依赖回调函数
-    Navigator.pushNamed(context, '/learning', arguments: item.videoId);
+  void _onVideoTap(PlaylistItem item) async {
+    // 使用 Navigator.push 并等待返回，然后刷新播放列表
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => YoutubeLearningScreen(videoId: item.videoId),
+      ),
+    );
+    // 返回时刷新播放列表
+    await _refreshPlaylist();
   }
 
-  void _playVideoFromEmptyState() {
+  void _playVideoFromEmptyState() async {
     final url = _emptyUrlController.text.trim();
     if (url.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -103,7 +111,16 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     }
 
     _emptyUrlController.clear();
-    Navigator.pushNamed(context, '/learning', arguments: videoId);
+    
+    // 使用 Navigator.push 并等待返回，然后刷新播放列表
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => YoutubeLearningScreen(videoId: videoId),
+      ),
+    );
+    // 返回时刷新播放列表
+    await _refreshPlaylist();
   }
 
   void _signOut() {
@@ -373,7 +390,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     );
   }
 
-  void _playVideoFromUrl(String url) {
+  void _playVideoFromUrl(String url) async {
     final videoId = YoutubePlayer.convertUrlToId(url);
     if (videoId == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -395,7 +412,15 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
       ),
     );
     
-    Navigator.pushNamed(context, '/learning', arguments: videoId);
+    // 使用 Navigator.push 并等待返回，然后刷新播放列表
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => YoutubeLearningScreen(videoId: videoId),
+      ),
+    );
+    // 返回时刷新播放列表
+    await _refreshPlaylist();
   }
 
   @override

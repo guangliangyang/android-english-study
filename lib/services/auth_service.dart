@@ -48,7 +48,10 @@ class AuthService {
       final GoogleSignInAccount? account = await googleSignIn.signIn();
       if (account != null) {
         _currentUser = User.fromGoogleSignInAccount(account);
+        // Load saved playlist from local storage for the new user
+        await _loadPlaylistFromStorage();
         _initialized = true;
+        print('AuthService.signInWithGoogle: User signed in with playlist length: ${_currentUser!.playlist.length}');
         return _currentUser;
       }
     } catch (e) {
@@ -319,6 +322,14 @@ class AuthService {
 
   static List<PlaylistItem> getVideosByCategory(String category) {
     return _currentUser?.playlist.getVideosByCategory(category) ?? [];
+  }
+
+  // Force refresh playlist data
+  static Future<void> refreshPlaylist() async {
+    if (_currentUser != null) {
+      await _loadPlaylistFromStorage();
+      print('AuthService.refreshPlaylist: Playlist refreshed with ${_currentUser!.playlist.length} items');
+    }
   }
 
   // Local storage methods
