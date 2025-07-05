@@ -7,6 +7,7 @@ import '../models/transcript.dart';
 import '../services/transcript_service.dart';
 import '../services/auth_service.dart';
 import '../services/background_audio_service.dart';
+import '../services/app_guide_service.dart';
 import '../widgets/word_definition_dialog.dart';
 
 class YoutubeLearningScreen extends StatefulWidget {
@@ -163,6 +164,9 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
         _transcript = transcript;
         _isLoading = false;
       });
+
+      // 首次使用时显示生词功能引导
+      _showVocabularyGuideIfNeeded();
 
       // Setup background audio service for the new video
       if (_backgroundAudioService != null && transcript != null) {
@@ -502,6 +506,220 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     showDialog(
       context: context,
       builder: (context) => WordDefinitionDialog(word: word),
+    );
+  }
+
+  void _showVocabularyTip() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.grey[800],
+        title: const Row(
+          children: [
+            Icon(Icons.lightbulb, color: Colors.amber),
+            SizedBox(width: 8),
+            Text('生词功能说明', style: TextStyle(color: Colors.white)),
+          ],
+        ),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '📚 如何使用生词功能：',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 12),
+            Row(
+              children: [
+                Text('1. ', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                Expanded(
+                  child: Text(
+                    '长按字幕中的任意单词',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Text('2. ', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                Expanded(
+                  child: Text(
+                    '选择想要查询的单词',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Text('3. ', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                Expanded(
+                  child: Text(
+                    '查看音标、释义和例句',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Text('4. ', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                Expanded(
+                  child: Text(
+                    '点击收藏按钮添加到生词本',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 12),
+            Row(
+              children: [
+                Icon(Icons.volume_up, color: Colors.blue, size: 16),
+                SizedBox(width: 4),
+                Text(
+                  '支持播放单词发音',
+                  style: TextStyle(color: Colors.grey, fontSize: 12),
+                ),
+              ],
+            ),
+            SizedBox(height: 4),
+            Row(
+              children: [
+                Icon(Icons.book, color: Colors.amber, size: 16),
+                SizedBox(width: 4),
+                Text(
+                  '从主菜单进入生词本查看收藏',
+                  style: TextStyle(color: Colors.grey, fontSize: 12),
+                ),
+              ],
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('知道了'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _showVocabularyGuideIfNeeded() async {
+    final hasShown = await AppGuideService.hasShownVocabularyGuide();
+    if (!hasShown && mounted) {
+      // 延迟显示，让页面加载完成
+      await Future.delayed(const Duration(seconds: 2));
+      if (mounted) {
+        await AppGuideService.markVocabularyGuideShown();
+        _showVocabularyWelcomeDialog();
+      }
+    }
+  }
+
+  void _showVocabularyWelcomeDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.grey[800],
+        title: const Row(
+          children: [
+            Icon(Icons.celebration, color: Colors.amber),
+            SizedBox(width: 8),
+            Text('新功能：生词查询', style: TextStyle(color: Colors.white)),
+          ],
+        ),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '🎉 欢迎使用生词查询功能！',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 12),
+            Text(
+              '现在你可以：',
+              style: TextStyle(color: Colors.white, fontSize: 14),
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Icon(Icons.touch_app, color: Colors.blue, size: 16),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '长按字幕中的单词查看释义',
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 6),
+            Row(
+              children: [
+                Icon(Icons.bookmark_add, color: Colors.green, size: 16),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '收藏生词到生词本',
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 6),
+            Row(
+              children: [
+                Icon(Icons.volume_up, color: Colors.orange, size: 16),
+                SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    '播放单词发音',
+                    style: TextStyle(color: Colors.white, fontSize: 14),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 12),
+            Text(
+              '试试长按下面字幕中的单词吧！',
+              style: TextStyle(
+                color: Colors.blue,
+                fontSize: 12,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _showVocabularyTip();
+            },
+            child: const Text('查看详细说明'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('开始使用', style: TextStyle(fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
     );
   }
 
