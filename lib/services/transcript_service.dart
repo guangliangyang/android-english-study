@@ -139,7 +139,7 @@ class TranscriptService {
 
       final responseBody = response.body;
       developer.log('InnerTube API response length: ${responseBody.length}', name: _tag);
-      developer.log('Response preview: ${responseBody.substring(0, responseBody.length > 300 ? 300 : responseBody.length)}...', name: _tag);
+      // developer.log('Response preview: ${responseBody.substring(0, responseBody.length > 300 ? 300 : responseBody.length)}...', name: _tag);
 
       return responseBody;
 
@@ -239,7 +239,7 @@ class TranscriptService {
     try {
       final segments = <TranscriptSegment>[];
 
-      developer.log('Parsing XML format, first 500 chars: ${xml.substring(0, xml.length > 500 ? 500 : xml.length)}', name: _tag);
+      developer.log('Parsing XML format, length: ${xml.length}', name: _tag);
 
       // 解析srv3格式的XML字幕 - 使用<p>标签
       final paragraphPattern = RegExp(
@@ -273,7 +273,7 @@ class TranscriptService {
               startTime: startTime,
               endTime: startTime + duration,
             ));
-            developer.log('Parsed segment: ${startTime.toStringAsFixed(2)}s - \'$text\'', name: _tag);
+            // developer.log('Parsed segment: ${startTime.toStringAsFixed(2)}s - \'$text\'', name: _tag);
           }
 
         } catch (e) {

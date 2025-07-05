@@ -143,6 +143,8 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
           mute: false,
           loop: _isLoopMode,
           showLiveFullscreenButton: false,
+          enableCaption: false,
+          controlsVisibleAtStart: true,
         ),
       );
 
@@ -181,6 +183,18 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       
       // Auto-save to playlist
       await AuthService.addToPlaylist(videoId);
+      
+      // Show toast notification for successful save
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('视频已添加到播放列表 (总数: ${AuthService.playlist.length}) [用户: ${AuthService.currentUser?.playlist.length}]'),
+            duration: const Duration(seconds: 3),
+            backgroundColor: Colors.green,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
     } catch (e) {
       setState(() {
         _isLoading = false;
