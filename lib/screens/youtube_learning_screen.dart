@@ -21,6 +21,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   YoutubePlayerController? _controller;
   Transcript? _transcript;
   bool _isLoading = false;
+  bool _isHeaderVisible = true;
   bool _isLoopMode = false;
   
   // 播放状态
@@ -178,18 +179,6 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       
       // Auto-save to playlist
       await AuthService.addToPlaylist(videoId);
-      
-      // Show toast notification for successful save
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('视频已添加到播放列表 (总数: ${AuthService.playlist.length}) [用户: ${AuthService.currentUser?.playlist.length}]'),
-            duration: const Duration(seconds: 3),
-            backgroundColor: Colors.green,
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-      }
     } catch (e) {
       setState(() {
         _isLoading = false;
@@ -498,6 +487,18 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     }
   }
 
+  void _toggleHeaderVisibility() {
+    setState(() {
+      _isHeaderVisible = !_isHeaderVisible;
+    });
+    
+    // 布局变化后重新居中当前高亮的transcript
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_highlightedSegmentIndex >= 0) {
+        _scrollToHighlightedSegment();
+      }
+    });
+  }
 
   String _formatTime(double seconds) {
     final totalSeconds = seconds.toInt();
@@ -590,18 +591,24 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // YouTube Player - 简化版本
+            // YouTube Player - 使用Visibility控制显示但保持播放
             if (_controller != null)
-              Container(
-                color: Colors.black,
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: YoutubePlayer(
-                      controller: _controller!,
-                      showVideoProgressIndicator: true,
-                      progressIndicatorColor: Colors.red,
+              Visibility(
+                visible: _isHeaderVisible,
+                maintainState: true,
+                maintainAnimation: true,
+                maintainSize: false,
+                child: Container(
+                  color: Colors.black,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: YoutubePlayer(
+                        controller: _controller!,
+                        showVideoProgressIndicator: true,
+                        progressIndicatorColor: Colors.red,
+                      ),
                     ),
                   ),
                 ),
@@ -635,6 +642,14 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            IconButton(
+              onPressed: _toggleHeaderVisibility,
+              icon: Icon(
+                _isHeaderVisible ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                color: Colors.white,
+              ),
+              tooltip: _isHeaderVisible ? '隐藏视频区域' : '显示视频区域',
+            ),
             IconButton(
               onPressed: _cycleFontSize,
               icon: const Icon(Icons.text_fields, color: Colors.white),

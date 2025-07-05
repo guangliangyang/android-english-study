@@ -328,8 +328,9 @@ class AuthService {
       
       final prefs = await SharedPreferences.getInstance();
       final playlistJson = json.encode(_currentUser!.playlist.toJson());
-      await prefs.setString('user_playlist', playlistJson);
-      print('AuthService: Saved playlist to storage with ${_currentUser!.playlist.length} items');
+      final userKey = 'user_playlist_${_currentUser!.email}';
+      await prefs.setString(userKey, playlistJson);
+      print('AuthService: Saved playlist to storage with ${_currentUser!.playlist.length} items for ${_currentUser!.email}');
     } catch (e) {
       print('Error saving playlist to storage: $e');
     }
@@ -340,15 +341,16 @@ class AuthService {
       if (_currentUser == null) return;
       
       final prefs = await SharedPreferences.getInstance();
-      final playlistJsonString = prefs.getString('user_playlist');
+      final userKey = 'user_playlist_${_currentUser!.email}';
+      final playlistJsonString = prefs.getString(userKey);
       
       if (playlistJsonString != null) {
         final playlistJson = json.decode(playlistJsonString) as Map<String, dynamic>;
         final savedPlaylist = Playlist.fromJson(playlistJson);
         _currentUser = _currentUser!.copyWith(playlist: savedPlaylist);
-        print('AuthService: Loaded playlist from storage with ${savedPlaylist.length} items');
+        print('AuthService: Loaded playlist from storage with ${savedPlaylist.length} items for ${_currentUser!.email}');
       } else {
-        print('AuthService: No saved playlist found in storage');
+        print('AuthService: No saved playlist found in storage for ${_currentUser!.email}');
       }
     } catch (e) {
       print('Error loading playlist from storage: $e');

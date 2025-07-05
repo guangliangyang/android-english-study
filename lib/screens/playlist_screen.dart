@@ -16,6 +16,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   String _searchQuery = '';
   String _selectedCategory = '全部';
   final TextEditingController _searchController = TextEditingController();
+  final TextEditingController _emptyUrlController = TextEditingController();
 
   @override
   void initState() {
@@ -40,6 +41,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   @override
   void dispose() {
     _searchController.dispose();
+    _emptyUrlController.dispose();
     super.dispose();
   }
 
@@ -75,6 +77,34 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     Navigator.pushNamed(context, '/learning', arguments: item.videoId);
   }
 
+  void _playVideoFromEmptyState() {
+    final url = _emptyUrlController.text.trim();
+    if (url.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('请输入YouTube视频链接'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    final videoId = YoutubePlayer.convertUrlToId(url);
+    if (videoId == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('无效的YouTube链接'),
+          backgroundColor: Colors.red,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      return;
+    }
+
+    _emptyUrlController.clear();
+    Navigator.pushNamed(context, '/learning', arguments: videoId);
+  }
 
   void _signOut() {
     showDialog(
@@ -572,21 +602,132 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
 
   Widget _buildPlaylistContent() {
     if (_playlist.isEmpty) {
-      return const Expanded(
-        child: Center(
+      return Expanded(
+        child: Container(
+          padding: const EdgeInsets.all(32),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.playlist_play, size: 64, color: Colors.grey),
-              SizedBox(height: 16),
-              Text(
-                '播放列表为空',
-                style: TextStyle(color: Colors.grey, fontSize: 18),
+              // Icon and Title
+              Container(
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: Colors.grey[800]?.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: const Column(
+                  children: [
+                    Icon(Icons.video_library, size: 64, color: Colors.blue),
+                    SizedBox(height: 16),
+                    Text(
+                      '开始你的英语学习之旅',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      '添加第一个YouTube视频到播放列表',
+                      style: TextStyle(color: Colors.grey, fontSize: 14),
+                    ),
+                  ],
+                ),
               ),
-              SizedBox(height: 8),
-              Text(
-                '在上方输入YouTube链接开始学习',
-                style: TextStyle(color: Colors.grey, fontSize: 14),
+              
+              const SizedBox(height: 32),
+              
+              // URL Input
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: TextField(
+                  controller: _emptyUrlController,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    hintText: '粘贴YouTube视频链接...',
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    prefixIcon: const Icon(Icons.link, color: Colors.grey),
+                    suffixIcon: _emptyUrlController.text.isNotEmpty
+                        ? IconButton(
+                            onPressed: () {
+                              _emptyUrlController.clear();
+                              setState(() {});
+                            },
+                            icon: const Icon(Icons.clear, color: Colors.grey),
+                          )
+                        : null,
+                    filled: true,
+                    fillColor: Colors.grey[800]?.withOpacity(0.5),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.blue, width: 2),
+                    ),
+                  ),
+                  onChanged: (value) {
+                    setState(() {});
+                  },
+                  onSubmitted: (value) {
+                    if (value.trim().isNotEmpty) {
+                      _playVideoFromEmptyState();
+                    }
+                  },
+                ),
+              ),
+              
+              const SizedBox(height: 16),
+              
+              // Play Button
+              SizedBox(
+                width: double.infinity,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 16),
+                  child: ElevatedButton.icon(
+                    onPressed: _emptyUrlController.text.trim().isNotEmpty
+                        ? _playVideoFromEmptyState
+                        : null,
+                    icon: const Icon(Icons.play_arrow),
+                    label: const Text('开始学习'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      elevation: 0,
+                    ),
+                  ),
+                ),
+              ),
+              
+              const SizedBox(height: 24),
+              
+              // Tips
+              Container(
+                padding: const EdgeInsets.all(16),
+                margin: const EdgeInsets.symmetric(horizontal: 16),
+                decoration: BoxDecoration(
+                  color: Colors.blue.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.blue.withOpacity(0.3)),
+                ),
+                child: const Row(
+                  children: [
+                    Icon(Icons.lightbulb_outline, color: Colors.blue, size: 20),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        '提示：支持YouTube视频链接，自动提取字幕进行英语学习',
+                        style: TextStyle(color: Colors.blue, fontSize: 12),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
