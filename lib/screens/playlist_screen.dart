@@ -334,59 +334,193 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   }
 
   void _showAddVideoDialog() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (context) => _buildAddVideoBottomSheet(),
+    );
+  }
+
+  Widget _buildAddVideoBottomSheet() {
     final urlController = TextEditingController();
     
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey[900],
-        title: const Text(
-          '添加新视频',
-          style: TextStyle(color: Colors.white),
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: urlController,
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                hintText: '请输入YouTube视频链接',
-                hintStyle: TextStyle(color: Colors.grey),
-                border: OutlineInputBorder(),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.grey),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue),
-                ),
-              ),
-              onSubmitted: (value) {
-                if (value.trim().isNotEmpty) {
-                  Navigator.of(context).pop();
-                  _playVideoFromUrl(value.trim());
-                }
-              },
+    return StatefulBuilder(
+      builder: (context, setModalState) {
+        return Container(
+          decoration: const BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
             ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('取消', style: TextStyle(color: Colors.grey)),
           ),
-          TextButton(
-            onPressed: () {
-              final url = urlController.text.trim();
-              if (url.isNotEmpty) {
-                Navigator.of(context).pop();
-                _playVideoFromUrl(url);
-              }
-            },
-            child: const Text('播放', style: TextStyle(color: Colors.blue)),
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: 20,
+              left: 32,
+              right: 32,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 32,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Handle bar
+                Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[600],
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+                
+                const SizedBox(height: 24),
+                
+                // Icon and Title
+                Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[800]?.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const Column(
+                    children: [
+                      Icon(Icons.add_circle_outline, size: 48, color: Colors.blue),
+                      SizedBox(height: 12),
+                      Text(
+                        '添加新视频',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 6),
+                      Text(
+                        '输入YouTube视频链接开始学习',
+                        style: TextStyle(color: Colors.grey, fontSize: 14),
+                      ),
+                    ],
+                  ),
+                ),
+                
+                const SizedBox(height: 24),
+                
+                // URL Input
+                TextField(
+                  controller: urlController,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    hintText: '粘贴YouTube视频链接...',
+                    hintStyle: const TextStyle(color: Colors.grey),
+                    prefixIcon: const Icon(Icons.link, color: Colors.grey),
+                    suffixIcon: urlController.text.isNotEmpty
+                        ? IconButton(
+                            onPressed: () {
+                              urlController.clear();
+                              setModalState(() {});
+                            },
+                            icon: const Icon(Icons.clear, color: Colors.grey),
+                          )
+                        : null,
+                    filled: true,
+                    fillColor: Colors.grey[800]?.withOpacity(0.5),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: const BorderSide(color: Colors.blue, width: 2),
+                    ),
+                  ),
+                  onChanged: (value) {
+                    setModalState(() {});
+                  },
+                  onSubmitted: (value) {
+                    if (value.trim().isNotEmpty) {
+                      Navigator.of(context).pop();
+                      _playVideoFromUrl(value.trim());
+                    }
+                  },
+                ),
+                
+                const SizedBox(height: 16),
+                
+                // Action Buttons
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        style: TextButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            side: BorderSide(color: Colors.grey[600]!),
+                          ),
+                        ),
+                        child: const Text(
+                          '取消',
+                          style: TextStyle(color: Colors.grey, fontSize: 16),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      flex: 2,
+                      child: ElevatedButton.icon(
+                        onPressed: urlController.text.trim().isNotEmpty
+                            ? () {
+                                Navigator.of(context).pop();
+                                _playVideoFromUrl(urlController.text.trim());
+                              }
+                            : null,
+                        icon: const Icon(Icons.play_arrow),
+                        label: const Text('开始学习'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          elevation: 0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                
+                const SizedBox(height: 16),
+                
+                // Tips
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.blue.withOpacity(0.3)),
+                  ),
+                  child: const Row(
+                    children: [
+                      Icon(Icons.lightbulb_outline, color: Colors.blue, size: 18),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          '支持YouTube视频链接，自动提取字幕进行英语学习',
+                          style: TextStyle(color: Colors.blue, fontSize: 12),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
