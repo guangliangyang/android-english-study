@@ -43,6 +43,9 @@ dependencies:
   # Wake lock for preventing sleep
   wakelock_plus: ^1.1.4
 
+  # Local storage
+  shared_preferences: ^2.2.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
