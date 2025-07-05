@@ -8,7 +8,7 @@ import 'video_metadata_service.dart';
 class AuthService {
   static GoogleSignIn? _googleSignIn;
   static User? _currentUser;
-  static Playlist? _persistentPlaylist;
+  static bool _initialized = false;
 
   static GoogleSignIn get googleSignIn {
     _googleSignIn ??= GoogleSignIn(
@@ -24,15 +24,18 @@ class AuthService {
   static bool get isSignedIn => _currentUser != null;
 
   static Future<void> initialize() async {
+    if (_initialized) {
+      print('AuthService.initialize: Already initialized, skipping');
+      return;
+    }
+    
     try {
       final account = await googleSignIn.signInSilently();
-      if (account != null && _currentUser == null) {
-        // Only create new user if we don't have one already
+      if (account != null) {
         _currentUser = User.fromGoogleSignInAccount(account);
-        print('AuthService.initialize: Created new user with playlist length: ${_currentUser!.playlist.length}');
-      } else if (account != null && _currentUser != null) {
-        print('AuthService.initialize: User already exists, keeping existing playlist length: ${_currentUser!.playlist.length}');
+        print('AuthService.initialize: Created user with playlist length: ${_currentUser!.playlist.length}');
       }
+      _initialized = true;
     } catch (e) {
       print('Error initializing auth service: $e');
     }
@@ -43,6 +46,7 @@ class AuthService {
       final GoogleSignInAccount? account = await googleSignIn.signIn();
       if (account != null) {
         _currentUser = User.fromGoogleSignInAccount(account);
+        _initialized = true;
         return _currentUser;
       }
     } catch (e) {
@@ -55,6 +59,7 @@ class AuthService {
     try {
       await googleSignIn.signOut();
       _currentUser = null;
+      _initialized = false;
     } catch (e) {
       print('Error signing out: $e');
     }
@@ -64,6 +69,7 @@ class AuthService {
     try {
       await googleSignIn.disconnect();
       _currentUser = null;
+      _initialized = false;
     } catch (e) {
       print('Error disconnecting: $e');
     }
@@ -209,14 +215,11 @@ class AuthService {
     }
   }
 
-  // Playlist management methods - using persistent playlist
-  static Playlist get playlist {
-    _persistentPlaylist ??= Playlist();
-    return _persistentPlaylist!;
-  }
+  // Playlist management methods - using user's playlist
+  static Playlist get playlist => _currentUser?.playlist ?? Playlist();
 
   static Future<void> addToPlaylist(String videoId, {String? title, String? channelName, Duration? duration, String? thumbnail, String? description, String category = '未分类'}) async {
-    _persistentPlaylist ??= Playlist();
+    if (_currentUser == null) return;
 
     try {
       PlaylistItem? item;
@@ -247,7 +250,8 @@ class AuthService {
         );
       }
 
-      _persistentPlaylist = _persistentPlaylist!.addVideo(item);
+      final newPlaylist = _currentUser!.playlist.addVideo(item);
+      _currentUser = _currentUser!.copyWith(playlist: newPlaylist);
     } catch (e) {
       // Fallback: create with basic info
       final item = PlaylistItem(
@@ -260,41 +264,45 @@ class AuthService {
         category: category,
       );
 
-      _persistentPlaylist = _persistentPlaylist!.addVideo(item);
+      final newPlaylist = _currentUser!.playlist.addVideo(item);
+      _currentUser = _currentUser!.copyWith(playlist: newPlaylist);
     }
   }
 
   static void removeFromPlaylist(String videoId) {
-    _persistentPlaylist ??= Playlist();
-    _persistentPlaylist = _persistentPlaylist!.removeVideo(videoId);
+    if (_currentUser != null) {
+      final newPlaylist = _currentUser!.playlist.removeVideo(videoId);
+      _currentUser = _currentUser!.copyWith(playlist: newPlaylist);
+    }
   }
 
   static void clearPlaylist() {
-    _persistentPlaylist = Playlist();
+    if (_currentUser != null) {
+      final newPlaylist = Playlist();
+      _currentUser = _currentUser!.copyWith(playlist: newPlaylist);
+    }
   }
 
   static void updateVideoCategory(String videoId, String newCategory) {
-    _persistentPlaylist ??= Playlist();
-    _persistentPlaylist = _persistentPlaylist!.updateVideoCategory(videoId, newCategory);
+    if (_currentUser != null) {
+      final newPlaylist = _currentUser!.playlist.updateVideoCategory(videoId, newCategory);
+      _currentUser = _currentUser!.copyWith(playlist: newPlaylist);
+    }
   }
 
   static bool isVideoInPlaylist(String videoId) {
-    _persistentPlaylist ??= Playlist();
-    return _persistentPlaylist!.containsVideo(videoId);
+    return _currentUser?.playlist.containsVideo(videoId) ?? false;
   }
 
   static PlaylistItem? getPlaylistVideo(String videoId) {
-    _persistentPlaylist ??= Playlist();
-    return _persistentPlaylist!.getVideo(videoId);
+    return _currentUser?.playlist.getVideo(videoId);
   }
 
   static List<String> getPlaylistCategories() {
-    _persistentPlaylist ??= Playlist();
-    return _persistentPlaylist!.categories;
+    return _currentUser?.playlist.categories ?? [];
   }
 
   static List<PlaylistItem> getVideosByCategory(String category) {
-    _persistentPlaylist ??= Playlist();
-    return _persistentPlaylist!.getVideosByCategory(category);
+    return _currentUser?.playlist.getVideosByCategory(category) ?? [];
   }
 }
