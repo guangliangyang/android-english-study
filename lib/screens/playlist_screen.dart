@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../models/playlist.dart';
 import '../services/auth_service.dart';
@@ -23,6 +24,10 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
   void initState() {
     super.initState();
     _loadPlaylist();
+    // Check clipboard for YouTube links after a short delay
+    Future.delayed(const Duration(milliseconds: 500), () {
+      _checkClipboardForYouTubeLink();
+    });
   }
 
   @override
@@ -50,6 +55,135 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     setState(() {
       _playlist = AuthService.playlist;
     });
+  }
+
+  Future<void> _checkClipboardForYouTubeLink() async {
+    try {
+      final clipboardData = await Clipboard.getData(Clipboard.kTextPlain);
+      final clipboardText = clipboardData?.text?.trim();
+      
+      if (clipboardText != null && clipboardText.isNotEmpty) {
+        final videoId = YoutubePlayer.convertUrlToId(clipboardText);
+        
+        if (videoId != null && mounted) {
+          // Check if this video is not already in the playlist
+          if (!AuthService.isVideoInPlaylist(videoId)) {
+            _showClipboardYouTubePrompt(clipboardText, videoId);
+          }
+        }
+      }
+    } catch (e) {
+      // Silently handle clipboard errors (permissions, etc.)
+      print('Clipboard check error: $e');
+    }
+  }
+
+  void _showClipboardYouTubePrompt(String url, String videoId) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.grey[900],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: Row(
+          children: [
+            Icon(Icons.content_paste, color: Colors.blue, size: 24),
+            const SizedBox(width: 8),
+            const Expanded(
+              child: Text(
+                '检测到YouTube链接',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              '检测到你刚复制了一个YouTube视频链接，是否要用它来学习？',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.grey[800]?.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.link, color: Colors.grey[400], size: 16),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      url.length > 50 ? '${url.substring(0, 50)}...' : url,
+                      style: TextStyle(
+                        color: Colors.grey[300],
+                        fontSize: 12,
+                        fontFamily: 'monospace',
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+            child: const Text(
+              '取消',
+              style: TextStyle(color: Colors.grey, fontSize: 16),
+            ),
+          ),
+          ElevatedButton.icon(
+            onPressed: () async {
+              Navigator.of(context).pop();
+              // Clear clipboard to avoid showing the prompt again
+              await Clipboard.setData(const ClipboardData(text: ''));
+              // Navigate to learning screen
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => YoutubeLearningScreen(videoId: videoId),
+                ),
+              );
+              // Refresh playlist when returning
+              await _refreshPlaylist();
+            },
+            icon: const Icon(Icons.play_arrow, size: 18),
+            label: const Text('是'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+              elevation: 0,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   List<PlaylistItem> get _filteredItems {
