@@ -228,7 +228,7 @@ class AuthService {
   // Playlist management methods - using user's playlist
   static Playlist get playlist => _currentUser?.playlist ?? Playlist();
 
-  static Future<void> addToPlaylist(String videoId, {String? title, String? channelName, Duration? duration, String? thumbnail, String? description, String category = '未分类'}) async {
+  static Future<void> addToPlaylist(String videoId, {String? title, String? channelName, Duration? duration, String? thumbnail, String? description, String? category}) async {
     if (_currentUser == null) {
       print('AuthService.addToPlaylist: No current user, skipping');
       return;
@@ -237,6 +237,10 @@ class AuthService {
     print('AuthService.addToPlaylist: Adding video $videoId to playlist');
 
     try {
+      // Check if video already exists in playlist to preserve its category
+      final existingVideo = _currentUser!.playlist.getVideo(videoId);
+      final finalCategory = category ?? existingVideo?.category ?? '未分类';
+      
       PlaylistItem? item;
       
       // Try to get metadata from VideoMetadataService
@@ -246,46 +250,49 @@ class AuthService {
       if (item == null) {
         item = PlaylistItem(
           videoId: videoId,
-          title: title ?? 'Video $videoId',
-          channelName: channelName,
-          duration: duration,
-          thumbnail: thumbnail,
-          description: description,
-          category: category,
+          title: title ?? existingVideo?.title ?? 'Video $videoId',
+          channelName: channelName ?? existingVideo?.channelName,
+          duration: duration ?? existingVideo?.duration,
+          thumbnail: thumbnail ?? existingVideo?.thumbnail,
+          description: description ?? existingVideo?.description,
+          category: finalCategory,
         );
       } else {
-        // Update with any additional data provided
+        // Update with any additional data provided, preserving existing category if not specified
         item = item.copyWith(
           title: title ?? item.title,
           channelName: channelName ?? item.channelName,
           duration: duration ?? item.duration,
           thumbnail: thumbnail ?? item.thumbnail,
           description: description ?? item.description,
-          category: category,
+          category: finalCategory,
         );
       }
 
       final newPlaylist = _currentUser!.playlist.addVideo(item);
       _currentUser = _currentUser!.copyWith(playlist: newPlaylist);
       await _savePlaylistToStorage();
-      print('AuthService.addToPlaylist: Video added successfully, new playlist length: ${_currentUser!.playlist.length}');
+      print('AuthService.addToPlaylist: Video added successfully with category "$finalCategory", new playlist length: ${_currentUser!.playlist.length}');
     } catch (e) {
       print('AuthService.addToPlaylist: Error in main flow: $e');
-      // Fallback: create with basic info
+      // Fallback: create with basic info, preserving existing category
+      final existingVideo = _currentUser!.playlist.getVideo(videoId);
+      final finalCategory = category ?? existingVideo?.category ?? '未分类';
+      
       final item = PlaylistItem(
         videoId: videoId,
-        title: title ?? 'Video $videoId',
-        channelName: channelName,
-        duration: duration,
-        thumbnail: thumbnail ?? 'https://img.youtube.com/vi/$videoId/mqdefault.jpg',
-        description: description,
-        category: category,
+        title: title ?? existingVideo?.title ?? 'Video $videoId',
+        channelName: channelName ?? existingVideo?.channelName,
+        duration: duration ?? existingVideo?.duration,
+        thumbnail: thumbnail ?? existingVideo?.thumbnail ?? 'https://img.youtube.com/vi/$videoId/mqdefault.jpg',
+        description: description ?? existingVideo?.description,
+        category: finalCategory,
       );
 
       final newPlaylist = _currentUser!.playlist.addVideo(item);
       _currentUser = _currentUser!.copyWith(playlist: newPlaylist);
       await _savePlaylistToStorage();
-      print('AuthService.addToPlaylist: Video added via fallback, new playlist length: ${_currentUser!.playlist.length}');
+      print('AuthService.addToPlaylist: Video added via fallback with category "$finalCategory", new playlist length: ${_currentUser!.playlist.length}');
     }
   }
 
