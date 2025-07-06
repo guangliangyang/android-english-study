@@ -9,6 +9,7 @@ import '../services/transcript_service.dart';
 import '../services/auth_service.dart';
 import '../services/background_audio_service.dart';
 import '../services/app_guide_service.dart';
+import '../services/video_metadata_service.dart';
 import '../widgets/word_definition_dialog.dart';
 
 class YoutubeLearningScreen extends StatefulWidget {
@@ -26,6 +27,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   bool _isLoading = false;
   bool _isHeaderVisible = true;
   bool _isLoopMode = false;
+  String _videoTitle = 'English Study';
   
   // 播放状态
   double _currentPosition = 0.0;
@@ -152,6 +154,23 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
 
       final transcript = await TranscriptService.getTranscript(videoId);
       
+      // 获取视频标题
+      String videoTitle = 'English Study';
+      try {
+        final playlistItem = AuthService.getPlaylistVideo(videoId);
+        if (playlistItem != null && playlistItem.title.isNotEmpty) {
+          videoTitle = playlistItem.title;
+        } else {
+          // 如果播放列表中没有，尝试从VideoMetadataService获取
+          final metadata = await VideoMetadataService.getVideoMetadata(videoId);
+          if (metadata != null && metadata.title.isNotEmpty) {
+            videoTitle = metadata.title;
+          }
+        }
+      } catch (e) {
+        print('Error getting video title: $e');
+      }
+      
       // 初始化字幕项目的GlobalKey列表
       if (transcript != null) {
         _transcriptItemKeys = List.generate(
@@ -164,6 +183,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       
       setState(() {
         _transcript = transcript;
+        _videoTitle = videoTitle;
         _isLoading = false;
       });
 
@@ -189,6 +209,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     } catch (e) {
       setState(() {
         _isLoading = false;
+        _videoTitle = 'English Study'; // 错误时重置为默认标题
       });
       // 静默处理错误，不显示toast
     }
@@ -907,7 +928,15 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text('English Study'),
+        title: Text(
+          _videoTitle,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
         elevation: 0,
       ),
       body: SafeArea(
