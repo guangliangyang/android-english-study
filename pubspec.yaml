@@ -49,6 +49,9 @@ dependencies:
   # Audio playback for dictionary
   audioplayers: ^6.1.0
 
+  # Toast messages
+  fluttertoast: ^8.2.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

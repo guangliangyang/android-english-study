@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../services/auth_service.dart';
 import '../models/user.dart';
 
@@ -58,14 +59,23 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
     });
 
     try {
-      final User? user = await AuthService.signInWithGoogle();
-      if (user != null && mounted) {
-        Navigator.pushReplacementNamed(context, '/playlist');
-      } else {
-        _showErrorDialog('登录失败', '请检查网络连接后重试');
+      final AuthResult result = await AuthService.signInWithGoogle();
+      
+      if (mounted) {
+        if (result.success && result.user != null) {
+          _showToast(result.message, isSuccess: true);
+          Navigator.pushReplacementNamed(context, '/playlist');
+        } else {
+          _showToast(result.message, isSuccess: false);
+          _showErrorDialog('登录失败', result.message);
+        }
       }
     } catch (e) {
-      _showErrorDialog('登录错误', '发生未知错误，请稍后重试');
+      if (mounted) {
+        final errorMessage = '发生未知错误：${e.toString()}';
+        _showToast(errorMessage, isSuccess: false);
+        _showErrorDialog('登录错误', errorMessage);
+      }
     } finally {
       if (mounted) {
         setState(() {
@@ -75,18 +85,65 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
     }
   }
 
+  void _showToast(String message, {required bool isSuccess}) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_LONG,
+      gravity: ToastGravity.CENTER,
+      backgroundColor: isSuccess ? Colors.green : Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
+
   void _showErrorDialog(String title, String message) {
     if (!mounted) return;
     
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(title),
-        content: Text(message),
+        backgroundColor: Colors.grey[800],
+        title: Row(
+          children: [
+            const Icon(Icons.error_outline, color: Colors.red),
+            const SizedBox(width: 8),
+            Text(title, style: const TextStyle(color: Colors.white)),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              message,
+              style: const TextStyle(color: Colors.white),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              '常见解决方案：',
+              style: TextStyle(
+                color: Colors.blue,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              '• 检查网络连接\n• 确认Google Play服务正常\n• 重启应用后重试\n• 检查账户是否被限制',
+              style: TextStyle(color: Colors.grey, fontSize: 12),
+            ),
+          ],
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Text('确定'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              _handleGoogleSignIn(); // 重试登录
+            },
+            child: const Text('重试'),
           ),
         ],
       ),

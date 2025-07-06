@@ -1,6 +1,7 @@
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import 'dart:io';
 import '../models/user.dart';
 import '../models/playlist.dart';
 import 'video_metadata_service.dart';
@@ -23,10 +24,10 @@ class AuthService {
   static User? get currentUser => _currentUser;
   static bool get isSignedIn => _currentUser != null;
 
-  static Future<void> initialize() async {
+  static Future<AuthResult> initialize() async {
     if (_initialized) {
       print('AuthService.initialize: Already initialized, skipping');
-      return;
+      return AuthResult(success: true, user: _currentUser, message: '已初始化');
     }
     
     try {
@@ -38,12 +39,14 @@ class AuthService {
         print('AuthService.initialize: Created user with playlist length: ${_currentUser!.playlist.length}');
       }
       _initialized = true;
+      return AuthResult(success: true, user: _currentUser, message: '初始化成功');
     } catch (e) {
       print('Error initializing auth service: $e');
+      return AuthResult(success: false, message: _getErrorMessage(e));
     }
   }
 
-  static Future<User?> signInWithGoogle() async {
+  static Future<AuthResult> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? account = await googleSignIn.signIn();
       if (account != null) {
@@ -52,12 +55,14 @@ class AuthService {
         await _loadPlaylistFromStorage();
         _initialized = true;
         print('AuthService.signInWithGoogle: User signed in with playlist length: ${_currentUser!.playlist.length}');
-        return _currentUser;
+        return AuthResult(success: true, user: _currentUser, message: '登录成功');
+      } else {
+        return AuthResult(success: false, message: '用户取消登录');
       }
     } catch (e) {
       print('Error signing in with Google: $e');
+      return AuthResult(success: false, message: _getErrorMessage(e));
     }
-    return null;
   }
 
   static Future<void> signOut() async {
@@ -367,4 +372,48 @@ class AuthService {
       print('Error loading playlist from storage: $e');
     }
   }
+
+  static String _getErrorMessage(dynamic error) {
+    final errorString = error.toString().toLowerCase();
+    
+    if (errorString.contains('network_error') || errorString.contains('network')) {
+      return '网络连接错误，请检查网络设置';
+    } else if (errorString.contains('sign_in_canceled')) {
+      return '用户取消了登录';
+    } else if (errorString.contains('sign_in_failed')) {
+      return 'Google 登录失败，请稍后重试';
+    } else if (errorString.contains('account_exists_with_different_credential')) {
+      return '该邮箱已关联其他登录方式';
+    } else if (errorString.contains('invalid_credential')) {
+      return '登录凭据无效，请重新登录';
+    } else if (errorString.contains('user_disabled')) {
+      return '该账户已被禁用';
+    } else if (errorString.contains('operation_not_allowed')) {
+      return 'Google 登录服务未启用';
+    } else if (errorString.contains('too_many_requests')) {
+      return '请求过于频繁，请稍后再试';
+    } else if (errorString.contains('timeout')) {
+      return '登录超时，请检查网络连接';
+    } else if (errorString.contains('platform')) {
+      return '平台不支持此登录方式';
+    } else if (errorString.contains('service_unavailable')) {
+      return 'Google 服务暂时不可用';
+    } else if (errorString.contains('permission_denied')) {
+      return '权限被拒绝，请检查应用权限';
+    } else {
+      return '登录失败：${error.toString()}';
+    }
+  }
+}
+
+class AuthResult {
+  final bool success;
+  final User? user;
+  final String message;
+
+  AuthResult({
+    required this.success,
+    this.user,
+    required this.message,
+  });
 }

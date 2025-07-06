@@ -54,12 +54,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _checkAuthAndNavigate() async {
-    await AuthService.initialize();
+    final result = await AuthService.initialize();
     
     await Future.delayed(const Duration(seconds: 2));
     
     if (mounted) {
-      if (AuthService.isSignedIn) {
+      if (result.success && AuthService.isSignedIn) {
         Navigator.pushReplacementNamed(context, '/playlist');
       } else {
         Navigator.pushReplacementNamed(context, '/auth');
