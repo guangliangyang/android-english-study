@@ -53,13 +53,13 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  Future<void> _handleGoogleSignIn() async {
+  Future<void> _handleSignIn() async {
     setState(() {
       _isLoading = true;
     });
 
     try {
-      final AuthResult result = await AuthService.signInWithGoogle();
+      final AuthResult result = await AuthService.signIn();
       
       if (mounted) {
         if (result.success && result.user != null) {
@@ -67,14 +67,14 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
           Navigator.pushReplacementNamed(context, '/playlist');
         } else {
           _showToast(result.message, isSuccess: false);
-          _showErrorDialog('登录失败', result.message);
+          _showErrorDialog('初始化失败', result.message);
         }
       }
     } catch (e) {
       if (mounted) {
         final errorMessage = '发生未知错误：${e.toString()}';
         _showToast(errorMessage, isSuccess: false);
-        _showErrorDialog('登录错误', errorMessage);
+        _showErrorDialog('初始化错误', errorMessage);
       }
     } finally {
       if (mounted) {
@@ -141,7 +141,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
           TextButton(
             onPressed: () {
               Navigator.pop(context);
-              _handleGoogleSignIn(); // 重试登录
+              _handleSignIn(); // 重试初始化
             },
             child: const Text('重试'),
           ),
@@ -383,7 +383,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: _isLoading ? null : _handleGoogleSignIn,
+          onTap: _isLoading ? null : _handleSignIn,
           borderRadius: BorderRadius.circular(28),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -414,7 +414,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
                   ),
                 const SizedBox(width: 12),
                 Text(
-                  _isLoading ? '登录中...' : '使用 Google 账号登录',
+                  _isLoading ? '初始化中...' : '开始使用',
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -433,7 +433,7 @@ class _AuthScreenState extends State<AuthScreen> with TickerProviderStateMixin {
     return Column(
       children: [
         Text(
-          '登录即表示您同意我们的服务条款和隐私政策',
+          '使用即表示您同意我们的服务条款和隐私政策',
           style: TextStyle(
             fontSize: 11, // 缩小字体
             color: Colors.grey[500],

@@ -59,11 +59,8 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 2));
     
     if (mounted) {
-      if (result.success && AuthService.isSignedIn) {
-        Navigator.pushReplacementNamed(context, '/playlist');
-      } else {
-        Navigator.pushReplacementNamed(context, '/auth');
-      }
+      // Always navigate to playlist since it's a single-user app
+      Navigator.pushReplacementNamed(context, '/playlist');
     }
   }
 

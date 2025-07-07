@@ -18,8 +18,6 @@ dependencies:
   # YouTube Player
   youtube_player_flutter: ^9.1.1
 
-  # Google Sign-In
-  google_sign_in: ^6.1.5
 
   # HTTP requests
   http: ^1.1.0

@@ -1,25 +1,14 @@
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import 'dart:io';
 import '../models/user.dart';
 import '../models/playlist.dart';
 import 'video_metadata_service.dart';
 
 class AuthService {
-  static GoogleSignIn? _googleSignIn;
   static User? _currentUser;
   static bool _initialized = false;
-
-  static GoogleSignIn get googleSignIn {
-    _googleSignIn ??= GoogleSignIn(
-      scopes: [
-        'email',
-        'profile',
-      ],
-    );
-    return _googleSignIn!;
-  }
+  static const String _defaultUserEmail = 'local_user@englishstudy.app';
+  static const String _defaultUserName = '英语学习用户';
 
   static User? get currentUser => _currentUser;
   static bool get isSignedIn => _currentUser != null;
@@ -31,65 +20,63 @@ class AuthService {
     }
     
     try {
-      final account = await googleSignIn.signInSilently();
-      if (account != null) {
-        _currentUser = User.fromGoogleSignInAccount(account);
-        // Load saved playlist from local storage
-        await _loadPlaylistFromStorage();
-        print('AuthService.initialize: Created user with playlist length: ${_currentUser!.playlist.length}');
-      }
+      // Create a default local user
+      _currentUser = User(
+        id: 'local_user',
+        email: _defaultUserEmail,
+        name: _defaultUserName,
+        photoUrl: null,
+        playlist: Playlist(),
+        recentVideoIds: [],
+        favoriteVideoIds: [],
+        videoProgress: {},
+        preferences: UserPreferences(),
+        stats: UserStats(),
+      );
+      
+      // Load saved playlist from local storage
+      await _loadPlaylistFromStorage();
+      print('AuthService.initialize: Created local user with playlist length: ${_currentUser!.playlist.length}');
+      
       _initialized = true;
       return AuthResult(success: true, user: _currentUser, message: '初始化成功');
     } catch (e) {
       print('Error initializing auth service: $e');
-      return AuthResult(success: false, message: _getErrorMessage(e));
+      return AuthResult(success: false, message: '初始化失败：${e.toString()}');
     }
   }
 
-  static Future<AuthResult> signInWithGoogle() async {
-    try {
-      final GoogleSignInAccount? account = await googleSignIn.signIn();
-      if (account != null) {
-        _currentUser = User.fromGoogleSignInAccount(account);
-        // Load saved playlist from local storage for the new user
-        await _loadPlaylistFromStorage();
-        _initialized = true;
-        print('AuthService.signInWithGoogle: User signed in with playlist length: ${_currentUser!.playlist.length}');
-        return AuthResult(success: true, user: _currentUser, message: '登录成功');
-      } else {
-        return AuthResult(success: false, message: '用户取消登录');
-      }
-    } catch (e) {
-      print('Error signing in with Google: $e');
-      return AuthResult(success: false, message: _getErrorMessage(e));
-    }
+  // Single-user app doesn't need sign-in, just initialize
+  static Future<AuthResult> signIn() async {
+    return await initialize();
   }
 
   static Future<void> signOut() async {
     try {
-      await googleSignIn.signOut();
       _currentUser = null;
       _initialized = false;
+      print('User signed out');
     } catch (e) {
       print('Error signing out: $e');
     }
   }
 
-  static Future<void> disconnect() async {
+  static Future<void> clearAllData() async {
     try {
-      await googleSignIn.disconnect();
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.clear();
       _currentUser = null;
       _initialized = false;
+      print('All user data cleared');
     } catch (e) {
-      print('Error disconnecting: $e');
+      print('Error clearing data: $e');
     }
   }
 
   static Future<User?> refreshUserData() async {
     try {
-      final account = await googleSignIn.signInSilently();
-      if (account != null) {
-        _currentUser = User.fromGoogleSignInAccount(account);
+      if (_currentUser != null) {
+        await _loadPlaylistFromStorage();
         return _currentUser;
       }
     } catch (e) {
@@ -99,39 +86,7 @@ class AuthService {
   }
 
   static Future<bool> isUserSignedIn() async {
-    try {
-      final account = await googleSignIn.signInSilently();
-      return account != null;
-    } catch (e) {
-      print('Error checking sign in status: $e');
-      return false;
-    }
-  }
-
-  static Future<String?> getAccessToken() async {
-    try {
-      final account = await googleSignIn.signInSilently();
-      if (account != null) {
-        final auth = await account.authentication;
-        return auth.accessToken;
-      }
-    } catch (e) {
-      print('Error getting access token: $e');
-    }
-    return null;
-  }
-
-  static Future<String?> getIdToken() async {
-    try {
-      final account = await googleSignIn.signInSilently();
-      if (account != null) {
-        final auth = await account.authentication;
-        return auth.idToken;
-      }
-    } catch (e) {
-      print('Error getting ID token: $e');
-    }
-    return null;
+    return _currentUser != null;
   }
 
   static void updateUserPreferences(UserPreferences preferences) {
@@ -351,9 +306,8 @@ class AuthService {
       
       final prefs = await SharedPreferences.getInstance();
       final playlistJson = json.encode(_currentUser!.playlist.toJson());
-      final userKey = 'user_playlist_${_currentUser!.email}';
-      await prefs.setString(userKey, playlistJson);
-      print('AuthService: Saved playlist to storage with ${_currentUser!.playlist.length} items for ${_currentUser!.email}');
+      await prefs.setString('user_playlist', playlistJson);
+      print('AuthService: Saved playlist to storage with ${_currentUser!.playlist.length} items');
     } catch (e) {
       print('Error saving playlist to storage: $e');
     }
@@ -364,53 +318,21 @@ class AuthService {
       if (_currentUser == null) return;
       
       final prefs = await SharedPreferences.getInstance();
-      final userKey = 'user_playlist_${_currentUser!.email}';
-      final playlistJsonString = prefs.getString(userKey);
+      final playlistJsonString = prefs.getString('user_playlist');
       
       if (playlistJsonString != null) {
         final playlistJson = json.decode(playlistJsonString) as Map<String, dynamic>;
         final savedPlaylist = Playlist.fromJson(playlistJson);
         _currentUser = _currentUser!.copyWith(playlist: savedPlaylist);
-        print('AuthService: Loaded playlist from storage with ${savedPlaylist.length} items for ${_currentUser!.email}');
+        print('AuthService: Loaded playlist from storage with ${savedPlaylist.length} items');
       } else {
-        print('AuthService: No saved playlist found in storage for ${_currentUser!.email}');
+        print('AuthService: No saved playlist found in storage');
       }
     } catch (e) {
       print('Error loading playlist from storage: $e');
     }
   }
 
-  static String _getErrorMessage(dynamic error) {
-    final errorString = error.toString().toLowerCase();
-    
-    if (errorString.contains('network_error') || errorString.contains('network')) {
-      return '网络连接错误，请检查网络设置';
-    } else if (errorString.contains('sign_in_canceled')) {
-      return '用户取消了登录';
-    } else if (errorString.contains('sign_in_failed')) {
-      return 'Google 登录失败，请稍后重试';
-    } else if (errorString.contains('account_exists_with_different_credential')) {
-      return '该邮箱已关联其他登录方式';
-    } else if (errorString.contains('invalid_credential')) {
-      return '登录凭据无效，请重新登录';
-    } else if (errorString.contains('user_disabled')) {
-      return '该账户已被禁用';
-    } else if (errorString.contains('operation_not_allowed')) {
-      return 'Google 登录服务未启用';
-    } else if (errorString.contains('too_many_requests')) {
-      return '请求过于频繁，请稍后再试';
-    } else if (errorString.contains('timeout')) {
-      return '登录超时，请检查网络连接';
-    } else if (errorString.contains('platform')) {
-      return '平台不支持此登录方式';
-    } else if (errorString.contains('service_unavailable')) {
-      return 'Google 服务暂时不可用';
-    } else if (errorString.contains('permission_denied')) {
-      return '权限被拒绝，请检查应用权限';
-    } else {
-      return '登录失败：${error.toString()}';
-    }
-  }
 }
 
 class AuthResult {

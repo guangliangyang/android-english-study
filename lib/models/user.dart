@@ -1,4 +1,3 @@
-import 'package:google_sign_in/google_sign_in.dart';
 import 'playlist.dart';
 
 class User {
@@ -37,14 +36,6 @@ class User {
         stats = stats ?? UserStats(),
         playlist = playlist ?? Playlist();
 
-  factory User.fromGoogleSignInAccount(GoogleSignInAccount account) {
-    return User(
-      id: account.id,
-      name: account.displayName ?? '',
-      email: account.email,
-      photoUrl: account.photoUrl,
-    );
-  }
 
   Map<String, dynamic> toJson() {
     return {

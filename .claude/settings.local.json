@@ -10,7 +10,8 @@
       "Bash(git init:*)",
       "Bash(git remote add:*)",
       "Bash(dart analyze:*)",
-      "Bash(rg:*)"
+      "Bash(rg:*)",
+      "Bash(/Library/flutter/bin/flutter:*)"
     ],
     "deny": []
   }
