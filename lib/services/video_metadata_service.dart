@@ -14,24 +14,26 @@ class VideoMetadataService {
     try {
       developer.log('Fetching metadata for video: $videoId', name: _tag);
       
-      // 方法1: 尝试从YouTube页面HTML提取信息
-      final item = await _extractFromVideoPage(videoId);
-      if (item != null) {
-        return item;
+      // 方法1: 从oEmbed API获取基本信息（更可靠且快速）
+      final oembedItem = await _getFromOEmbed(videoId);
+      if (oembedItem != null && oembedItem.title != 'Unknown Title') {
+        developer.log('Successfully got title from oEmbed: ${oembedItem.title}', name: _tag);
+        return oembedItem;
       }
       
-      // 方法2: 从oEmbed API获取基本信息
-      return await _getFromOEmbed(videoId);
+      // 方法2: 尝试从YouTube页面HTML提取信息
+      final htmlItem = await _extractFromVideoPage(videoId);
+      if (htmlItem != null) {
+        developer.log('Successfully got title from HTML: ${htmlItem.title}', name: _tag);
+        return htmlItem;
+      }
+      
+      developer.log('Both methods failed, returning fallback', name: _tag);
+      return null;
       
     } catch (e) {
       developer.log('Error fetching video metadata: $e', name: _tag, error: e);
-      
-      // 返回基本的PlaylistItem
-      return PlaylistItem(
-        videoId: videoId,
-        title: 'Video $videoId',
-        thumbnail: 'https://img.youtube.com/vi/$videoId/mqdefault.jpg',
-      );
+      return null;
     }
   }
 
@@ -113,16 +115,25 @@ class VideoMetadataService {
   static Future<PlaylistItem?> _getFromOEmbed(String videoId) async {
     try {
       final oembedUrl = 'https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=$videoId&format=json';
+      developer.log('Fetching from oEmbed: $oembedUrl', name: _tag);
+      
       final response = await _client.get(Uri.parse(oembedUrl)).timeout(_connectTimeout);
       
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        return PlaylistItem(
-          videoId: videoId,
-          title: data['title'] ?? 'Unknown Title',
-          thumbnail: data['thumbnail_url'] ?? 'https://img.youtube.com/vi/$videoId/mqdefault.jpg',
-          channelName: data['author_name'],
-        );
+        final title = data['title']?.toString();
+        
+        if (title != null && title.isNotEmpty) {
+          developer.log('oEmbed success: $title', name: _tag);
+          return PlaylistItem(
+            videoId: videoId,
+            title: title,
+            thumbnail: data['thumbnail_url'] ?? 'https://img.youtube.com/vi/$videoId/mqdefault.jpg',
+            channelName: data['author_name'],
+          );
+        }
+      } else {
+        developer.log('oEmbed HTTP error: ${response.statusCode}', name: _tag);
       }
     } catch (e) {
       developer.log('Error fetching from oEmbed: $e', name: _tag);

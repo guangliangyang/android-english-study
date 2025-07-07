@@ -157,14 +157,19 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       // 获取视频标题
       String videoTitle = 'English Study';
       try {
-        final playlistItem = AuthService.getPlaylistVideo(videoId);
-        if (playlistItem != null && playlistItem.title.isNotEmpty) {
-          videoTitle = playlistItem.title;
+        // 首先尝试从VideoMetadataService获取实时标题
+        final metadata = await VideoMetadataService.getVideoMetadata(videoId);
+        if (metadata != null && metadata.title.isNotEmpty && metadata.title != 'Video $videoId') {
+          videoTitle = metadata.title;
+          print('Got video title from metadata: $videoTitle');
         } else {
-          // 如果播放列表中没有，尝试从VideoMetadataService获取
-          final metadata = await VideoMetadataService.getVideoMetadata(videoId);
-          if (metadata != null && metadata.title.isNotEmpty) {
-            videoTitle = metadata.title;
+          // 如果元数据服务失败，尝试从播放列表获取
+          final playlistItem = AuthService.getPlaylistVideo(videoId);
+          if (playlistItem != null && playlistItem.title.isNotEmpty) {
+            videoTitle = playlistItem.title;
+            print('Got video title from playlist: $videoTitle');
+          } else {
+            print('Failed to get video title, using default: $videoTitle');
           }
         }
       } catch (e) {
@@ -929,12 +934,12 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          _videoTitle,
+          _videoTitle.isNotEmpty ? _videoTitle : 'English Study',
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
-          maxLines: 1,
+          maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
         elevation: 0,
