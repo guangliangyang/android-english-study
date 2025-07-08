@@ -55,6 +55,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   // 后台音频服务 (默认启用)
   BackgroundAudioService? _backgroundAudioService;
   
+  
   // 动画控制器（保留用于其他可能的动画）
 
   @override
@@ -148,7 +149,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
           mute: false,
           loop: _isLoopMode,
           showLiveFullscreenButton: false,
-          enableCaption: false,
+          enableCaption: true,
           controlsVisibleAtStart: true,
         ),
       );
@@ -281,10 +282,27 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     int currentSegmentIndex = -1;
     for (int i = 0; i < transcriptToUse.segments.length; i++) {
       final segment = transcriptToUse.segments[i];
-      if (_currentPosition >= segment.startTime && 
-          _currentPosition < segment.endTime) {
+      // 使用更宽松的边界条件，包含endTime，并添加小的容差
+      if (_currentPosition >= (segment.startTime - 0.1) && 
+          _currentPosition <= (segment.endTime + 0.1)) {
         currentSegmentIndex = i;
         break;
+      }
+    }
+    
+    // 如果没有找到精确匹配，寻找最接近的segment
+    if (currentSegmentIndex == -1) {
+      double minDistance = double.infinity;
+      for (int i = 0; i < transcriptToUse.segments.length; i++) {
+        final segment = transcriptToUse.segments[i];
+        final distanceToStart = (_currentPosition - segment.startTime).abs();
+        final distanceToEnd = (_currentPosition - segment.endTime).abs();
+        final minSegmentDistance = [distanceToStart, distanceToEnd].reduce((a, b) => a < b ? a : b);
+        
+        if (minSegmentDistance < minDistance && minSegmentDistance <= 1.0) { // 1秒容差
+          minDistance = minSegmentDistance;
+          currentSegmentIndex = i;
+        }
       }
     }
 
@@ -525,7 +543,6 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       }
     });
   }
-  
 
   void _seekToTime(double seconds) {
     if (_controller != null) {
@@ -1112,6 +1129,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     // 更新高亮位置
     _updateTranscriptHighlight();
   }
+
 
   @override
   Widget build(BuildContext context) {
