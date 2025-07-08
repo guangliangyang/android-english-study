@@ -21,8 +21,11 @@ class AITranscriptService {
   
   static final http.Client _client = http.Client();
 
-  /// Generate AI transcript from original transcript
-  static Future<EnhancedTranscript?> generateFromOriginal(String videoId) async {
+  /// Generate AI transcript from original transcript with progress callback
+  static Future<EnhancedTranscript?> generateFromOriginal(
+    String videoId, {
+    Function(int currentBatch, int totalBatches, int processedSegments, int totalSegments)? onProgress,
+  }) async {
     try {
       if (!_isConfigured) {
         throw Exception('OpenAI API key not configured. Please check your .env file.');
@@ -41,12 +44,17 @@ class AITranscriptService {
       // Process all segments in batches of 20
       final allSentences = <Sentence>[];
       final totalSegments = originalTranscript.segments.length;
+      final totalBatches = (totalSegments / 20).ceil();
       
       for (int i = 0; i < totalSegments; i += 20) {
         final endIndex = (i + 20).clamp(0, totalSegments);
         final batchSegments = originalTranscript.segments.sublist(i, endIndex);
+        final currentBatch = (i ~/ 20) + 1;
         
-        developer.log('Processing batch ${(i ~/ 20) + 1}/${(totalSegments / 20).ceil()}: segments ${i + 1}-$endIndex', name: _tag);
+        developer.log('Processing batch $currentBatch/$totalBatches: segments ${i + 1}-$endIndex', name: _tag);
+        
+        // Call progress callback before processing batch
+        onProgress?.call(currentBatch, totalBatches, i, totalSegments);
         
         // Create temporary transcript for this batch
         final batchTranscript = Transcript(
@@ -65,10 +73,13 @@ class AITranscriptService {
         
         if (batchEnhancedTranscript != null) {
           allSentences.addAll(batchEnhancedTranscript.sentences);
-          developer.log('Successfully processed batch ${(i ~/ 20) + 1}, total sentences so far: ${allSentences.length}', name: _tag);
+          developer.log('Successfully processed batch $currentBatch, total sentences so far: ${allSentences.length}', name: _tag);
         } else {
-          developer.log('Failed to process batch ${(i ~/ 20) + 1}', name: _tag);
+          developer.log('Failed to process batch $currentBatch', name: _tag);
         }
+        
+        // Call progress callback after processing batch
+        onProgress?.call(currentBatch, totalBatches, endIndex, totalSegments);
         
         // Add a small delay between batches to avoid rate limiting
         if (i + 20 < totalSegments) {

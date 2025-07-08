@@ -620,88 +620,47 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        backgroundColor: Colors.grey[900],
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        title: const Row(
-          children: [
-            Icon(Icons.auto_fix_high, color: Colors.green),
-            SizedBox(width: 8),
-            Text(
-              '正在生成AI字幕',
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            ),
-          ],
-        ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              '正在为"${item.title}"生成AI字幕...',
-              style: const TextStyle(color: Colors.white),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              '正在批量处理所有字幕段落（每批20条）',
-              style: TextStyle(color: Colors.orange, fontSize: 12, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 4),
-            const Text(
-              '这可能需要几分钟，请稍候',
-              style: TextStyle(color: Colors.grey, fontSize: 12),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
+      builder: (context) => _AITranscriptProgressDialog(
+        videoTitle: item.title,
+        videoId: item.videoId,
+        onComplete: (aiTranscript) {
+          // 关闭进度对话框
+          if (mounted) {
+            Navigator.of(context).pop();
+          }
+
+          if (aiTranscript != null) {
+            // 生成成功
+            if (mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('AI字幕生成成功！共${aiTranscript.sentences.length}个句子'),
+                  backgroundColor: Colors.green,
+                  behavior: SnackBarBehavior.floating,
+                  duration: const Duration(seconds: 3),
+                ),
+              );
+            }
+          } else {
+            // 生成失败
+            if (mounted) {
+              _showErrorDialog('AI字幕生成失败', '可能是网络问题或视频没有字幕，请稍后再试');
+            }
+          }
+        },
+        onError: (error) {
+          // 关闭进度对话框
+          if (mounted) {
+            Navigator.of(context).pop();
+          }
+          
+          // 显示错误信息
+          if (mounted) {
+            _showErrorDialog('AI字幕生成失败', '错误信息：$error');
+          }
+        },
       ),
     );
-
-    try {
-      // 调用AI字幕服务
-      final aiTranscript = await AITranscriptService.generateFromOriginal(item.videoId);
-      
-      // 关闭进度对话框
-      if (mounted) {
-        Navigator.of(context).pop();
-      }
-
-      if (aiTranscript != null) {
-        // 生成成功
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('AI字幕生成成功！共${aiTranscript.sentences.length}个句子'),
-              backgroundColor: Colors.green,
-              behavior: SnackBarBehavior.floating,
-              duration: const Duration(seconds: 3),
-            ),
-          );
-        }
-      } else {
-        // 生成失败
-        if (mounted) {
-          _showErrorDialog('AI字幕生成失败', '可能是网络问题或视频没有字幕，请稍后再试');
-        }
-      }
-    } catch (e) {
-      // 关闭进度对话框
-      if (mounted) {
-        Navigator.of(context).pop();
-      }
-      
-      // 显示错误信息
-      if (mounted) {
-        _showErrorDialog('AI字幕生成失败', '错误信息：$e');
-      }
-    }
   }
 
   void _showErrorDialog(String title, String message) {
@@ -1549,5 +1508,141 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
     } else {
       return '${date.month}/${date.day}';
     }
+  }
+}
+
+/// Progress dialog for AI transcript generation with real-time progress
+class _AITranscriptProgressDialog extends StatefulWidget {
+  final String videoTitle;
+  final String videoId;
+  final Function(EnhancedTranscript?) onComplete;
+  final Function(dynamic) onError;
+
+  const _AITranscriptProgressDialog({
+    required this.videoTitle,
+    required this.videoId,
+    required this.onComplete,
+    required this.onError,
+  });
+
+  @override
+  State<_AITranscriptProgressDialog> createState() => _AITranscriptProgressDialogState();
+}
+
+class _AITranscriptProgressDialogState extends State<_AITranscriptProgressDialog> {
+  int _currentBatch = 0;
+  int _totalBatches = 0;
+  int _processedSegments = 0;
+  int _totalSegments = 0;
+  double _progress = 0.0;
+  String _statusText = '正在初始化...';
+
+  @override
+  void initState() {
+    super.initState();
+    _startGeneration();
+  }
+
+  void _startGeneration() async {
+    try {
+      final aiTranscript = await AITranscriptService.generateFromOriginal(
+        widget.videoId,
+        onProgress: (currentBatch, totalBatches, processedSegments, totalSegments) {
+          if (mounted) {
+            setState(() {
+              _currentBatch = currentBatch;
+              _totalBatches = totalBatches;
+              _processedSegments = processedSegments;
+              _totalSegments = totalSegments;
+              _progress = totalSegments > 0 ? processedSegments / totalSegments : 0.0;
+              _statusText = '正在处理第 $currentBatch/$totalBatches 批 (${processedSegments}/${totalSegments} 段落)';
+            });
+          }
+        },
+      );
+      
+      if (mounted) {
+        widget.onComplete(aiTranscript);
+      }
+    } catch (e) {
+      if (mounted) {
+        widget.onError(e);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: Colors.grey[900],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      title: const Row(
+        children: [
+          Icon(Icons.auto_fix_high, color: Colors.green),
+          SizedBox(width: 8),
+          Text(
+            '正在生成AI字幕',
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+        ],
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Progress bar
+          LinearProgressIndicator(
+            value: _progress,
+            backgroundColor: Colors.grey[700],
+            valueColor: const AlwaysStoppedAnimation<Color>(Colors.green),
+            minHeight: 8,
+          ),
+          const SizedBox(height: 16),
+          
+          // Video title
+          Text(
+            '正在为"${widget.videoTitle}"生成AI字幕...',
+            style: const TextStyle(color: Colors.white, fontSize: 14),
+            textAlign: TextAlign.center,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 12),
+          
+          // Progress status
+          Text(
+            _statusText,
+            style: const TextStyle(color: Colors.orange, fontSize: 13, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 8),
+          
+          // Progress percentage
+          Text(
+            '${(_progress * 100).toStringAsFixed(1)}% 完成',
+            style: const TextStyle(color: Colors.blue, fontSize: 12),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 4),
+          
+          // Batch info
+          if (_totalBatches > 0)
+            Text(
+              '批次进度: $_currentBatch/$_totalBatches',
+              style: const TextStyle(color: Colors.grey, fontSize: 11),
+              textAlign: TextAlign.center,
+            ),
+          const SizedBox(height: 8),
+          
+          // Tip
+          const Text(
+            '请耐心等待，这可能需要几分钟',
+            style: TextStyle(color: Colors.grey, fontSize: 11),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
   }
 }
