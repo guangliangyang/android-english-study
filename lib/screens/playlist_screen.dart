@@ -5,6 +5,7 @@ import '../models/playlist.dart';
 import '../services/auth_service.dart';
 import '../services/sharing_service.dart';
 import '../services/youtube_playlist_service.dart';
+import '../services/ai_transcript_service.dart';
 import '../models/user.dart';
 import 'youtube_learning_screen.dart';
 import 'sharing_screen.dart';
@@ -556,6 +557,179 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
               );
             },
             child: const Text('清空'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _generateAITranscript(PlaylistItem item) async {
+    // 检查是否已经有AI字幕
+    final hasAITranscript = await AITranscriptService.hasAITranscript(item.videoId);
+    
+    if (hasAITranscript) {
+      // 如果已经有AI字幕，提示用户
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          backgroundColor: Colors.grey[900],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: const Row(
+            children: [
+              Icon(Icons.info, color: Colors.blue),
+              SizedBox(width: 8),
+              Text(
+                'AI字幕已存在',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+            ],
+          ),
+          content: const Text(
+            '该视频已经有AI字幕，是否要重新生成？',
+            style: TextStyle(color: Colors.white),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('取消', style: TextStyle(color: Colors.grey)),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                _startAITranscriptGeneration(item);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+              ),
+              child: const Text('重新生成'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      // 直接开始生成
+      _startAITranscriptGeneration(item);
+    }
+  }
+
+  void _startAITranscriptGeneration(PlaylistItem item) async {
+    // 显示进度对话框
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.grey[900],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: const Row(
+          children: [
+            Icon(Icons.auto_fix_high, color: Colors.green),
+            SizedBox(width: 8),
+            Text(
+              '正在生成AI字幕',
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              '正在为"${item.title}"生成AI字幕...',
+              style: const TextStyle(color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              '正在批量处理所有字幕段落（每批20条）',
+              style: TextStyle(color: Colors.orange, fontSize: 12, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 4),
+            const Text(
+              '这可能需要几分钟，请稍候',
+              style: TextStyle(color: Colors.grey, fontSize: 12),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+
+    try {
+      // 调用AI字幕服务
+      final aiTranscript = await AITranscriptService.generateFromOriginal(item.videoId);
+      
+      // 关闭进度对话框
+      if (mounted) {
+        Navigator.of(context).pop();
+      }
+
+      if (aiTranscript != null) {
+        // 生成成功
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('AI字幕生成成功！共${aiTranscript.sentences.length}个句子'),
+              backgroundColor: Colors.green,
+              behavior: SnackBarBehavior.floating,
+              duration: const Duration(seconds: 3),
+            ),
+          );
+        }
+      } else {
+        // 生成失败
+        if (mounted) {
+          _showErrorDialog('AI字幕生成失败', '可能是网络问题或视频没有字幕，请稍后再试');
+        }
+      }
+    } catch (e) {
+      // 关闭进度对话框
+      if (mounted) {
+        Navigator.of(context).pop();
+      }
+      
+      // 显示错误信息
+      if (mounted) {
+        _showErrorDialog('AI字幕生成失败', '错误信息：$e');
+      }
+    }
+  }
+
+  void _showErrorDialog(String title, String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.grey[900],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: Row(
+          children: [
+            const Icon(Icons.error, color: Colors.red),
+            const SizedBox(width: 8),
+            Text(
+              title,
+              style: const TextStyle(color: Colors.white, fontSize: 18),
+            ),
+          ],
+        ),
+        content: Text(
+          message,
+          style: const TextStyle(color: Colors.white),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('确定', style: TextStyle(color: Colors.blue)),
           ),
         ],
       ),
@@ -1172,22 +1346,51 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
           child: Row(
             children: [
               // 缩略图
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  item.thumbnail ?? 'https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg',
-                  width: 120,
-                  height: 68,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
+              Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image.network(
+                      item.thumbnail ?? 'https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg',
                       width: 120,
                       height: 68,
-                      color: Colors.grey[800],
-                      child: const Icon(Icons.play_circle_outline, color: Colors.white),
-                    );
-                  },
-                ),
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          width: 120,
+                          height: 68,
+                          color: Colors.grey[800],
+                          child: const Icon(Icons.play_circle_outline, color: Colors.white),
+                        );
+                      },
+                    ),
+                  ),
+                  // AI字幕状态指示器
+                  FutureBuilder<bool>(
+                    future: AITranscriptService.hasAITranscript(item.videoId),
+                    builder: (context, snapshot) {
+                      if (snapshot.data == true) {
+                        return Positioned(
+                          top: 4,
+                          right: 4,
+                          child: Container(
+                            padding: const EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: const Icon(
+                              Icons.auto_fix_high,
+                              color: Colors.white,
+                              size: 12,
+                            ),
+                          ),
+                        );
+                      }
+                      return const SizedBox.shrink();
+                    },
+                  ),
+                ],
               ),
               
               const SizedBox(width: 12),
@@ -1279,6 +1482,9 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                 color: Colors.grey[800],
                 onSelected: (value) {
                   switch (value) {
+                    case 'ai_transcript':
+                      _generateAITranscript(item);
+                      break;
                     case 'remove':
                       _removeVideo(item.videoId);
                       break;
@@ -1288,6 +1494,16 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                   }
                 },
                 itemBuilder: (context) => [
+                  const PopupMenuItem(
+                    value: 'ai_transcript',
+                    child: Row(
+                      children: [
+                        Icon(Icons.auto_fix_high, color: Colors.green),
+                        SizedBox(width: 8),
+                        Text('AI字幕', style: TextStyle(color: Colors.white)),
+                      ],
+                    ),
+                  ),
                   const PopupMenuItem(
                     value: 'change_category',
                     child: Row(

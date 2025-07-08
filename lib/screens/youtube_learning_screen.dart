@@ -6,6 +6,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/transcript.dart';
 import '../services/transcript_service.dart';
+import '../services/ai_transcript_service.dart';
 import '../services/auth_service.dart';
 import '../services/background_audio_service.dart';
 import '../services/app_guide_service.dart';
@@ -24,6 +25,8 @@ class YoutubeLearningScreen extends StatefulWidget {
 class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   YoutubePlayerController? _controller;
   Transcript? _transcript;
+  EnhancedTranscript? _aiTranscript;
+  bool _isUsingAITranscript = false;
   bool _isLoading = false;
   bool _isHeaderVisible = true;
   bool _isLoopMode = false;
@@ -154,6 +157,9 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
 
       final transcript = await TranscriptService.getTranscript(videoId);
       
+      // 检查是否有AI字幕
+      final aiTranscript = await AITranscriptService.loadAITranscript(videoId);
+      
       // 获取视频标题
       String videoTitle = 'English Study';
       try {
@@ -177,9 +183,10 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       }
       
       // 初始化字幕项目的GlobalKey列表
-      if (transcript != null) {
+      final transcriptToUse = aiTranscript?.toTranscript() ?? transcript;
+      if (transcriptToUse != null) {
         _transcriptItemKeys = List.generate(
-          transcript.segments.length,
+          transcriptToUse.segments.length,
           (index) => GlobalKey(),
         );
       } else {
@@ -188,6 +195,8 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       
       setState(() {
         _transcript = transcript;
+        _aiTranscript = aiTranscript;
+        _isUsingAITranscript = aiTranscript != null;
         _videoTitle = videoTitle;
         _isLoading = false;
       });
@@ -266,11 +275,12 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   }
 
   void _updateTranscriptHighlight() {
-    if (_transcript == null) return;
+    final transcriptToUse = _isUsingAITranscript ? _aiTranscript?.toTranscript() : _transcript;
+    if (transcriptToUse == null) return;
 
     int currentSegmentIndex = -1;
-    for (int i = 0; i < _transcript!.segments.length; i++) {
-      final segment = _transcript!.segments[i];
+    for (int i = 0; i < transcriptToUse.segments.length; i++) {
+      final segment = transcriptToUse.segments[i];
       if (_currentPosition >= segment.startTime && 
           _currentPosition < segment.endTime) {
         currentSegmentIndex = i;
@@ -278,11 +288,8 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       }
     }
 
-    // 高亮下一个段落（提前显示）
-    int highlightSegmentIndex = currentSegmentIndex >= 0 && 
-        currentSegmentIndex + 1 < _transcript!.segments.length
-        ? currentSegmentIndex + 1
-        : currentSegmentIndex;
+    // 高亮当前正在播放的段落（精确同步）
+    int highlightSegmentIndex = currentSegmentIndex;
 
     if (highlightSegmentIndex != _highlightedSegmentIndex) {
       setState(() {
@@ -853,7 +860,9 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   }
 
   Widget _buildTranscriptWidget() {
-    if (_transcript == null) {
+    final transcriptToUse = _isUsingAITranscript ? _aiTranscript?.toTranscript() : _transcript;
+    
+    if (transcriptToUse == null) {
       return const Center(
         child: Text(
           'Paste a YouTube video URL above and tap "Play Video" to start learning English!',
@@ -863,63 +872,245 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       );
     }
 
-    return ListView.builder(
-      controller: _transcriptScrollController,
-      padding: const EdgeInsets.all(16),
-      itemCount: _transcript!.segments.length,
-      itemBuilder: (context, index) {
-        final segment = _transcript!.segments[index];
-        final isHighlighted = index == _highlightedSegmentIndex;
-        
-        // 确保有足够的GlobalKey
-        if (index >= _transcriptItemKeys.length) {
-          _transcriptItemKeys.add(GlobalKey());
-        }
-        
-        return GestureDetector(
-          onTap: () => _seekToSegment(segment),
-          child: Container(
-            key: _transcriptItemKeys[index], // 添加GlobalKey
-            margin: const EdgeInsets.only(bottom: 12),
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: isHighlighted 
-                  ? Colors.green.withOpacity(0.2)
-                  : Colors.transparent,
-              borderRadius: BorderRadius.circular(8),
-              border: isHighlighted 
-                  ? Border.all(color: Colors.green, width: 2)
-                  : null,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '[${_formatTime(segment.startTime)}]',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: _currentFontSize * 0.8,
-                    fontWeight: FontWeight.bold,
+    return Column(
+      children: [
+        // 字幕列表
+        Expanded(
+          child: ListView.builder(
+            controller: _transcriptScrollController,
+            padding: const EdgeInsets.all(16),
+            itemCount: transcriptToUse.segments.length,
+            itemBuilder: (context, index) {
+              final segment = transcriptToUse.segments[index];
+              final isHighlighted = index == _highlightedSegmentIndex;
+              
+              // 确保有足够的GlobalKey
+              if (index >= _transcriptItemKeys.length) {
+                _transcriptItemKeys.add(GlobalKey());
+              }
+              
+              return GestureDetector(
+                onTap: () => _seekToSegment(segment),
+                child: Container(
+                  key: _transcriptItemKeys[index], // 添加GlobalKey
+                  margin: const EdgeInsets.only(bottom: 12),
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: isHighlighted 
+                        ? Colors.green.withOpacity(0.2)
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                    border: isHighlighted 
+                        ? Border.all(color: Colors.green, width: 2)
+                        : null,
                   ),
+                  child: _isUsingAITranscript 
+                      ? _buildAITranscriptItem(segment, isHighlighted, index)
+                      : _buildOriginalTranscriptItem(segment, isHighlighted),
                 ),
-                const SizedBox(height: 4),
-                SelectableText(
-                  segment.text,
-                  style: TextStyle(
-                    fontSize: _currentFontSize,
-                    color: isHighlighted ? Colors.green : Colors.white,
-                    fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,
-                  ),
-                  contextMenuBuilder: (context, editableTextState) {
-                    return _buildCustomContextMenu(context, editableTextState, segment.text);
-                  },
-                ),
-              ],
-            ),
+              );
+            },
           ),
-        );
-      },
+        ),
+      ],
     );
+  }
+
+  Widget _buildOriginalTranscriptItem(TranscriptSegment segment, bool isHighlighted) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '[${_formatTime(segment.startTime)}]',
+          style: TextStyle(
+            color: Colors.blue,
+            fontSize: _currentFontSize * 0.8,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 4),
+        SelectableText(
+          segment.text,
+          style: TextStyle(
+            fontSize: _currentFontSize,
+            color: isHighlighted ? Colors.green : Colors.white,
+            fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,
+          ),
+          contextMenuBuilder: (context, editableTextState) {
+            return _buildCustomContextMenu(context, editableTextState, segment.text);
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAITranscriptItem(TranscriptSegment segment, bool isHighlighted, int index) {
+    // 查找对应的AI增强句子
+    Sentence? aiSentence;
+    if (_aiTranscript != null) {
+      for (final sentence in _aiTranscript!.sentences) {
+        if (sentence.startTime <= segment.startTime && sentence.endTime >= segment.endTime) {
+          aiSentence = sentence;
+          break;
+        }
+      }
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // 时间戳
+        Text(
+          '[${_formatTime(segment.startTime)}]',
+          style: TextStyle(
+            color: Colors.blue,
+            fontSize: _currentFontSize * 0.8,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 4),
+        
+        // 英文文本
+        SelectableText(
+          segment.text,
+          style: TextStyle(
+            fontSize: _currentFontSize,
+            color: isHighlighted ? Colors.green : Colors.white,
+            fontWeight: isHighlighted ? FontWeight.bold : FontWeight.normal,
+          ),
+          contextMenuBuilder: (context, editableTextState) {
+            return _buildCustomContextMenu(context, editableTextState, segment.text);
+          },
+        ),
+        
+        // AI增强内容
+        if (aiSentence != null) ...[
+          // 中文翻译
+          if (aiSentence.chineseTranslation.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Text(
+              aiSentence.chineseTranslation,
+              style: TextStyle(
+                fontSize: _currentFontSize * 0.9,
+                color: Colors.grey[400],
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ],
+          
+          // 关键词
+          if (aiSentence.keywords.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 6,
+              runSpacing: 4,
+              children: aiSentence.keywords.map((keyword) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: Colors.blue.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Text(
+                    '${keyword.english} - ${keyword.chinese}',
+                    style: const TextStyle(
+                      color: Colors.blue,
+                      fontSize: 12,
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+          ],
+          
+          // 发音指导
+          if (aiSentence.pronunciation.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.purple.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.record_voice_over,
+                    size: 16,
+                    color: Colors.purple[300],
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      aiSentence.pronunciation,
+                      style: TextStyle(
+                        color: Colors.purple[300],
+                        fontSize: 12,
+                        fontFamily: 'monospace',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+          
+          // 语法解释
+          if (aiSentence.explanation.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.green.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.lightbulb_outline,
+                    size: 16,
+                    color: Colors.green[300],
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      aiSentence.explanation,
+                      style: TextStyle(
+                        color: Colors.green[300],
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ],
+      ],
+    );
+  }
+
+  void _toggleTranscriptMode() {
+    setState(() {
+      _isUsingAITranscript = !_isUsingAITranscript;
+      
+      // 重新初始化GlobalKey列表
+      final transcriptToUse = _isUsingAITranscript ? _aiTranscript?.toTranscript() : _transcript;
+      if (transcriptToUse != null) {
+        _transcriptItemKeys = List.generate(
+          transcriptToUse.segments.length,
+          (index) => GlobalKey(),
+        );
+      }
+      
+      // 重置高亮状态
+      _currentSegmentIndex = -1;
+      _highlightedSegmentIndex = -1;
+    });
+    
+    // 更新高亮位置
+    _updateTranscriptHighlight();
   }
 
   @override
@@ -1056,6 +1247,16 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
               ),
               tooltip: _isLoopMode ? '复读模式' : '顺序模式',
             ),
+            // AI字幕切换按钮
+            if (_transcript != null && _aiTranscript != null)
+              IconButton(
+                onPressed: _toggleTranscriptMode,
+                icon: Icon(
+                  _isUsingAITranscript ? Icons.auto_fix_high : Icons.subtitles,
+                  color: _isUsingAITranscript ? Colors.green : Colors.white,
+                ),
+                tooltip: _isUsingAITranscript ? 'AI字幕模式' : '原始字幕模式',
+              ),
           ],
         );
   }
