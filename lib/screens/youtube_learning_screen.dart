@@ -52,6 +52,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   double _currentFontSize = 16.0;
   final List<double> _fontSizes = [14.0, 16.0, 18.0, 20.0, 24.0];
   
+  
   // 后台音频服务 (默认启用)
   BackgroundAudioService? _backgroundAudioService;
   
@@ -151,6 +152,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
           showLiveFullscreenButton: false,
           enableCaption: true,
           controlsVisibleAtStart: true,
+          hideThumbnail: true,
         ),
       );
 
@@ -1130,6 +1132,127 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     _updateTranscriptHighlight();
   }
 
+  Widget _buildKeywordOverlay() {
+    // 只有在使用AI字幕模式且有当前段落时才显示
+    if (!_isUsingAITranscript || _aiTranscript == null || _currentSegmentIndex < 0) {
+      return const SizedBox.shrink();
+    }
+
+    if (_currentSegmentIndex >= _aiTranscript!.sentences.length) {
+      return const SizedBox.shrink();
+    }
+
+    final currentSentence = _aiTranscript!.sentences[_currentSegmentIndex];
+    final keywords = currentSentence.keywords;
+
+    if (keywords.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    // 限制显示的关键词数量（最多4个）
+    final displayKeywords = keywords.take(4).toList();
+
+    return Positioned(
+      top: 20,
+      right: 20,
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 200),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: displayKeywords.map((keyword) => _buildKeywordCard(keyword)).toList(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildKeywordCard(dynamic keyword) {
+    final english = keyword.english ?? '';
+    final chinese = keyword.chinese ?? '';
+    final type = keyword.type ?? '';
+
+    if (english.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    // 根据词性选择颜色
+    Color typeColor;
+    switch (type.toLowerCase()) {
+      case 'noun':
+      case 'n':
+        typeColor = Colors.blue;
+        break;
+      case 'verb':
+      case 'v':
+        typeColor = Colors.green;
+        break;
+      case 'adjective':
+      case 'adj':
+        typeColor = Colors.orange;
+        break;
+      case 'adverb':
+      case 'adv':
+        typeColor = Colors.purple;
+        break;
+      default:
+        typeColor = Colors.grey;
+    }
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.8),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: typeColor, width: 1),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // 英文词汇
+          Text(
+            english,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: (_currentFontSize * 0.8).clamp(12.0, 18.0),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          if (chinese.isNotEmpty) ...[
+            const SizedBox(height: 2),
+            // 中文翻译
+            Text(
+              chinese,
+              style: TextStyle(
+                color: Colors.grey[300],
+                fontSize: (_currentFontSize * 0.7).clamp(10.0, 14.0),
+              ),
+            ),
+          ],
+          if (type.isNotEmpty) ...[
+            const SizedBox(height: 2),
+            // 词性标签
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+              decoration: BoxDecoration(
+                color: typeColor.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Text(
+                type,
+                style: TextStyle(
+                  color: typeColor,
+                  fontSize: (_currentFontSize * 0.6).clamp(8.0, 12.0),
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -1169,10 +1292,16 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
                     padding: const EdgeInsets.all(16),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: YoutubePlayer(
-                        controller: _controller!,
-                        showVideoProgressIndicator: true,
-                        progressIndicatorColor: Colors.red,
+                      child: Stack(
+                        children: [
+                          YoutubePlayer(
+                            controller: _controller!,
+                            showVideoProgressIndicator: true,
+                            progressIndicatorColor: Colors.red,
+                          ),
+                          // AI字幕关键词叠加层
+                          _buildKeywordOverlay(),
+                        ],
                       ),
                     ),
                   ),
