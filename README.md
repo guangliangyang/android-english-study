@@ -40,7 +40,7 @@ A Flutter application for learning English through YouTube videos with interacti
 - Flutter SDK 3.2.0 or higher
 - Dart SDK 2.18.0 or higher
 - Android Studio or VS Code
-- Google API Key (for YouTube Data API)
+- OpenAI API Key (for AI transcript generation)
 
 ### Setup Instructions
 
@@ -55,23 +55,51 @@ A Flutter application for learning English through YouTube videos with interacti
    flutter pub get
    ```
 
-3. **Configure Google Sign-In**
-   - Go to [Google Cloud Console](https://console.cloud.google.com/)
-   - Create a new project or select existing one
-   - Enable Google Sign-In API
-   - Create OAuth 2.0 credentials
-   - Download `google-services.json` for Android and `GoogleService-Info.plist` for iOS
-   - Place them in the appropriate directories
+3. **Configure Environment Variables**
+   ```bash
+   # Copy the environment template
+   cp .env.example .env
+   ```
+   
+   Edit the `.env` file and add your API keys:
+   ```env
+   # Required: OpenAI API Key for AI transcript generation
+   OPENAI_API_KEY=sk-your_actual_openai_api_key_here
+   
+   # Optional: YouTube API Key (currently using internal API)
+   YOUTUBE_API_KEY=your_youtube_api_key_here
+   ```
 
-4. **Configure YouTube API**
-   - Enable YouTube Data API v3 in Google Cloud Console
-   - Create an API key
-   - Replace `YOUR_YOUTUBE_API_KEY` in `lib/services/transcript_service.dart`
+4. **Get OpenAI API Key**
+   - Visit [OpenAI API Keys](https://platform.openai.com/api-keys)
+   - Create a new API key
+   - Copy the key (starts with "sk-")
+   - Paste it in your `.env` file
 
 5. **Run the app**
    ```bash
    flutter run
    ```
+
+### Environment Configuration
+
+The app uses environment variables for secure API key management. The following variables are supported:
+
+#### Required Variables
+- `OPENAI_API_KEY`: Your OpenAI API key for AI transcript generation
+
+#### Optional Variables
+- `YOUTUBE_API_KEY`: YouTube Data API key (fallback option)
+- `OPENAI_MODEL`: AI model to use (default: gpt-3.5-turbo)
+- `AI_TRANSCRIPT_TIMEOUT`: API timeout in milliseconds (default: 30000)
+- `AI_TRANSCRIPT_TEMPERATURE`: AI response creativity (default: 0.1)
+- `ENVIRONMENT`: Application environment (development/production)
+
+#### Security Notes
+- Never commit your `.env` file to version control
+- The `.env` file is already included in `.gitignore`
+- Use `.env.example` as a template for new environments
+- Keep your API keys secure and rotate them regularly
 
 ## Project Structure
 
@@ -170,6 +198,7 @@ For support, email support@englishstudyapp.com or create an issue on GitHub.
 - [ ] Multi-language support
 - [ ] Tablet-optimized UI
 - [ ] Widget support for quick access
+- [ ] Develop a backend service and now plan the backend product. 1. The backend provides user registration, login, and recharge. It is recommended to use WeChat joint login. 2. The backend needs to store video categories, video names, videos, video subtitles, and video subtitle explanations. It is recommended to use s3+ xml storage. 3. Use aws lambda to provide access services. 4. Need to register a domain name
 
 ---
 

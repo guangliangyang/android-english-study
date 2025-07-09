@@ -12,43 +12,47 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # Audio playback for dictionary
+  audioplayers: ^6.1.0
+
+  # Background audio playbook
+  audio_service: ^0.18.12
+
   # UI Components
   cupertino_icons: ^1.0.2
 
-  # YouTube Player
-  youtube_player_flutter: ^9.1.1
+  # Environment variables
+  flutter_dotenv: ^5.1.0
 
+  # Toast messages
+  fluttertoast: ^8.2.4
 
   # HTTP requests
   http: ^1.1.0
 
-  # XML parsing
-  xml: ^6.4.2
+  # Audio playback
+  just_audio: ^0.9.36
 
   # State management
   provider: ^6.0.5
 
-  # URL handling
-  url_launcher: ^6.1.14
-
-  # Background audio playback
-  audio_service: ^0.18.12
-  just_audio: ^0.9.36
-  
-  # YouTube audio extraction
-  youtube_explode_dart: ^2.2.1
-  
-  # Wake lock for preventing sleep
-  wakelock_plus: ^1.1.4
-
   # Local storage
   shared_preferences: ^2.2.2
 
-  # Audio playback for dictionary
-  audioplayers: ^6.1.0
+  # URL handling
+  url_launcher: ^6.1.14
 
-  # Toast messages
-  fluttertoast: ^8.2.4
+  # Wake lock for preventing sleep
+  wakelock_plus: ^1.1.4
+
+  # XML parsing
+  xml: ^6.4.2
+
+  # YouTube audio extraction
+  youtube_explode_dart: ^2.2.1
+
+  # YouTube Player
+  youtube_player_flutter: ^9.1.1
 
 dev_dependencies:
   flutter_test:
@@ -58,3 +62,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  
+  # Include environment variables file
+  assets:
+    - .env

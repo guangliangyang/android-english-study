@@ -4,6 +4,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:audio_service/audio_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../models/transcript.dart';
 import '../services/transcript_service.dart';
 import '../services/ai_transcript_service.dart';
@@ -65,16 +66,10 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     _loadSavedFontSize();
     if (widget.videoId != null) {
       _loadVideo(widget.videoId!);
-    } else {
-      _initializeWithSampleVideo();
     }
     _initializeBackgroundAudio();
   }
 
-  void _initializeWithSampleVideo() {
-    const sampleVideoId = '8YkkvVe_Z8w'; // 设置一个默认视频
-    _loadVideo(sampleVideoId);
-  }
   
   Future<void> _initializeBackgroundAudio() async {
     try {
@@ -96,7 +91,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
         setState(() {
           _currentPosition = position;
         });
-        _updateTranscriptHighlight();
+        _forceScrollToCurrentPosition();
       });
     } catch (e) {
       // Handle initialization error silently
@@ -251,7 +246,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       _backgroundAudioService!.syncPlaybackState(isPlaying);
     }
 
-    _updateTranscriptHighlight();
+    _forceScrollToCurrentPosition();
     
     // Enable/disable wakelock based on playing state
     if (isPlaying) {
@@ -284,27 +279,14 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     int currentSegmentIndex = -1;
     for (int i = 0; i < transcriptToUse.segments.length; i++) {
       final segment = transcriptToUse.segments[i];
-      // 使用更宽松的边界条件，包含endTime，并添加小的容差
-      if (_currentPosition >= (segment.startTime - 0.1) && 
-          _currentPosition <= (segment.endTime + 0.1)) {
+      final nextSegment = i + 1 < transcriptToUse.segments.length ? transcriptToUse.segments[i + 1] : null;
+      
+      // 当前位置在当前段落startTime和下一个段落startTime之间
+      // 对于最后一条字幕，只要播放进度>=startTime就匹配
+      if (_currentPosition >= segment.startTime && 
+          (nextSegment == null || _currentPosition < nextSegment.startTime)) {
         currentSegmentIndex = i;
         break;
-      }
-    }
-    
-    // 如果没有找到精确匹配，寻找最接近的segment
-    if (currentSegmentIndex == -1) {
-      double minDistance = double.infinity;
-      for (int i = 0; i < transcriptToUse.segments.length; i++) {
-        final segment = transcriptToUse.segments[i];
-        final distanceToStart = (_currentPosition - segment.startTime).abs();
-        final distanceToEnd = (_currentPosition - segment.endTime).abs();
-        final minSegmentDistance = [distanceToStart, distanceToEnd].reduce((a, b) => a < b ? a : b);
-        
-        if (minSegmentDistance < minDistance && minSegmentDistance <= 1.0) { // 1秒容差
-          minDistance = minSegmentDistance;
-          currentSegmentIndex = i;
-        }
       }
     }
 
@@ -321,82 +303,28 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
   }
 
   void _scrollToHighlightedSegment() {
+    // 由于使用滑动窗口，当前字幕总是在可视范围内
+    // 确保当前字幕完整显示，上面预留一行字的空间
     if (_highlightedSegmentIndex < 0 || 
         _transcript == null || 
-        _highlightedSegmentIndex >= _transcriptItemKeys.length) return;
+        _highlightedSegmentIndex >= _transcriptItemKeys.length) {
+      return;
+    }
 
-    // 使用GlobalKey进行精确定位
+    // 使用当前字幕的GlobalKey进行精确定位
     final targetKey = _transcriptItemKeys[_highlightedSegmentIndex];
     final targetContext = targetKey.currentContext;
     
     if (targetContext != null) {
-      try {
-        // 使用Scrollable.ensureVisible实现居中对齐
-        Scrollable.ensureVisible(
-          targetContext,
-          alignment: 0.5, // 0.5 表示居中
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-        );
-      } catch (e) {
-        // 如果ensureVisible失败，稍微延迟后使用备用方法
-        Future.delayed(const Duration(milliseconds: 100), () {
-          _fallbackScrollToCenter();
-        });
-      }
-    } else {
-      // 如果context不可用，稍微延迟后重试或使用备用方法
-      Future.delayed(const Duration(milliseconds: 100), () {
-        final retryContext = targetKey.currentContext;
-        if (retryContext != null) {
-          try {
-            Scrollable.ensureVisible(
-              retryContext,
-              alignment: 0.5,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-            );
-          } catch (e) {
-            _fallbackScrollToCenter();
-          }
-        } else {
-          _fallbackScrollToCenter();
-        }
-      });
+      Scrollable.ensureVisible(
+        targetContext,
+        alignment: 0.15, // 让当前字幕显示在稍微偏下的位置，上面预留空间显示前一条字幕
+        duration: Duration.zero, // 去除动画效果
+      );
     }
   }
+
   
-  void _fallbackScrollToCenter() {
-    if (_highlightedSegmentIndex < 0 || _transcript == null) return;
-    
-    // 改进的高度估算，考虑字体大小
-    final estimatedTimeTextHeight = _currentFontSize * 0.8 * 1.2; // 加上行高
-    final estimatedMainTextHeight = _currentFontSize * 1.2; // 加上行高
-    final estimatedItemHeight = 12.0 + // margin bottom
-                               12.0 + // padding all (top)
-                               estimatedTimeTextHeight +
-                               4.0 + // SizedBox height
-                               estimatedMainTextHeight +
-                               12.0; // padding all (bottom)
-    
-    // 获取viewport高度
-    final viewportHeight = _transcriptScrollController.position.viewportDimension;
-    
-    // 计算目标偏移量使项目居中
-    final targetOffset = (_highlightedSegmentIndex * estimatedItemHeight) - 
-                        (viewportHeight / 2) + 
-                        (estimatedItemHeight / 2);
-    
-    // 确保偏移量在有效范围内
-    final maxOffset = _transcriptScrollController.position.maxScrollExtent;
-    final clampedOffset = targetOffset.clamp(0.0, maxOffset);
-    
-    _transcriptScrollController.animateTo(
-      clampedOffset,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
-  }
 
   void _forceScrollToCurrentPosition() {
     if (_transcript == null || _controller == null) return;
@@ -405,42 +333,33 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
     final currentPosition = _controller!.value.position.inSeconds.toDouble();
     
     int targetSegmentIndex = -1;
-    for (int i = 0; i < _transcript!.segments.length; i++) {
-      final segment = _transcript!.segments[i];
-      if (currentPosition >= segment.startTime && 
-          currentPosition < segment.endTime) {
-        targetSegmentIndex = i;
-        break;
-      }
-    }
-    
-    // 如果找不到当前段落，找最接近的段落
-    if (targetSegmentIndex == -1) {
-      double minDistance = double.infinity;
-      for (int i = 0; i < _transcript!.segments.length; i++) {
-        final segment = _transcript!.segments[i];
-        final distance = (currentPosition - segment.startTime).abs();
-        if (distance < minDistance) {
-          minDistance = distance;
+    final transcriptToUse = _isUsingAITranscript ? _aiTranscript?.toTranscript() : _transcript;
+    if (transcriptToUse != null) {
+      for (int i = 0; i < transcriptToUse.segments.length; i++) {
+        final segment = transcriptToUse.segments[i];
+        final nextSegment = i + 1 < transcriptToUse.segments.length ? transcriptToUse.segments[i + 1] : null;
+        
+        // 当前位置在当前段落startTime和下一个段落startTime之间
+        // 对于最后一条字幕，只要播放进度>=startTime就匹配
+        if (currentPosition >= segment.startTime && 
+            (nextSegment == null || currentPosition < nextSegment.startTime)) {
           targetSegmentIndex = i;
+          break;
         }
       }
     }
-    
-    if (targetSegmentIndex >= 0) {
-      // 使用高亮下一个段落的逻辑（与 _updateTranscriptHighlight 保持一致）
-      final highlightSegmentIndex = targetSegmentIndex >= 0 && 
-          targetSegmentIndex + 1 < _transcript!.segments.length
-          ? targetSegmentIndex + 1
-          : targetSegmentIndex;
-      
+
+    if (targetSegmentIndex >= 0 && transcriptToUse != null) {
+      // 高亮当前段落
+      final highlightSegmentIndex = targetSegmentIndex;
+
       // 强制更新高亮状态
       setState(() {
         _currentSegmentIndex = targetSegmentIndex;
         _highlightedSegmentIndex = highlightSegmentIndex;
       });
-      
-      // 完全复制字体变化的逻辑：setState后直接调用_scrollToHighlightedSegment
+
+      // 确保UI更新完成后再滚动
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (_highlightedSegmentIndex >= 0) {
           _scrollToHighlightedSegment();
@@ -891,27 +810,44 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       );
     }
 
+    // 计算滑动窗口范围：当前字幕的前1条到后5条
+    final currentIndex = _currentSegmentIndex >= 0 ? _currentSegmentIndex : 0;
+    final startIndex = (currentIndex - 1).clamp(0, transcriptToUse.segments.length - 1);
+    final endIndex = (currentIndex + 5).clamp(0, transcriptToUse.segments.length - 1);
+    
+    // 计算实际显示的字幕数量
+    final visibleSegments = <TranscriptSegment>[];
+    final segmentIndices = <int>[];
+    
+    for (int i = startIndex; i <= endIndex; i++) {
+      visibleSegments.add(transcriptToUse.segments[i]);
+      segmentIndices.add(i);
+    }
+
     return Column(
       children: [
-        // 字幕列表
+        // 字幕列表 - 只显示滑动窗口内的字幕
         Expanded(
           child: ListView.builder(
             controller: _transcriptScrollController,
             padding: const EdgeInsets.all(16),
-            itemCount: transcriptToUse.segments.length,
+            itemCount: visibleSegments.length,
             itemBuilder: (context, index) {
-              final segment = transcriptToUse.segments[index];
-              final isHighlighted = index == _highlightedSegmentIndex;
+              final segment = visibleSegments[index];
+              final originalIndex = segmentIndices[index];
+              final isHighlighted = originalIndex == _highlightedSegmentIndex;
               
               // 确保有足够的GlobalKey
-              if (index >= _transcriptItemKeys.length) {
-                _transcriptItemKeys.add(GlobalKey());
+              if (originalIndex >= _transcriptItemKeys.length) {
+                while (_transcriptItemKeys.length <= originalIndex) {
+                  _transcriptItemKeys.add(GlobalKey());
+                }
               }
               
               return GestureDetector(
                 onTap: () => _seekToSegment(segment),
                 child: Container(
-                  key: _transcriptItemKeys[index], // 添加GlobalKey
+                  key: _transcriptItemKeys[originalIndex], // 使用原始索引的GlobalKey
                   margin: const EdgeInsets.only(bottom: 12),
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -924,7 +860,7 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
                         : null,
                   ),
                   child: _isUsingAITranscript 
-                      ? _buildAITranscriptItem(segment, isHighlighted, index)
+                      ? _buildAITranscriptItem(segment, isHighlighted, originalIndex)
                       : _buildOriginalTranscriptItem(segment, isHighlighted),
                 ),
               );
@@ -1128,8 +1064,10 @@ class _YoutubeLearningScreenState extends State<YoutubeLearningScreen> {
       _highlightedSegmentIndex = -1;
     });
     
-    // 更新高亮位置
-    _updateTranscriptHighlight();
+    // 确保ListView重建后再更新高亮位置
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _forceScrollToCurrentPosition();
+    });
   }
 
   Widget _buildKeywordOverlay() {

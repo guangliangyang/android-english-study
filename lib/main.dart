@@ -1,11 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'screens/auth_screen.dart';
 import 'screens/youtube_learning_screen.dart';
 import 'screens/playlist_screen.dart';
 import 'screens/vocabulary_screen.dart';
 import 'services/auth_service.dart';
+import 'services/environment_config.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Load environment variables
+  try {
+    await dotenv.load(fileName: ".env");
+    print('Environment variables loaded successfully');
+    
+    // Print configuration summary for debugging
+    EnvironmentConfig.printConfigSummary();
+    
+    // Validate configuration (non-blocking for development)
+    final warnings = EnvironmentConfig.validateConfigurationSafe();
+    if (warnings.isNotEmpty && EnvironmentConfig.isProduction) {
+      // In production, we want to ensure proper configuration
+      throw Exception('Production environment requires proper configuration');
+    }
+    
+  } catch (e) {
+    print('Warning: Could not load .env file: $e');
+    print('Please copy .env.example to .env and configure your API keys');
+    print('');
+    print(EnvironmentConfig.getSetupInstructions());
+  }
+  
   runApp(const EnglishStudyApp());
 }
 

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer' as developer;
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/transcript.dart';
 
 class TranscriptService {
@@ -12,14 +13,93 @@ class TranscriptService {
 
   static Future<Transcript?> getTranscript(String videoId) async {
     try {
-      developer.log('Fetching transcript for video: $videoId using youtube-transcript-api approach', name: _tag);
+      developer.log('Getting transcript for video: $videoId', name: _tag);
       
-      // 使用类似youtube-transcript-api的方法
-      return await _fetchTranscriptViaInnerTubeAPI(videoId);
+      // Try loading from local cache first
+      final cachedTranscript = await loadOriginalTranscript(videoId);
+      if (cachedTranscript != null) {
+        developer.log('Using cached transcript for video: $videoId', name: _tag);
+        return cachedTranscript;
+      }
+      
+      // Fetch from network and cache
+      developer.log('Fetching transcript from network for video: $videoId', name: _tag);
+      final transcript = await _fetchTranscriptViaInnerTubeAPI(videoId);
+      
+      if (transcript != null) {
+        await saveOriginalTranscript(videoId, transcript);
+      }
+      
+      return transcript;
       
     } catch (e) {
-      developer.log('Error fetching transcript: $e', name: _tag, error: e);
+      developer.log('Error getting transcript: $e', name: _tag, error: e);
       return null;
+    }
+  }
+
+  /// Save original transcript to local storage
+  static Future<void> saveOriginalTranscript(String videoId, Transcript transcript) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final jsonString = json.encode(transcript.toJson());
+      await prefs.setString('original_transcript_$videoId', jsonString);
+      
+      // Update cache list
+      final cacheList = prefs.getStringList('transcript_cache_list') ?? [];
+      if (!cacheList.contains(videoId)) {
+        cacheList.add(videoId);
+        await prefs.setStringList('transcript_cache_list', cacheList);
+      }
+      
+      developer.log('Original transcript saved for video: $videoId', name: _tag);
+    } catch (e) {
+      developer.log('Error saving original transcript: $e', name: _tag, error: e);
+    }
+  }
+
+  /// Load original transcript from local storage
+  static Future<Transcript?> loadOriginalTranscript(String videoId) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final jsonString = prefs.getString('original_transcript_$videoId');
+      
+      if (jsonString != null) {
+        final jsonData = json.decode(jsonString);
+        return Transcript.fromJson(jsonData);
+      }
+      
+      return null;
+    } catch (e) {
+      developer.log('Error loading original transcript: $e', name: _tag, error: e);
+      return null;
+    }
+  }
+
+  /// Check if original transcript exists in cache
+  static Future<bool> hasOriginalTranscript(String videoId) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      return prefs.containsKey('original_transcript_$videoId');
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /// Delete original transcript from cache
+  static Future<void> deleteOriginalTranscript(String videoId) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove('original_transcript_$videoId');
+      
+      // Update cache list
+      final cacheList = prefs.getStringList('transcript_cache_list') ?? [];
+      cacheList.remove(videoId);
+      await prefs.setStringList('transcript_cache_list', cacheList);
+      
+      developer.log('Original transcript deleted for video: $videoId', name: _tag);
+    } catch (e) {
+      developer.log('Error deleting original transcript: $e', name: _tag, error: e);
     }
   }
 

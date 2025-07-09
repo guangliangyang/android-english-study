@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../models/transcript.dart';
-import '../services/transcript_service.dart';
 
 class TranscriptWidget extends StatefulWidget {
   final Transcript transcript;
@@ -292,7 +291,7 @@ class _TranscriptWidgetState extends State<TranscriptWidget> {
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: Text(
-                          '${TranscriptService.formatTime(segment.startTime)} - ${TranscriptService.formatTime(segment.endTime)}',
+                          '${_formatTime(segment.startTime)} - ${_formatTime(segment.endTime)}',
                           style: const TextStyle(
                             color: Colors.deepOrange,
                             fontSize: 12,
@@ -442,5 +441,12 @@ class _TranscriptWidgetState extends State<TranscriptWidget> {
         ),
       ),
     );
+  }
+
+  String _formatTime(double seconds) {
+    final totalSeconds = seconds.toInt();
+    final minutes = totalSeconds ~/ 60;
+    final remainingSeconds = totalSeconds % 60;
+    return '${minutes}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 }

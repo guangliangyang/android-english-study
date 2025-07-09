@@ -216,8 +216,9 @@ class AITranscriptService {
 **重要要求：**
 1. **每个<sentence>标签只包含一个完整的句子**，不要包含多个句子
 2. 将原始的碎片化字幕重新组织，但要确保每个句子独立成段
-3. 为每个单句提供准确的时间戳和中文翻译
-4. 提取关键词汇，帮助中文用户学习
+3. **保持时间戳的连续性**，尽量让相邻句子的时间戳接近连续，避免大的时间间隙
+4. 为每个单句提供准确的时间戳和中文翻译
+5. 提取关键词汇，帮助中文用户学习
 
 **输出要求：**
 - 每个句子必须语法完整且有意义
@@ -374,10 +375,19 @@ $transcriptData''';
           developer.log('Translation: "${translation}"', name: _tag);
           developer.log('Keywords count: ${keywords.length}', name: _tag);
           
+          // 智能计算endTime，避免间隙
+          double calculatedEndTime = endTime;
+          if (endTime <= startTime) {
+            // 根据文本长度估算duration（每个字符约0.1秒，最少2秒，最多8秒）
+            final textLength = text.trim().length;
+            final estimatedDuration = (textLength * 0.1).clamp(2.0, 8.0);
+            calculatedEndTime = startTime + estimatedDuration;
+          }
+          
           sentences.add(Sentence(
             text: text.trim(),
             startTime: startTime,
-            endTime: endTime > startTime ? endTime : startTime + 5.0,
+            endTime: calculatedEndTime,
             chineseTranslation: translation.trim(),
             pronunciation: pronunciation.trim(),
             explanation: explanation.trim(),
