@@ -1,23 +1,43 @@
+import 'dart:convert';
+import 'dart:developer' as developer;
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
-import 'dart:developer' as developer;
+
 import '../models/transcript.dart';
+import 'ai_prompts.dart';
+import 'environment_config.dart';
 import 'transcript_service.dart';
 
 class AITranscriptService {
   static const String _tag = 'AITranscriptService';
 
   // Environment variable accessors
-  static String get _apiKey => dotenv.env['OPENAI_API_KEY'] ?? '';
-  static String get _apiUrl => dotenv.env['OPENAI_API_URL'] ?? 'https://api.openai.com/v1/chat/completions';
-  static String get _model => dotenv.env['OPENAI_MODEL'] ?? 'gpt-3.5-turbo';
+  static String get _provider => EnvironmentConfig.aiProvider;
+  static String get _apiKey => _provider == 'gemini' 
+      ? dotenv.env['GEMINI_API_KEY'] ?? '' 
+      : dotenv.env['OPENAI_API_KEY'] ?? '';
+  static String get _apiUrl {
+    if (_provider == 'gemini') {
+      final customUrl = dotenv.env['GEMINI_API_URL'] ?? '';
+      if (customUrl.isNotEmpty) {
+        return customUrl;
+      }
+      // Generate URL with current model
+      final model = dotenv.env['GEMINI_MODEL'] ?? 'gemini-2.5-pro';
+      return 'https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent';
+    }
+    return dotenv.env['OPENAI_API_URL'] ?? 'https://api.openai.com/v1/chat/completions';
+  }
+  static String get _model => _provider == 'gemini'
+      ? dotenv.env['GEMINI_MODEL'] ?? 'gemini-2.5-pro'
+      : dotenv.env['OPENAI_MODEL'] ?? 'gpt-3.5-turbo';
   static int get _timeout => int.tryParse(dotenv.env['AI_TRANSCRIPT_TIMEOUT'] ?? '30000') ?? 30000;
   static double get _temperature => double.tryParse(dotenv.env['AI_TRANSCRIPT_TEMPERATURE'] ?? '0.1') ?? 0.1;
   
   // Configuration validation
-  static bool get _isConfigured => _apiKey.isNotEmpty && _apiKey.startsWith('sk-');
+  static bool get _isConfigured => EnvironmentConfig.isAIReady;
   
   static final http.Client _client = http.Client();
 
@@ -28,7 +48,7 @@ class AITranscriptService {
   }) async {
     try {
       if (!_isConfigured) {
-        throw Exception('OpenAI API key not configured. Please check your .env file.');
+        throw Exception('${_provider.toUpperCase()} API key not configured. Please check your .env file.');
       }
 
       developer.log('Generating AI transcript for video: $videoId', name: _tag);
@@ -66,7 +86,7 @@ class AITranscriptService {
         
         // Build prompt with batch transcript data
         final transcriptData = _buildTranscriptData(batchTranscript);
-        final aiResponse = await _callOpenAI(transcriptData);
+        final aiResponse = await _callAI(transcriptData);
         
         // Parse AI response for this batch
         final batchEnhancedTranscript = _parseAIResponse(aiResponse, videoId);
@@ -209,65 +229,18 @@ class AITranscriptService {
     return '${minutes}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 
+  /// Call AI API (no retry, fail fast)
+  static Future<String> _callAI(String transcriptData) async {
+    if (_provider == 'gemini') {
+      return _callGeminiAPI(transcriptData);
+    } else {
+      return _callOpenAI(transcriptData);
+    }
+  }
+
   /// Call OpenAI API (no retry, fail fast)
   static Future<String> _callOpenAI(String transcriptData) async {
-    final prompt = '''你是一个专业的英语学习材料制作助手。请将下面YouTube的碎片化字幕转换为以单个句子为单位的结构化字幕。
-
-**重要要求：**
-1. **每个<sentence>标签只包含一个完整的句子**，不要包含多个句子
-2. 将原始的碎片化字幕重新组织，但要确保每个句子独立成段
-3. **保持时间戳的连续性**，尽量让相邻句子的时间戳接近连续，避免大的时间间隙
-4. 为每个单句提供准确的时间戳和中文翻译
-5. 提取关键词汇，帮助中文用户学习
-
-**输出要求：**
-- 每个句子必须语法完整且有意义
-- 句子长度适中，便于学习理解
-- 过长的句子要拆分成多个独立的句子
-
-**输出格式（严格按照以下XML格式）：**
-```xml
-<sentence start_time="0:05" end_time="0:08">
-    <original>Hello there and welcome to this system design mock interview.</original>
-    <translation>大家好，欢迎来到这个系统设计模拟面试。</translation>
-    <pronunciation></pronunciation>
-    <explanation></explanation>
-    <keywords>
-        <keyword>
-            <phrase>system design</phrase>
-            <meaning>系统设计</meaning>
-            <type>专业术语</type>
-        </keyword>
-        <keyword>
-            <phrase>mock interview</phrase>
-            <meaning>模拟面试</meaning>
-            <type>短语搭配</type>
-        </keyword>
-    </keywords>
-</sentence>
-
-<sentence start_time="0:08" end_time="0:12">
-    <original>Today we want to show you a really high quality answer.</original>
-    <translation>今天我们想向你展示一个高质量的答案。</translation>
-    <pronunciation></pronunciation>
-    <explanation></explanation>
-    <keywords>
-        <keyword>
-            <phrase>high quality</phrase>
-            <meaning>高质量的</meaning>
-            <type>形容词短语</type>
-        </keyword>
-    </keywords>
-</sentence>
-```
-
-**注意：**
-- 即使某些字段为空，也必须包含空标签
-- 确保每个句子都是独立完整的
-- 不要将多个句子合并在一个<sentence>标签中
-
-**原始字幕数据：**
-$transcriptData''';
+    final prompt = AIPrompts.getTranscriptEnhancementPrompt(transcriptData);
 
     final requestBody = {
       'model': _model,
@@ -313,6 +286,60 @@ $transcriptData''';
     } catch (e) {
       developer.log('OpenAI API call failed: $e', name: _tag);
       throw Exception('OpenAI API调用失败: $e');
+    }
+  }
+
+  /// Call Gemini API (no retry, fail fast)
+  static Future<String> _callGeminiAPI(String transcriptData) async {
+    final prompt = AIPrompts.getTranscriptEnhancementPrompt(transcriptData);
+
+    final requestBody = {
+      'contents': [
+        {
+          'parts': [
+            {
+              'text': prompt,
+            }
+          ]
+        }
+      ],
+      'generationConfig': {
+        'temperature': _temperature,
+        'maxOutputTokens': 4000,
+      },
+    };
+
+    try {
+      developer.log('Calling Gemini API (single attempt, no retry)', name: _tag);
+      developer.log('Sending transcript data preview: ${transcriptData.substring(0, transcriptData.length > 200 ? 200 : transcriptData.length)}...', name: _tag);
+      
+      final response = await _client.post(
+        Uri.parse('$_apiUrl?key=$_apiKey'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode(requestBody),
+      ).timeout(Duration(milliseconds: _timeout));
+
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        final content = data['candidates'][0]['content']['parts'][0]['text'];
+        developer.log('Gemini API call successful', name: _tag);
+        
+        // 打印Gemini返回的完整内容用于调试
+        developer.log('=== Gemini Response Start ===', name: _tag);
+        developer.log(content, name: _tag);
+        developer.log('=== Gemini Response End ===', name: _tag);
+        
+        return content;
+      } else {
+        final error = 'Gemini API error: ${response.statusCode} - ${response.body}';
+        developer.log(error, name: _tag);
+        throw Exception(error);
+      }
+    } catch (e) {
+      developer.log('Gemini API call failed: $e', name: _tag);
+      throw Exception('Gemini API调用失败: $e');
     }
   }
 

@@ -1,5 +1,6 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:developer' as developer;
+
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Environment configuration validator and helper
 class EnvironmentConfig {
@@ -11,9 +12,38 @@ class EnvironmentConfig {
   /// Check if debug mode is enabled
   static bool get isDebugMode => dotenv.env['DEBUG_MODE'] == 'true';
 
+  /// Get current AI provider
+  static String get aiProvider => dotenv.env['AI_PROVIDER'] ?? _detectAIProvider();
+
+  /// Auto-detect AI provider based on model name
+  static String _detectAIProvider() {
+    // Check if GEMINI_MODEL is set
+    final geminiModel = dotenv.env['GEMINI_MODEL'] ?? '';
+    if (geminiModel.isNotEmpty) {
+      return 'gemini';
+    }
+    
+    // Check if OPENAI_MODEL suggests Gemini
+    final openaiModel = dotenv.env['OPENAI_MODEL'] ?? 'gpt-3.5-turbo';
+    if (openaiModel.startsWith('gemini')) {
+      return 'gemini';
+    }
+    
+    return 'openai';
+  }
+
   /// Validate all required environment variables
   static void validateConfiguration() {
-    final required = ['OPENAI_API_KEY'];
+    final provider = aiProvider;
+    final required = <String>[];
+    
+    // Add required keys based on provider
+    if (provider == 'gemini') {
+      required.add('GEMINI_API_KEY');
+    } else {
+      required.add('OPENAI_API_KEY');
+    }
+    
     final missing = <String>[];
 
     for (final key in required) {
@@ -29,15 +59,24 @@ class EnvironmentConfig {
       throw Exception(error);
     }
 
-    // Validate OpenAI API key format
-    final apiKey = dotenv.env['OPENAI_API_KEY'] ?? '';
-    if (!apiKey.startsWith('sk-')) {
-      final error = 'Invalid OpenAI API key format. Key should start with "sk-"';
-      developer.log(error, name: _tag, level: 1000);
-      throw Exception(error);
+    // Validate API key format based on provider
+    if (provider == 'gemini') {
+      final apiKey = dotenv.env['GEMINI_API_KEY'] ?? '';
+      if (!apiKey.startsWith('AIza')) {
+        final error = 'Invalid Gemini API key format. Key should start with "AIza"';
+        developer.log(error, name: _tag, level: 1000);
+        throw Exception(error);
+      }
+    } else {
+      final apiKey = dotenv.env['OPENAI_API_KEY'] ?? '';
+      if (!apiKey.startsWith('sk-')) {
+        final error = 'Invalid OpenAI API key format. Key should start with "sk-"';
+        developer.log(error, name: _tag, level: 1000);
+        throw Exception(error);
+      }
     }
 
-    developer.log('Environment configuration validated successfully', name: _tag);
+    developer.log('Environment configuration validated successfully for provider: $provider', name: _tag);
   }
 
   /// Validate configuration and return warnings instead of throwing
@@ -55,6 +94,7 @@ class EnvironmentConfig {
       'YOUTUBE_API_KEY': 'YouTube API key not configured (using internal API)',
       'AI_TRANSCRIPT_TIMEOUT': 'AI transcript timeout not configured (using default: 30000ms)',
       'AI_TRANSCRIPT_MAX_RETRIES': 'AI transcript max retries not configured (using default: 3)',
+      'AI_PROVIDER': 'AI provider not configured (auto-detecting based on model)',
     };
 
     for (final entry in optionalChecks.entries) {
@@ -69,11 +109,15 @@ class EnvironmentConfig {
 
   /// Get configuration summary for debugging
   static Map<String, String> getConfigSummary() {
+    final provider = aiProvider;
     return {
       'Environment': dotenv.env['ENVIRONMENT'] ?? 'development',
       'Debug Mode': isDebugMode ? 'Enabled' : 'Disabled',
+      'AI Provider': provider,
       'OpenAI API': _isApiKeyConfigured('OPENAI_API_KEY') ? 'Configured' : 'Not Configured',
+      'Gemini API': _isApiKeyConfigured('GEMINI_API_KEY') ? 'Configured' : 'Not Configured',
       'OpenAI Model': dotenv.env['OPENAI_MODEL'] ?? 'gpt-3.5-turbo',
+      'Gemini Model': dotenv.env['GEMINI_MODEL'] ?? 'Not Set',
       'YouTube API': _isApiKeyConfigured('YOUTUBE_API_KEY') ? 'Configured' : 'Not Configured',
       'AI Timeout': '${dotenv.env['AI_TRANSCRIPT_TIMEOUT'] ?? '30000'}ms',
       'AI Max Retries': dotenv.env['AI_TRANSCRIPT_MAX_RETRIES'] ?? '3',
@@ -83,10 +127,15 @@ class EnvironmentConfig {
 
   /// Get configuration status for UI display
   static Map<String, bool> getConfigStatus() {
+    final provider = aiProvider;
     return {
       'openai_configured': _isApiKeyConfigured('OPENAI_API_KEY'),
+      'gemini_configured': _isApiKeyConfigured('GEMINI_API_KEY'),
       'youtube_configured': _isApiKeyConfigured('YOUTUBE_API_KEY'),
       'environment_loaded': dotenv.isEveryDefined(['ENVIRONMENT']),
+      'ai_provider_ready': provider == 'gemini' 
+          ? _isApiKeyConfigured('GEMINI_API_KEY') 
+          : _isApiKeyConfigured('OPENAI_API_KEY'),
     };
   }
 
@@ -127,7 +176,20 @@ class EnvironmentConfig {
     buffer.writeln('Environment Setup Required:');
     buffer.writeln('');
     
-    if (!_isApiKeyConfigured('OPENAI_API_KEY')) {
+    final provider = aiProvider;
+    
+    if (provider == 'gemini' && !_isApiKeyConfigured('GEMINI_API_KEY')) {
+      buffer.writeln('1. Get Gemini API Key:');
+      buffer.writeln('   • Visit https://ai.google.dev/');
+      buffer.writeln('   • Create a new API key');
+      buffer.writeln('   • Copy the key (starts with "AIza")');
+      buffer.writeln('');
+      buffer.writeln('2. Configure .env file:');
+      buffer.writeln('   • Copy .env.example to .env');
+      buffer.writeln('   • Set GEMINI_API_KEY value with your actual key');
+      buffer.writeln('   • Set AI_PROVIDER=gemini or OPENAI_MODEL=gemini-2.5-pro');
+      buffer.writeln('');
+    } else if (provider == 'openai' && !_isApiKeyConfigured('OPENAI_API_KEY')) {
       buffer.writeln('1. Get OpenAI API Key:');
       buffer.writeln('   • Visit https://platform.openai.com/api-keys');
       buffer.writeln('   • Create a new API key');
@@ -145,7 +207,12 @@ class EnvironmentConfig {
   }
 
   /// Check if environment is properly configured for AI features
-  static bool get isAIReady => _isApiKeyConfigured('OPENAI_API_KEY');
+  static bool get isAIReady {
+    final provider = aiProvider;
+    return provider == 'gemini' 
+        ? _isApiKeyConfigured('GEMINI_API_KEY') 
+        : _isApiKeyConfigured('OPENAI_API_KEY');
+  }
 
   /// Check if YouTube API is configured
   static bool get isYouTubeAPIReady => _isApiKeyConfigured('YOUTUBE_API_KEY');
