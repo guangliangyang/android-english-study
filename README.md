@@ -2,6 +2,8 @@
 
 A Flutter application for learning English through YouTube videos with interactive transcripts, real-time synchronization, and comprehensive learning features.
 
+![d24b9817bd7b83c53f5595657ee975b9](https://github.com/user-attachments/assets/a6745006-d956-4bf4-925d-0101da42f85a)
+
 ## Features
 
 ### 🎥 Video Learning
